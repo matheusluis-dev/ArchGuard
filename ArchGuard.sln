@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Library", "src\ArchGuard.Library\ArchGuard.Library.csproj", "{B39CCD8F-FF46-4912-9495-8750DF360A80}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5024B8E1-3A74-4072-8FCF-9AB3D0A5E5E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solutions-items", "solutions-items", "{D4F2FB78-9C9D-4C9B-A694-2D2BBC8353F5}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		LICENSE = LICENSE
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F676C254-5A24-48D0-8452-557E35A97DCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Tests", "tests\ArchGuard.Tests\ArchGuard.Tests.csproj", "{8EA358ED-96CA-476A-AE5E-5E8C9C112030}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Tests.MockedAssembly", "tests\ArchGuard.Tests.MockedAssembly\ArchGuard.Tests.MockedAssembly.csproj", "{54EE02FA-CE83-4AF1-8F1E-9939038EAD39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B39CCD8F-FF46-4912-9495-8750DF360A80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B39CCD8F-FF46-4912-9495-8750DF360A80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B39CCD8F-FF46-4912-9495-8750DF360A80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B39CCD8F-FF46-4912-9495-8750DF360A80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EA358ED-96CA-476A-AE5E-5E8C9C112030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EA358ED-96CA-476A-AE5E-5E8C9C112030}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA358ED-96CA-476A-AE5E-5E8C9C112030}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EA358ED-96CA-476A-AE5E-5E8C9C112030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54EE02FA-CE83-4AF1-8F1E-9939038EAD39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54EE02FA-CE83-4AF1-8F1E-9939038EAD39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54EE02FA-CE83-4AF1-8F1E-9939038EAD39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54EE02FA-CE83-4AF1-8F1E-9939038EAD39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B39CCD8F-FF46-4912-9495-8750DF360A80} = {5024B8E1-3A74-4072-8FCF-9AB3D0A5E5E2}
+		{8EA358ED-96CA-476A-AE5E-5E8C9C112030} = {F676C254-5A24-48D0-8452-557E35A97DCA}
+		{54EE02FA-CE83-4AF1-8F1E-9939038EAD39} = {F676C254-5A24-48D0-8452-557E35A97DCA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		FileExplorer = 
+	EndGlobalSection
+EndGlobal
