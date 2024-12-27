@@ -1,7 +1,5 @@
 namespace ArchGuard.Library.Types;
 
-using ArchGuard.Library.Types.Filters.Common.Interfaces;
-
 public sealed class Types
 {
     private Types() { }
