@@ -27,6 +27,6 @@ public sealed class TypesTest
         var types = Types.FromAssembly(assembly).GetTypes().GetFullNamesOrdered();
 
         // Assert
-        types.Should().BeEquivalentTo(TypeNames.Types, options => options.WithoutStrictOrdering());
+        types.Should().BeEquivalentTo(TypeNames.Types);
     }
 }

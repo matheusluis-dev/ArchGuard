@@ -1,11 +1,9 @@
 namespace ArchGuard.Tests;
 
-using ArchGuard.Tests.Common;
-
-public sealed class ClassesTests
+public sealed class RecordsTests
 {
     [Fact]
-    public void Get_classes()
+    public void Get_records()
     {
         // Arrange
         var assembly = typeof(PublicClass).Assembly;
@@ -14,35 +12,35 @@ public sealed class ClassesTests
         var types = Types
             .FromAssembly(assembly)
             .That()
-            .AreClasses()
+            .AreRecords()
             .GetTypes()
             .GetFullNamesOrdered();
 
         // Assert
-        types.Should().BeEquivalentTo(TypeNames.Classes);
+        types.Should().BeEquivalentTo(TypeNames.Records);
     }
 
     [Fact]
-    public void Get_non_class_types()
+    public void Get_non_record_types()
     {
         // Arrange
         var assembly = typeof(PublicClass).Assembly;
-        var nonClassTypes = TypeNames.Types.Except(TypeNames.Classes, StringComparer.Ordinal);
+        var nonRecordTypes = TypeNames.Types.Except(TypeNames.Records, StringComparer.Ordinal);
 
         // Act
         var types = Types
             .FromAssembly(assembly)
             .That()
-            .AreNotClasses()
+            .AreNotRecords()
             .GetTypes()
             .GetFullNamesOrdered();
 
         // Assert
-        types.Should().BeEquivalentTo(nonClassTypes);
+        types.Should().BeEquivalentTo(nonRecordTypes);
     }
 
     [Fact]
-    public void Get_public_classes()
+    public void Get_public_records()
     {
         // Arrange
         var assembly = typeof(PublicClass).Assembly;
@@ -51,18 +49,18 @@ public sealed class ClassesTests
         var types = Types
             .FromAssembly(assembly)
             .That()
-            .AreClasses()
+            .AreRecords()
             .And()
             .ArePublic()
             .GetTypes()
             .GetFullNamesOrdered();
 
         // Assert
-        types.Should().BeEquivalentTo(TypeNames.ClassesPublic);
+        types.Should().BeEquivalentTo(TypeNames.RecordsPublic);
     }
 
     [Fact]
-    public void Get_internal_classes()
+    public void Get_internal_records()
     {
         // Arrange
         var assembly = typeof(PublicClass).Assembly;
@@ -71,58 +69,63 @@ public sealed class ClassesTests
         var types = Types
             .FromAssembly(assembly)
             .That()
-            .AreClasses()
+            .AreRecords()
             .And()
             .AreInternal()
             .GetTypes()
             .GetFullNamesOrdered();
 
         // Assert
-        types.Should().BeEquivalentTo(TypeNames.ClassesInternal);
+        types.Should().BeEquivalentTo(TypeNames.RecordsInternal);
     }
 
     [Fact]
-    public void Get_partial_classes()
+    public void Get_partial_records()
     {
         // Arrange
         var assembly = typeof(PublicClass).Assembly;
-
-        // Act
-        var types = Types
-            .FromAssembly(assembly)
-            .That()
-            .AreClasses()
-            .And()
-            .ArePartial()
-            .GetTypes()
-            .GetFullNamesOrdered();
-
-        // Assert
-        types.Should().BeEquivalentTo([TypeNames.PublicPartialClass]);
-    }
-
-    [Fact]
-    public void Get_sealed_classes()
-    {
-        // Arrange
-        var assembly = typeof(PublicClass).Assembly;
-        var sealedClasses = new List<string>
+        var partialRecords = new List<string>
         {
-            TypeNames.InternalSealedClass,
-            TypeNames.PublicSealedClass,
+            TypeNames.InternalPartialRecord,
+            TypeNames.PublicPartialRecord,
         };
 
         // Act
         var types = Types
             .FromAssembly(assembly)
             .That()
-            .AreClasses()
+            .AreRecords()
+            .And()
+            .ArePartial()
+            .GetTypes()
+            .GetFullNamesOrdered();
+
+        // Assert
+        types.Should().BeEquivalentTo(partialRecords);
+    }
+
+    [Fact]
+    public void Get_sealed_records()
+    {
+        // Arrange
+        var assembly = typeof(PublicClass).Assembly;
+        var sealedRecords = new List<string>
+        {
+            TypeNames.InternalSealedRecord,
+            TypeNames.PublicSealedRecord,
+        };
+
+        // Act
+        var types = Types
+            .FromAssembly(assembly)
+            .That()
+            .AreRecords()
             .And()
             .AreSealed()
             .GetTypes()
             .GetFullNamesOrdered();
 
         // Assert
-        types.Should().BeEquivalentTo(sealedClasses);
+        types.Should().BeEquivalentTo(sealedRecords);
     }
 }

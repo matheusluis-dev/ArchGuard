@@ -13,6 +13,14 @@ internal static partial class TypeNames
             PublicStaticClass,
             IInternalInterface,
             IPublicInterface,
+            InternalPartialRecord,
+            InternalRecord,
+            InternalSealedRecord,
+            PublicPartialRecord,
+            PublicRecord,
+            PublicSealedRecord,
+            InternalStruct,
+            PublicStruct,
         ]
     );
 }

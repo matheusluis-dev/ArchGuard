@@ -1,12 +1,10 @@
 namespace ArchGuard.Library.Helpers;
 
-using System.Collections.Generic;
-
 internal static class DirectoryHelper
 {
     private static readonly Dictionary<string, DirectoryInfo> _cache = [];
 
-    public static DirectoryInfo GetDirectoryInSolution(string subDirectory)
+    internal static DirectoryInfo GetDirectoryInSolution(string subDirectory)
     {
         if (_cache.TryGetValue(subDirectory, out var cacheDirectoryInfo))
             return cacheDirectoryInfo;

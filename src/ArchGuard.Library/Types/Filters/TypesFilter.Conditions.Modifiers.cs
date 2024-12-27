@@ -1,4 +1,6 @@
-namespace ArchGuard.Library.Types.Filter;
+namespace ArchGuard.Library.Types.Filters;
+
+using ArchGuard.Library.Types.Filters.Interfaces;
 
 public sealed partial class TypesFilter
 {
@@ -61,6 +63,18 @@ public sealed partial class TypesFilter
     public ITypesFilterPostCondition AreNotPartial()
     {
         _context.ApplyFilter(type => type.IsNotPartial());
+        return this;
+    }
+
+    public ITypesFilterPostCondition AreSealed()
+    {
+        _context.ApplyFilter(type => type.IsSealed());
+        return this;
+    }
+
+    public ITypesFilterPostCondition AreNotSealed()
+    {
+        _context.ApplyFilter(type => type.IsNotSealed());
         return this;
     }
 }

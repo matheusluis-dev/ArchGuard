@@ -1,4 +1,4 @@
-namespace ArchGuard.Library.Types.Filter;
+namespace ArchGuard.Library.Types.Filters.Interfaces;
 
 public interface ITypesFilterPostCondition
 {

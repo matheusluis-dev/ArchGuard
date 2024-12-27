@@ -1,4 +1,6 @@
-namespace ArchGuard.Library.Types.Filter;
+namespace ArchGuard.Library.Types.Filters.Interfaces;
+
+using ArchGuard.Library.Types.Filters.Interfaces;
 
 public partial interface ITypesFilterCondition
 {
@@ -13,4 +15,7 @@ public partial interface ITypesFilterCondition
 
     ITypesFilterPostCondition ArePartial();
     ITypesFilterPostCondition AreNotPartial();
+
+    ITypesFilterPostCondition AreSealed();
+    ITypesFilterPostCondition AreNotSealed();
 }

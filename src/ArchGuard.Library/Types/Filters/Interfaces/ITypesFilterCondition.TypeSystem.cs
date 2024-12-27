@@ -1,4 +1,4 @@
-namespace ArchGuard.Library.Types.Filter;
+namespace ArchGuard.Library.Types.Filters.Interfaces;
 
 public partial interface ITypesFilterCondition
 {
@@ -13,4 +13,7 @@ public partial interface ITypesFilterCondition
 
     ITypesFilterPostCondition AreEnums();
     ITypesFilterPostCondition AreNotEnums();
+
+    ITypesFilterPostCondition AreRecords();
+    ITypesFilterPostCondition AreNotRecords();
 }

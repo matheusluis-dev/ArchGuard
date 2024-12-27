@@ -1,4 +1,6 @@
-namespace ArchGuard.Library.Types.Filter;
+namespace ArchGuard.Library.Types.Filters;
+
+using ArchGuard.Library.Types.Filters.Interfaces;
 
 public sealed partial class TypesFilter : ITypesFilterCondition, ITypesFilterPostCondition
 {

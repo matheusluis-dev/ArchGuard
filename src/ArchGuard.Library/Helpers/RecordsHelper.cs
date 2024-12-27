@@ -2,11 +2,11 @@ namespace ArchGuard.Library.Helpers;
 
 internal static class RecordsHelper
 {
-    private static readonly Lazy<IEnumerable<string>> _cache = new(LoadRecords);
+    private static readonly Lazy<IEnumerable<string>> _cache = new(Load);
 
-    internal static IEnumerable<string> Classes => _cache.Value;
+    internal static IEnumerable<string> Records => _cache.Value;
 
-    private static IEnumerable<string> LoadRecords()
+    private static IEnumerable<string> Load()
     {
         return ApplicationCSharpFilesHelper.Files.SelectMany(file =>
         {
@@ -15,9 +15,8 @@ internal static class RecordsHelper
             var root = syntaxTree.GetRoot();
 
             return root.DescendantNodes()
-                .OfType<ClassDeclarationSyntax>()
-                .Where(c => c.Modifiers.Any(m => m.IsKind(SyntaxKind.RecordDeclaration)))
-                .Select(c => c.Identifier.Text);
+                .OfType<RecordDeclarationSyntax>()
+                .Select(c => c.GetFullName());
         });
     }
 }

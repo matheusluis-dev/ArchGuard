@@ -1,7 +1,5 @@
 namespace ArchGuard.Library.Types;
 
-using ArchGuard.Library.Types.Filter;
-
 public sealed class Types
 {
     private readonly IEnumerable<Type> _types;

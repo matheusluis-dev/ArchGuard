@@ -1,8 +1,12 @@
 global using System;
 global using System.Collections.Generic;
+global using System.Diagnostics.CodeAnalysis;
 global using System.Linq;
 global using System.Reflection;
 global using ArchGuard.Library.Extensions;
+global using ArchGuard.Library.Helpers;
+global using ArchGuard.Library.Types.Filters;
+global using ArchGuard.Library.Types.Filters.Interfaces;
 global using Microsoft.CodeAnalysis;
 global using Microsoft.CodeAnalysis.CSharp;
 global using Microsoft.CodeAnalysis.CSharp.Syntax;

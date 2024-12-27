@@ -1,13 +1,20 @@
 namespace ArchGuard.Library.Extensions;
 
-using ArchGuard.Library.Helpers;
-
-public static class TypeExtensions
+internal static class TypeExtensions
 {
-    public static bool IsPrivate(this Type type)
+    internal static bool IsNonRecordClass([NotNull] this Type type)
     {
-        ArgumentNullException.ThrowIfNull(type);
+        return type.IsClass
+            && !RecordsHelper.Records.Contains(type.FullName, StringComparer.Ordinal);
+    }
 
+    internal static bool IsNotNonRecordClass([NotNull] this Type type)
+    {
+        return !type.IsNonRecordClass();
+    }
+
+    internal static bool IsPrivate([NotNull] this Type type)
+    {
         return type.IsNested
             && type.IsNestedPrivate
             && !type.IsVisible
@@ -20,10 +27,8 @@ public static class TypeExtensions
             && !type.IsNestedFamANDAssem;
     }
 
-    public static bool IsNotPrivate(this Type type)
+    internal static bool IsNotPrivate([NotNull] this Type type)
     {
-        ArgumentNullException.ThrowIfNull(type);
-
         return !type.IsPrivate();
     }
 
@@ -32,10 +37,8 @@ public static class TypeExtensions
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    public static bool IsInternal(this Type type)
+    internal static bool IsInternal([NotNull] this Type type)
     {
-        ArgumentNullException.ThrowIfNull(type);
-
         return type.IsNotPublic
             && !type.IsVisible
             && !type.IsPublic
@@ -48,10 +51,8 @@ public static class TypeExtensions
             && !type.IsNestedFamANDAssem;
     }
 
-    public static bool IsNotInternal(this Type type)
+    internal static bool IsNotInternal([NotNull] this Type type)
     {
-        ArgumentNullException.ThrowIfNull(type);
-
         return !type.IsInternal();
     }
 
@@ -60,31 +61,63 @@ public static class TypeExtensions
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    public static bool IsStruct(this Type type)
+    internal static bool IsStruct([NotNull] this Type type)
     {
-        ArgumentNullException.ThrowIfNull(type);
-
         return type.IsValueType && !type.IsEnum;
     }
 
-    public static bool IsNotStruct(this Type type)
+    internal static bool IsNotStruct([NotNull] this Type type)
     {
-        ArgumentNullException.ThrowIfNull(type);
-
         return !type.IsStruct();
     }
 
-    public static bool IsPartial(this Type type)
+    internal static bool IsPartial([NotNull] this Type type)
     {
-        ArgumentNullException.ThrowIfNull(type);
-
-        return PartialClassesHelper.Classes.Contains(type.FullName);
+        return PartialHelper.Types.Contains(type.FullName, StringComparer.Ordinal);
     }
 
-    public static bool IsNotPartial(this Type type)
+    internal static bool IsNotPartial([NotNull] this Type type)
     {
-        ArgumentNullException.ThrowIfNull(type);
-
         return !type.IsPartial();
+    }
+
+    internal static bool IsRecord([NotNull] this Type type)
+    {
+        return RecordsHelper.Records.Contains(type.FullName, StringComparer.Ordinal);
+    }
+
+    internal static bool IsNotRecord([NotNull] this Type type)
+    {
+        return !type.IsRecord();
+    }
+
+    internal static bool IsSealed([NotNull] this Type type)
+    {
+        return type.IsSealed && !type.IsAbstract;
+    }
+
+    internal static bool IsNotSealed([NotNull] this Type type)
+    {
+        return !type.IsSealed();
+    }
+
+    internal static bool IsAbstract([NotNull] this Type type)
+    {
+        return !type.IsSealed && type.IsAbstract;
+    }
+
+    internal static bool IsNotAbstract([NotNull] this Type type)
+    {
+        return !type.IsAbstract();
+    }
+
+    internal static bool IsStatic([NotNull] this Type type)
+    {
+        return type.IsSealed && type.IsAbstract;
+    }
+
+    internal static bool IsNotStatic([NotNull] this Type type)
+    {
+        return !type.IsStatic();
     }
 }

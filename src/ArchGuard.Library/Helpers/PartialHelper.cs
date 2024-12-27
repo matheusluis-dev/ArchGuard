@@ -1,12 +1,12 @@
 namespace ArchGuard.Library.Helpers;
 
-internal static class PartialClassesHelper
+internal static class PartialHelper
 {
-    private static readonly Lazy<IEnumerable<string>> _cache = new(LoadPartialClasses);
+    private static readonly Lazy<IEnumerable<string>> _cache = new(Load);
 
-    internal static IEnumerable<string> Classes => _cache.Value;
+    internal static IEnumerable<string> Types => _cache.Value;
 
-    private static IEnumerable<string> LoadPartialClasses()
+    private static IEnumerable<string> Load()
     {
         return ApplicationCSharpFilesHelper.Files.SelectMany(file =>
         {
@@ -15,7 +15,7 @@ internal static class PartialClassesHelper
             var root = syntaxTree.GetRoot();
 
             return root.DescendantNodes()
-                .OfType<ClassDeclarationSyntax>()
+                .OfType<TypeDeclarationSyntax>()
                 .Where(c => c.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword)))
                 .Select(c => c.GetFullName());
         });
