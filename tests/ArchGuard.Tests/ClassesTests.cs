@@ -1,7 +1,5 @@
 namespace ArchGuard.Tests;
 
-using ArchGuard.Tests.Common;
-
 public sealed class ClassesTests
 {
     [Fact]

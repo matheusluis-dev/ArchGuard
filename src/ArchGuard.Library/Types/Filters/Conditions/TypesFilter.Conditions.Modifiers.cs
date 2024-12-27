@@ -1,78 +1,78 @@
 namespace ArchGuard.Library.Types.Filters;
 
-using ArchGuard.Library.Types.Filters.Interfaces;
+using ArchGuard.Library.Types.Filters.PostConditions.Interfaces;
 
 public sealed partial class TypesFilter
 {
-    public ITypesFilterPostCondition ArePublic()
+    public ITypesFilterPostConditions ArePublic()
     {
         _context.ApplyFilter(type => type.IsPublic);
         return this;
     }
 
-    public ITypesFilterPostCondition AreNotPublic()
+    public ITypesFilterPostConditions AreNotPublic()
     {
         _context.ApplyFilter(type => type.IsNotPublic);
         return this;
     }
 
-    public ITypesFilterPostCondition AreInternal()
+    public ITypesFilterPostConditions AreInternal()
     {
         _context.ApplyFilter(type => type.IsInternal());
         return this;
     }
 
-    public ITypesFilterPostCondition AreNotInternal()
+    public ITypesFilterPostConditions AreNotInternal()
     {
         _context.ApplyFilter(type => type.IsNotInternal());
         return this;
     }
 
-    public ITypesFilterPostCondition ArePrivate()
+    public ITypesFilterPostConditions ArePrivate()
     {
         _context.ApplyFilter(type => type.IsPrivate());
         return this;
     }
 
-    public ITypesFilterPostCondition AreNotPrivate()
+    public ITypesFilterPostConditions AreNotPrivate()
     {
         _context.ApplyFilter(type => type.IsNotPrivate());
         return this;
     }
 
     // TODO move to a proper location
-    public ITypesFilterPostCondition AreNested()
+    public ITypesFilterPostConditions AreNested()
     {
         _context.ApplyFilter(type => type.IsNested);
         return this;
     }
 
     // TODO move to a proper location
-    public ITypesFilterPostCondition AreNotNested()
+    public ITypesFilterPostConditions AreNotNested()
     {
         _context.ApplyFilter(type => !type.IsNested);
         return this;
     }
 
-    public ITypesFilterPostCondition ArePartial()
+    public ITypesFilterPostConditions ArePartial()
     {
         _context.ApplyFilter(type => type.IsPartial());
         return this;
     }
 
-    public ITypesFilterPostCondition AreNotPartial()
+    public ITypesFilterPostConditions AreNotPartial()
     {
         _context.ApplyFilter(type => type.IsNotPartial());
         return this;
     }
 
-    public ITypesFilterPostCondition AreSealed()
+    public ITypesFilterPostConditions AreSealed()
     {
         _context.ApplyFilter(type => type.IsSealed());
         return this;
     }
 
-    public ITypesFilterPostCondition AreNotSealed()
+    public ITypesFilterPostConditions AreNotSealed()
     {
         _context.ApplyFilter(type => type.IsNotSealed());
         return this;

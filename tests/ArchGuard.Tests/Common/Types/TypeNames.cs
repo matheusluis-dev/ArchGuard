@@ -11,6 +11,8 @@ internal static partial class TypeNames
             PublicPartialClass,
             PublicSealedClass,
             PublicStaticClass,
+            InternalEnum,
+            PublicEnum,
             IInternalInterface,
             IPublicInterface,
             InternalPartialRecord,

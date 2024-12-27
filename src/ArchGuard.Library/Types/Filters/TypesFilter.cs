@@ -1,8 +1,11 @@
 namespace ArchGuard.Library.Types.Filters;
 
-using ArchGuard.Library.Types.Filters.Interfaces;
+using ArchGuard.Library.Types.Filters.Common.Interfaces;
 
-public sealed partial class TypesFilter : ITypesFilterCondition, ITypesFilterPostCondition
+public sealed partial class TypesFilter
+    : ITypesFilterStart,
+        ITypesFilterConditions,
+        ITypesFilterPostConditions
 {
     private readonly TypesFilterContext _context;
 
@@ -11,13 +14,8 @@ public sealed partial class TypesFilter : ITypesFilterCondition, ITypesFilterPos
         _context = context;
     }
 
-    public static ITypesFilterCondition That(TypesFilterContext context)
+    public static ITypesFilterStart Create(TypesFilterContext context)
     {
         return new TypesFilter(context);
-    }
-
-    public IEnumerable<Type> GetTypes()
-    {
-        return _context.Types;
     }
 }
