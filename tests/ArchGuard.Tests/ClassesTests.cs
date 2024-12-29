@@ -6,15 +6,10 @@ public sealed class ClassesTests
     public void Get_classes()
     {
         // Arrange
-        var assembly = typeof(PublicClass).Assembly;
+        var filters = TypesFromMockedAssembly.All.That().AreClasses();
 
         // Act
-        var types = Types
-            .FromAssembly(assembly)
-            .That()
-            .AreClasses()
-            .GetTypes()
-            .GetFullNamesOrdered();
+        var types = filters.GetTypes().GetFullNamesOrdered();
 
         // Assert
         types.Should().BeEquivalentTo(TypeNames.Classes);
