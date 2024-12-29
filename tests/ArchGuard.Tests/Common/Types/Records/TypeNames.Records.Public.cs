@@ -1,14 +1,28 @@
-namespace ArchGuard.Tests.Common;
-
-internal static partial class TypeNames
+namespace ArchGuard.Tests.Common
 {
-    internal static readonly ReadOnlyCollection<string> RecordsPublic = new(
-        [PublicPartialRecord, PublicRecord, PublicSealedRecord]
-    );
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
-    internal const string PublicRecord = $"{Namespaces.RecordsPublic}.{nameof(PublicRecord)}";
-    internal const string PublicPartialRecord =
-        $"{Namespaces.RecordsPublic}.{nameof(PublicPartialRecord)}";
-    internal const string PublicSealedRecord =
-        $"{Namespaces.RecordsPublic}.{nameof(PublicSealedRecord)}";
+    internal static partial class TypeNames
+    {
+        internal static readonly ReadOnlyCollection<string> RecordsPublic =
+            new ReadOnlyCollection<string>(
+                new List<string>
+                {
+#if NET5_0_OR_GREATER
+                    PublicPartialRecord,
+                    PublicRecord,
+                    PublicSealedRecord
+#endif
+                }
+            );
+
+        internal const string PublicRecord = Namespaces.RecordsPublic + "." + nameof(PublicRecord);
+
+        internal const string PublicPartialRecord =
+            Namespaces.RecordsPublic + "." + nameof(PublicPartialRecord);
+
+        internal const string PublicSealedRecord =
+            Namespaces.RecordsPublic + "." + nameof(PublicSealedRecord);
+    }
 }

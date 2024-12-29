@@ -1,40 +1,47 @@
-namespace ArchGuard.Library.Types.Filters;
-
-public sealed partial class TypesFilter
+namespace ArchGuard.Library.Types.Filters
 {
-    public ITypesFilterConditions And()
+    using System;
+    using ArchGuard.Library.Types.Filters.Conditions.Interfaces;
+    using ArchGuard.Library.Types.Filters.PostConditions.Interfaces;
+
+    public sealed partial class TypesFilter
     {
-        _context.And();
-        return this;
-    }
+        public ITypesFilterConditions And()
+        {
+            _context.And();
+            return this;
+        }
 
-    public ITypesFilterPostConditions And(
-        Func<ITypesFilterConditions, ITypesFilterPostConditions> filter
-    )
-    {
-        ArgumentNullException.ThrowIfNull(filter);
+        public ITypesFilterPostConditions And(
+            Func<ITypesFilterConditions, ITypesFilterPostConditions> filter
+        )
+        {
+            if (filter is null)
+                throw new ArgumentNullException(nameof(filter));
 
-        _context.And();
-        filter(this);
+            _context.And();
+            filter(this);
 
-        return this;
-    }
+            return this;
+        }
 
-    public ITypesFilterConditions Or()
-    {
-        _context.Or();
-        return this;
-    }
+        public ITypesFilterConditions Or()
+        {
+            _context.Or();
+            return this;
+        }
 
-    public ITypesFilterPostConditions Or(
-        Func<ITypesFilterConditions, ITypesFilterPostConditions> filter
-    )
-    {
-        ArgumentNullException.ThrowIfNull(filter);
+        public ITypesFilterPostConditions Or(
+            Func<ITypesFilterConditions, ITypesFilterPostConditions> filter
+        )
+        {
+            if (filter is null)
+                throw new ArgumentNullException(nameof(filter));
 
-        _context.Or();
-        filter(this);
+            _context.Or();
+            filter(this);
 
-        return this;
+            return this;
+        }
     }
 }

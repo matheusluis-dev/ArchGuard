@@ -1,3 +1,4 @@
-namespace ArchGuard.Tests.MockedAssembly.Classes.Public;
-
-public sealed class PublicSealedClass { }
+namespace ArchGuard.Tests.MockedAssembly.Classes.Public
+{
+    public sealed class PublicSealedClass { }
+}

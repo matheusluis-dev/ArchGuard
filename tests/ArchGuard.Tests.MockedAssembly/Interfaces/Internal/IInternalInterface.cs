@@ -1,3 +1,4 @@
-namespace ArchGuard.Tests.MockedAssembly.Interfaces.Internal;
-
-internal interface IInternalInterface { }
+namespace ArchGuard.Tests.MockedAssembly.Interfaces.Internal
+{
+    internal interface IInternalInterface { }
+}

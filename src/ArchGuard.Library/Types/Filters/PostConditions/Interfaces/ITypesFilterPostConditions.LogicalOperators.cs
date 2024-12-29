@@ -1,10 +1,18 @@
-namespace ArchGuard.Library.Types.Filters.PostConditions.Interfaces;
-
-public partial interface ITypesFilterPostConditions
+namespace ArchGuard.Library.Types.Filters.PostConditions.Interfaces
 {
-    ITypesFilterConditions And();
-    ITypesFilterPostConditions And(Func<ITypesFilterConditions, ITypesFilterPostConditions> filter);
+    using System;
+    using ArchGuard.Library.Types.Filters.Conditions.Interfaces;
 
-    ITypesFilterConditions Or();
-    ITypesFilterPostConditions Or(Func<ITypesFilterConditions, ITypesFilterPostConditions> filter);
+    public partial interface ITypesFilterPostConditions
+    {
+        ITypesFilterConditions And();
+        ITypesFilterPostConditions And(
+            Func<ITypesFilterConditions, ITypesFilterPostConditions> filter
+        );
+
+        ITypesFilterConditions Or();
+        ITypesFilterPostConditions Or(
+            Func<ITypesFilterConditions, ITypesFilterPostConditions> filter
+        );
+    }
 }

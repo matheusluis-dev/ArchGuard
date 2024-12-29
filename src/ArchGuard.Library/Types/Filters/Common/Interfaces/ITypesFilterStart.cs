@@ -1,9 +1,14 @@
-namespace ArchGuard.Library.Types.Filters.Common.Interfaces;
-
-public interface ITypesFilterStart : IGetTypes
+namespace ArchGuard.Library.Types.Filters.Common.Interfaces
 {
-    ITypesFilterConditions That();
-    ITypesFilterPostConditions That(
-        Func<ITypesFilterConditions, ITypesFilterPostConditions> filter
-    );
+    using System;
+    using ArchGuard.Library.Types.Filters.Conditions.Interfaces;
+    using ArchGuard.Library.Types.Filters.PostConditions.Interfaces;
+
+    public interface ITypesFilterStart : IGetTypes
+    {
+        ITypesFilterConditions That();
+        ITypesFilterPostConditions That(
+            Func<ITypesFilterConditions, ITypesFilterPostConditions> filter
+        );
+    }
 }

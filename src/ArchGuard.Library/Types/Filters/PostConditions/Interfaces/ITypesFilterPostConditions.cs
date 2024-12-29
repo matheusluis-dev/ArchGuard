@@ -1,5 +1,6 @@
-namespace ArchGuard.Library.Types.Filters.PostConditions.Interfaces;
+namespace ArchGuard.Library.Types.Filters.PostConditions.Interfaces
+{
+    using ArchGuard.Library.Types.Filters.Common.Interfaces;
 
-using ArchGuard.Library.Types.Filters.Common.Interfaces;
-
-public partial interface ITypesFilterPostConditions : IGetTypes { }
+    public partial interface ITypesFilterPostConditions : IGetTypes { }
+}

@@ -1,32 +1,38 @@
-namespace ArchGuard.Tests;
-
-using ArchGuard.Tests.Common;
-
-public sealed class TypesTest
+namespace ArchGuard.Tests
 {
-    [Fact]
-    public void No_duplicates()
+    using ArchGuard.Library.Types;
+    using ArchGuard.Tests.Common;
+    using ArchGuard.Tests.Common.Extensions;
+    using ArchGuard.Tests.MockedAssembly.Classes.Public;
+    using FluentAssertions;
+    using Xunit;
+
+    public sealed class TypesTest
     {
-        // Arrange
-        var assembly = typeof(PublicClass).Assembly;
+        [Fact]
+        public void No_duplicates()
+        {
+            // Arrange
+            var assembly = typeof(PublicClass).Assembly;
 
-        // Act
-        var types = Types.FromAssembly(assembly).GetTypes().GetFullNamesOrdered();
+            // Act
+            var types = Types.FromAssembly(assembly).GetTypes().GetFullNamesOrdered();
 
-        // Assert
-        types.Should().OnlyHaveUniqueItems();
-    }
+            // Assert
+            types.Should().OnlyHaveUniqueItems();
+        }
 
-    [Fact]
-    public void Get_all_types()
-    {
-        // Arrange
-        var assembly = typeof(PublicClass).Assembly;
+        [Fact]
+        public void Get_all_types()
+        {
+            // Arrange
+            var assembly = typeof(PublicClass).Assembly;
 
-        // Act
-        var types = Types.FromAssembly(assembly).GetTypes().GetFullNamesOrdered();
+            // Act
+            var types = Types.FromAssembly(assembly).GetTypes().GetFullNamesOrdered();
 
-        // Assert
-        types.Should().BeEquivalentTo(TypeNames.Types);
+            // Assert
+            types.Should().BeEquivalentTo(TypeNames.Types);
+        }
     }
 }

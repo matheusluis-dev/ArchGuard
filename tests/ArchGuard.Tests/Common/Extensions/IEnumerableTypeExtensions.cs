@@ -1,9 +1,16 @@
-namespace ArchGuard.Tests.Common.Extensions;
-
-internal static class IEnumerableTypeExtensions
+namespace ArchGuard.Tests.Common.Extensions
 {
-    internal static IEnumerable<string> GetFullNamesOrdered(this IEnumerable<Type> types)
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    internal static class IEnumerableTypeExtensions
     {
-        return types.Select(type => type.FullName!).Order(StringComparer.Ordinal);
+        internal static IEnumerable<string> GetFullNamesOrdered(this IEnumerable<Type> types)
+        {
+            return types
+                .Select(type => type.FullName)
+                .OrderBy(name => name, StringComparer.Ordinal);
+        }
     }
 }

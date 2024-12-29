@@ -1,21 +1,22 @@
-namespace ArchGuard.Library.Types.Filters.Conditions.Interfaces;
-
-using ArchGuard.Library.Types.Filters.PostConditions.Interfaces;
-
-public partial interface ITypesFilterConditions
+namespace ArchGuard.Library.Types.Filters.Conditions.Interfaces
 {
-    ITypesFilterPostConditions ArePublic();
-    ITypesFilterPostConditions AreNotPublic();
+    using ArchGuard.Library.Types.Filters.PostConditions.Interfaces;
 
-    ITypesFilterPostConditions AreInternal();
-    ITypesFilterPostConditions AreNotInternal();
+    public partial interface ITypesFilterConditions
+    {
+        ITypesFilterPostConditions ArePublic();
+        ITypesFilterPostConditions AreNotPublic();
 
-    ITypesFilterPostConditions ArePrivate();
-    ITypesFilterPostConditions AreNotPrivate();
+        ITypesFilterPostConditions AreInternal();
+        ITypesFilterPostConditions AreNotInternal();
 
-    ITypesFilterPostConditions ArePartial();
-    ITypesFilterPostConditions AreNotPartial();
+        ITypesFilterPostConditions ArePrivate();
+        ITypesFilterPostConditions AreNotPrivate();
 
-    ITypesFilterPostConditions AreSealed();
-    ITypesFilterPostConditions AreNotSealed();
+        ITypesFilterPostConditions ArePartial();
+        ITypesFilterPostConditions AreNotPartial();
+
+        ITypesFilterPostConditions AreSealed();
+        ITypesFilterPostConditions AreNotSealed();
+    }
 }

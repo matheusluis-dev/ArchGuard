@@ -1,3 +1,4 @@
-namespace ArchGuard.Tests.MockedAssembly.Structs.Internal;
-
-internal struct InternalStruct { }
+namespace ArchGuard.Tests.MockedAssembly.Structs.Internal
+{
+    internal struct InternalStruct { }
+}

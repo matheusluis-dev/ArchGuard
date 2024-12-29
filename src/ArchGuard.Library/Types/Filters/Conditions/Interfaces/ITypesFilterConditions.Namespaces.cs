@@ -1,10 +1,14 @@
-namespace ArchGuard.Library.Types.Filters.Conditions.Interfaces;
-
-public partial interface ITypesFilterConditions
+namespace ArchGuard.Library.Types.Filters.Conditions.Interfaces
 {
-    ITypesFilterPostConditions ResideInNamespace(string name);
-    ITypesFilterPostConditions ResideInNamespace(string name, StringComparison comparer);
+    using System;
+    using ArchGuard.Library.Types.Filters.PostConditions.Interfaces;
 
-    ITypesFilterPostConditions NotResideInNamespace(string name);
-    ITypesFilterPostConditions NotResideInNamespace(string name, StringComparison comparer);
+    public partial interface ITypesFilterConditions
+    {
+        ITypesFilterPostConditions ResideInNamespace(string name);
+        ITypesFilterPostConditions ResideInNamespace(string name, StringComparison comparer);
+
+        ITypesFilterPostConditions NotResideInNamespace(string name);
+        ITypesFilterPostConditions NotResideInNamespace(string name, StringComparison comparer);
+    }
 }

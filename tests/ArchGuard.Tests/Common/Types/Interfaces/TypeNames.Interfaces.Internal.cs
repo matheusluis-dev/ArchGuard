@@ -1,11 +1,14 @@
-namespace ArchGuard.Tests.Common;
-
-internal static partial class TypeNames
+namespace ArchGuard.Tests.Common
 {
-    internal static readonly ReadOnlyCollection<string> InterfacesInternal = new(
-        [IInternalInterface]
-    );
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
-    internal const string IInternalInterface =
-        $"{Namespaces.InterfacesInternal}.{nameof(IInternalInterface)}";
+    internal static partial class TypeNames
+    {
+        internal static readonly ReadOnlyCollection<string> InterfacesInternal =
+            new ReadOnlyCollection<string>(new List<string> { IInternalInterface });
+
+        internal const string IInternalInterface =
+            Namespaces.InterfacesInternal + "." + nameof(IInternalInterface);
+    }
 }

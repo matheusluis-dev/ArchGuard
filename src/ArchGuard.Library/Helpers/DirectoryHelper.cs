@@ -1,27 +1,34 @@
-namespace ArchGuard.Library.Helpers;
-
-internal static class DirectoryHelper
+namespace ArchGuard.Library.Helpers
 {
-    private static readonly Dictionary<string, DirectoryInfo> _cache = [];
+    using System.Collections.Generic;
+    using System.IO;
 
-    internal static DirectoryInfo GetDirectoryInSolution(string subDirectory)
+    internal static class DirectoryHelper
     {
-        if (_cache.TryGetValue(subDirectory, out var cacheDirectoryInfo))
-            return cacheDirectoryInfo;
+        private static readonly Dictionary<string, DirectoryInfo> _cache =
+            new Dictionary<string, DirectoryInfo>();
 
-        var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
-        while (directory is not null)
+        internal static DirectoryInfo GetDirectoryInSolution(string subDirectory)
         {
-            var directoryInfo = new DirectoryInfo(Path.Combine(directory.FullName, subDirectory));
-            if (directoryInfo.Exists)
+            if (_cache.TryGetValue(subDirectory, out var cacheDirectoryInfo))
+                return cacheDirectoryInfo;
+
+            var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
+            while (!(directory is null))
             {
-                _cache.Add(subDirectory, directoryInfo);
-                return directoryInfo;
+                var directoryInfo = new DirectoryInfo(
+                    Path.Combine(directory.FullName, subDirectory)
+                );
+                if (directoryInfo.Exists)
+                {
+                    _cache.Add(subDirectory, directoryInfo);
+                    return directoryInfo;
+                }
+
+                directory = directory.Parent;
             }
 
-            directory = directory.Parent;
+            throw new DirectoryNotFoundException($"Directory '{subDirectory}' not found");
         }
-
-        throw new DirectoryNotFoundException($"Directory '{subDirectory}' not found");
     }
 }

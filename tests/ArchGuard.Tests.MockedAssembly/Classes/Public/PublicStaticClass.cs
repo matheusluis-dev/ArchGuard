@@ -1,3 +1,4 @@
-namespace ArchGuard.Tests.MockedAssembly.Classes.Public;
-
-public static class PublicStaticClass { }
+namespace ArchGuard.Tests.MockedAssembly.Classes.Public
+{
+    public static class PublicStaticClass { }
+}

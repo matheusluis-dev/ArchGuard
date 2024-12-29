@@ -1,16 +1,23 @@
-namespace ArchGuard.Library.Types;
-
-public sealed class Types
+namespace ArchGuard.Library.Types
 {
-    private Types() { }
+    using System;
+    using System.Reflection;
+    using ArchGuard.Library.Types.Filters;
+    using ArchGuard.Library.Types.Filters.Common.Interfaces;
 
-    public static ITypesFilterStart FromAssembly(Assembly assembly)
+    public sealed class Types
     {
-        ArgumentNullException.ThrowIfNull(assembly);
+        private Types() { }
 
-        var types = assembly.GetTypes();
-        var context = new TypesFilterContext(types);
+        public static ITypesFilterStart FromAssembly(Assembly assembly)
+        {
+            if (assembly is null)
+                throw new ArgumentNullException(nameof(assembly));
 
-        return TypesFilter.Create(context);
+            var types = assembly.GetTypes();
+            var context = new TypesFilterContext(types);
+
+            return TypesFilter.Create(context);
+        }
     }
 }

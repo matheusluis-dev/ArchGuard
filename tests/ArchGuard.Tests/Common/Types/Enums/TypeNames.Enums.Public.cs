@@ -1,8 +1,13 @@
-namespace ArchGuard.Tests.Common;
-
-internal static partial class TypeNames
+namespace ArchGuard.Tests.Common
 {
-    internal static readonly ReadOnlyCollection<string> EnumsPublic = new([PublicEnum]);
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
-    internal const string PublicEnum = $"{Namespaces.EnumsPublic}.{nameof(PublicEnum)}";
+    internal static partial class TypeNames
+    {
+        internal static readonly ReadOnlyCollection<string> EnumsPublic =
+            new ReadOnlyCollection<string>(new List<string> { PublicEnum });
+
+        internal const string PublicEnum = Namespaces.EnumsPublic + "." + nameof(PublicEnum);
+    }
 }

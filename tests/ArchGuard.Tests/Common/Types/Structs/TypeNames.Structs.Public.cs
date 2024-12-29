@@ -1,8 +1,13 @@
-namespace ArchGuard.Tests.Common;
-
-internal static partial class TypeNames
+namespace ArchGuard.Tests.Common
 {
-    internal static readonly ReadOnlyCollection<string> StructsPublic = new([PublicStruct]);
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
-    internal const string PublicStruct = $"{Namespaces.StructsPublic}.{nameof(PublicStruct)}";
+    internal static partial class TypeNames
+    {
+        internal static readonly ReadOnlyCollection<string> StructsPublic =
+            new ReadOnlyCollection<string>(new List<string> { PublicStruct });
+
+        internal const string PublicStruct = Namespaces.StructsPublic + "." + nameof(PublicStruct);
+    }
 }

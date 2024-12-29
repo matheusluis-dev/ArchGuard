@@ -1,28 +1,38 @@
-namespace ArchGuard.Library.Types.Filters;
-
-public sealed partial class TypesFilter
+namespace ArchGuard.Library.Types.Filters
 {
-    public ITypesFilterPostConditions HaveNameStartingWith(string name)
-    {
-        _context.ApplyFilter(type => type.Name.StartsWith(name));
-        return this;
-    }
+    using System;
+    using ArchGuard.Library.Types.Filters.PostConditions.Interfaces;
 
-    public ITypesFilterPostConditions HaveNameStartingWith(string name, StringComparison comparison)
+    public sealed partial class TypesFilter
     {
-        _context.ApplyFilter(type => type.Name.StartsWith(name, comparison));
-        return this;
-    }
+        public ITypesFilterPostConditions HaveNameStartingWith(string name)
+        {
+            _context.ApplyFilter(type => type.Name.StartsWith(name));
+            return this;
+        }
 
-    public ITypesFilterPostConditions HaveNameEndingWith(string name)
-    {
-        _context.ApplyFilter(type => type.Name.EndsWith(name));
-        return this;
-    }
+        public ITypesFilterPostConditions HaveNameStartingWith(
+            string name,
+            StringComparison comparison
+        )
+        {
+            _context.ApplyFilter(type => type.Name.StartsWith(name, comparison));
+            return this;
+        }
 
-    public ITypesFilterPostConditions HaveNameEndingWith(string name, StringComparison comparison)
-    {
-        _context.ApplyFilter(type => type.Name.EndsWith(name, comparison));
-        return this;
+        public ITypesFilterPostConditions HaveNameEndingWith(string name)
+        {
+            _context.ApplyFilter(type => type.Name.EndsWith(name));
+            return this;
+        }
+
+        public ITypesFilterPostConditions HaveNameEndingWith(
+            string name,
+            StringComparison comparison
+        )
+        {
+            _context.ApplyFilter(type => type.Name.EndsWith(name, comparison));
+            return this;
+        }
     }
 }

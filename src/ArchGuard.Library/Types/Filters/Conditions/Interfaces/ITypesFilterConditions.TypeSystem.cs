@@ -1,19 +1,22 @@
-namespace ArchGuard.Library.Types.Filters.Conditions.Interfaces;
-
-public partial interface ITypesFilterConditions
+namespace ArchGuard.Library.Types.Filters.Conditions.Interfaces
 {
-    ITypesFilterPostConditions AreClasses();
-    ITypesFilterPostConditions AreNotClasses();
+    using ArchGuard.Library.Types.Filters.PostConditions.Interfaces;
 
-    ITypesFilterPostConditions AreInterfaces();
-    ITypesFilterPostConditions AreNotInterfaces();
+    public partial interface ITypesFilterConditions
+    {
+        ITypesFilterPostConditions AreClasses();
+        ITypesFilterPostConditions AreNotClasses();
 
-    ITypesFilterPostConditions AreStructs();
-    ITypesFilterPostConditions AreNotStructs();
+        ITypesFilterPostConditions AreInterfaces();
+        ITypesFilterPostConditions AreNotInterfaces();
 
-    ITypesFilterPostConditions AreEnums();
-    ITypesFilterPostConditions AreNotEnums();
+        ITypesFilterPostConditions AreStructs();
+        ITypesFilterPostConditions AreNotStructs();
 
-    ITypesFilterPostConditions AreRecords();
-    ITypesFilterPostConditions AreNotRecords();
+        ITypesFilterPostConditions AreEnums();
+        ITypesFilterPostConditions AreNotEnums();
+
+        ITypesFilterPostConditions AreRecords();
+        ITypesFilterPostConditions AreNotRecords();
+    }
 }

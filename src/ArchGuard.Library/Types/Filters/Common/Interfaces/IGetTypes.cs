@@ -1,6 +1,10 @@
-namespace ArchGuard.Library.Types.Filters.Common.Interfaces;
-
-public interface IGetTypes
+namespace ArchGuard.Library.Types.Filters.Common.Interfaces
 {
-    IEnumerable<Type> GetTypes();
+    using System;
+    using System.Collections.Generic;
+
+    public interface IGetTypes
+    {
+        IEnumerable<Type> GetTypes();
+    }
 }

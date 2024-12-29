@@ -1,36 +1,45 @@
-namespace ArchGuard.Library.Types.Filters;
-
-public sealed partial class TypesFilter
+namespace ArchGuard.Library.Types.Filters
 {
-    public ITypesFilterPostConditions ResideInNamespace(string name)
+    using System;
+    using ArchGuard.Library.Types.Filters.PostConditions.Interfaces;
+
+    public sealed partial class TypesFilter
     {
-        _context.ApplyFilter(f =>
-            f.Namespace is not null && f.Namespace.Equals(name, StringComparison.Ordinal)
-        );
+        public ITypesFilterPostConditions ResideInNamespace(string name)
+        {
+            _context.ApplyFilter(f =>
+                !(f.Namespace is null) && f.Namespace.Equals(name, StringComparison.Ordinal)
+            );
 
-        return this;
-    }
+            return this;
+        }
 
-    public ITypesFilterPostConditions ResideInNamespace(string name, StringComparison comparer)
-    {
-        _context.ApplyFilter(f => f.Namespace is not null && f.Namespace.Equals(name, comparer));
+        public ITypesFilterPostConditions ResideInNamespace(string name, StringComparison comparer)
+        {
+            _context.ApplyFilter(f => !(f.Namespace is null) && f.Namespace.Equals(name, comparer));
 
-        return this;
-    }
+            return this;
+        }
 
-    public ITypesFilterPostConditions NotResideInNamespace(string name)
-    {
-        _context.ApplyFilter(f =>
-            f.Namespace is not null && !f.Namespace.Equals(name, StringComparison.Ordinal)
-        );
+        public ITypesFilterPostConditions NotResideInNamespace(string name)
+        {
+            _context.ApplyFilter(f =>
+                !(f.Namespace is null) && !f.Namespace.Equals(name, StringComparison.Ordinal)
+            );
 
-        return this;
-    }
+            return this;
+        }
 
-    public ITypesFilterPostConditions NotResideInNamespace(string name, StringComparison comparer)
-    {
-        _context.ApplyFilter(f => f.Namespace is not null && !f.Namespace.Equals(name, comparer));
+        public ITypesFilterPostConditions NotResideInNamespace(
+            string name,
+            StringComparison comparer
+        )
+        {
+            _context.ApplyFilter(f =>
+                !(f.Namespace is null) && !f.Namespace.Equals(name, comparer)
+            );
 
-        return this;
+            return this;
+        }
     }
 }

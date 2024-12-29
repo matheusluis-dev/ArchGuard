@@ -1,26 +1,32 @@
-namespace ArchGuard.Library.Types.Filters;
-
-using ArchGuard.Library.Types.Filters.PostConditions.Interfaces;
-
-public sealed partial class TypesFilter
+namespace ArchGuard.Library.Types.Filters
 {
-    public ITypesFilterConditions That()
-    {
-        return this;
-    }
+    using System;
+    using System.Collections.Generic;
+    using ArchGuard.Library.Types.Filters.Conditions.Interfaces;
+    using ArchGuard.Library.Types.Filters.PostConditions.Interfaces;
 
-    public ITypesFilterPostConditions That(
-        Func<ITypesFilterConditions, ITypesFilterPostConditions> filter
-    )
+    public sealed partial class TypesFilter
     {
-        ArgumentNullException.ThrowIfNull(filter);
-        filter(this);
+        public ITypesFilterConditions That()
+        {
+            return this;
+        }
 
-        return this;
-    }
+        public ITypesFilterPostConditions That(
+            Func<ITypesFilterConditions, ITypesFilterPostConditions> filter
+        )
+        {
+            if (filter is null)
+                throw new ArgumentNullException(nameof(filter));
 
-    public IEnumerable<Type> GetTypes()
-    {
-        return _context.Types;
+            filter(this);
+
+            return this;
+        }
+
+        public IEnumerable<Type> GetTypes()
+        {
+            return _context.Types;
+        }
     }
 }

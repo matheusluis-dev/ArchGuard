@@ -1,3 +1,4 @@
-namespace ArchGuard.Tests.MockedAssembly.Structs.Public;
-
-public struct PublicStruct { }
+namespace ArchGuard.Tests.MockedAssembly.Structs.Public
+{
+    public struct PublicStruct { }
+}

@@ -1,26 +1,31 @@
-namespace ArchGuard.Library.Extensions;
-
-internal static class TypeDeclarationSyntaxExtensions
+namespace ArchGuard.Library.Extensions
 {
-    internal static string GetFullName(this TypeDeclarationSyntax classDeclarationSyntax)
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
+
+    internal static class TypeDeclarationSyntaxExtensions
     {
-        var fullClassName = classDeclarationSyntax.Identifier.ValueText;
-
-        var parent = classDeclarationSyntax.Parent;
-        while (
-            parent is not null and not BaseNamespaceDeclarationSyntax and not CompilationUnitSyntax
-        )
+        internal static string GetFullName(this TypeDeclarationSyntax classDeclarationSyntax)
         {
-            // Treatment for Nested Classes
-            if (parent is ClassDeclarationSyntax parentClass)
-                fullClassName = $"{parentClass.Identifier.ValueText}.{fullClassName}";
+            var fullClassName = classDeclarationSyntax.Identifier.ValueText;
 
-            parent = parent.Parent;
+            var parent = classDeclarationSyntax.Parent;
+            while (
+                !(parent is null)
+                && !(parent is BaseNamespaceDeclarationSyntax)
+                && !(parent is CompilationUnitSyntax)
+            )
+            {
+                // Treatment for Nested Classes
+                if (parent is ClassDeclarationSyntax parentClass)
+                    fullClassName = $"{parentClass.Identifier.ValueText}.{fullClassName}";
+
+                parent = parent.Parent;
+            }
+
+            if (parent is BaseNamespaceDeclarationSyntax namespaceDeclarationSyntax)
+                fullClassName = $"{namespaceDeclarationSyntax.Name}.{fullClassName}";
+
+            return fullClassName;
         }
-
-        if (parent is BaseNamespaceDeclarationSyntax namespaceDeclarationSyntax)
-            fullClassName = $"{namespaceDeclarationSyntax.Name}.{fullClassName}";
-
-        return fullClassName;
     }
 }

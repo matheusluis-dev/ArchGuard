@@ -1,21 +1,24 @@
-namespace ArchGuard.Library.Types.Filters;
-
-using ArchGuard.Library.Types.Filters.Common.Interfaces;
-
-public sealed partial class TypesFilter
-    : ITypesFilterStart,
-        ITypesFilterConditions,
-        ITypesFilterPostConditions
+namespace ArchGuard.Library.Types.Filters
 {
-    private readonly TypesFilterContext _context;
+    using ArchGuard.Library.Types.Filters.Common.Interfaces;
+    using ArchGuard.Library.Types.Filters.Conditions.Interfaces;
+    using ArchGuard.Library.Types.Filters.PostConditions.Interfaces;
 
-    private TypesFilter(TypesFilterContext context)
+    public sealed partial class TypesFilter
+        : ITypesFilterStart,
+            ITypesFilterConditions,
+            ITypesFilterPostConditions
     {
-        _context = context;
-    }
+        private readonly TypesFilterContext _context;
 
-    public static ITypesFilterStart Create(TypesFilterContext context)
-    {
-        return new TypesFilter(context);
+        private TypesFilter(TypesFilterContext context)
+        {
+            _context = context;
+        }
+
+        public static ITypesFilterStart Create(TypesFilterContext context)
+        {
+            return new TypesFilter(context);
+        }
     }
 }

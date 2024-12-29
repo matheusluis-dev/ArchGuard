@@ -1,10 +1,13 @@
-namespace ArchGuard.Tests.Common;
-
-using ArchGuard.Library.Types.Filters.Common.Interfaces;
-
-internal static class TypesFromMockedAssembly
+namespace ArchGuard.Tests.Common
 {
-    private static readonly Assembly _assembly = typeof(PublicClass).Assembly;
+    using System.Reflection;
+    using ArchGuard.Library.Types.Filters.Common.Interfaces;
+    using ArchGuard.Tests.MockedAssembly.Classes.Public;
 
-    public static ITypesFilterStart All => Types.FromAssembly(_assembly);
+    internal static class TypesFromMockedAssembly
+    {
+        private static readonly Assembly _assembly = typeof(PublicClass).Assembly;
+
+        public static ITypesFilterStart All => Library.Types.Types.FromAssembly(_assembly);
+    }
 }
