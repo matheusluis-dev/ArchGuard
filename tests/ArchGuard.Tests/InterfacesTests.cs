@@ -1,10 +1,13 @@
 namespace ArchGuard.Tests
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using ArchGuard.Library.Types;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
+    using ArchGuard.Tests.Common.Types;
+    using ArchGuard.Tests.Common.Types.Builder;
     using ArchGuard.Tests.MockedAssembly.Classes.Public;
     using FluentAssertions;
     using Xunit;
@@ -15,80 +18,82 @@ namespace ArchGuard.Tests
         public void Get_interfaces()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
+            var expected = new List<string>
+            {
+                TypeNamesRefactorStatic.IInternalInterface,
+                TypeNamesRefactorStatic.IPublicInterface,
+            };
+            var filters = TypesFromMockedAssembly.All.That().AreInterfaces();
 
             // Act
-            var types = Types
-                .FromAssembly(assembly)
-                .That()
-                .AreInterfaces()
-                .GetTypes()
-                .GetFullNamesOrdered();
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.Interfaces);
+            types.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void Get_non_interface_types()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
-            var nonInterfaceTypes = TypeNames.Types.Except(
-                TypeNames.Interfaces,
-                StringComparer.Ordinal
-            );
+            var expected = new List<string>
+            {
+                TypeNamesRefactorStatic.InternalClass,
+                TypeNamesRefactorStatic.InternalPartialClass,
+                TypeNamesRefactorStatic.InternalSealedClass,
+                TypeNamesRefactorStatic.InternalStaticClass,
+                TypeNamesRefactorStatic.PublicClass,
+                TypeNamesRefactorStatic.PublicPartialClass,
+                TypeNamesRefactorStatic.PublicSealedClass,
+                TypeNamesRefactorStatic.PublicStaticClass,
+                TypeNamesRefactorStatic.InternalEnum,
+                TypeNamesRefactorStatic.PublicEnum,
+#if NET5_0_OR_GREATER
+                TypeNamesRefactorStatic.InternalRecord,
+                TypeNamesRefactorStatic.InternalPartialRecord,
+                TypeNamesRefactorStatic.InternalSealedRecord,
+                TypeNamesRefactorStatic.PublicRecord,
+                TypeNamesRefactorStatic.PublicPartialRecord,
+                TypeNamesRefactorStatic.PublicSealedRecord,
+#endif
+                TypeNamesRefactorStatic.InternalStruct,
+                TypeNamesRefactorStatic.PublicStruct,
+            };
+            var filters = TypesFromMockedAssembly.All.That().AreNotInterfaces();
 
             // Act
-            var types = Types
-                .FromAssembly(assembly)
-                .That()
-                .AreNotInterfaces()
-                .GetTypes()
-                .GetFullNamesOrdered();
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(nonInterfaceTypes);
+            types.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void Get_public_interfaces()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
+            var expected = new List<string> { TypeNamesRefactorStatic.IPublicInterface };
+            var filters = TypesFromMockedAssembly.All.That().AreInterfaces().And().ArePublic();
 
             // Act
-            var types = Types
-                .FromAssembly(assembly)
-                .That()
-                .AreInterfaces()
-                .And()
-                .ArePublic()
-                .GetTypes()
-                .GetFullNamesOrdered();
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.InterfacesPublic);
+            types.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void Get_internal_interfaces()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
+            var expected = new List<string> { TypeNamesRefactorStatic.IInternalInterface };
+            var filters = TypesFromMockedAssembly.All.That().AreInterfaces().And().AreInternal();
 
             // Act
-            var types = Types
-                .FromAssembly(assembly)
-                .That()
-                .AreInterfaces()
-                .And()
-                .AreInternal()
-                .GetTypes()
-                .GetFullNamesOrdered();
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.InterfacesInternal);
+            types.Should().BeEquivalentTo(expected);
         }
     }
 }

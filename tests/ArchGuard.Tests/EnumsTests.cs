@@ -1,10 +1,13 @@
 namespace ArchGuard.Tests
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using ArchGuard.Library.Types;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
+    using ArchGuard.Tests.Common.Types;
+    using ArchGuard.Tests.Common.Types.Builder;
     using ArchGuard.Tests.MockedAssembly.Classes.Public;
     using FluentAssertions;
     using Xunit;
@@ -15,77 +18,82 @@ namespace ArchGuard.Tests
         public void Get_enums()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
+            var expected = new List<string>
+            {
+                TypeNamesRefactorStatic.InternalEnum,
+                TypeNamesRefactorStatic.PublicEnum,
+            };
+            var filters = TypesFromMockedAssembly.All.That().AreEnums();
 
             // Act
-            var types = Types
-                .FromAssembly(assembly)
-                .That()
-                .AreEnums()
-                .GetTypes()
-                .GetFullNamesOrdered();
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.Enums);
+            types.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void Get_non_enum_types()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
-            var nonEnumTypes = TypeNames.Types.Except(TypeNames.Enums, StringComparer.Ordinal);
+            var expected = new List<string>
+            {
+                TypeNamesRefactorStatic.InternalClass,
+                TypeNamesRefactorStatic.InternalPartialClass,
+                TypeNamesRefactorStatic.InternalSealedClass,
+                TypeNamesRefactorStatic.InternalStaticClass,
+                TypeNamesRefactorStatic.PublicClass,
+                TypeNamesRefactorStatic.PublicPartialClass,
+                TypeNamesRefactorStatic.PublicSealedClass,
+                TypeNamesRefactorStatic.PublicStaticClass,
+                TypeNamesRefactorStatic.IInternalInterface,
+                TypeNamesRefactorStatic.IPublicInterface,
+#if NET5_0_OR_GREATER
+                TypeNamesRefactorStatic.InternalRecord,
+                TypeNamesRefactorStatic.InternalPartialRecord,
+                TypeNamesRefactorStatic.InternalSealedRecord,
+                TypeNamesRefactorStatic.PublicRecord,
+                TypeNamesRefactorStatic.PublicPartialRecord,
+                TypeNamesRefactorStatic.PublicSealedRecord,
+#endif
+                TypeNamesRefactorStatic.InternalStruct,
+                TypeNamesRefactorStatic.PublicStruct,
+            };
+            var filters = TypesFromMockedAssembly.All.That().AreNotEnums();
 
             // Act
-            var types = Types
-                .FromAssembly(assembly)
-                .That()
-                .AreNotEnums()
-                .GetTypes()
-                .GetFullNamesOrdered();
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(nonEnumTypes);
+            types.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void Get_public_enums()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
+            var expected = new List<string> { TypeNamesRefactorStatic.PublicEnum };
+            var filters = TypesFromMockedAssembly.All.That().AreEnums().And().ArePublic();
 
             // Act
-            var types = Types
-                .FromAssembly(assembly)
-                .That()
-                .AreEnums()
-                .And()
-                .ArePublic()
-                .GetTypes()
-                .GetFullNamesOrdered();
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.EnumsPublic);
+            types.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void Get_internal_enums()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
+            var expected = new List<string> { TypeNamesRefactorStatic.InternalEnum };
+            var filters = TypesFromMockedAssembly.All.That().AreEnums().And().AreInternal();
 
             // Act
-            var types = Types
-                .FromAssembly(assembly)
-                .That()
-                .AreEnums()
-                .And()
-                .AreInternal()
-                .GetTypes()
-                .GetFullNamesOrdered();
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.EnumsInternal);
+            types.Should().BeEquivalentTo(expected);
         }
     }
 }

@@ -4,6 +4,7 @@ namespace ArchGuard.Tests
     using System.Collections.Generic;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
+    using ArchGuard.Tests.Common.Types.Builder;
     using FluentAssertions;
     using Xunit;
 
@@ -13,14 +14,13 @@ namespace ArchGuard.Tests
         public void Name_starting()
         {
             // Arrange
-            var expected = new List<string>
-            {
-                TypeNames.PublicSealedClass,
-#if NET5_0_OR_GREATER
-                TypeNames.PublicSealedRecord,
-#endif
-            };
-            var filters = TypesFromMockedAssembly.All.That().HaveNameStartingWith("PublicSealed");
+            var prefix = "PublicSealed";
+
+            var expected = TypeNamesFromMockedAssembly
+                .That()
+                .HaveNameStartingWith(prefix)
+                .GetTypeNames();
+            var filters = TypesFromMockedAssembly.All.That().HaveNameStartingWith(prefix);
 
             // Act
             var types = filters.GetTypes().GetFullNamesOrdered();
@@ -33,16 +33,18 @@ namespace ArchGuard.Tests
         public void Name_starting_with_StringComparison()
         {
             // Arrange
-            var expected = new List<string>
-            {
-                TypeNames.PublicSealedClass,
-#if NET5_0_OR_GREATER
-                TypeNames.PublicSealedRecord,
-#endif
-            };
+            var prefix = "PublicSealed";
+
+            var expected = TypeNamesFromMockedAssembly
+                .That()
+                .HaveNameStartingWith(prefix)
+                .GetTypeNames();
             var filters = TypesFromMockedAssembly
                 .All.That()
-                .HaveNameStartingWith("publicsealed", StringComparison.OrdinalIgnoreCase);
+                .HaveNameStartingWith(
+                    prefix.ToUpperInvariant(),
+                    StringComparison.OrdinalIgnoreCase
+                );
 
             // Act
             var types = filters.GetTypes().GetFullNamesOrdered();
@@ -55,8 +57,13 @@ namespace ArchGuard.Tests
         public void Name_ending()
         {
             // Arrange
-            var expected = TypeNames.Classes;
-            var filters = TypesFromMockedAssembly.All.That().HaveNameEndingWith("Class");
+            var suffix = "Class";
+
+            var expected = TypeNamesFromMockedAssembly
+                .That()
+                .HaveNameEndingWith(suffix)
+                .GetTypeNames();
+            var filters = TypesFromMockedAssembly.All.That().HaveNameEndingWith(suffix);
 
             // Act
             var types = filters.GetTypes().GetFullNamesOrdered();
@@ -69,10 +76,15 @@ namespace ArchGuard.Tests
         public void Name_ending_with_StringComparison()
         {
             // Arrange
-            var expected = TypeNames.Classes;
+            var suffix = "Class";
+
+            var expected = TypeNamesFromMockedAssembly
+                .That()
+                .HaveNameEndingWith(suffix)
+                .GetTypeNames();
             var filters = TypesFromMockedAssembly
                 .All.That()
-                .HaveNameEndingWith("class", StringComparison.OrdinalIgnoreCase);
+                .HaveNameEndingWith(suffix.ToUpperInvariant(), StringComparison.OrdinalIgnoreCase);
 
             // Act
             var types = filters.GetTypes().GetFullNamesOrdered();

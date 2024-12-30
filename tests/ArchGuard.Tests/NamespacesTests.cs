@@ -1,10 +1,13 @@
 namespace ArchGuard.Tests
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using ArchGuard.Library.Types;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
+    using ArchGuard.Tests.Common.Types;
+    using ArchGuard.Tests.Common.Types.Builder;
     using ArchGuard.Tests.MockedAssembly.Classes.Public;
     using FluentAssertions;
     using Xunit;
@@ -15,86 +18,88 @@ namespace ArchGuard.Tests
         public void Reside_in_namespace()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
+            var expected = new List<string>
+            {
+                TypeNamesRefactorStatic.PublicClass,
+                TypeNamesRefactorStatic.PublicPartialClass,
+                TypeNamesRefactorStatic.PublicSealedClass,
+                TypeNamesRefactorStatic.PublicStaticClass,
+            };
+            var filters = TypesFromMockedAssembly
+                .All.That()
+                .ResideInNamespace(Namespaces.ClassesPublic);
 
             // Act
-            var types = Types
-                .FromAssembly(assembly)
-                .That()
-                .ResideInNamespace(Namespaces.ClassesPublic)
-                .GetTypes()
-                .GetFullNamesOrdered();
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.ClassesPublic);
+            types.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void Reside_in_namespace_StringComparison_overload()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
-
-            // Act
-            var types = Types
-                .FromAssembly(assembly)
-                .That()
+            var expected = new List<string>
+            {
+                TypeNamesRefactorStatic.PublicClass,
+                TypeNamesRefactorStatic.PublicPartialClass,
+                TypeNamesRefactorStatic.PublicSealedClass,
+                TypeNamesRefactorStatic.PublicStaticClass,
+            };
+            var filters = TypesFromMockedAssembly
+                .All.That()
                 .ResideInNamespace(
                     Namespaces.ClassesPublic.ToUpperInvariant(),
                     StringComparison.OrdinalIgnoreCase
-                )
-                .GetTypes()
-                .GetFullNamesOrdered();
+                );
+
+            // Act
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.ClassesPublic);
+            types.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void Not_reside_in_namespace()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
-            var allTypesExceptPublicClasses = TypeNames.Types.Except(
-                TypeNames.ClassesPublic,
-                StringComparer.Ordinal
-            );
-
-            // Act
-            var types = Types
-                .FromAssembly(assembly)
+            var expected = TypeNamesFromMockedAssembly
                 .That()
                 .NotResideInNamespace(Namespaces.ClassesPublic)
-                .GetTypes()
-                .GetFullNamesOrdered();
+                .GetTypeNames();
+            var filters = TypesFromMockedAssembly
+                .All.That()
+                .NotResideInNamespace(Namespaces.ClassesPublic);
+
+            // Act
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(allTypesExceptPublicClasses);
+            types.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void Not_reside_in_namespace_StringComparison_overload()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
-            var allTypesExceptPublicClasses = TypeNames.Types.Except(
-                TypeNames.ClassesPublic,
-                StringComparer.Ordinal
-            );
-
-            // Act
-            var types = Types
-                .FromAssembly(assembly)
+            var expected = TypeNamesFromMockedAssembly
                 .That()
+                .NotResideInNamespace(Namespaces.ClassesPublic)
+                .GetTypeNames();
+            var filters = TypesFromMockedAssembly
+                .All.That()
                 .NotResideInNamespace(
                     Namespaces.ClassesPublic.ToUpperInvariant(),
                     StringComparison.OrdinalIgnoreCase
-                )
-                .GetTypes()
-                .GetFullNamesOrdered();
+                );
+
+            // Act
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(allTypesExceptPublicClasses);
+            types.Should().BeEquivalentTo(expected);
         }
     }
 }

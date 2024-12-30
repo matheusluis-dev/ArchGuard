@@ -4,37 +4,26 @@ namespace ArchGuard.Tests.Common.Types
     using System.Collections.Generic;
     using System.Linq;
 
-    internal static class TypeNamesRefactorStatic
+    internal static partial class TypeNamesRefactorStatic { }
+
+    internal static partial class TypeNamesRefactorStatic
     {
-        internal static IEnumerable<string> Classes
-        {
-            get
-            {
-                var list = new List<string>();
+        internal const string InternalEnum = Namespaces.EnumsInternal + "." + nameof(InternalEnum);
 
-                list.AddRange(InternalClasses);
-                list.AddRange(PublicClasses);
+        internal const string PublicEnum = Namespaces.EnumsPublic + "." + nameof(PublicEnum);
+    }
 
-                return list.OrderBy(c => c, StringComparer.Ordinal);
-            }
-        }
+    internal static partial class TypeNamesRefactorStatic
+    {
+        internal const string IInternalInterface =
+            Namespaces.InterfacesInternal + "." + nameof(IInternalInterface);
 
-        internal static readonly IEnumerable<string> PublicClasses = new List<string>
-        {
-            PublicClass,
-            PublicPartialClass,
-            PublicSealedClass,
-            PublicStaticClass,
-        }.OrderBy(c => c, StringComparer.Ordinal);
+        internal const string IPublicInterface =
+            Namespaces.InterfacesPublic + "." + nameof(IPublicInterface);
+    }
 
-        internal static readonly IEnumerable<string> InternalClasses = new List<string>
-        {
-            InternalClass,
-            InternalPartialClass,
-            InternalSealedClass,
-            InternalStaticClass,
-        }.OrderBy(c => c, StringComparer.Ordinal);
-
+    internal static partial class TypeNamesRefactorStatic
+    {
         internal const string InternalClass =
             Namespaces.ClassesInternal + "." + nameof(InternalClass);
 
@@ -57,5 +46,35 @@ namespace ArchGuard.Tests.Common.Types
 
         internal const string PublicStaticClass =
             Namespaces.ClassesPublic + "." + nameof(PublicStaticClass);
+    }
+
+#if NET5_0_OR_GREATER
+    internal static partial class TypeNamesRefactorStatic
+    {
+        internal const string InternalRecord =
+            Namespaces.RecordsInternal + "." + nameof(InternalRecord);
+
+        internal const string InternalPartialRecord =
+            Namespaces.RecordsInternal + "." + nameof(InternalPartialRecord);
+
+        internal const string InternalSealedRecord =
+            Namespaces.RecordsPublic + "." + nameof(PublicSealedRecord);
+
+        internal const string PublicRecord = Namespaces.RecordsPublic + "." + nameof(PublicRecord);
+
+        internal const string PublicPartialRecord =
+            Namespaces.RecordsPublic + "." + nameof(PublicPartialRecord);
+
+        internal const string PublicSealedRecord =
+            Namespaces.RecordsPublic + "." + nameof(PublicSealedRecord);
+    }
+#endif
+
+    internal static partial class TypeNamesRefactorStatic
+    {
+        internal const string InternalStruct =
+            Namespaces.StructsInternal + "." + nameof(InternalStruct);
+
+        internal const string PublicStruct = Namespaces.StructsPublic + "." + nameof(PublicStruct);
     }
 }

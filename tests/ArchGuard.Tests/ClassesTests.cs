@@ -1,13 +1,10 @@
 namespace ArchGuard.Tests
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using ArchGuard.Library.Types;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;
-    using ArchGuard.Tests.MockedAssembly.Classes.Public;
+    using ArchGuard.Tests.Common.Types.Builder;
     using FluentAssertions;
     using Xunit;
 
@@ -17,7 +14,17 @@ namespace ArchGuard.Tests
         public void Get_classes()
         {
             // Arrange
-            var expected = TypeNamesRefactorStatic.Classes;
+            var expected = new List<string>
+            {
+                TypeNamesRefactorStatic.InternalClass,
+                TypeNamesRefactorStatic.InternalPartialClass,
+                TypeNamesRefactorStatic.InternalSealedClass,
+                TypeNamesRefactorStatic.InternalStaticClass,
+                TypeNamesRefactorStatic.PublicClass,
+                TypeNamesRefactorStatic.PublicPartialClass,
+                TypeNamesRefactorStatic.PublicSealedClass,
+                TypeNamesRefactorStatic.PublicStaticClass,
+            };
             var filters = TypesFromMockedAssembly.All.That().AreClasses();
 
             // Act
@@ -31,46 +38,63 @@ namespace ArchGuard.Tests
         public void Get_non_class_types()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
-            var nonClassTypes = TypeNames.Types.Except(TypeNames.Classes, StringComparer.Ordinal);
+            var expected = new List<string>
+            {
+                TypeNamesRefactorStatic.IInternalInterface,
+                TypeNamesRefactorStatic.IPublicInterface,
+                TypeNamesRefactorStatic.InternalEnum,
+                TypeNamesRefactorStatic.PublicEnum,
+#if NET5_0_OR_GREATER
+                TypeNamesRefactorStatic.InternalRecord,
+                TypeNamesRefactorStatic.InternalPartialRecord,
+                TypeNamesRefactorStatic.InternalSealedRecord,
+                TypeNamesRefactorStatic.PublicRecord,
+                TypeNamesRefactorStatic.PublicPartialRecord,
+                TypeNamesRefactorStatic.PublicSealedRecord,
+#endif
+                TypeNamesRefactorStatic.InternalStruct,
+                TypeNamesRefactorStatic.PublicStruct,
+            };
+            var filters = TypesFromMockedAssembly.All.That().AreNotClasses();
 
             // Act
-            var types = Types
-                .FromAssembly(assembly)
-                .That()
-                .AreNotClasses()
-                .GetTypes()
-                .GetFullNamesOrdered();
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(nonClassTypes);
+            types.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void Get_public_classes()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
+            var expected = new List<string>
+            {
+                TypeNamesRefactorStatic.PublicClass,
+                TypeNamesRefactorStatic.PublicPartialClass,
+                TypeNamesRefactorStatic.PublicSealedClass,
+                TypeNamesRefactorStatic.PublicStaticClass,
+            };
+            var filters = TypesFromMockedAssembly.All.That().AreClasses().And().ArePublic();
 
             // Act
-            var types = Types
-                .FromAssembly(assembly)
-                .That()
-                .AreClasses()
-                .And()
-                .ArePublic()
-                .GetTypes()
-                .GetFullNamesOrdered();
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.ClassesPublic);
+            types.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void Get_internal_classes()
         {
             // Arrange
-            var expected = TypeNamesRefactorStatic.InternalClasses;
+            var expected = new List<string>
+            {
+                TypeNamesRefactorStatic.InternalClass,
+                TypeNamesRefactorStatic.InternalPartialClass,
+                TypeNamesRefactorStatic.InternalSealedClass,
+                TypeNamesRefactorStatic.InternalStaticClass,
+            };
             var filters = TypesFromMockedAssembly.All.That().AreClasses().And().AreInternal();
 
             // Act
@@ -84,50 +108,36 @@ namespace ArchGuard.Tests
         public void Get_partial_classes()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
+            var expected = new List<string>
+            {
+                TypeNamesRefactorStatic.PublicPartialClass,
+                TypeNamesRefactorStatic.InternalPartialClass,
+            };
+            var filters = TypesFromMockedAssembly.All.That().AreClasses().And().ArePartial();
 
             // Act
-            var types = Types
-                .FromAssembly(assembly)
-                .That()
-                .AreClasses()
-                .And()
-                .ArePartial()
-                .GetTypes()
-                .GetFullNamesOrdered();
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(new List<string> { TypeNames.PublicPartialClass });
+            types.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void Get_sealed_classes()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
-            var sealedClasses = new List<string>
+            var expected = new List<string>
             {
-                TypeNames.InternalSealedClass,
-                TypeNames.PublicSealedClass,
-#if NET5_0_OR_GREATER
-                "Microsoft.CodeAnalysis.EmbeddedAttribute",
-                "System.Runtime.CompilerServices.NullableAttribute",
-                "System.Runtime.CompilerServices.NullableContextAttribute",
-#endif
+                TypeNamesRefactorStatic.InternalSealedClass,
+                TypeNamesRefactorStatic.PublicSealedClass,
             };
+            var filters = TypesFromMockedAssembly.All.That().AreClasses().And().AreSealed();
 
             // Act
-            var types = Types
-                .FromAssembly(assembly)
-                .That()
-                .AreClasses()
-                .And()
-                .AreSealed()
-                .GetTypes()
-                .GetFullNamesOrdered();
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(sealedClasses);
+            types.Should().BeEquivalentTo(expected);
         }
     }
 }

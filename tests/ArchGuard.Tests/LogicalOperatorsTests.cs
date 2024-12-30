@@ -5,6 +5,8 @@ namespace ArchGuard.Tests
     using ArchGuard.Library.Types;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
+    using ArchGuard.Tests.Common.Types;
+    using ArchGuard.Tests.Common.Types.Builder;
     using ArchGuard.Tests.MockedAssembly.Classes.Public;
     using FluentAssertions;
     using Xunit;
@@ -15,89 +17,71 @@ namespace ArchGuard.Tests
         public void That_with_one_filter()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
+            var expected = TypeNamesFromMockedAssembly.That(t => t.AreClasses()).GetTypeNames();
+            var filters = TypesFromMockedAssembly.All.That(t => t.AreClasses());
 
             // Act
-            var types = Types
-                .FromAssembly(assembly)
-                .That(t => t.AreClasses())
-                .GetTypes()
-                .GetFullNamesOrdered();
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.Classes);
+            types.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void That_nested_And()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
-            var nonPublicClasses = new List<string>
-            {
-                TypeNames.InternalClass,
-                TypeNames.InternalSealedClass,
-                TypeNames.InternalStaticClass,
-            };
+            var expected = TypeNamesFromMockedAssembly
+                .That(t => t.AreClasses().And().AreNotPublic())
+                .GetTypeNames();
+            var filters = TypesFromMockedAssembly.All.That(t =>
+                t.AreClasses().And().AreNotPublic()
+            );
 
             // Act
-            var types = Types
-                .FromAssembly(assembly)
-                .That(t => t.AreClasses().And().AreNotPublic())
-                .GetTypes()
-                .GetFullNamesOrdered();
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(nonPublicClasses);
+            types.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void And()
         {
             // Arrange
-            var assembly = typeof(PublicClass).Assembly;
-            var nonPublicClasses = new List<string>
-            {
-                TypeNames.InternalClass,
-                TypeNames.InternalSealedClass,
-                TypeNames.InternalStaticClass,
-            };
-
-            // Act
-            var types = Types
-                .FromAssembly(assembly)
+            var expected = TypeNamesFromMockedAssembly
                 .That()
                 .AreClasses()
                 .And()
                 .AreNotPublic()
-                .GetTypes()
-                .GetFullNamesOrdered();
+                .GetTypeNames();
+            var filters = TypesFromMockedAssembly.All.That().AreClasses().And().AreNotPublic();
+
+            // Act
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(nonPublicClasses);
+            types.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void And_and()
-        {
-            // Arrange
-            var assembly = typeof(PublicClass).Assembly;
-            var nonPublicAndSealedClasses = new List<string> { TypeNames.InternalSealedClass };
-
-            // Act
-            var types = Types
-                .FromAssembly(assembly)
+        { // Arrange
+            var expected = TypeNamesFromMockedAssembly
                 .That()
                 .AreClasses()
                 .And()
                 .AreNotPublic()
                 .And()
                 .AreSealed()
-                .GetTypes()
-                .GetFullNamesOrdered();
+                .GetTypeNames();
+            var filters = TypesFromMockedAssembly.All.That().AreClasses().And().AreNotPublic();
+
+            // Act
+            var types = filters.GetTypes().GetFullNamesOrdered();
 
             // Assert
-            types.Should().BeEquivalentTo(nonPublicAndSealedClasses);
+            types.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
