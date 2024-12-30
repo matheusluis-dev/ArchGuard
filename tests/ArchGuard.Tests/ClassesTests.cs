@@ -4,7 +4,6 @@ namespace ArchGuard.Tests
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;
-    using ArchGuard.Tests.Common.Types.Builder;
     using FluentAssertions;
     using Xunit;
 
@@ -16,14 +15,14 @@ namespace ArchGuard.Tests
             // Arrange
             var expected = new List<string>
             {
-                TypeNamesRefactorStatic.InternalClass,
-                TypeNamesRefactorStatic.InternalPartialClass,
-                TypeNamesRefactorStatic.InternalSealedClass,
-                TypeNamesRefactorStatic.InternalStaticClass,
-                TypeNamesRefactorStatic.PublicClass,
-                TypeNamesRefactorStatic.PublicPartialClass,
-                TypeNamesRefactorStatic.PublicSealedClass,
-                TypeNamesRefactorStatic.PublicStaticClass,
+                TypeNames.InternalClass,
+                TypeNames.InternalPartialClass,
+                TypeNames.InternalSealedClass,
+                TypeNames.InternalStaticClass,
+                TypeNames.PublicClass,
+                TypeNames.PublicPartialClass,
+                TypeNames.PublicSealedClass,
+                TypeNames.PublicStaticClass,
             };
             var filters = TypesFromMockedAssembly.All.That().AreClasses();
 
@@ -40,20 +39,20 @@ namespace ArchGuard.Tests
             // Arrange
             var expected = new List<string>
             {
-                TypeNamesRefactorStatic.IInternalInterface,
-                TypeNamesRefactorStatic.IPublicInterface,
-                TypeNamesRefactorStatic.InternalEnum,
-                TypeNamesRefactorStatic.PublicEnum,
+                TypeNames.IInternalInterface,
+                TypeNames.IPublicInterface,
+                TypeNames.InternalEnum,
+                TypeNames.PublicEnum,
 #if NET5_0_OR_GREATER
-                TypeNamesRefactorStatic.InternalRecord,
-                TypeNamesRefactorStatic.InternalPartialRecord,
-                TypeNamesRefactorStatic.InternalSealedRecord,
-                TypeNamesRefactorStatic.PublicRecord,
-                TypeNamesRefactorStatic.PublicPartialRecord,
-                TypeNamesRefactorStatic.PublicSealedRecord,
+                TypeNames.InternalRecord,
+                TypeNames.InternalPartialRecord,
+                TypeNames.InternalSealedRecord,
+                TypeNames.PublicRecord,
+                TypeNames.PublicPartialRecord,
+                TypeNames.PublicSealedRecord,
 #endif
-                TypeNamesRefactorStatic.InternalStruct,
-                TypeNamesRefactorStatic.PublicStruct,
+                TypeNames.InternalStruct,
+                TypeNames.PublicStruct,
             };
             var filters = TypesFromMockedAssembly.All.That().AreNotClasses();
 
@@ -70,10 +69,10 @@ namespace ArchGuard.Tests
             // Arrange
             var expected = new List<string>
             {
-                TypeNamesRefactorStatic.PublicClass,
-                TypeNamesRefactorStatic.PublicPartialClass,
-                TypeNamesRefactorStatic.PublicSealedClass,
-                TypeNamesRefactorStatic.PublicStaticClass,
+                TypeNames.PublicClass,
+                TypeNames.PublicPartialClass,
+                TypeNames.PublicSealedClass,
+                TypeNames.PublicStaticClass,
             };
             var filters = TypesFromMockedAssembly.All.That().AreClasses().And().ArePublic();
 
@@ -90,10 +89,10 @@ namespace ArchGuard.Tests
             // Arrange
             var expected = new List<string>
             {
-                TypeNamesRefactorStatic.InternalClass,
-                TypeNamesRefactorStatic.InternalPartialClass,
-                TypeNamesRefactorStatic.InternalSealedClass,
-                TypeNamesRefactorStatic.InternalStaticClass,
+                TypeNames.InternalClass,
+                TypeNames.InternalPartialClass,
+                TypeNames.InternalSealedClass,
+                TypeNames.InternalStaticClass,
             };
             var filters = TypesFromMockedAssembly.All.That().AreClasses().And().AreInternal();
 
@@ -110,8 +109,8 @@ namespace ArchGuard.Tests
             // Arrange
             var expected = new List<string>
             {
-                TypeNamesRefactorStatic.PublicPartialClass,
-                TypeNamesRefactorStatic.InternalPartialClass,
+                TypeNames.PublicPartialClass,
+                TypeNames.InternalPartialClass,
             };
             var filters = TypesFromMockedAssembly.All.That().AreClasses().And().ArePartial();
 
@@ -128,8 +127,8 @@ namespace ArchGuard.Tests
             // Arrange
             var expected = new List<string>
             {
-                TypeNamesRefactorStatic.InternalSealedClass,
-                TypeNamesRefactorStatic.PublicSealedClass,
+                TypeNames.InternalSealedClass,
+                TypeNames.PublicSealedClass,
             };
             var filters = TypesFromMockedAssembly.All.That().AreClasses().And().AreSealed();
 

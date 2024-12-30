@@ -7,7 +7,6 @@ namespace ArchGuard.Tests
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;
-    using ArchGuard.Tests.Common.Types.Builder;
     using ArchGuard.Tests.MockedAssembly.Classes.Public;
     using FluentAssertions;
     using Xunit;
@@ -20,10 +19,10 @@ namespace ArchGuard.Tests
             // Arrange
             var expected = new List<string>
             {
-                TypeNamesRefactorStatic.PublicClass,
-                TypeNamesRefactorStatic.PublicPartialClass,
-                TypeNamesRefactorStatic.PublicSealedClass,
-                TypeNamesRefactorStatic.PublicStaticClass,
+                TypeNames.PublicClass,
+                TypeNames.PublicPartialClass,
+                TypeNames.PublicSealedClass,
+                TypeNames.PublicStaticClass,
             };
             var filters = TypesFromMockedAssembly
                 .All.That()
@@ -42,10 +41,10 @@ namespace ArchGuard.Tests
             // Arrange
             var expected = new List<string>
             {
-                TypeNamesRefactorStatic.PublicClass,
-                TypeNamesRefactorStatic.PublicPartialClass,
-                TypeNamesRefactorStatic.PublicSealedClass,
-                TypeNamesRefactorStatic.PublicStaticClass,
+                TypeNames.PublicClass,
+                TypeNames.PublicPartialClass,
+                TypeNames.PublicSealedClass,
+                TypeNames.PublicStaticClass,
             };
             var filters = TypesFromMockedAssembly
                 .All.That()
@@ -65,10 +64,27 @@ namespace ArchGuard.Tests
         public void Not_reside_in_namespace()
         {
             // Arrange
-            var expected = TypeNamesFromMockedAssembly
-                .That()
-                .NotResideInNamespace(Namespaces.ClassesPublic)
-                .GetTypeNames();
+            var expected = new List<string>
+            {
+                TypeNames.InternalClass,
+                TypeNames.InternalPartialClass,
+                TypeNames.InternalSealedClass,
+                TypeNames.InternalStaticClass,
+                TypeNames.IInternalInterface,
+                TypeNames.IPublicInterface,
+                TypeNames.InternalEnum,
+                TypeNames.PublicEnum,
+#if NET5_0_OR_GREATER
+                TypeNames.InternalRecord,
+                TypeNames.InternalPartialRecord,
+                TypeNames.InternalSealedRecord,
+                TypeNames.PublicRecord,
+                TypeNames.PublicPartialRecord,
+                TypeNames.PublicSealedRecord,
+#endif
+                TypeNames.InternalStruct,
+                TypeNames.PublicStruct,
+            };
             var filters = TypesFromMockedAssembly
                 .All.That()
                 .NotResideInNamespace(Namespaces.ClassesPublic);
@@ -84,10 +100,27 @@ namespace ArchGuard.Tests
         public void Not_reside_in_namespace_StringComparison_overload()
         {
             // Arrange
-            var expected = TypeNamesFromMockedAssembly
-                .That()
-                .NotResideInNamespace(Namespaces.ClassesPublic)
-                .GetTypeNames();
+            var expected = new List<string>
+            {
+                TypeNames.InternalClass,
+                TypeNames.InternalPartialClass,
+                TypeNames.InternalSealedClass,
+                TypeNames.InternalStaticClass,
+                TypeNames.IInternalInterface,
+                TypeNames.IPublicInterface,
+                TypeNames.InternalEnum,
+                TypeNames.PublicEnum,
+#if NET5_0_OR_GREATER
+                TypeNames.InternalRecord,
+                TypeNames.InternalPartialRecord,
+                TypeNames.InternalSealedRecord,
+                TypeNames.PublicRecord,
+                TypeNames.PublicPartialRecord,
+                TypeNames.PublicSealedRecord,
+#endif
+                TypeNames.InternalStruct,
+                TypeNames.PublicStruct,
+            };
             var filters = TypesFromMockedAssembly
                 .All.That()
                 .NotResideInNamespace(

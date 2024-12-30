@@ -4,16 +4,16 @@ namespace ArchGuard.Tests.Common.Types
     using System.Collections.Generic;
     using System.Linq;
 
-    internal static partial class TypeNamesRefactorStatic { }
+    internal static partial class TypeNames { }
 
-    internal static partial class TypeNamesRefactorStatic
+    internal static partial class TypeNames
     {
         internal const string InternalEnum = Namespaces.EnumsInternal + "." + nameof(InternalEnum);
 
         internal const string PublicEnum = Namespaces.EnumsPublic + "." + nameof(PublicEnum);
     }
 
-    internal static partial class TypeNamesRefactorStatic
+    internal static partial class TypeNames
     {
         internal const string IInternalInterface =
             Namespaces.InterfacesInternal + "." + nameof(IInternalInterface);
@@ -22,7 +22,7 @@ namespace ArchGuard.Tests.Common.Types
             Namespaces.InterfacesPublic + "." + nameof(IPublicInterface);
     }
 
-    internal static partial class TypeNamesRefactorStatic
+    internal static partial class TypeNames
     {
         internal const string InternalClass =
             Namespaces.ClassesInternal + "." + nameof(InternalClass);
@@ -49,7 +49,7 @@ namespace ArchGuard.Tests.Common.Types
     }
 
 #if NET5_0_OR_GREATER
-    internal static partial class TypeNamesRefactorStatic
+    internal static partial class TypeNames
     {
         internal const string InternalRecord =
             Namespaces.RecordsInternal + "." + nameof(InternalRecord);
@@ -70,7 +70,7 @@ namespace ArchGuard.Tests.Common.Types
     }
 #endif
 
-    internal static partial class TypeNamesRefactorStatic
+    internal static partial class TypeNames
     {
         internal const string InternalStruct =
             Namespaces.StructsInternal + "." + nameof(InternalStruct);

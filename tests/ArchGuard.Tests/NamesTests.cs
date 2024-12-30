@@ -4,7 +4,7 @@ namespace ArchGuard.Tests
     using System.Collections.Generic;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
-    using ArchGuard.Tests.Common.Types.Builder;
+    using ArchGuard.Tests.Common.Types;
     using FluentAssertions;
     using Xunit;
 
@@ -16,10 +16,13 @@ namespace ArchGuard.Tests
             // Arrange
             var prefix = "PublicSealed";
 
-            var expected = TypeNamesFromMockedAssembly
-                .That()
-                .HaveNameStartingWith(prefix)
-                .GetTypeNames();
+            var expected = new List<string>
+            {
+                TypeNames.PublicSealedClass,
+#if NET5_0_OR_GREATER
+                TypeNames.PublicSealedRecord,
+#endif
+            };
             var filters = TypesFromMockedAssembly.All.That().HaveNameStartingWith(prefix);
 
             // Act
@@ -35,10 +38,13 @@ namespace ArchGuard.Tests
             // Arrange
             var prefix = "PublicSealed";
 
-            var expected = TypeNamesFromMockedAssembly
-                .That()
-                .HaveNameStartingWith(prefix)
-                .GetTypeNames();
+            var expected = new List<string>
+            {
+                TypeNames.PublicSealedClass,
+#if NET5_0_OR_GREATER
+                TypeNames.PublicSealedRecord,
+#endif
+            };
             var filters = TypesFromMockedAssembly
                 .All.That()
                 .HaveNameStartingWith(
@@ -59,10 +65,17 @@ namespace ArchGuard.Tests
             // Arrange
             var suffix = "Class";
 
-            var expected = TypeNamesFromMockedAssembly
-                .That()
-                .HaveNameEndingWith(suffix)
-                .GetTypeNames();
+            var expected = new List<string>
+            {
+                TypeNames.InternalClass,
+                TypeNames.InternalPartialClass,
+                TypeNames.InternalSealedClass,
+                TypeNames.InternalStaticClass,
+                TypeNames.PublicClass,
+                TypeNames.PublicPartialClass,
+                TypeNames.PublicSealedClass,
+                TypeNames.PublicStaticClass,
+            };
             var filters = TypesFromMockedAssembly.All.That().HaveNameEndingWith(suffix);
 
             // Act
@@ -78,10 +91,17 @@ namespace ArchGuard.Tests
             // Arrange
             var suffix = "Class";
 
-            var expected = TypeNamesFromMockedAssembly
-                .That()
-                .HaveNameEndingWith(suffix)
-                .GetTypeNames();
+            var expected = new List<string>
+            {
+                TypeNames.InternalClass,
+                TypeNames.InternalPartialClass,
+                TypeNames.InternalSealedClass,
+                TypeNames.InternalStaticClass,
+                TypeNames.PublicClass,
+                TypeNames.PublicPartialClass,
+                TypeNames.PublicSealedClass,
+                TypeNames.PublicStaticClass,
+            };
             var filters = TypesFromMockedAssembly
                 .All.That()
                 .HaveNameEndingWith(suffix.ToUpperInvariant(), StringComparison.OrdinalIgnoreCase);

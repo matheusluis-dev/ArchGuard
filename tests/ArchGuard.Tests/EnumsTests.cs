@@ -7,7 +7,6 @@ namespace ArchGuard.Tests
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;
-    using ArchGuard.Tests.Common.Types.Builder;
     using ArchGuard.Tests.MockedAssembly.Classes.Public;
     using FluentAssertions;
     using Xunit;
@@ -18,11 +17,7 @@ namespace ArchGuard.Tests
         public void Get_enums()
         {
             // Arrange
-            var expected = new List<string>
-            {
-                TypeNamesRefactorStatic.InternalEnum,
-                TypeNamesRefactorStatic.PublicEnum,
-            };
+            var expected = new List<string> { TypeNames.InternalEnum, TypeNames.PublicEnum };
             var filters = TypesFromMockedAssembly.All.That().AreEnums();
 
             // Act
@@ -38,26 +33,26 @@ namespace ArchGuard.Tests
             // Arrange
             var expected = new List<string>
             {
-                TypeNamesRefactorStatic.InternalClass,
-                TypeNamesRefactorStatic.InternalPartialClass,
-                TypeNamesRefactorStatic.InternalSealedClass,
-                TypeNamesRefactorStatic.InternalStaticClass,
-                TypeNamesRefactorStatic.PublicClass,
-                TypeNamesRefactorStatic.PublicPartialClass,
-                TypeNamesRefactorStatic.PublicSealedClass,
-                TypeNamesRefactorStatic.PublicStaticClass,
-                TypeNamesRefactorStatic.IInternalInterface,
-                TypeNamesRefactorStatic.IPublicInterface,
+                TypeNames.InternalClass,
+                TypeNames.InternalPartialClass,
+                TypeNames.InternalSealedClass,
+                TypeNames.InternalStaticClass,
+                TypeNames.PublicClass,
+                TypeNames.PublicPartialClass,
+                TypeNames.PublicSealedClass,
+                TypeNames.PublicStaticClass,
+                TypeNames.IInternalInterface,
+                TypeNames.IPublicInterface,
 #if NET5_0_OR_GREATER
-                TypeNamesRefactorStatic.InternalRecord,
-                TypeNamesRefactorStatic.InternalPartialRecord,
-                TypeNamesRefactorStatic.InternalSealedRecord,
-                TypeNamesRefactorStatic.PublicRecord,
-                TypeNamesRefactorStatic.PublicPartialRecord,
-                TypeNamesRefactorStatic.PublicSealedRecord,
+                TypeNames.InternalRecord,
+                TypeNames.InternalPartialRecord,
+                TypeNames.InternalSealedRecord,
+                TypeNames.PublicRecord,
+                TypeNames.PublicPartialRecord,
+                TypeNames.PublicSealedRecord,
 #endif
-                TypeNamesRefactorStatic.InternalStruct,
-                TypeNamesRefactorStatic.PublicStruct,
+                TypeNames.InternalStruct,
+                TypeNames.PublicStruct,
             };
             var filters = TypesFromMockedAssembly.All.That().AreNotEnums();
 
@@ -72,7 +67,7 @@ namespace ArchGuard.Tests
         public void Get_public_enums()
         {
             // Arrange
-            var expected = new List<string> { TypeNamesRefactorStatic.PublicEnum };
+            var expected = new List<string> { TypeNames.PublicEnum };
             var filters = TypesFromMockedAssembly.All.That().AreEnums().And().ArePublic();
 
             // Act
@@ -86,7 +81,7 @@ namespace ArchGuard.Tests
         public void Get_internal_enums()
         {
             // Arrange
-            var expected = new List<string> { TypeNamesRefactorStatic.InternalEnum };
+            var expected = new List<string> { TypeNames.InternalEnum };
             var filters = TypesFromMockedAssembly.All.That().AreEnums().And().AreInternal();
 
             // Act
