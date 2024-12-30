@@ -58,7 +58,7 @@ namespace ArchGuard.Tests.Common.Types
             Namespaces.RecordsInternal + "." + nameof(InternalPartialRecord);
 
         internal const string InternalSealedRecord =
-            Namespaces.RecordsPublic + "." + nameof(PublicSealedRecord);
+            Namespaces.RecordsInternal + "." + nameof(InternalSealedRecord);
 
         internal const string PublicRecord = Namespaces.RecordsPublic + "." + nameof(PublicRecord);
 

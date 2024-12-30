@@ -22,7 +22,10 @@ namespace ArchGuard.Library.Helpers
             return ApplicationCSharpFilesHelper.Files.SelectMany(file =>
             {
                 var code = File.ReadAllText(file.FullName);
-                var syntaxTree = CSharpSyntaxTree.ParseText(code);
+                var syntaxTree = CSharpSyntaxTree.ParseText(
+                    code,
+                    new CSharpParseOptions().WithPreprocessorSymbols("NET5_0_OR_GREATER")
+                );
                 var root = syntaxTree.GetRoot();
 
                 return root.DescendantNodes()

@@ -1,6 +1,8 @@
 namespace ArchGuard.Tests
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;
@@ -39,16 +41,16 @@ namespace ArchGuard.Tests
             // Arrange
             var expected = new List<string>
             {
-                TypeNames.IInternalInterface,
-                TypeNames.IPublicInterface,
                 TypeNames.InternalEnum,
                 TypeNames.PublicEnum,
+                TypeNames.IInternalInterface,
+                TypeNames.IPublicInterface,
 #if NET5_0_OR_GREATER
-                TypeNames.InternalRecord,
                 TypeNames.InternalPartialRecord,
+                TypeNames.InternalRecord,
                 TypeNames.InternalSealedRecord,
-                TypeNames.PublicRecord,
                 TypeNames.PublicPartialRecord,
+                TypeNames.PublicRecord,
                 TypeNames.PublicSealedRecord,
 #endif
                 TypeNames.InternalStruct,
