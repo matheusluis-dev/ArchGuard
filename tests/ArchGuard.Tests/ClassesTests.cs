@@ -1,8 +1,6 @@
 namespace ArchGuard.Tests
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;
