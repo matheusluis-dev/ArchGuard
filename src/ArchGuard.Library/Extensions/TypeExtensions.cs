@@ -2,10 +2,19 @@ namespace ArchGuard.Library.Extensions
 {
     using System;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using ArchGuard.Library.Helpers;
 
     internal static class TypeExtensions
     {
+        internal static string CleanFullName(this Type type)
+        {
+            var regex = new Regex(@"<[^>]+>[^_]+__(.+)$");
+            var match = regex.Match(type.FullName);
+
+            return match.Success ? type.Namespace + "." + match.Groups[1].Value : type.FullName;
+        }
+
         internal static bool IsNonRecordClass(this Type type)
         {
             return type.IsClass
@@ -52,7 +61,11 @@ namespace ArchGuard.Library.Extensions
                 && !type.IsNestedPrivate
                 && !type.IsNestedAssembly
                 && !type.IsNestedFamORAssem
-                && !type.IsNestedFamANDAssem;
+                && !type.IsNestedFamANDAssem
+#if NET7_0_OR_GREATER
+                && !type.IsFileScoped()
+#endif
+            ;
         }
 
         internal static bool IsNotInternal(this Type type)
@@ -123,6 +136,39 @@ namespace ArchGuard.Library.Extensions
         internal static bool IsNotStatic(this Type type)
         {
             return !type.IsStatic();
+        }
+
+        internal static bool IsProtected(this Type type)
+        {
+            return !type.IsVisible
+                && !type.IsPublic
+                && !type.IsNotPublic
+                && type.IsNested
+                && !type.IsNestedPublic
+                && type.IsNestedFamily
+                && !type.IsNestedPrivate
+                && !type.IsNestedAssembly
+                && !type.IsNestedFamORAssem
+                && !type.IsNestedFamANDAssem;
+        }
+
+        internal static bool IsNotProtected(this Type type)
+        {
+            return !type.IsProtected();
+        }
+
+        internal static bool IsFileScoped(this Type type)
+        {
+            var fullName = type.FullName;
+            var cleanFullName = type.CleanFullName();
+
+            return !fullName.Equals(cleanFullName, StringComparison.Ordinal)
+                && FileAccessModifierHelper.Types.Contains(cleanFullName, StringComparer.Ordinal);
+        }
+
+        internal static bool IsNotFileScoped(this Type type)
+        {
+            return !type.IsFileScoped();
         }
     }
 }

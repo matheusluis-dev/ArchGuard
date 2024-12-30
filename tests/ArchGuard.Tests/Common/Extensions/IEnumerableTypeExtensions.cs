@@ -6,11 +6,11 @@ namespace ArchGuard.Tests.Common.Extensions
 
     internal static class IEnumerableTypeExtensions
     {
-        internal static List<string> GetFullNamesOrdered(this IEnumerable<Type> types)
+        internal static List<string> GetNames(this IEnumerable<Type> types)
         {
             return types
-                .Select(type => type.FullName)
-                .OrderBy(name => name, StringComparer.Ordinal)
+                .Select(type => type.FullNameClean())
+                .OrderBy(fullName => fullName, StringComparer.Ordinal)
                 .ToList();
         }
     }

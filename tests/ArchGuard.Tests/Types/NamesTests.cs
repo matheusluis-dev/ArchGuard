@@ -1,4 +1,4 @@
-namespace ArchGuard.Tests
+namespace ArchGuard.Tests.Types
 {
     using System;
     using System.Collections.Generic;
@@ -26,7 +26,7 @@ namespace ArchGuard.Tests
             var filters = TypesFromMockedAssembly.All.That().HaveNameStartingWith(prefix);
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -53,7 +53,7 @@ namespace ArchGuard.Tests
                 );
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -67,6 +67,12 @@ namespace ArchGuard.Tests
 
             var expected = new List<string>
             {
+#if NET7_0_OR_GREATER
+                TypeNames.FileClass,
+                TypeNames.FilePartialClass,
+                TypeNames.FileSealedClass,
+                TypeNames.FileStaticClass,
+#endif
                 TypeNames.InternalClass,
                 TypeNames.InternalPartialClass,
                 TypeNames.InternalSealedClass,
@@ -79,7 +85,7 @@ namespace ArchGuard.Tests
             var filters = TypesFromMockedAssembly.All.That().HaveNameEndingWith(suffix);
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -93,6 +99,12 @@ namespace ArchGuard.Tests
 
             var expected = new List<string>
             {
+#if NET7_0_OR_GREATER
+                TypeNames.FileClass,
+                TypeNames.FilePartialClass,
+                TypeNames.FileSealedClass,
+                TypeNames.FileStaticClass,
+#endif
                 TypeNames.InternalClass,
                 TypeNames.InternalPartialClass,
                 TypeNames.InternalSealedClass,
@@ -107,7 +119,7 @@ namespace ArchGuard.Tests
                 .HaveNameEndingWith(suffix.ToUpperInvariant(), StringComparison.OrdinalIgnoreCase);
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);

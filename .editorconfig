@@ -285,7 +285,7 @@ csharp_preserve_single_line_blocks = true
 
 # Namespace options
 # https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#namespace-options
-csharp_style_namespace_declarations = file_scoped:warning
+csharp_style_namespace_declarations = block_scoped:warning
 
 ##########################################
 # .NET Naming Rules
@@ -464,8 +464,6 @@ dotnet_naming_rule.parameters_rule.style = camel_case_style
 dotnet_naming_rule.parameters_rule.severity = warning
 
 
-dotnet_diagnostic.IDE0005.severity = none # IDE0005: Remove unnecessary using directives
-
 # Code Analysis
 dotnet_diagnostic.CA2007.severity = none # CA2007: Do not directly await a Task
 
@@ -572,7 +570,7 @@ end_of_line = crlf
 ##########################################
 
 dotnet_diagnostic.CA1515.severity = none
-dotnet_diagnostic.IDE0005.severity = warning
+dotnet_diagnostic.IDE0005.severity = error
 dotnet_diagnostic.CS1591.severity = none
 
 MA0048.only_validate_first_type = true

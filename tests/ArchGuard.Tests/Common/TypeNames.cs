@@ -1,9 +1,5 @@
 namespace ArchGuard.Tests.Common.Types
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
     internal static partial class TypeNames { }
 
     internal static partial class TypeNames
@@ -24,6 +20,17 @@ namespace ArchGuard.Tests.Common.Types
 
     internal static partial class TypeNames
     {
+        internal const string FileClass = Namespaces.ClassesFile + "." + nameof(FileClass);
+
+        internal const string FilePartialClass =
+            Namespaces.ClassesFile + "." + nameof(FilePartialClass);
+
+        internal const string FileSealedClass =
+            Namespaces.ClassesFile + "." + nameof(FileSealedClass);
+
+        internal const string FileStaticClass =
+            Namespaces.ClassesFile + "." + nameof(FileStaticClass);
+
         internal const string InternalClass =
             Namespaces.ClassesInternal + "." + nameof(InternalClass);
 

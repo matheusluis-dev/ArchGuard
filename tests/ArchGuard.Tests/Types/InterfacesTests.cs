@@ -1,13 +1,9 @@
-namespace ArchGuard.Tests
+namespace ArchGuard.Tests.Types
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using ArchGuard.Library.Types;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;
-    using ArchGuard.Tests.MockedAssembly.Classes.Public;
     using FluentAssertions;
     using Xunit;
 
@@ -25,7 +21,7 @@ namespace ArchGuard.Tests
             var filters = TypesFromMockedAssembly.All.That().AreInterfaces();
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -37,6 +33,12 @@ namespace ArchGuard.Tests
             // Arrange
             var expected = new List<string>
             {
+#if NET7_0_OR_GREATER
+                TypeNames.FileClass,
+                TypeNames.FilePartialClass,
+                TypeNames.FileSealedClass,
+                TypeNames.FileStaticClass,
+#endif
                 TypeNames.InternalClass,
                 TypeNames.InternalPartialClass,
                 TypeNames.InternalSealedClass,
@@ -61,7 +63,7 @@ namespace ArchGuard.Tests
             var filters = TypesFromMockedAssembly.All.That().AreNotInterfaces();
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -75,7 +77,7 @@ namespace ArchGuard.Tests
             var filters = TypesFromMockedAssembly.All.That().AreInterfaces().And().ArePublic();
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -89,7 +91,7 @@ namespace ArchGuard.Tests
             var filters = TypesFromMockedAssembly.All.That().AreInterfaces().And().AreInternal();
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);

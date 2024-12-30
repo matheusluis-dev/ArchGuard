@@ -2,8 +2,9 @@ namespace ArchGuard.Tests.Common
 {
     internal static class Namespaces
     {
-        internal const string ClassesPublic = "ArchGuard.Tests.MockedAssembly.Classes.Public";
+        internal const string ClassesFile = "ArchGuard.Tests.MockedAssembly.Classes.File";
         internal const string ClassesInternal = "ArchGuard.Tests.MockedAssembly.Classes.Internal";
+        internal const string ClassesPublic = "ArchGuard.Tests.MockedAssembly.Classes.Public";
 
         internal const string EnumsPublic = "ArchGuard.Tests.MockedAssembly.Enums.Public";
         internal const string EnumsInternal = "ArchGuard.Tests.MockedAssembly.Enums.Internal";

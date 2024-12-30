@@ -1,13 +1,10 @@
-namespace ArchGuard.Tests
+namespace ArchGuard.Tests.Types
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using ArchGuard.Library.Types;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;
-    using ArchGuard.Tests.MockedAssembly.Classes.Public;
     using FluentAssertions;
     using Xunit;
 
@@ -29,7 +26,7 @@ namespace ArchGuard.Tests
                 .ResideInNamespace(Namespaces.ClassesPublic);
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -54,7 +51,7 @@ namespace ArchGuard.Tests
                 );
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -66,6 +63,12 @@ namespace ArchGuard.Tests
             // Arrange
             var expected = new List<string>
             {
+#if NET7_0_OR_GREATER
+                TypeNames.FileClass,
+                TypeNames.FilePartialClass,
+                TypeNames.FileSealedClass,
+                TypeNames.FileStaticClass,
+#endif
                 TypeNames.InternalClass,
                 TypeNames.InternalPartialClass,
                 TypeNames.InternalSealedClass,
@@ -90,7 +93,7 @@ namespace ArchGuard.Tests
                 .NotResideInNamespace(Namespaces.ClassesPublic);
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -102,6 +105,12 @@ namespace ArchGuard.Tests
             // Arrange
             var expected = new List<string>
             {
+#if NET7_0_OR_GREATER
+                TypeNames.FileClass,
+                TypeNames.FilePartialClass,
+                TypeNames.FileSealedClass,
+                TypeNames.FileStaticClass,
+#endif
                 TypeNames.InternalClass,
                 TypeNames.InternalPartialClass,
                 TypeNames.InternalSealedClass,
@@ -129,7 +138,7 @@ namespace ArchGuard.Tests
                 );
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);

@@ -4,15 +4,6 @@ namespace ArchGuard.Library.Types.Filters.Conditions.Interfaces
 
     public partial interface ITypesFilterConditions
     {
-        ITypesFilterPostConditions ArePublic();
-        ITypesFilterPostConditions AreNotPublic();
-
-        ITypesFilterPostConditions AreInternal();
-        ITypesFilterPostConditions AreNotInternal();
-
-        ITypesFilterPostConditions ArePrivate();
-        ITypesFilterPostConditions AreNotPrivate();
-
         ITypesFilterPostConditions ArePartial();
         ITypesFilterPostConditions AreNotPartial();
 

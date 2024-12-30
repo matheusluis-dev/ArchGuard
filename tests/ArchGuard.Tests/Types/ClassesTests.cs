@@ -1,4 +1,4 @@
-namespace ArchGuard.Tests
+namespace ArchGuard.Tests.Types
 {
     using System.Collections.Generic;
     using ArchGuard.Tests.Common;
@@ -15,6 +15,12 @@ namespace ArchGuard.Tests
             // Arrange
             var expected = new List<string>
             {
+#if NET7_0_OR_GREATER
+                TypeNames.FileClass,
+                TypeNames.FilePartialClass,
+                TypeNames.FileSealedClass,
+                TypeNames.FileStaticClass,
+#endif
                 TypeNames.InternalClass,
                 TypeNames.InternalPartialClass,
                 TypeNames.InternalSealedClass,
@@ -27,7 +33,7 @@ namespace ArchGuard.Tests
             var filters = TypesFromMockedAssembly.All.That().AreClasses();
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -57,7 +63,7 @@ namespace ArchGuard.Tests
             var filters = TypesFromMockedAssembly.All.That().AreNotClasses();
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -77,7 +83,7 @@ namespace ArchGuard.Tests
             var filters = TypesFromMockedAssembly.All.That().AreClasses().And().ArePublic();
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -97,7 +103,7 @@ namespace ArchGuard.Tests
             var filters = TypesFromMockedAssembly.All.That().AreClasses().And().AreInternal();
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -115,7 +121,7 @@ namespace ArchGuard.Tests
             var filters = TypesFromMockedAssembly.All.That().AreClasses().And().ArePartial();
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -127,16 +133,22 @@ namespace ArchGuard.Tests
             // Arrange
             var expected = new List<string>
             {
+#if NET7_0_OR_GREATER
+                TypeNames.FileSealedClass,
+#endif
                 TypeNames.InternalSealedClass,
                 TypeNames.PublicSealedClass,
             };
             var filters = TypesFromMockedAssembly.All.That().AreClasses().And().AreSealed();
 
             // Act
-            var types = filters.GetTypes().GetFullNamesOrdered();
+            var types = filters.GetTypes().GetNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
         }
+
+        [Fact]
+        public void Get_file_scoped_classes() { }
     }
 }
