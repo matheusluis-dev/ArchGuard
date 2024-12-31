@@ -24,6 +24,7 @@ namespace ArchGuard.Library.Helpers
                 var code = File.ReadAllText(file.FullName);
                 var syntaxTree = CSharpSyntaxTree.ParseText(
                     code,
+                    // TODO find a way to treat preprocessors and stuff
                     new CSharpParseOptions().WithPreprocessorSymbols("NET7_0_OR_GREATER")
                 );
                 var root = syntaxTree.GetRoot();

@@ -38,7 +38,7 @@ namespace ArchGuard.Tests.Types
         }
 
         [Fact]
-        public void Reside_in_namespace_StringComparison_overload()
+        public void Reside_in_namespace_with_StringComparison()
         {
             // Arrange
             var expected = new List<string>
@@ -100,7 +100,7 @@ namespace ArchGuard.Tests.Types
             };
             var filters = TypesFromMockedAssembly
                 .All.That()
-                .NotResideInNamespace(Namespaces.ClassesPublic);
+                .DoNotResideInNamespace(Namespaces.ClassesPublic);
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -110,7 +110,7 @@ namespace ArchGuard.Tests.Types
         }
 
         [Fact]
-        public void Not_reside_in_namespace_StringComparison_overload()
+        public void Not_reside_in_namespace_with_StringComparison()
         {
             // Arrange
             var expected = new List<string>
@@ -142,10 +142,145 @@ namespace ArchGuard.Tests.Types
             };
             var filters = TypesFromMockedAssembly
                 .All.That()
-                .NotResideInNamespace(
+                .DoNotResideInNamespace(
                     Namespaces.ClassesPublic.ToUpperInvariant(),
                     StringComparison.OrdinalIgnoreCase
                 );
+
+            // Act
+            var types = filters.GetTypes().GetFullNames();
+
+            // Assert
+            types.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public void Reside_in_namespace_containing()
+        {
+            // Arrange
+            var expected = new List<string>
+            {
+                TypeNames.IInternalInterface,
+                TypeNames.IPublicInterface,
+            };
+            var filters = TypesFromMockedAssembly
+                .All.That()
+                .ResideInNamespaceContaining(".Interfaces.");
+
+            // Act
+            var types = filters.GetTypes().GetFullNames();
+
+            // Assert
+            types.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public void Reside_in_namespace_containing_with_StringComparison()
+        {
+            // Arrange
+            var expected = new List<string>
+            {
+                TypeNames.IInternalInterface,
+                TypeNames.IPublicInterface,
+            };
+            var filters = TypesFromMockedAssembly
+                .All.That()
+                .ResideInNamespaceContaining(".InTeRfAcEs.", StringComparison.OrdinalIgnoreCase);
+
+            // Act
+            var types = filters.GetTypes().GetFullNames();
+
+            // Assert
+            types.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public void Reside_in_namespace_starting()
+        {
+            // Arrange
+            var expected = new List<string> { TypeNames.InternalEnum, TypeNames.PublicEnum };
+            var filters = TypesFromMockedAssembly
+                .All.That()
+                .ResideInNamespaceStartingWith("ArchGuard.Tests.MockedAssembly.Enums.");
+
+            // Act
+            var types = filters.GetTypes().GetFullNames();
+
+            // Assert
+            types.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public void Reside_in_namespace_starting_with_StringComparison()
+        {
+            // Arrange
+            var expected = new List<string> { TypeNames.InternalEnum, TypeNames.PublicEnum };
+            var filters = TypesFromMockedAssembly
+                .All.That()
+                .ResideInNamespaceStartingWith(
+                    "ARCHGUARD.tests.MOCKEDASSEMBLY.enums.",
+                    StringComparison.OrdinalIgnoreCase
+                );
+
+            // Act
+            var types = filters.GetTypes().GetFullNames();
+
+            // Assert
+            types.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public void Reside_in_namespace_ending()
+        {
+            // Arrange
+            var expected = new List<string>
+            {
+                TypeNames.InternalEnum,
+                TypeNames.IInternalInterface,
+#if NET5_0_OR_GREATER
+                TypeNames.InternalRecord,
+                TypeNames.InternalPartialRecord,
+                TypeNames.InternalSealedRecord,
+#endif
+                TypeNames.InternalClass,
+                TypeNames.InternalPartialClass,
+                TypeNames.InternalSealedClass,
+                TypeNames.InternalStaticClass,
+                TypeNames.InternalStruct,
+            };
+            var filters = TypesFromMockedAssembly
+                .All.That()
+                .ResideInNamespaceEndingWith(".Internal");
+
+            // Act
+            var types = filters.GetTypes().GetFullNames();
+
+            // Assert
+            types.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public void Reside_in_namespace_ending_with_StringComparison()
+        {
+            // Arrange
+            var expected = new List<string>
+            {
+                TypeNames.InternalEnum,
+                TypeNames.IInternalInterface,
+#if NET5_0_OR_GREATER
+                TypeNames.InternalRecord,
+                TypeNames.InternalPartialRecord,
+                TypeNames.InternalSealedRecord,
+#endif
+                TypeNames.InternalClass,
+                TypeNames.InternalPartialClass,
+                TypeNames.InternalSealedClass,
+                TypeNames.InternalStaticClass,
+                TypeNames.InternalStruct,
+            };
+            var filters = TypesFromMockedAssembly
+                .All.That()
+                .ResideInNamespaceEndingWith(".iNtErNaL", StringComparison.OrdinalIgnoreCase);
 
             // Act
             var types = filters.GetTypes().GetFullNames();

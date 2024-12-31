@@ -2,6 +2,6 @@
 {
     public sealed class ProtectedTests
     {
-        // TODO
+        // TODO: Implement this test
     }
 }
