@@ -17,7 +17,7 @@ namespace ArchGuard.Library.Extensions
             {
                 // Treatment for Nested Classes
                 if (parent is ClassDeclarationSyntax parentClass)
-                    fullClassName = $"{parentClass.Identifier.ValueText}.{fullClassName}";
+                    fullClassName = $"{parentClass.Identifier.ValueText}+{fullClassName}";
 
                 parent = parent.Parent;
             }

@@ -31,6 +31,7 @@ namespace ArchGuard.Tests.Types
                 TypeNames.PublicParentClass_InternalNestedClass,
                 TypeNames.PublicParentClass_PrivateNestedClass,
                 TypeNames.PublicParentClass_PublicNestedClass,
+                TypeNames.PublicParentClass_PublicNestedPartialClass,
                 TypeNames.PublicPartialClass,
                 TypeNames.PublicSealedClass,
                 TypeNames.PublicStaticClass,
@@ -82,6 +83,7 @@ namespace ArchGuard.Tests.Types
                 TypeNames.PublicClass,
                 TypeNames.PublicParentClass,
                 TypeNames.PublicParentClass_PublicNestedClass,
+                TypeNames.PublicParentClass_PublicNestedPartialClass,
                 TypeNames.PublicPartialClass,
                 TypeNames.PublicSealedClass,
                 TypeNames.PublicStaticClass,
@@ -122,8 +124,9 @@ namespace ArchGuard.Tests.Types
             // Arrange
             var expected = new List<string>
             {
-                TypeNames.PublicPartialClass,
                 TypeNames.InternalPartialClass,
+                TypeNames.PublicParentClass_PublicNestedPartialClass,
+                TypeNames.PublicPartialClass,
             };
             var filters = TypesFromMockedAssembly.All.That().AreClasses().And().ArePartial();
 
@@ -156,6 +159,9 @@ namespace ArchGuard.Tests.Types
         }
 
         [Fact]
-        public void Get_file_scoped_classes() { }
+        public void Get_file_scoped_classes()
+        {
+            // TODO: Implement this test
+        }
     }
 }

@@ -51,6 +51,9 @@ namespace ArchGuard.Tests.Common.Types
         internal const string PublicParentClass_PublicNestedClass =
             PublicParentClass + "+PublicNestedClass";
 
+        internal const string PublicParentClass_PublicNestedPartialClass =
+            PublicParentClass + "+PublicNestedPartialClass";
+
         internal const string PublicParentClass_InternalNestedClass =
             PublicParentClass + "+InternalNestedClass";
 

@@ -18,6 +18,7 @@ namespace ArchGuard.Tests.Modifiers
                 TypeNames.PublicParentClass_InternalNestedClass,
                 TypeNames.PublicParentClass_PrivateNestedClass,
                 TypeNames.PublicParentClass_PublicNestedClass,
+                TypeNames.PublicParentClass_PublicNestedPartialClass,
             };
             var filters = TypesFromMockedAssembly.All.That().AreNested();
 

@@ -25,6 +25,7 @@ namespace ArchGuard.Tests.Modifiers.Access
                 TypeNames.PublicClass,
                 TypeNames.PublicParentClass,
                 TypeNames.PublicParentClass_PublicNestedClass,
+                TypeNames.PublicParentClass_PublicNestedPartialClass,
                 TypeNames.PublicPartialClass,
                 TypeNames.PublicSealedClass,
                 TypeNames.PublicStaticClass,
