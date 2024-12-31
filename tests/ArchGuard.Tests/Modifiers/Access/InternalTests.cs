@@ -1,4 +1,4 @@
-﻿namespace ArchGuard.Tests.Modifiers.Access
+namespace ArchGuard.Tests.Modifiers.Access
 {
     using System.Collections.Generic;
     using ArchGuard.Tests.Common;
@@ -27,11 +27,12 @@
                 TypeNames.InternalSealedClass,
                 TypeNames.InternalStaticClass,
                 TypeNames.InternalStruct,
+                TypeNames.PublicParentClass_InternalNestedClass,
             };
             var filters = TypesFromMockedAssembly.All.That().AreInternal();
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -56,6 +57,9 @@
                 TypeNames.FileStaticClass,
 #endif
                 TypeNames.PublicClass,
+                TypeNames.PublicParentClass,
+                TypeNames.PublicParentClass_PrivateNestedClass,
+                TypeNames.PublicParentClass_PublicNestedClass,
                 TypeNames.PublicPartialClass,
                 TypeNames.PublicSealedClass,
                 TypeNames.PublicStaticClass,
@@ -64,7 +68,7 @@
             var filters = TypesFromMockedAssembly.All.That().AreNotInternal();
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);

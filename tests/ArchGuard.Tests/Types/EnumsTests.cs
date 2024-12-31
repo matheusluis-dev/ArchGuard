@@ -17,7 +17,7 @@ namespace ArchGuard.Tests.Types
             var filters = TypesFromMockedAssembly.All.That().AreEnums();
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -40,6 +40,10 @@ namespace ArchGuard.Tests.Types
                 TypeNames.InternalSealedClass,
                 TypeNames.InternalStaticClass,
                 TypeNames.PublicClass,
+                TypeNames.PublicParentClass,
+                TypeNames.PublicParentClass_InternalNestedClass,
+                TypeNames.PublicParentClass_PrivateNestedClass,
+                TypeNames.PublicParentClass_PublicNestedClass,
                 TypeNames.PublicPartialClass,
                 TypeNames.PublicSealedClass,
                 TypeNames.PublicStaticClass,
@@ -59,7 +63,7 @@ namespace ArchGuard.Tests.Types
             var filters = TypesFromMockedAssembly.All.That().AreNotEnums();
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -73,7 +77,7 @@ namespace ArchGuard.Tests.Types
             var filters = TypesFromMockedAssembly.All.That().AreEnums().And().ArePublic();
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -87,7 +91,7 @@ namespace ArchGuard.Tests.Types
             var filters = TypesFromMockedAssembly.All.That().AreEnums().And().AreInternal();
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);

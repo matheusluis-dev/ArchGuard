@@ -1,4 +1,4 @@
-﻿namespace ArchGuard.Tests.Modifiers.Access
+namespace ArchGuard.Tests.Modifiers.Access
 {
     using System.Collections.Generic;
     using ArchGuard.Tests.Common;
@@ -23,6 +23,8 @@
                 TypeNames.PublicSealedRecord,
 #endif
                 TypeNames.PublicClass,
+                TypeNames.PublicParentClass,
+                TypeNames.PublicParentClass_PublicNestedClass,
                 TypeNames.PublicPartialClass,
                 TypeNames.PublicSealedClass,
                 TypeNames.PublicStaticClass,
@@ -31,7 +33,7 @@
             var filters = TypesFromMockedAssembly.All.That().ArePublic();
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -64,7 +66,7 @@
             var filters = TypesFromMockedAssembly.All.That().AreNotPublic();
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);

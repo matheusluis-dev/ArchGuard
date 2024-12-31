@@ -45,6 +45,18 @@ namespace ArchGuard.Tests.Common.Types
 
         internal const string PublicClass = Namespaces.ClassesPublic + "." + nameof(PublicClass);
 
+        internal const string PublicParentClass =
+            Namespaces.ClassesPublic + "." + nameof(PublicParentClass);
+
+        internal const string PublicParentClass_PublicNestedClass =
+            PublicParentClass + "+PublicNestedClass";
+
+        internal const string PublicParentClass_InternalNestedClass =
+            PublicParentClass + "+InternalNestedClass";
+
+        internal const string PublicParentClass_PrivateNestedClass =
+            PublicParentClass + "+PrivateNestedClass";
+
         internal const string PublicPartialClass =
             Namespaces.ClassesPublic + "." + nameof(PublicPartialClass);
 

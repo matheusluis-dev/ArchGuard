@@ -17,6 +17,10 @@ namespace ArchGuard.Tests.Types
             var expected = new List<string>
             {
                 TypeNames.PublicClass,
+                TypeNames.PublicParentClass,
+                TypeNames.PublicParentClass_InternalNestedClass,
+                TypeNames.PublicParentClass_PrivateNestedClass,
+                TypeNames.PublicParentClass_PublicNestedClass,
                 TypeNames.PublicPartialClass,
                 TypeNames.PublicSealedClass,
                 TypeNames.PublicStaticClass,
@@ -26,7 +30,7 @@ namespace ArchGuard.Tests.Types
                 .ResideInNamespace(Namespaces.ClassesPublic);
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -39,6 +43,10 @@ namespace ArchGuard.Tests.Types
             var expected = new List<string>
             {
                 TypeNames.PublicClass,
+                TypeNames.PublicParentClass,
+                TypeNames.PublicParentClass_InternalNestedClass,
+                TypeNames.PublicParentClass_PrivateNestedClass,
+                TypeNames.PublicParentClass_PublicNestedClass,
                 TypeNames.PublicPartialClass,
                 TypeNames.PublicSealedClass,
                 TypeNames.PublicStaticClass,
@@ -51,7 +59,7 @@ namespace ArchGuard.Tests.Types
                 );
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -93,7 +101,7 @@ namespace ArchGuard.Tests.Types
                 .NotResideInNamespace(Namespaces.ClassesPublic);
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -138,7 +146,7 @@ namespace ArchGuard.Tests.Types
                 );
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);

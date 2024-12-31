@@ -1,4 +1,4 @@
-namespace ArchGuard.Tests.Types
+namespace ArchGuard.Tests.Modifiers
 {
     using System.Collections.Generic;
     using ArchGuard.Tests.Common;
@@ -7,10 +7,29 @@ namespace ArchGuard.Tests.Types
     using FluentAssertions;
     using Xunit;
 
-    public sealed class TypesTest
+    public sealed class NestedTests
     {
         [Fact]
-        public void Get_all_types()
+        public void Nested_types()
+        {
+            // Arrange
+            var expected = new List<string>
+            {
+                TypeNames.PublicParentClass_InternalNestedClass,
+                TypeNames.PublicParentClass_PrivateNestedClass,
+                TypeNames.PublicParentClass_PublicNestedClass,
+            };
+            var filters = TypesFromMockedAssembly.All.That().AreNested();
+
+            // Act
+            var types = filters.GetTypes().GetFullNames();
+
+            // Assert
+            types.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public void Non_nested_types()
         {
             // Arrange
             var expected = new List<string>
@@ -27,9 +46,6 @@ namespace ArchGuard.Tests.Types
                 TypeNames.InternalStaticClass,
                 TypeNames.PublicClass,
                 TypeNames.PublicParentClass,
-                TypeNames.PublicParentClass_InternalNestedClass,
-                TypeNames.PublicParentClass_PrivateNestedClass,
-                TypeNames.PublicParentClass_PublicNestedClass,
                 TypeNames.PublicPartialClass,
                 TypeNames.PublicSealedClass,
                 TypeNames.PublicStaticClass,
@@ -48,7 +64,7 @@ namespace ArchGuard.Tests.Types
                 TypeNames.InternalStruct,
                 TypeNames.PublicStruct,
             };
-            var filters = TypesFromMockedAssembly.All;
+            var filters = TypesFromMockedAssembly.All.That().AreNotNested();
 
             // Act
             var types = filters.GetTypes().GetFullNames();

@@ -6,7 +6,7 @@ namespace ArchGuard.Tests.Common.Extensions
 
     internal static class IEnumerableTypeExtensions
     {
-        internal static List<string> GetNames(this IEnumerable<Type> types)
+        internal static List<string> GetFullNames(this IEnumerable<Type> types)
         {
             return types
                 .Select(type => type.FullNameClean())

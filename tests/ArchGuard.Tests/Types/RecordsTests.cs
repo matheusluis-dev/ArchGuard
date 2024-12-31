@@ -26,7 +26,7 @@ namespace ArchGuard.Tests.Types
             var filters = TypesFromMockedAssembly.All.That().AreRecords();
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -49,6 +49,10 @@ namespace ArchGuard.Tests.Types
                 TypeNames.InternalSealedClass,
                 TypeNames.InternalStaticClass,
                 TypeNames.PublicClass,
+                TypeNames.PublicParentClass,
+                TypeNames.PublicParentClass_InternalNestedClass,
+                TypeNames.PublicParentClass_PrivateNestedClass,
+                TypeNames.PublicParentClass_PublicNestedClass,
                 TypeNames.PublicPartialClass,
                 TypeNames.PublicSealedClass,
                 TypeNames.PublicStaticClass,
@@ -62,7 +66,7 @@ namespace ArchGuard.Tests.Types
             var filters = TypesFromMockedAssembly.All.That().AreNotRecords();
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -81,7 +85,7 @@ namespace ArchGuard.Tests.Types
             var filters = TypesFromMockedAssembly.All.That().AreRecords().And().ArePublic();
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -100,7 +104,7 @@ namespace ArchGuard.Tests.Types
             var filters = TypesFromMockedAssembly.All.That().AreRecords().And().AreInternal();
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -118,7 +122,7 @@ namespace ArchGuard.Tests.Types
             var filters = TypesFromMockedAssembly.All.That().AreRecords().And().ArePartial();
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -136,7 +140,7 @@ namespace ArchGuard.Tests.Types
             var filters = TypesFromMockedAssembly.All.That().AreRecords().And().AreSealed();
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);

@@ -1,4 +1,4 @@
-﻿#if NET7_0_OR_GREATER
+#if NET7_0_OR_GREATER
 namespace ArchGuard.Tests.Modifiers.Access
 {
     using System.Collections.Generic;
@@ -24,7 +24,7 @@ namespace ArchGuard.Tests.Modifiers.Access
             var filters = TypesFromMockedAssembly.All.That().AreFileScoped();
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
@@ -41,6 +41,10 @@ namespace ArchGuard.Tests.Modifiers.Access
                 TypeNames.InternalSealedClass,
                 TypeNames.InternalStaticClass,
                 TypeNames.PublicClass,
+                TypeNames.PublicParentClass,
+                TypeNames.PublicParentClass_InternalNestedClass,
+                TypeNames.PublicParentClass_PrivateNestedClass,
+                TypeNames.PublicParentClass_PublicNestedClass,
                 TypeNames.PublicPartialClass,
                 TypeNames.PublicSealedClass,
                 TypeNames.PublicStaticClass,
@@ -60,7 +64,7 @@ namespace ArchGuard.Tests.Modifiers.Access
             var filters = TypesFromMockedAssembly.All.That().AreNotFileScoped();
 
             // Act
-            var types = filters.GetTypes().GetNames();
+            var types = filters.GetTypes().GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(expected);
