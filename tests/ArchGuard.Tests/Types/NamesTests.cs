@@ -15,21 +15,23 @@ namespace ArchGuard.Tests.Types
         {
             // Arrange
             var prefix = "PublicSealed";
-
-            var expected = new List<string>
-            {
-                TypeNames.PublicSealedClass,
-#if NET5_0_OR_GREATER
-                TypeNames.PublicSealedRecord,
-#endif
-            };
             var filters = TypesFromMockedAssembly.All.That().HaveNameStartingWith(prefix);
 
             // Act
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(expected);
+            types
+                .Should()
+                .BeEquivalentTo(
+                    new List<string>
+                    {
+                        TypeNames.PublicSealedClass,
+#if NET5_0_OR_GREATER
+                        TypeNames.PublicSealedRecord,
+#endif
+                    }
+                );
         }
 
         [Fact]
@@ -37,14 +39,6 @@ namespace ArchGuard.Tests.Types
         {
             // Arrange
             var prefix = "PublicSealed";
-
-            var expected = new List<string>
-            {
-                TypeNames.PublicSealedClass,
-#if NET5_0_OR_GREATER
-                TypeNames.PublicSealedRecord,
-#endif
-            };
             var filters = TypesFromMockedAssembly
                 .All.That()
                 .HaveNameStartingWith(
@@ -56,7 +50,17 @@ namespace ArchGuard.Tests.Types
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(expected);
+            types
+                .Should()
+                .BeEquivalentTo(
+                    new List<string>
+                    {
+                        TypeNames.PublicSealedClass,
+#if NET5_0_OR_GREATER
+                        TypeNames.PublicSealedRecord,
+#endif
+                    }
+                );
         }
 
         [Fact]
@@ -65,35 +69,38 @@ namespace ArchGuard.Tests.Types
             // Arrange
             var suffix = "Class";
 
-            var expected = new List<string>
-            {
-#if NET7_0_OR_GREATER
-                TypeNames.FileClass,
-                TypeNames.FilePartialClass,
-                TypeNames.FileSealedClass,
-                TypeNames.FileStaticClass,
-#endif
-                TypeNames.InternalClass,
-                TypeNames.InternalPartialClass,
-                TypeNames.InternalSealedClass,
-                TypeNames.InternalStaticClass,
-                TypeNames.PublicClass,
-                TypeNames.PublicParentClass,
-                TypeNames.PublicParentClass_InternalNestedClass,
-                TypeNames.PublicParentClass_PrivateNestedClass,
-                TypeNames.PublicParentClass_PublicNestedClass,
-                TypeNames.PublicParentClass_PublicNestedPartialClass,
-                TypeNames.PublicPartialClass,
-                TypeNames.PublicSealedClass,
-                TypeNames.PublicStaticClass,
-            };
             var filters = TypesFromMockedAssembly.All.That().HaveNameEndingWith(suffix);
 
             // Act
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(expected);
+            types
+                .Should()
+                .BeEquivalentTo(
+                    new List<string>
+                    {
+#if NET7_0_OR_GREATER
+                        TypeNames.FileClass,
+                        TypeNames.FilePartialClass,
+                        TypeNames.FileSealedClass,
+                        TypeNames.FileStaticClass,
+#endif
+                        TypeNames.InternalClass,
+                        TypeNames.InternalPartialClass,
+                        TypeNames.InternalSealedClass,
+                        TypeNames.InternalStaticClass,
+                        TypeNames.PublicClass,
+                        TypeNames.PublicParentClass,
+                        TypeNames.PublicParentClass_InternalNestedClass,
+                        TypeNames.PublicParentClass_PrivateNestedClass,
+                        TypeNames.PublicParentClass_PublicNestedClass,
+                        TypeNames.PublicParentClass_PublicNestedPartialClass,
+                        TypeNames.PublicPartialClass,
+                        TypeNames.PublicSealedClass,
+                        TypeNames.PublicStaticClass,
+                    }
+                );
         }
 
         [Fact]
@@ -101,29 +108,6 @@ namespace ArchGuard.Tests.Types
         {
             // Arrange
             var suffix = "Class";
-
-            var expected = new List<string>
-            {
-#if NET7_0_OR_GREATER
-                TypeNames.FileClass,
-                TypeNames.FilePartialClass,
-                TypeNames.FileSealedClass,
-                TypeNames.FileStaticClass,
-#endif
-                TypeNames.InternalClass,
-                TypeNames.InternalPartialClass,
-                TypeNames.InternalSealedClass,
-                TypeNames.InternalStaticClass,
-                TypeNames.PublicClass,
-                TypeNames.PublicParentClass,
-                TypeNames.PublicParentClass_InternalNestedClass,
-                TypeNames.PublicParentClass_PrivateNestedClass,
-                TypeNames.PublicParentClass_PublicNestedClass,
-                TypeNames.PublicParentClass_PublicNestedPartialClass,
-                TypeNames.PublicPartialClass,
-                TypeNames.PublicSealedClass,
-                TypeNames.PublicStaticClass,
-            };
             var filters = TypesFromMockedAssembly
                 .All.That()
                 .HaveNameEndingWith(suffix.ToUpperInvariant(), StringComparison.OrdinalIgnoreCase);
@@ -132,7 +116,32 @@ namespace ArchGuard.Tests.Types
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(expected);
+            types
+                .Should()
+                .BeEquivalentTo(
+                    new List<string>
+                    {
+#if NET7_0_OR_GREATER
+                        TypeNames.FileClass,
+                        TypeNames.FilePartialClass,
+                        TypeNames.FileSealedClass,
+                        TypeNames.FileStaticClass,
+#endif
+                        TypeNames.InternalClass,
+                        TypeNames.InternalPartialClass,
+                        TypeNames.InternalSealedClass,
+                        TypeNames.InternalStaticClass,
+                        TypeNames.PublicClass,
+                        TypeNames.PublicParentClass,
+                        TypeNames.PublicParentClass_InternalNestedClass,
+                        TypeNames.PublicParentClass_PrivateNestedClass,
+                        TypeNames.PublicParentClass_PublicNestedClass,
+                        TypeNames.PublicParentClass_PublicNestedPartialClass,
+                        TypeNames.PublicPartialClass,
+                        TypeNames.PublicSealedClass,
+                        TypeNames.PublicStaticClass,
+                    }
+                );
         }
     }
 }

@@ -14,7 +14,6 @@ namespace ArchGuard.Tests.Namespaces
         public void Reside_in_namespace()
         {
             // Arrange
-            var expected = new List<string> { TypeNames.PublicEnum };
 #pragma warning disable CA1307 // Specify StringComparison for clarity
             var filters = TypesFromMockedAssembly
                 .All.That()
@@ -25,14 +24,13 @@ namespace ArchGuard.Tests.Namespaces
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(expected);
+            types.Should().BeEquivalentTo(new List<string> { TypeNames.PublicEnum });
         }
 
         [Fact]
         public void Reside_in_namespace_with_StringComparison()
         {
             // Arrange
-            var expected = new List<string> { TypeNames.PublicEnum };
             var filters = TypesFromMockedAssembly
                 .All.That()
                 .ResideInNamespace(Namespaces.EnumsPublic, StringComparison.OrdinalIgnoreCase);
@@ -41,14 +39,13 @@ namespace ArchGuard.Tests.Namespaces
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(expected);
+            types.Should().BeEquivalentTo(new List<string> { TypeNames.PublicEnum });
         }
 
         [Fact]
         public void Reside_in_sub_namespace()
         {
             // Arrange
-            var expected = new List<string> { TypeNames.InternalEnum, TypeNames.PublicEnum };
 #pragma warning disable CA1307 // Specify StringComparison for clarity
             var filters = TypesFromMockedAssembly
                 .All.That()
@@ -59,14 +56,15 @@ namespace ArchGuard.Tests.Namespaces
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(expected);
+            types
+                .Should()
+                .BeEquivalentTo(new List<string> { TypeNames.InternalEnum, TypeNames.PublicEnum });
         }
 
         [Fact]
         public void Reside_in_sub_namespace_with_StringComparison()
         {
             // Arrange
-            var expected = new List<string> { TypeNames.InternalEnum, TypeNames.PublicEnum };
             var filters = TypesFromMockedAssembly
                 .All.That()
                 .ResideInNamespace(
@@ -78,7 +76,9 @@ namespace ArchGuard.Tests.Namespaces
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(expected);
+            types
+                .Should()
+                .BeEquivalentTo(new List<string> { TypeNames.InternalEnum, TypeNames.PublicEnum });
         }
 
         [Fact]
