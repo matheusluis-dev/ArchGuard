@@ -15,9 +15,11 @@ namespace ArchGuard.Tests.Namespaces
         {
             // Arrange
             var expected = new List<string> { TypeNames.PublicEnum };
+#pragma warning disable CA1307 // Specify StringComparison for clarity
             var filters = TypesFromMockedAssembly
                 .All.That()
                 .ResideInNamespace(Namespaces.EnumsPublic);
+#pragma warning restore CA1307 // Specify StringComparison for clarity
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -47,9 +49,11 @@ namespace ArchGuard.Tests.Namespaces
         {
             // Arrange
             var expected = new List<string> { TypeNames.InternalEnum, TypeNames.PublicEnum };
+#pragma warning disable CA1307 // Specify StringComparison for clarity
             var filters = TypesFromMockedAssembly
                 .All.That()
                 .ResideInNamespace("ArchGuard.Tests.MockedAssembly.Enums");
+#pragma warning restore CA1307 // Specify StringComparison for clarity
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -81,9 +85,11 @@ namespace ArchGuard.Tests.Namespaces
         public void Reside_in_namespace_should_not_act_as_string_StartsWith()
         {
             // Arrange
+#pragma warning disable CA1307 // Specify StringComparison for clarity
             var filters = TypesFromMockedAssembly
                 .All.That()
                 .ResideInNamespace("ArchGuard.Tests.MockedAssembly.Enu");
+#pragma warning restore CA1307 // Specify StringComparison for clarity
 
             // Act
             var types = filters.GetTypes().GetFullNames();
