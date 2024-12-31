@@ -14,12 +14,6 @@ namespace ArchGuard.Library.Type.Filters.Conditions.Interfaces
             StringComparison comparison
         );
 
-        ITypesFilterPostConditions ResideInNamespaceStartingWith(string name);
-        ITypesFilterPostConditions ResideInNamespaceStartingWith(
-            string name,
-            StringComparison comparison
-        );
-
         ITypesFilterPostConditions ResideInNamespaceEndingWith(string name);
         ITypesFilterPostConditions ResideInNamespaceEndingWith(
             string name,
@@ -31,12 +25,6 @@ namespace ArchGuard.Library.Type.Filters.Conditions.Interfaces
 
         ITypesFilterPostConditions DoNotResideInNamespaceContaining(string name);
         ITypesFilterPostConditions DoNotResideInNamespaceContaining(
-            string name,
-            StringComparison comparison
-        );
-
-        ITypesFilterPostConditions DoNotResideInNamespaceStartingWith(string name);
-        ITypesFilterPostConditions DoNotResideInNamespaceStartingWith(
             string name,
             StringComparison comparison
         );

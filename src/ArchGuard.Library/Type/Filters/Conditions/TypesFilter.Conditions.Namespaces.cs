@@ -1,16 +1,22 @@
 namespace ArchGuard.Library.Type.Filters
 {
     using System;
+    using System.Linq;
     using ArchGuard.Library.Type.Filters.PostConditions.Interfaces;
 
     public sealed partial class TypesFilter
     {
+        private void DefaultNamespaceFilterPrefix(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentNullException(nameof(name));
+
+            _context.ApplyFilter(f => !(f.Namespace is null));
+        }
+
         public ITypesFilterPostConditions ResideInNamespace(string name)
         {
-            _context.ApplyFilter(f =>
-                !(f.Namespace is null) && f.Namespace.Equals(name, StringComparison.Ordinal)
-            );
-
+            ResideInNamespace(name, StringComparison.CurrentCulture);
             return this;
         }
 
@@ -19,19 +25,21 @@ namespace ArchGuard.Library.Type.Filters
             StringComparison comparison
         )
         {
-            _context.ApplyFilter(f =>
-                !(f.Namespace is null) && f.Namespace.Equals(name, comparison)
+            DefaultNamespaceFilterPrefix(name);
+
+            var namespaceExists = _context.Types.Any(type =>
+                type.Namespace.Equals(name, StringComparison.Ordinal)
             );
+            var @namespace = namespaceExists || name[name.Length - 1] == '.' ? name : name + ".";
+
+            _context.ApplyFilter(f => f.Namespace.StartsWith(@namespace, comparison));
 
             return this;
         }
 
         public ITypesFilterPostConditions ResideInNamespaceContaining(string name)
         {
-            _context.ApplyFilter(f =>
-                !(f.Namespace is null) && f.Namespace.IndexOf(name, StringComparison.Ordinal) >= 0
-            );
-
+            ResideInNamespaceContaining(name, StringComparison.CurrentCulture);
             return this;
         }
 
@@ -40,40 +48,16 @@ namespace ArchGuard.Library.Type.Filters
             StringComparison comparison
         )
         {
-            _context.ApplyFilter(f =>
-                !(f.Namespace is null) && f.Namespace.IndexOf(name, comparison) >= 0
-            );
+            DefaultNamespaceFilterPrefix(name);
 
-            return this;
-        }
-
-        public ITypesFilterPostConditions ResideInNamespaceStartingWith(string name)
-        {
-            _context.ApplyFilter(f =>
-                !(f.Namespace is null) && f.Namespace.StartsWith(name, StringComparison.Ordinal)
-            );
-
-            return this;
-        }
-
-        public ITypesFilterPostConditions ResideInNamespaceStartingWith(
-            string name,
-            StringComparison comparison
-        )
-        {
-            _context.ApplyFilter(f =>
-                !(f.Namespace is null) && f.Namespace.StartsWith(name, comparison)
-            );
+            _context.ApplyFilter(f => f.Namespace.IndexOf(name, comparison) >= 0);
 
             return this;
         }
 
         public ITypesFilterPostConditions ResideInNamespaceEndingWith(string name)
         {
-            _context.ApplyFilter(f =>
-                !(f.Namespace is null) && f.Namespace.EndsWith(name, StringComparison.Ordinal)
-            );
-
+            ResideInNamespaceEndingWith(name, StringComparison.CurrentCulture);
             return this;
         }
 
@@ -82,19 +66,16 @@ namespace ArchGuard.Library.Type.Filters
             StringComparison comparison
         )
         {
-            _context.ApplyFilter(f =>
-                !(f.Namespace is null) && f.Namespace.EndsWith(name, comparison)
-            );
+            DefaultNamespaceFilterPrefix(name);
+
+            _context.ApplyFilter(f => f.Namespace.EndsWith(name, comparison));
 
             return this;
         }
 
         public ITypesFilterPostConditions DoNotResideInNamespace(string name)
         {
-            _context.ApplyFilter(f =>
-                !(f.Namespace is null) && !f.Namespace.Equals(name, StringComparison.Ordinal)
-            );
-
+            DoNotResideInNamespace(name, StringComparison.CurrentCulture);
             return this;
         }
 
@@ -103,19 +84,16 @@ namespace ArchGuard.Library.Type.Filters
             StringComparison comparison
         )
         {
-            _context.ApplyFilter(f =>
-                !(f.Namespace is null) && !f.Namespace.Equals(name, comparison)
-            );
+            DefaultNamespaceFilterPrefix(name);
+
+            _context.ApplyFilter(f => !f.Namespace.Equals(name, comparison));
 
             return this;
         }
 
         public ITypesFilterPostConditions DoNotResideInNamespaceContaining(string name)
         {
-            _context.ApplyFilter(f =>
-                !(f.Namespace is null) && f.Namespace.IndexOf(name, StringComparison.Ordinal) < 0
-            );
-
+            DoNotResideInNamespaceContaining(name, StringComparison.CurrentCulture);
             return this;
         }
 
@@ -124,40 +102,16 @@ namespace ArchGuard.Library.Type.Filters
             StringComparison comparison
         )
         {
-            _context.ApplyFilter(f =>
-                !(f.Namespace is null) && f.Namespace.IndexOf(name, comparison) < 0
-            );
+            DefaultNamespaceFilterPrefix(name);
 
-            return this;
-        }
-
-        public ITypesFilterPostConditions DoNotResideInNamespaceStartingWith(string name)
-        {
-            _context.ApplyFilter(f =>
-                !(f.Namespace is null) && !f.Namespace.StartsWith(name, StringComparison.Ordinal)
-            );
-
-            return this;
-        }
-
-        public ITypesFilterPostConditions DoNotResideInNamespaceStartingWith(
-            string name,
-            StringComparison comparison
-        )
-        {
-            _context.ApplyFilter(f =>
-                !(f.Namespace is null) && !f.Namespace.StartsWith(name, comparison)
-            );
+            _context.ApplyFilter(f => f.Namespace.IndexOf(name, comparison) < 0);
 
             return this;
         }
 
         public ITypesFilterPostConditions DoNotResideInNamespaceEndingWith(string name)
         {
-            _context.ApplyFilter(f =>
-                !(f.Namespace is null) && !f.Namespace.EndsWith(name, StringComparison.Ordinal)
-            );
-
+            DoNotResideInNamespaceEndingWith(name, StringComparison.CurrentCulture);
             return this;
         }
 
@@ -166,9 +120,9 @@ namespace ArchGuard.Library.Type.Filters
             StringComparison comparison
         )
         {
-            _context.ApplyFilter(f =>
-                !(f.Namespace is null) && !f.Namespace.EndsWith(name, comparison)
-            );
+            DefaultNamespaceFilterPrefix(name);
+
+            _context.ApplyFilter(f => !f.Namespace.EndsWith(name, comparison));
 
             return this;
         }

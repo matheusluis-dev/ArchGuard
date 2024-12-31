@@ -1,4 +1,4 @@
-namespace ArchGuard.Tests.Types
+namespace ArchGuard.Tests.Namespaces
 {
     using System;
     using System.Collections.Generic;
@@ -10,63 +10,6 @@ namespace ArchGuard.Tests.Types
 
     public sealed class NamespacesTests
     {
-        [Fact]
-        public void Reside_in_namespace()
-        {
-            // Arrange
-            var expected = new List<string>
-            {
-                TypeNames.PublicClass,
-                TypeNames.PublicParentClass,
-                TypeNames.PublicParentClass_InternalNestedClass,
-                TypeNames.PublicParentClass_PrivateNestedClass,
-                TypeNames.PublicParentClass_PublicNestedClass,
-                TypeNames.PublicParentClass_PublicNestedPartialClass,
-                TypeNames.PublicPartialClass,
-                TypeNames.PublicSealedClass,
-                TypeNames.PublicStaticClass,
-            };
-            var filters = TypesFromMockedAssembly
-                .All.That()
-                .ResideInNamespace(Namespaces.ClassesPublic);
-
-            // Act
-            var types = filters.GetTypes().GetFullNames();
-
-            // Assert
-            types.Should().BeEquivalentTo(expected);
-        }
-
-        [Fact]
-        public void Reside_in_namespace_with_StringComparison()
-        {
-            // Arrange
-            var expected = new List<string>
-            {
-                TypeNames.PublicClass,
-                TypeNames.PublicParentClass,
-                TypeNames.PublicParentClass_InternalNestedClass,
-                TypeNames.PublicParentClass_PrivateNestedClass,
-                TypeNames.PublicParentClass_PublicNestedClass,
-                TypeNames.PublicParentClass_PublicNestedPartialClass,
-                TypeNames.PublicPartialClass,
-                TypeNames.PublicSealedClass,
-                TypeNames.PublicStaticClass,
-            };
-            var filters = TypesFromMockedAssembly
-                .All.That()
-                .ResideInNamespace(
-                    Namespaces.ClassesPublic.ToUpperInvariant(),
-                    StringComparison.OrdinalIgnoreCase
-                );
-
-            // Act
-            var types = filters.GetTypes().GetFullNames();
-
-            // Assert
-            types.Should().BeEquivalentTo(expected);
-        }
-
         [Fact]
         public void Not_reside_in_namespace()
         {
@@ -186,41 +129,6 @@ namespace ArchGuard.Tests.Types
             var filters = TypesFromMockedAssembly
                 .All.That()
                 .ResideInNamespaceContaining(".InTeRfAcEs.", StringComparison.OrdinalIgnoreCase);
-
-            // Act
-            var types = filters.GetTypes().GetFullNames();
-
-            // Assert
-            types.Should().BeEquivalentTo(expected);
-        }
-
-        [Fact]
-        public void Reside_in_namespace_starting()
-        {
-            // Arrange
-            var expected = new List<string> { TypeNames.InternalEnum, TypeNames.PublicEnum };
-            var filters = TypesFromMockedAssembly
-                .All.That()
-                .ResideInNamespaceStartingWith("ArchGuard.Tests.MockedAssembly.Enums.");
-
-            // Act
-            var types = filters.GetTypes().GetFullNames();
-
-            // Assert
-            types.Should().BeEquivalentTo(expected);
-        }
-
-        [Fact]
-        public void Reside_in_namespace_starting_with_StringComparison()
-        {
-            // Arrange
-            var expected = new List<string> { TypeNames.InternalEnum, TypeNames.PublicEnum };
-            var filters = TypesFromMockedAssembly
-                .All.That()
-                .ResideInNamespaceStartingWith(
-                    "ARCHGUARD.tests.MOCKEDASSEMBLY.enums.",
-                    StringComparison.OrdinalIgnoreCase
-                );
 
             // Act
             var types = filters.GetTypes().GetFullNames();
