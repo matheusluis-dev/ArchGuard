@@ -75,11 +75,13 @@ namespace ArchGuard.Library.Extensions.Type
             return !type.IsProtected();
         }
 
+#if NET7_0_OR_GREATER
         internal static bool IsFileScoped(this Type type)
         {
             var fullName = type.FullName;
             var cleanFullName = type.GetFullNameClean();
 
+            // TODO: test it
             return !fullName.Equals(cleanFullName, StringComparison.Ordinal)
                 && FileAccessModifierHelper.Types.Contains(cleanFullName, StringComparer.Ordinal);
         }
@@ -88,5 +90,6 @@ namespace ArchGuard.Library.Extensions.Type
         {
             return !type.IsFileScoped();
         }
+#endif
     }
 }
