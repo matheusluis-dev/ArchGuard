@@ -43,6 +43,9 @@ namespace ArchGuard.Tests.Common.Types
         internal const string InternalStaticClass =
             Namespaces.ClassesInternal + "." + nameof(InternalStaticClass);
 
+        internal const string PublicAbstractClass =
+            Namespaces.ClassesPublic + "." + nameof(PublicAbstractClass);
+
         internal const string PublicClass = Namespaces.ClassesPublic + "." + nameof(PublicClass);
 
         internal const string PublicParentClass =

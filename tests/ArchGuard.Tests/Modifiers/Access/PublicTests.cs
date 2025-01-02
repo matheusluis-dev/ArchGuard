@@ -22,6 +22,7 @@ namespace ArchGuard.Tests.Modifiers.Access
                 TypeNames.PublicPartialRecord,
                 TypeNames.PublicSealedRecord,
 #endif
+                TypeNames.PublicAbstractClass,
                 TypeNames.PublicClass,
                 TypeNames.PublicParentClass,
                 TypeNames.PublicParentClass_PublicNestedClass,

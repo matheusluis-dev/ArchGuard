@@ -30,6 +30,7 @@ namespace ArchGuard.Tests.Types
                         TypeNames.FileSealedClass,
                         TypeNames.FileStaticClass,
 #endif
+                        TypeNames.PublicAbstractClass,
                         TypeNames.InternalClass,
                         TypeNames.InternalPartialClass,
                         TypeNames.InternalSealedClass,
@@ -178,6 +179,7 @@ namespace ArchGuard.Tests.Types
                 .BeEquivalentTo(
                     new List<string>
                     {
+                        TypeNames.PublicAbstractClass,
                         TypeNames.PublicClass,
                         TypeNames.PublicParentClass,
                         TypeNames.PublicParentClass_PublicNestedClass,
@@ -214,6 +216,7 @@ namespace ArchGuard.Tests.Types
                 .BeEquivalentTo(
                     new List<string>
                     {
+                        TypeNames.PublicAbstractClass,
                         TypeNames.PublicClass,
                         TypeNames.PublicParentClass,
                         TypeNames.PublicParentClass_PublicNestedClass,
@@ -251,6 +254,7 @@ namespace ArchGuard.Tests.Types
                 .BeEquivalentTo(
                     new List<string>
                     {
+                        TypeNames.PublicAbstractClass,
                         TypeNames.PublicClass,
                         TypeNames.PublicParentClass,
                         TypeNames.PublicParentClass_PublicNestedClass,
@@ -333,6 +337,7 @@ namespace ArchGuard.Tests.Types
                 .BeEquivalentTo(
                     new List<string>
                     {
+                        TypeNames.PublicAbstractClass,
                         TypeNames.PublicClass,
                         TypeNames.PublicParentClass,
                         TypeNames.PublicParentClass_PublicNestedClass,

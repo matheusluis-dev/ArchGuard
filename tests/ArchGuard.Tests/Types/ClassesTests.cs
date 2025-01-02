@@ -34,6 +34,7 @@ namespace ArchGuard.Tests.Types
                         TypeNames.InternalPartialClass,
                         TypeNames.InternalSealedClass,
                         TypeNames.InternalStaticClass,
+                        TypeNames.PublicAbstractClass,
                         TypeNames.PublicClass,
                         TypeNames.PublicParentClass,
                         TypeNames.PublicParentClass_InternalNestedClass,
@@ -95,6 +96,7 @@ namespace ArchGuard.Tests.Types
                 .BeEquivalentTo(
                     new List<string>
                     {
+                        TypeNames.PublicAbstractClass,
                         TypeNames.PublicClass,
                         TypeNames.PublicParentClass,
                         TypeNames.PublicParentClass_PublicNestedClass,

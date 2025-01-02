@@ -10,16 +10,14 @@ namespace ArchGuard.Tests
     using FluentAssertions;
     using Xunit;
 
-    public sealed partial class ImplementsInterfaceTests
+    public sealed partial class InheritTests
     {
         [Fact]
-        public void ImplementsInterface_with_type_as_argument()
+        public void Inherit_with_type_as_argument()
         {
             // Arrange
 #pragma warning disable CA2263 // Prefer generic overload when type is known
-            var filters = TypesFromMockedAssembly
-                .All.That()
-                .ImplementsInterface(typeof(IPublicInterface));
+            var filters = TypesFromMockedAssembly.All.That().Inherit(typeof(PublicAbstractClass));
 #pragma warning restore CA2263 // Prefer generic overload when type is known
 
             // Act
@@ -30,12 +28,10 @@ namespace ArchGuard.Tests
         }
 
         [Fact]
-        public void ImplementsInterface_with_generic_overload()
+        public void Inherit_with_generic_overload()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly
-                .All.That()
-                .ImplementsInterface<IPublicInterface>();
+            var filters = TypesFromMockedAssembly.All.That().Inherit<PublicAbstractClass>();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -45,49 +41,45 @@ namespace ArchGuard.Tests
         }
 
         [Fact]
-        public void ImplementsInterface_with_type_as_argument_should_Throw_ArgumentException_when_type_is_not_class()
+        public void Inherit_with_type_as_argument_should_Throw_ArgumentException_when_type_is_not_class()
         {
             // Arrange
 #pragma warning disable CA2263 // Prefer generic overload when type is known
             Action act = () =>
                 TypesFromMockedAssembly
                     .All.That()
-                    .ImplementsInterface(typeof(PublicAbstractClass))
+                    .Inherit(typeof(IPublicInterface))
                     .GetTypes()
                     .GetFullNames();
 #pragma warning restore CA2263 // Prefer generic overload when type is known
 
             // Assert
-            act.Should()
-                .ThrowExactly<ArgumentException>()
-                .WithMessage("Type must be an interface*");
+            act.Should().ThrowExactly<ArgumentException>().WithMessage("Type must be a class*");
         }
 
         [Fact]
-        public void ImplementsInterface_with_generic_overload_should_Throw_ArgumentException_when_type_is_not_class()
+        public void Inherit_with_generic_overload_should_Throw_ArgumentException_when_type_is_not_class()
         {
             // Arrange
             Action act = () =>
                 TypesFromMockedAssembly
                     .All.That()
-                    .ImplementsInterface<PublicAbstractClass>()
+                    .Inherit<IPublicInterface>()
                     .GetTypes()
                     .GetFullNames();
 
             // Assert
-            act.Should()
-                .ThrowExactly<ArgumentException>()
-                .WithMessage("Type must be an interface*");
+            act.Should().ThrowExactly<ArgumentException>().WithMessage("Type must be a class*");
         }
 
         [Fact]
-        public void DoNotImplementsInterface_with_type_as_argument()
+        public void DoNotInherit_with_type_as_argument()
         {
             // Arrange
 #pragma warning disable CA2263 // Prefer generic overload when type is known
             var filters = TypesFromMockedAssembly
                 .All.That()
-                .DoNotImplementsInterface(typeof(IPublicInterface));
+                .DoNotInherit(typeof(PublicAbstractClass));
 #pragma warning restore CA2263 // Prefer generic overload when type is known
 
             // Act
@@ -118,9 +110,10 @@ namespace ArchGuard.Tests
                         TypeNames.PublicPartialClass,
                         TypeNames.PublicSealedClass,
                         TypeNames.PublicStaticClass,
+                        TypeNames.IInternalInterface,
+                        TypeNames.IPublicInterface,
                         TypeNames.InternalEnum,
                         TypeNames.PublicEnum,
-                        TypeNames.IInternalInterface,
 #if NET5_0_OR_GREATER
                         TypeNames.InternalRecord,
                         TypeNames.InternalPartialRecord,
@@ -136,12 +129,10 @@ namespace ArchGuard.Tests
         }
 
         [Fact]
-        public void DoNotImplementsInterface_with_generic_overload()
+        public void DoNotInherit_with_generic_overload()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly
-                .All.That()
-                .DoNotImplementsInterface<IPublicInterface>();
+            var filters = TypesFromMockedAssembly.All.That().DoNotInherit<PublicAbstractClass>();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -171,9 +162,10 @@ namespace ArchGuard.Tests
                         TypeNames.PublicPartialClass,
                         TypeNames.PublicSealedClass,
                         TypeNames.PublicStaticClass,
+                        TypeNames.IInternalInterface,
+                        TypeNames.IPublicInterface,
                         TypeNames.InternalEnum,
                         TypeNames.PublicEnum,
-                        TypeNames.IInternalInterface,
 #if NET5_0_OR_GREATER
                         TypeNames.InternalRecord,
                         TypeNames.InternalPartialRecord,
@@ -189,39 +181,35 @@ namespace ArchGuard.Tests
         }
 
         [Fact]
-        public void DoNotImplementsInterface_with_type_as_argument_should_Throw_ArgumentException_when_type_is_not_class()
+        public void DoNotInherit_with_type_as_argument_should_Throw_ArgumentException_when_type_is_not_class()
         {
             // Arrange
 #pragma warning disable CA2263 // Prefer generic overload when type is known
             Action act = () =>
                 TypesFromMockedAssembly
                     .All.That()
-                    .DoNotImplementsInterface(typeof(PublicAbstractClass))
+                    .DoNotInherit(typeof(IPublicInterface))
                     .GetTypes()
                     .GetFullNames();
 #pragma warning restore CA2263 // Prefer generic overload when type is known
 
             // Assert
-            act.Should()
-                .ThrowExactly<ArgumentException>()
-                .WithMessage("Type must be an interface*");
+            act.Should().ThrowExactly<ArgumentException>().WithMessage("Type must be a class*");
         }
 
         [Fact]
-        public void DoNotImplementsInterface_with_generic_overload_should_Throw_ArgumentException_when_type_is_not_class()
+        public void DoNotInherit_with_generic_overload_should_Throw_ArgumentException_when_type_is_not_class()
         {
             // Arrange
             Action act = () =>
                 TypesFromMockedAssembly
                     .All.That()
-                    .DoNotImplementsInterface<PublicAbstractClass>()
+                    .DoNotInherit<IPublicInterface>()
                     .GetTypes()
                     .GetFullNames();
 
             // Assert
-            act.Should()
-                .ThrowExactly<ArgumentException>()
-                .WithMessage("Type must be an interface*");
+            act.Should().ThrowExactly<ArgumentException>().WithMessage("Type must be a class*");
         }
     }
 }

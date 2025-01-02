@@ -56,6 +56,7 @@ namespace ArchGuard.Tests.Modifiers.Access
                 TypeNames.FileSealedClass,
                 TypeNames.FileStaticClass,
 #endif
+                TypeNames.PublicAbstractClass,
                 TypeNames.PublicClass,
                 TypeNames.PublicParentClass,
                 TypeNames.PublicParentClass_PrivateNestedClass,

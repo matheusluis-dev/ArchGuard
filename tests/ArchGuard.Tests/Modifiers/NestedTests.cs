@@ -57,6 +57,7 @@ namespace ArchGuard.Tests.Modifiers
                         TypeNames.InternalPartialClass,
                         TypeNames.InternalSealedClass,
                         TypeNames.InternalStaticClass,
+                        TypeNames.PublicAbstractClass,
                         TypeNames.PublicClass,
                         TypeNames.PublicParentClass,
                         TypeNames.PublicPartialClass,

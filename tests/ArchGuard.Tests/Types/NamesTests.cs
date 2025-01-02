@@ -86,10 +86,12 @@ namespace ArchGuard.Tests.Types
                         TypeNames.FileSealedClass,
                         TypeNames.FileStaticClass,
 #endif
+
                         TypeNames.InternalClass,
                         TypeNames.InternalPartialClass,
                         TypeNames.InternalSealedClass,
                         TypeNames.InternalStaticClass,
+                        TypeNames.PublicAbstractClass,
                         TypeNames.PublicClass,
                         TypeNames.PublicParentClass,
                         TypeNames.PublicParentClass_InternalNestedClass,
@@ -131,6 +133,7 @@ namespace ArchGuard.Tests.Types
                         TypeNames.InternalPartialClass,
                         TypeNames.InternalSealedClass,
                         TypeNames.InternalStaticClass,
+                        TypeNames.PublicAbstractClass,
                         TypeNames.PublicClass,
                         TypeNames.PublicParentClass,
                         TypeNames.PublicParentClass_InternalNestedClass,

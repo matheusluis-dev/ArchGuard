@@ -51,6 +51,7 @@ namespace ArchGuard.Tests.Types
                         TypeNames.InternalPartialClass,
                         TypeNames.InternalSealedClass,
                         TypeNames.InternalStaticClass,
+                        TypeNames.PublicAbstractClass,
                         TypeNames.PublicClass,
                         TypeNames.PublicParentClass,
                         TypeNames.PublicParentClass_InternalNestedClass,
