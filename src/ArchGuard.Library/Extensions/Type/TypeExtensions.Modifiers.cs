@@ -42,6 +42,7 @@ namespace ArchGuard.Library.Extensions.Type
             return !type.IsPartial();
         }
 
+#if NET5_0_OR_GREATER
         internal static bool IsRecord(this Type type)
         {
             return RecordsHelper.Records.Contains(type.FullName, StringComparer.Ordinal);
@@ -51,6 +52,7 @@ namespace ArchGuard.Library.Extensions.Type
         {
             return !type.IsRecord();
         }
+#endif
 
         internal static bool IsSealed(this Type type)
         {

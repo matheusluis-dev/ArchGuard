@@ -30,7 +30,7 @@ namespace ArchGuard.Tests.Api
         }
 
         [Fact]
-        public void File_scoped_extensions_should_not_be_visible_when_DotNet_version_7_0_or_greater()
+        public void File_scoped_extensions_should_be_visible_when_DotNet_version_7_0_or_greater()
         {
             // Arrange
             var assembly = typeof(TypesFilter).Assembly;
@@ -47,7 +47,7 @@ namespace ArchGuard.Tests.Api
         [Theory]
         [InlineData(typeof(ITypesFilterConditions))]
         [InlineData(typeof(TypesFilter))]
-        public void File_scoped_related_filters_should_be_not_visible_when_DotNet_version_lesser_than_7_0(
+        public void File_scoped_related_filters_should_not_be_visible_when_DotNet_version_lesser_than_7_0(
             Type type
         )
         {
