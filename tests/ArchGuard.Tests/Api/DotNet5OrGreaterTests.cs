@@ -12,8 +12,8 @@ namespace ArchGuard.Tests.Api
     public sealed class DotNet5OrGreaterTests
     {
         private readonly Func<MethodInfo, bool> _endsWithRecordPredicate = method =>
-            method.Name.EndsWith("Records", StringComparison.Ordinal)
-            || method.Name.EndsWith("Record", StringComparison.Ordinal);
+            method.Name.EndsWith("Record", StringComparison.Ordinal)
+            || method.Name.EndsWith("Records", StringComparison.Ordinal);
 
 #if NET5_0_OR_GREATER
         [Theory]
