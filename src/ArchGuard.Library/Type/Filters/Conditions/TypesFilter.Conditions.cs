@@ -28,5 +28,24 @@ namespace ArchGuard.Library.Type.Filters
         {
             return _context.Types;
         }
+
+        public ITypesFilterPostConditions ImplementsInterface(Type @interface)
+        {
+            if (@interface is null)
+                throw new ArgumentNullException(nameof(@interface));
+
+            if (!@interface.IsInterface)
+                throw new ArgumentException("Type must be an interface", nameof(@interface));
+
+            _context.ApplyFilter(type => type != @interface);
+            _context.ApplyFilter(type => @interface.IsAssignableFrom(type));
+
+            return this;
+        }
+
+        public ITypesFilterPostConditions ImplementsInterface<T>()
+        {
+            return ImplementsInterface(typeof(T));
+        }
     }
 }

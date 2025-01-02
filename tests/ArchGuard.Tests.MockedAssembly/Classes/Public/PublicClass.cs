@@ -1,4 +1,6 @@
 namespace ArchGuard.Tests.MockedAssembly.Classes.Public
 {
-    public class PublicClass { }
+    using ArchGuard.Tests.MockedAssembly.Interfaces.Public;
+
+    public class PublicClass : IPublicInterface { }
 }
