@@ -3,7 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="CSharpier.MsBuild" Version="0.30.3" />
+    <PackageVersion Include="CSharpier.MsBuild" Version="0.30.4" />
     <PackageVersion Include="FluentAssertions" Version="7.0.0" />
     <PackageVersion Include="FluentAssertions.Analyzers" Version="0.34.1" />
     <PackageVersion Include="Meziantou.Analyzer" Version="2.0.184" />
@@ -11,7 +11,7 @@
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0" />
     <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="4.12.9" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.4.0.108396" />
-    <PackageVersion Include="coverlet.collector" Version="6.0.2" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.3" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageVersion Include="xunit" Version="2.9.2" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.0" />

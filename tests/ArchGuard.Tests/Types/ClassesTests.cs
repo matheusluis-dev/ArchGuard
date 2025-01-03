@@ -1,5 +1,6 @@
 namespace ArchGuard.Tests.Types
 {
+    // TODO: remove new List<string> from tests, not necessary in any runtime
     using System.Collections.Generic;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
@@ -167,18 +168,32 @@ namespace ArchGuard.Tests.Types
             types
                 .Should()
                 .BeEquivalentTo(
-                    new List<string> {
 #if NET7_0_OR_GREATER
-                        TypeNames.FileSealedClass,
+                    TypeNames.FileSealedClass,
 #endif
-                        TypeNames.InternalSealedClass, TypeNames.PublicSealedClass }
-                );
+                    TypeNames.InternalSealedClass, TypeNames.PublicSealedClass);
         }
 
+#if NET7_0_OR_GREATER
         [Fact]
         public void Get_file_scoped_classes()
         {
-            // TODO: Implement this test
+            // Arrange
+            var filters = TypesFromMockedAssembly.All.That().AreClasses().And().AreFileScoped();
+
+            // Act
+            var types = filters.GetTypes().GetFullNames();
+
+            // Assert
+            types
+                .Should()
+                .BeEquivalentTo(
+                    TypeNames.FileClass,
+                    TypeNames.FilePartialClass,
+                    TypeNames.FileSealedClass,
+                    TypeNames.FileStaticClass
+                );
         }
+#endif
     }
 }

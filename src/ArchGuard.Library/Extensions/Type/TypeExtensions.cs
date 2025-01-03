@@ -5,19 +5,21 @@ namespace ArchGuard.Library.Extensions.Type
 
     internal static partial class TypeExtensions
     {
-        // TODO fix this on all runtimes
-        private static readonly Regex _fullNameCleanRegex = new Regex(@"<[^>]+>[^_]+__(.+)$");
+        private static Regex MyRegex()
+        {
+            return new Regex("<[^>]+>[^_]+__(.+)$", RegexOptions.None, TimeSpan.FromSeconds(1));
+        }
 
         internal static string GetFullNameClean(this Type type)
         {
-            var regex = _fullNameCleanRegex;
+            var regex = MyRegex();
             var match = regex.Match(type.FullName);
 
             var @namespace = string.IsNullOrWhiteSpace(type.Namespace)
                 ? string.Empty
                 : $"{type.Namespace}.";
 
-            return match.Success ? $"{@namespace}{match.Groups[1].Value}" : type.FullName;
+            return match.Success ? @namespace + match.Groups[1].Value : type.FullName;
         }
     }
 }

@@ -29,16 +29,15 @@ namespace ArchGuard.Library.Type.Filters
             return _context.Types;
         }
 
-        public ITypesFilterPostConditions ImplementsInterface(Type @interface)
+        public ITypesFilterPostConditions ImplementsInterface(Type type)
         {
-            if (@interface is null)
-                throw new ArgumentNullException(nameof(@interface));
+            if (type is null)
+                throw new ArgumentNullException(nameof(type));
 
-            if (!@interface.IsInterface)
-                throw new ArgumentException("Type must be an interface", nameof(@interface));
+            if (!type.IsInterface)
+                throw new ArgumentException("Type must be an interface", nameof(type));
 
-            _context.ApplyFilter(type => type != @interface);
-            _context.ApplyFilter(type => @interface.IsAssignableFrom(type));
+            _context.ApplyFilter(t => t != type && type.IsAssignableFrom(t));
 
             return this;
         }
@@ -48,16 +47,15 @@ namespace ArchGuard.Library.Type.Filters
             return ImplementsInterface(typeof(T));
         }
 
-        public ITypesFilterPostConditions DoNotImplementsInterface(Type @interface)
+        public ITypesFilterPostConditions DoNotImplementsInterface(Type type)
         {
-            if (@interface is null)
-                throw new ArgumentNullException(nameof(@interface));
+            if (type is null)
+                throw new ArgumentNullException(nameof(type));
 
-            if (!@interface.IsInterface)
-                throw new ArgumentException("Type must be an interface", nameof(@interface));
+            if (!type.IsInterface)
+                throw new ArgumentException("Type must be an interface", nameof(type));
 
-            //_context.ApplyFilter(type => type == @interface);
-            _context.ApplyFilter(type => !@interface.IsAssignableFrom(type));
+            _context.ApplyFilter(t => !type.IsAssignableFrom(t));
 
             return this;
         }

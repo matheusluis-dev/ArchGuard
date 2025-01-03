@@ -10,7 +10,7 @@ namespace ArchGuard.Library.Extensions
 
             var parent = classDeclarationSyntax.Parent;
             while (
-                !(parent is null)
+                parent != null
                 && !(parent is BaseNamespaceDeclarationSyntax)
                 && !(parent is CompilationUnitSyntax)
             )

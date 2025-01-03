@@ -20,18 +20,16 @@ namespace ArchGuard.Library.Helpers
                 "tests/ArchGuard.Tests.MockedAssembly"
             );
 
-            // TODO Find a less stupid way to do this
+            var excludedDirectories = new[] { "bin", "obj" };
             return directoryInfo
                 .EnumerateFiles("*.cs", SearchOption.AllDirectories)
                 .Where(file =>
-                    file.FullName.IndexOf(
-                        $"{Path.DirectorySeparatorChar}bin{Path.DirectorySeparatorChar}",
-                        StringComparison.OrdinalIgnoreCase
-                    ) == -1
-                    && file.FullName.IndexOf(
-                        $"{Path.DirectorySeparatorChar}obj{Path.DirectorySeparatorChar}",
-                        StringComparison.OrdinalIgnoreCase
-                    ) == -1
+                    !excludedDirectories.Any(dir =>
+                        file.FullName.IndexOf(
+                            $"{Path.DirectorySeparatorChar}{dir}{Path.DirectorySeparatorChar}",
+                            StringComparison.OrdinalIgnoreCase
+                        ) != -1
+                    )
                 );
         }
     }

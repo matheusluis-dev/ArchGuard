@@ -7,8 +7,7 @@ namespace ArchGuard.Library.Type.Filters
     {
         public ITypesFilterPostConditions HaveNameStartingWith(string name)
         {
-            _context.ApplyFilter(type => type.Name.StartsWith(name));
-            return this;
+            return HaveNameStartingWith(name, StringComparison.Ordinal);
         }
 
         public ITypesFilterPostConditions HaveNameStartingWith(
@@ -22,8 +21,7 @@ namespace ArchGuard.Library.Type.Filters
 
         public ITypesFilterPostConditions HaveNameEndingWith(string name)
         {
-            _context.ApplyFilter(type => type.Name.EndsWith(name));
-            return this;
+            return HaveNameEndingWith(name, StringComparison.Ordinal);
         }
 
         public ITypesFilterPostConditions HaveNameEndingWith(

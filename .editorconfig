@@ -130,6 +130,7 @@ dotnet_style_parentheses_in_other_operators = never_if_unnecessary:warning
 # Expression-level preferences
 dotnet_style_object_initializer = true:warning
 dotnet_style_collection_initializer = false:error
+dotnet_style_prefer_collection_expression = false:error
 dotnet_style_explicit_tuple_names = true:warning
 dotnet_style_prefer_inferred_tuple_names = true:warning
 dotnet_style_prefer_inferred_anonymous_type_member_names = false:warning
@@ -183,7 +184,7 @@ csharp_style_inlined_variable_declaration = true:warning
 csharp_prefer_simple_default_expression = true:warning
 csharp_style_pattern_local_over_anonymous_function = false:warning
 csharp_style_deconstructed_variable_declaration = true:warning
-csharp_style_prefer_index_operator = true:warning
+csharp_style_prefer_index_operator = false:error
 csharp_style_prefer_range_operator = true:warning
 csharp_style_implicit_object_creation_when_type_is_apparent = true:warning
 
@@ -615,10 +616,18 @@ dotnet_diagnostic.MA0165.severity = none
 dotnet_diagnostic.MA0159.severity = none
 
 dotnet_diagnostic.MA0004.severity = none
+dotnet_diagnostic.MA0076.severity = none
+dotnet_diagnostic.MA0023.severity = none
+dotnet_diagnostic.MA0110.severity = none
 
 dotnet_diagnostic.IDE0058.severity = none
 dotnet_diagnostic.IDE0059.severity = none
 dotnet_diagnostic.IDE0052.severity = none
+dotnet_diagnostic.IDE0078.severity = none
+dotnet_diagnostic.IDE0083.severity = none
 dotnet_diagnostic.CA1848.severity = none
+dotnet_diagnostic.CA2249.severity = none
+dotnet_diagnostic.CA1510.severity = none
 
 dotnet_diagnostic.S1135.severity = none
+dotnet_diagnostic.IDE0090.severity=none

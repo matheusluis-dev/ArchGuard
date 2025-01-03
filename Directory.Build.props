@@ -11,7 +11,7 @@
     <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
+  <ItemGroup Condition="'$(MSBuildProjectName)' != 'ArchGuard.Tests.MockedAssembly'">
     <PackageReference Include="SonarAnalyzer.CSharp">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>
@@ -20,7 +20,7 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
+  <ItemGroup Condition="'$(MSBuildProjectName)' != 'ArchGuard.Tests.MockedAssembly'">
     <PackageReference Include="Meziantou.Analyzer">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>
@@ -28,6 +28,7 @@
       </IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="CSharpier.MsBuild">

@@ -1,8 +1,10 @@
 namespace ArchGuard.Library.Extensions.Type
 {
     using System;
+#if NET7_0_OR_GREATER
     using System.Linq;
     using ArchGuard.Library.Helpers;
+#endif
 
     internal static partial class TypeExtensions
     {
@@ -16,13 +18,9 @@ namespace ArchGuard.Library.Extensions.Type
             return type.IsNotPublic && !type.IsNestedPublic;
         }
 
-        /// <summary>
-        /// https://stackoverflow.com/questions/4971213/how-to-use-reflection-to-determine-if-a-class-is-internal
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
         internal static bool IsInternal(this Type type)
         {
+            // https://stackoverflow.com/questions/4971213/how-to-use-reflection-to-determine-if-a-class-is-internal
             var isInternal = type.IsNotPublic;
 #if NET7_0_OR_GREATER
             isInternal = isInternal && !type.IsFileScoped();

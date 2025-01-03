@@ -1,12 +1,15 @@
 namespace ArchGuard.Library.Helpers
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
 
     internal static class DirectoryHelper
     {
-        private static readonly Dictionary<string, DirectoryInfo> _cache =
-            new Dictionary<string, DirectoryInfo>();
+        private static readonly Dictionary<string, DirectoryInfo> _cache = new Dictionary<
+            string,
+            DirectoryInfo
+        >(StringComparer.OrdinalIgnoreCase);
 
         internal static DirectoryInfo GetDirectoryInSolution(string subDirectory)
         {
@@ -14,7 +17,7 @@ namespace ArchGuard.Library.Helpers
                 return cacheDirectoryInfo;
 
             var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
-            while (!(directory is null))
+            while (directory != null)
             {
                 var directoryInfo = new DirectoryInfo(
                     Path.Combine(directory.FullName, subDirectory)

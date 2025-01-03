@@ -3,6 +3,7 @@ namespace ArchGuard.Library.Type.Filters.PostConditions.Interfaces
     using System;
     using ArchGuard.Library.Type.Filters.Conditions.Interfaces;
 
+#pragma warning disable CA1716 // Identifiers should not match keywords
     public partial interface ITypesFilterPostConditions
     {
         ITypesFilterConditions And();
@@ -15,4 +16,5 @@ namespace ArchGuard.Library.Type.Filters.PostConditions.Interfaces
             Func<ITypesFilterConditions, ITypesFilterPostConditions> filter
         );
     }
+#pragma warning restore CA1716 // Identifiers should not match keywords
 }

@@ -11,17 +11,22 @@ namespace ArchGuard.Library.Type.Filters
 
         public IEnumerable<Type> Types { get; private set; }
 
+        // TODO: Refactor to use enums
         private bool AndOperator { get; set; } = true;
+
+        // TODO: Refactor to use enums
         private bool OrOperator { get; set; }
 
-        private List<IEnumerable<Type>> GroupedTypes { get; set; } = new List<IEnumerable<Type>>();
+        private List<IEnumerable<Type>> GroupedTypes { get; } = new List<IEnumerable<Type>>();
 
+        // TODO: Refactor to use enums
         public void And()
         {
             AndOperator = true;
             OrOperator = false;
         }
 
+        // TODO: Refactor to use enums
         public void Or()
         {
             AndOperator = false;
