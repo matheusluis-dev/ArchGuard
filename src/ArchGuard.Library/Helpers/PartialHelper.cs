@@ -32,7 +32,8 @@ namespace ArchGuard.Library.Helpers
                 return root.DescendantNodes()
                     .OfType<TypeDeclarationSyntax>()
                     .Where(c => c.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword)))
-                    .Select(c => c.GetFullName());
+                    .Select(c => c.GetFullName())
+                    .Distinct(StringComparer.Ordinal);
             });
         }
     }

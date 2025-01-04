@@ -100,5 +100,17 @@ namespace ArchGuard.Library.Type.Filters
         {
             return DoNotInherit(typeof(T));
         }
+
+        public ITypesFilterPostConditions AreGeneric()
+        {
+            _context.ApplyFilter(t => t.IsGenericType);
+            return this;
+        }
+
+        public ITypesFilterPostConditions AreNotGeneric()
+        {
+            _context.ApplyFilter(t => !t.IsGenericType);
+            return this;
+        }
     }
 }

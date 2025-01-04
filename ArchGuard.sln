@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solutions-items", "solution
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F676C254-5A24-48D0-8452-557E35A97DCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Tests", "tests\ArchGuard.Tests\ArchGuard.Tests.csproj", "{8EA358ED-96CA-476A-AE5E-5E8C9C112030}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Filters.Tests", "tests\ArchGuard.Tests\ArchGuard.Filters.Tests.csproj", "{8EA358ED-96CA-476A-AE5E-5E8C9C112030}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Tests.MockedAssembly", "tests\ArchGuard.Tests.MockedAssembly\ArchGuard.Tests.MockedAssembly.csproj", "{54EE02FA-CE83-4AF1-8F1E-9939038EAD39}"
 EndProject
@@ -26,6 +26,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests-items", "tests-items"
 	ProjectSection(SolutionItems) = preProject
 		tests\.editorconfig = tests\.editorconfig
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Tests.Common", "tests\ArchGuard.Common.Tests\ArchGuard.Tests.Common.csproj", "{F7F837BB-CA2A-4CC9-AACB-AFAE5C5E34D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.PublicApi.Tests", "tests\ArchGuard.PublicApi.Tests\ArchGuard.PublicApi.Tests.csproj", "{2F891FB1-94A2-4335-8675-7324645F5CEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{54EE02FA-CE83-4AF1-8F1E-9939038EAD39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54EE02FA-CE83-4AF1-8F1E-9939038EAD39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54EE02FA-CE83-4AF1-8F1E-9939038EAD39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7F837BB-CA2A-4CC9-AACB-AFAE5C5E34D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7F837BB-CA2A-4CC9-AACB-AFAE5C5E34D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7F837BB-CA2A-4CC9-AACB-AFAE5C5E34D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7F837BB-CA2A-4CC9-AACB-AFAE5C5E34D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F891FB1-94A2-4335-8675-7324645F5CEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F891FB1-94A2-4335-8675-7324645F5CEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F891FB1-94A2-4335-8675-7324645F5CEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F891FB1-94A2-4335-8675-7324645F5CEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +66,8 @@ Global
 		{8EA358ED-96CA-476A-AE5E-5E8C9C112030} = {F676C254-5A24-48D0-8452-557E35A97DCA}
 		{54EE02FA-CE83-4AF1-8F1E-9939038EAD39} = {F676C254-5A24-48D0-8452-557E35A97DCA}
 		{375314E4-0BD9-487E-AE19-ECEF1A9C6C62} = {F676C254-5A24-48D0-8452-557E35A97DCA}
+		{F7F837BB-CA2A-4CC9-AACB-AFAE5C5E34D0} = {F676C254-5A24-48D0-8452-557E35A97DCA}
+		{2F891FB1-94A2-4335-8675-7324645F5CEA} = {F676C254-5A24-48D0-8452-557E35A97DCA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		FileExplorer = 

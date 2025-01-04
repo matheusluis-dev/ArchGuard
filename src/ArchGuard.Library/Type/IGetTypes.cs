@@ -1,4 +1,4 @@
-namespace ArchGuard.Library.Type.Filters.Common.Interfaces
+namespace ArchGuard.Library.Type
 {
     using System;
     using System.Collections.Generic;

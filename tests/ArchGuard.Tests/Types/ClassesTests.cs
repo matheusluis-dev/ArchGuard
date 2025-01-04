@@ -1,4 +1,4 @@
-namespace ArchGuard.Tests.Types
+namespace ArchGuard.Filters.Tests.Types
 {
     // TODO: remove new List<string> from tests, not necessary in any runtime
     using System.Collections.Generic;
@@ -37,6 +37,8 @@ namespace ArchGuard.Tests.Types
                         TypeNames.InternalStaticClass,
                         TypeNames.PublicAbstractClass,
                         TypeNames.PublicClass,
+                        TypeNames.PublicGenericClassWithOneType,
+                        TypeNames.PublicGenericClassWithTwoTypes,
                         TypeNames.PublicParentClass,
                         TypeNames.PublicParentClass_InternalNestedClass,
                         TypeNames.PublicParentClass_PrivateNestedClass,
@@ -95,17 +97,16 @@ namespace ArchGuard.Tests.Types
             types
                 .Should()
                 .BeEquivalentTo(
-                    new List<string>
-                    {
-                        TypeNames.PublicAbstractClass,
-                        TypeNames.PublicClass,
-                        TypeNames.PublicParentClass,
-                        TypeNames.PublicParentClass_PublicNestedClass,
-                        TypeNames.PublicParentClass_PublicNestedPartialClass,
-                        TypeNames.PublicPartialClass,
-                        TypeNames.PublicSealedClass,
-                        TypeNames.PublicStaticClass,
-                    }
+                    TypeNames.PublicAbstractClass,
+                    TypeNames.PublicClass,
+                    TypeNames.PublicGenericClassWithOneType,
+                    TypeNames.PublicGenericClassWithTwoTypes,
+                    TypeNames.PublicParentClass,
+                    TypeNames.PublicParentClass_PublicNestedClass,
+                    TypeNames.PublicParentClass_PublicNestedPartialClass,
+                    TypeNames.PublicPartialClass,
+                    TypeNames.PublicSealedClass,
+                    TypeNames.PublicStaticClass
                 );
         }
 

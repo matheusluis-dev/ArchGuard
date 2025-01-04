@@ -4,9 +4,9 @@ namespace ArchGuard.Tests.Common.Extensions
     using System.Collections.Generic;
     using System.Linq;
 
-    internal static class IEnumerableTypeExtensions
+    public static class IEnumerableTypeExtensions
     {
-        internal static List<string> GetFullNames(this IEnumerable<Type> types)
+        public static List<string> GetFullNames(this IEnumerable<Type> types)
         {
             return types
                 .Select(type => type.FullNameClean())

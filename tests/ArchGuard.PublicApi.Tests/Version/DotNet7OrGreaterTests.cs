@@ -1,4 +1,4 @@
-namespace ArchGuard.Tests.Api
+namespace ArchGuard.PublicApi.Tests.Version
 {
     using System;
     using System.Linq;

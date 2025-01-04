@@ -1,4 +1,4 @@
-﻿namespace ArchGuard.Tests.Modifiers.Access
+﻿namespace ArchGuard.Filters.Tests.Modifiers.Access
 {
     public sealed class ProtectedTests
     {

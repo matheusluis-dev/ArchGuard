@@ -4,6 +4,7 @@ namespace ArchGuard.Library.Type.Filters
     using System.Collections.Generic;
     using System.Linq;
     using ArchGuard.Library.Extensions;
+    using ArchGuard.Library.Type;
 
     public sealed class TypesFilterContext
     {
@@ -11,35 +12,18 @@ namespace ArchGuard.Library.Type.Filters
 
         public IEnumerable<Type> Types { get; private set; }
 
-        // TODO: Refactor to use enums
-        private bool AndOperator { get; set; } = true;
-
-        // TODO: Refactor to use enums
-        private bool OrOperator { get; set; }
+        private LogicalOperator LogicalOperator { get; set; } = LogicalOperator.And;
 
         private List<IEnumerable<Type>> GroupedTypes { get; } = new List<IEnumerable<Type>>();
 
-        // TODO: Refactor to use enums
         public void And()
         {
-            AndOperator = true;
-            OrOperator = false;
+            LogicalOperator = LogicalOperator.And;
         }
 
-        // TODO: Refactor to use enums
         public void Or()
         {
-            AndOperator = false;
-            OrOperator = true;
-
-            GroupTypes();
-        }
-
-        private void GroupTypes()
-        {
-            if (!OrOperator)
-                throw new InvalidOperationException();
-
+            LogicalOperator = LogicalOperator.Or;
             GroupedTypes.Add(Types.Copy());
         }
 
@@ -51,16 +35,15 @@ namespace ArchGuard.Library.Type.Filters
 
         public void ApplyFilter(Func<Type, bool> filter)
         {
-            if (OrOperator)
+            if (LogicalOperator == LogicalOperator.Or)
             {
                 var orTypes = _typesWithoutFilter.Where(filter);
                 Types = Types.Union(orTypes);
-
-                return;
             }
-
-            if (AndOperator)
+            else
+            {
                 Types = Types.Where(filter);
+            }
 
             GroupedTypes.ForEach(group => Types = Types.Union(group));
         }

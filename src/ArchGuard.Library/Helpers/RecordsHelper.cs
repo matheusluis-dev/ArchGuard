@@ -31,7 +31,8 @@ namespace ArchGuard.Library.Helpers
 
                 return root.DescendantNodes()
                     .OfType<RecordDeclarationSyntax>()
-                    .Select(c => c.GetFullName());
+                    .Select(c => c.GetFullName())
+                    .Distinct(StringComparer.Ordinal);
             });
         }
     }

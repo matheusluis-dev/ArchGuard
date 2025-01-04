@@ -4,7 +4,6 @@ namespace ArchGuard.Library.Type
     using System.Linq;
     using System.Reflection;
     using ArchGuard.Library.Type.Filters;
-    using ArchGuard.Library.Type.Filters.Common.Interfaces;
 
     public sealed class Types
     {

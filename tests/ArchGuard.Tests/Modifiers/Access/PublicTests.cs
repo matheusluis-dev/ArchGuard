@@ -1,4 +1,4 @@
-namespace ArchGuard.Tests.Modifiers.Access
+namespace ArchGuard.Filters.Tests.Modifiers.Access
 {
     using System.Collections.Generic;
     using ArchGuard.Tests.Common;
@@ -13,32 +13,34 @@ namespace ArchGuard.Tests.Modifiers.Access
         public void Public_types()
         {
             // Arrange
-            var expected = new List<string>
-            {
-                TypeNames.PublicEnum,
-                TypeNames.IPublicInterface,
-#if NET5_0_OR_GREATER
-                TypeNames.PublicRecord,
-                TypeNames.PublicPartialRecord,
-                TypeNames.PublicSealedRecord,
-#endif
-                TypeNames.PublicAbstractClass,
-                TypeNames.PublicClass,
-                TypeNames.PublicParentClass,
-                TypeNames.PublicParentClass_PublicNestedClass,
-                TypeNames.PublicParentClass_PublicNestedPartialClass,
-                TypeNames.PublicPartialClass,
-                TypeNames.PublicSealedClass,
-                TypeNames.PublicStaticClass,
-                TypeNames.PublicStruct,
-            };
             var filters = TypesFromMockedAssembly.All.That().ArePublic();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(expected);
+            types
+                .Should()
+                .BeEquivalentTo(
+                    TypeNames.PublicEnum,
+                    TypeNames.IPublicInterface,
+#if NET5_0_OR_GREATER
+                    TypeNames.PublicRecord,
+                    TypeNames.PublicPartialRecord,
+                    TypeNames.PublicSealedRecord,
+#endif
+                    TypeNames.PublicAbstractClass,
+                    TypeNames.PublicClass,
+                    TypeNames.PublicGenericClassWithOneType,
+                    TypeNames.PublicGenericClassWithTwoTypes,
+                    TypeNames.PublicParentClass,
+                    TypeNames.PublicParentClass_PublicNestedClass,
+                    TypeNames.PublicParentClass_PublicNestedPartialClass,
+                    TypeNames.PublicPartialClass,
+                    TypeNames.PublicSealedClass,
+                    TypeNames.PublicStaticClass,
+                    TypeNames.PublicStruct
+                );
         }
 
         [Fact]

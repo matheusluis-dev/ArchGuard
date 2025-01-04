@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <NoWarn>*</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ArchGuard.Library\ArchGuard.Library.csproj" />
+    <ProjectReference Include="..\ArchGuard.Tests.MockedAssembly\ArchGuard.Tests.MockedAssembly.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="CSharpier.MsBuild">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+
+  </ItemGroup>
+</Project>

@@ -1,4 +1,4 @@
-namespace ArchGuard.Tests.Types
+namespace ArchGuard.Filters.Tests.Types
 {
     using System.Collections.Generic;
     using ArchGuard.Tests.Common;
@@ -22,29 +22,28 @@ namespace ArchGuard.Tests.Types
             types
                 .Should()
                 .BeEquivalentTo(
-                    new List<string>
-                    {
 #if NET7_0_OR_GREATER
-                        TypeNames.FileClass,
-                        TypeNames.FilePartialClass,
-                        TypeNames.FileSealedClass,
-                        TypeNames.FileStaticClass,
+                    TypeNames.FileClass,
+                    TypeNames.FilePartialClass,
+                    TypeNames.FileSealedClass,
+                    TypeNames.FileStaticClass,
 #endif
-                        TypeNames.PublicAbstractClass,
-                        TypeNames.InternalClass,
-                        TypeNames.InternalPartialClass,
-                        TypeNames.InternalSealedClass,
-                        TypeNames.InternalStaticClass,
-                        TypeNames.PublicClass,
-                        TypeNames.PublicParentClass,
-                        TypeNames.PublicParentClass_InternalNestedClass,
-                        TypeNames.PublicParentClass_PrivateNestedClass,
-                        TypeNames.PublicParentClass_PublicNestedClass,
-                        TypeNames.PublicParentClass_PublicNestedPartialClass,
-                        TypeNames.PublicPartialClass,
-                        TypeNames.PublicSealedClass,
-                        TypeNames.PublicStaticClass,
-                    }
+                    TypeNames.InternalClass,
+                    TypeNames.InternalPartialClass,
+                    TypeNames.InternalSealedClass,
+                    TypeNames.InternalStaticClass,
+                    TypeNames.PublicAbstractClass,
+                    TypeNames.PublicClass,
+                    TypeNames.PublicGenericClassWithOneType,
+                    TypeNames.PublicGenericClassWithTwoTypes,
+                    TypeNames.PublicParentClass,
+                    TypeNames.PublicParentClass_InternalNestedClass,
+                    TypeNames.PublicParentClass_PrivateNestedClass,
+                    TypeNames.PublicParentClass_PublicNestedClass,
+                    TypeNames.PublicParentClass_PublicNestedPartialClass,
+                    TypeNames.PublicPartialClass,
+                    TypeNames.PublicSealedClass,
+                    TypeNames.PublicStaticClass
                 );
         }
 
@@ -177,19 +176,18 @@ namespace ArchGuard.Tests.Types
             types
                 .Should()
                 .BeEquivalentTo(
-                    new List<string>
-                    {
-                        TypeNames.PublicAbstractClass,
-                        TypeNames.PublicClass,
-                        TypeNames.PublicParentClass,
-                        TypeNames.PublicParentClass_PublicNestedClass,
-                        TypeNames.PublicParentClass_PublicNestedPartialClass,
-                        TypeNames.PublicPartialClass,
-                        TypeNames.PublicSealedClass,
-                        TypeNames.PublicStaticClass,
-                        TypeNames.IInternalInterface,
-                        TypeNames.IPublicInterface,
-                    }
+                    TypeNames.PublicAbstractClass,
+                    TypeNames.PublicClass,
+                    TypeNames.PublicGenericClassWithOneType,
+                    TypeNames.PublicGenericClassWithTwoTypes,
+                    TypeNames.PublicParentClass,
+                    TypeNames.PublicParentClass_PublicNestedClass,
+                    TypeNames.PublicParentClass_PublicNestedPartialClass,
+                    TypeNames.PublicPartialClass,
+                    TypeNames.PublicSealedClass,
+                    TypeNames.PublicStaticClass,
+                    TypeNames.IInternalInterface,
+                    TypeNames.IPublicInterface
                 );
         }
 
@@ -214,18 +212,17 @@ namespace ArchGuard.Tests.Types
             types
                 .Should()
                 .BeEquivalentTo(
-                    new List<string>
-                    {
-                        TypeNames.PublicAbstractClass,
-                        TypeNames.PublicClass,
-                        TypeNames.PublicParentClass,
-                        TypeNames.PublicParentClass_PublicNestedClass,
-                        TypeNames.PublicParentClass_PublicNestedPartialClass,
-                        TypeNames.PublicPartialClass,
-                        TypeNames.PublicSealedClass,
-                        TypeNames.PublicStaticClass,
-                        TypeNames.IInternalInterface,
-                    }
+                    TypeNames.PublicAbstractClass,
+                    TypeNames.PublicClass,
+                    TypeNames.PublicGenericClassWithOneType,
+                    TypeNames.PublicGenericClassWithTwoTypes,
+                    TypeNames.PublicParentClass,
+                    TypeNames.PublicParentClass_PublicNestedClass,
+                    TypeNames.PublicParentClass_PublicNestedPartialClass,
+                    TypeNames.PublicPartialClass,
+                    TypeNames.PublicSealedClass,
+                    TypeNames.PublicStaticClass,
+                    TypeNames.IInternalInterface
                 );
         }
 
@@ -252,20 +249,19 @@ namespace ArchGuard.Tests.Types
             types
                 .Should()
                 .BeEquivalentTo(
-                    new List<string>
-                    {
-                        TypeNames.PublicAbstractClass,
-                        TypeNames.PublicClass,
-                        TypeNames.PublicParentClass,
-                        TypeNames.PublicParentClass_PublicNestedClass,
-                        TypeNames.PublicParentClass_PublicNestedPartialClass,
-                        TypeNames.PublicPartialClass,
-                        TypeNames.PublicSealedClass,
-                        TypeNames.PublicStaticClass,
-                        TypeNames.IInternalInterface,
-                        TypeNames.InternalEnum,
-                        TypeNames.PublicEnum,
-                    }
+                    TypeNames.PublicAbstractClass,
+                    TypeNames.PublicClass,
+                    TypeNames.PublicGenericClassWithOneType,
+                    TypeNames.PublicGenericClassWithTwoTypes,
+                    TypeNames.PublicParentClass,
+                    TypeNames.PublicParentClass_PublicNestedClass,
+                    TypeNames.PublicParentClass_PublicNestedPartialClass,
+                    TypeNames.PublicPartialClass,
+                    TypeNames.PublicSealedClass,
+                    TypeNames.PublicStaticClass,
+                    TypeNames.IInternalInterface,
+                    TypeNames.InternalEnum,
+                    TypeNames.PublicEnum
                 );
         }
 
@@ -339,6 +335,8 @@ namespace ArchGuard.Tests.Types
                     {
                         TypeNames.PublicAbstractClass,
                         TypeNames.PublicClass,
+                        TypeNames.PublicGenericClassWithOneType,
+                        TypeNames.PublicGenericClassWithTwoTypes,
                         TypeNames.PublicParentClass,
                         TypeNames.PublicParentClass_PublicNestedClass,
                         TypeNames.PublicParentClass_PublicNestedPartialClass,

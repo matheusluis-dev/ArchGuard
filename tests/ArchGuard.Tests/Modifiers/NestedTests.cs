@@ -1,4 +1,4 @@
-namespace ArchGuard.Tests.Modifiers
+namespace ArchGuard.Filters.Tests.Modifiers
 {
     using System.Collections.Generic;
     using ArchGuard.Tests.Common;
@@ -45,39 +45,38 @@ namespace ArchGuard.Tests.Modifiers
             types
                 .Should()
                 .BeEquivalentTo(
-                    new List<string>
-                    {
 #if NET7_0_OR_GREATER
-                        TypeNames.FileClass,
-                        TypeNames.FilePartialClass,
-                        TypeNames.FileSealedClass,
-                        TypeNames.FileStaticClass,
+                    TypeNames.FileClass,
+                    TypeNames.FilePartialClass,
+                    TypeNames.FileSealedClass,
+                    TypeNames.FileStaticClass,
 #endif
-                        TypeNames.InternalClass,
-                        TypeNames.InternalPartialClass,
-                        TypeNames.InternalSealedClass,
-                        TypeNames.InternalStaticClass,
-                        TypeNames.PublicAbstractClass,
-                        TypeNames.PublicClass,
-                        TypeNames.PublicParentClass,
-                        TypeNames.PublicPartialClass,
-                        TypeNames.PublicSealedClass,
-                        TypeNames.PublicStaticClass,
-                        TypeNames.IInternalInterface,
-                        TypeNames.IPublicInterface,
-                        TypeNames.InternalEnum,
-                        TypeNames.PublicEnum,
+                    TypeNames.InternalClass,
+                    TypeNames.InternalPartialClass,
+                    TypeNames.InternalSealedClass,
+                    TypeNames.InternalStaticClass,
+                    TypeNames.PublicAbstractClass,
+                    TypeNames.PublicClass,
+                    TypeNames.PublicGenericClassWithOneType,
+                    TypeNames.PublicGenericClassWithTwoTypes,
+                    TypeNames.PublicParentClass,
+                    TypeNames.PublicPartialClass,
+                    TypeNames.PublicSealedClass,
+                    TypeNames.PublicStaticClass,
+                    TypeNames.IInternalInterface,
+                    TypeNames.IPublicInterface,
+                    TypeNames.InternalEnum,
+                    TypeNames.PublicEnum,
 #if NET5_0_OR_GREATER
-                        TypeNames.InternalRecord,
-                        TypeNames.InternalPartialRecord,
-                        TypeNames.InternalSealedRecord,
-                        TypeNames.PublicRecord,
-                        TypeNames.PublicPartialRecord,
-                        TypeNames.PublicSealedRecord,
+                    TypeNames.InternalRecord,
+                    TypeNames.InternalPartialRecord,
+                    TypeNames.InternalSealedRecord,
+                    TypeNames.PublicRecord,
+                    TypeNames.PublicPartialRecord,
+                    TypeNames.PublicSealedRecord,
 #endif
-                        TypeNames.InternalStruct,
-                        TypeNames.PublicStruct,
-                    }
+                    TypeNames.InternalStruct,
+                    TypeNames.PublicStruct
                 );
         }
     }

@@ -1,4 +1,4 @@
-namespace ArchGuard.Tests.Namespaces
+namespace ArchGuard.Filters.Tests.Namespaces
 {
     using System;
     using System.Collections.Generic;

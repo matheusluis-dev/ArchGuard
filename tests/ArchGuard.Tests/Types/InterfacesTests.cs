@@ -1,4 +1,4 @@
-namespace ArchGuard.Tests.Types
+namespace ArchGuard.Filters.Tests.Types
 {
     using System.Collections.Generic;
     using ArchGuard.Tests.Common;
@@ -53,6 +53,8 @@ namespace ArchGuard.Tests.Types
                         TypeNames.InternalStaticClass,
                         TypeNames.PublicAbstractClass,
                         TypeNames.PublicClass,
+                        TypeNames.PublicGenericClassWithOneType,
+                        TypeNames.PublicGenericClassWithTwoTypes,
                         TypeNames.PublicParentClass,
                         TypeNames.PublicParentClass_InternalNestedClass,
                         TypeNames.PublicParentClass_PrivateNestedClass,

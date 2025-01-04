@@ -1,6 +1,6 @@
 namespace ArchGuard.Library.Type.Filters.Conditions.Interfaces
 {
-    using ArchGuard.Library.Type.Filters.Common.Interfaces;
+    using ArchGuard.Library.Type;
     using ArchGuard.Library.Type.Filters.PostConditions.Interfaces;
 
     public partial interface ITypesFilterConditions : IGetTypes
@@ -16,5 +16,8 @@ namespace ArchGuard.Library.Type.Filters.Conditions.Interfaces
 
         ITypesFilterPostConditions DoNotInherit(System.Type type);
         ITypesFilterPostConditions DoNotInherit<T>();
+
+        ITypesFilterPostConditions AreGeneric();
+        ITypesFilterPostConditions AreNotGeneric();
     }
 }

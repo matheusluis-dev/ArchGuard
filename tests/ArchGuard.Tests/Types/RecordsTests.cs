@@ -1,5 +1,5 @@
 #if NET5_0_OR_GREATER
-namespace ArchGuard.Tests.Types
+namespace ArchGuard.Filters.Tests.Types
 {
     using System.Collections.Generic;
     using ArchGuard.Tests.Common;
@@ -48,35 +48,34 @@ namespace ArchGuard.Tests.Types
             types
                 .Should()
                 .BeEquivalentTo(
-                    new List<string>
-                    {
 #if NET7_0_OR_GREATER
-                        TypeNames.FileClass,
-                        TypeNames.FilePartialClass,
-                        TypeNames.FileSealedClass,
-                        TypeNames.FileStaticClass,
+                    TypeNames.FileClass,
+                    TypeNames.FilePartialClass,
+                    TypeNames.FileSealedClass,
+                    TypeNames.FileStaticClass,
 #endif
-                        TypeNames.InternalClass,
-                        TypeNames.InternalPartialClass,
-                        TypeNames.InternalSealedClass,
-                        TypeNames.InternalStaticClass,
-                        TypeNames.PublicAbstractClass,
-                        TypeNames.PublicClass,
-                        TypeNames.PublicParentClass,
-                        TypeNames.PublicParentClass_InternalNestedClass,
-                        TypeNames.PublicParentClass_PrivateNestedClass,
-                        TypeNames.PublicParentClass_PublicNestedClass,
-                        TypeNames.PublicParentClass_PublicNestedPartialClass,
-                        TypeNames.PublicPartialClass,
-                        TypeNames.PublicSealedClass,
-                        TypeNames.PublicStaticClass,
-                        TypeNames.IInternalInterface,
-                        TypeNames.IPublicInterface,
-                        TypeNames.InternalEnum,
-                        TypeNames.PublicEnum,
-                        TypeNames.InternalStruct,
-                        TypeNames.PublicStruct,
-                    }
+                    TypeNames.InternalClass,
+                    TypeNames.InternalPartialClass,
+                    TypeNames.InternalSealedClass,
+                    TypeNames.InternalStaticClass,
+                    TypeNames.PublicAbstractClass,
+                    TypeNames.PublicClass,
+                    TypeNames.PublicGenericClassWithOneType,
+                    TypeNames.PublicGenericClassWithTwoTypes,
+                    TypeNames.PublicParentClass,
+                    TypeNames.PublicParentClass_InternalNestedClass,
+                    TypeNames.PublicParentClass_PrivateNestedClass,
+                    TypeNames.PublicParentClass_PublicNestedClass,
+                    TypeNames.PublicParentClass_PublicNestedPartialClass,
+                    TypeNames.PublicPartialClass,
+                    TypeNames.PublicSealedClass,
+                    TypeNames.PublicStaticClass,
+                    TypeNames.IInternalInterface,
+                    TypeNames.IPublicInterface,
+                    TypeNames.InternalEnum,
+                    TypeNames.PublicEnum,
+                    TypeNames.InternalStruct,
+                    TypeNames.PublicStruct
                 );
         }
 
