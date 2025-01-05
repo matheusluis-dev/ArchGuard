@@ -13,7 +13,7 @@ namespace ArchGuard.Filters.Tests.Modifiers.Access
         public void Public_types()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That().ArePublic();
+            var filters = TypesFromMockedAssembly.All.That.ArePublic();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -67,7 +67,7 @@ namespace ArchGuard.Filters.Tests.Modifiers.Access
 #endif
                 TypeNames.InternalStruct,
             };
-            var filters = TypesFromMockedAssembly.All.That().AreNotPublic();
+            var filters = TypesFromMockedAssembly.All.That.AreNotPublic();
 
             // Act
             var types = filters.GetTypes().GetFullNames();

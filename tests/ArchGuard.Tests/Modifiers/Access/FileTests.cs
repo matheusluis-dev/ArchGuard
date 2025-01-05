@@ -21,7 +21,7 @@ namespace ArchGuard.Filters.Tests.Modifiers.Access
                 TypeNames.FileSealedClass,
                 TypeNames.FileStaticClass,
             };
-            var filters = TypesFromMockedAssembly.All.That().AreFileScoped();
+            var filters = TypesFromMockedAssembly.All.That.AreFileScoped();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -34,7 +34,7 @@ namespace ArchGuard.Filters.Tests.Modifiers.Access
         public void Non_file_scoped_types()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That().AreNotFileScoped();
+            var filters = TypesFromMockedAssembly.All.That.AreNotFileScoped();
 
             // Act
             var types = filters.GetTypes().GetFullNames();

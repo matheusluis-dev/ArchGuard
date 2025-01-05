@@ -1,6 +1,7 @@
 namespace ArchGuard.Filters.Tests.Types
 {
     using System.Collections.Generic;
+    using ArchGuard.Library.Type.Filters;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;
@@ -82,7 +83,7 @@ namespace ArchGuard.Filters.Tests.Types
         public void And()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That().AreClasses().And().AreNotPublic();
+            var filters = TypesFromMockedAssembly.All.That.AreClasses().And().AreNotPublic();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -112,8 +113,7 @@ namespace ArchGuard.Filters.Tests.Types
         {
             // Arrange
             var filters = TypesFromMockedAssembly
-                .All.That()
-                .AreClasses()
+                .All.That.AreClasses()
                 .And()
                 .AreNotPublic()
                 .And()
@@ -138,7 +138,7 @@ namespace ArchGuard.Filters.Tests.Types
         public void Or()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That().AreInterfaces().Or().AreEnums();
+            var filters = TypesFromMockedAssembly.All.That.AreInterfaces().Or().AreEnums();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -162,8 +162,7 @@ namespace ArchGuard.Filters.Tests.Types
         {
             // Arrange
             var filters = TypesFromMockedAssembly
-                .All.That()
-                .AreClasses()
+                .All.That.AreClasses()
                 .And()
                 .ArePublic()
                 .Or()
@@ -196,8 +195,7 @@ namespace ArchGuard.Filters.Tests.Types
         {
             // Arrange
             var filters = TypesFromMockedAssembly
-                .All.That()
-                .AreClasses()
+                .All.That.AreClasses()
                 .And()
                 .ArePublic()
                 .Or()
@@ -231,8 +229,7 @@ namespace ArchGuard.Filters.Tests.Types
         {
             // Arrange
             var filters = TypesFromMockedAssembly
-                .All.That()
-                .AreClasses()
+                .All.That.AreClasses()
                 .And()
                 .ArePublic()
                 .Or()
@@ -270,8 +267,7 @@ namespace ArchGuard.Filters.Tests.Types
         {
             // Arrange
             var filters = TypesFromMockedAssembly
-                .All.That()
-                .AreClasses()
+                .All.That.AreClasses()
                 .And(a => a.AreNotPublic().And().AreSealed());
 
             // Act
@@ -294,8 +290,7 @@ namespace ArchGuard.Filters.Tests.Types
         {
             // Arrange
             var filters = TypesFromMockedAssembly
-                .All.That()
-                .AreClasses()
+                .All.That.AreClasses()
                 .And(a => a.AreNotPublic().And(b => b.AreSealed()));
 
             // Act
@@ -318,8 +313,7 @@ namespace ArchGuard.Filters.Tests.Types
         {
             // Arrange
             var filters = TypesFromMockedAssembly
-                .All.That()
-                .AreClasses()
+                .All.That.AreClasses()
                 .And()
                 .ArePublic()
                 .Or(o => o.AreInterfaces().And().AreInternal());

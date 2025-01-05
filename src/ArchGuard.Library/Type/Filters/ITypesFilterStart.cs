@@ -7,9 +7,6 @@ namespace ArchGuard.Library.Type.Filters
 
     public interface ITypesFilterStart : IGetTypes
     {
-        ITypesFilterConditions That();
-        ITypesFilterPostConditions That(
-            Func<ITypesFilterConditions, ITypesFilterPostConditions> filter
-        );
+        ITypesFilterConditions That { get; }
     }
 }

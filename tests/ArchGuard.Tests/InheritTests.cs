@@ -17,7 +17,7 @@ namespace ArchGuard.Filters.Tests
         {
             // Arrange
 #pragma warning disable CA2263 // Prefer generic overload when type is known
-            var filters = TypesFromMockedAssembly.All.That().Inherit(typeof(PublicAbstractClass));
+            var filters = TypesFromMockedAssembly.All.That.Inherit(typeof(PublicAbstractClass));
 #pragma warning restore CA2263 // Prefer generic overload when type is known
 
             // Act
@@ -31,7 +31,7 @@ namespace ArchGuard.Filters.Tests
         public void Inherit_with_generic_overload()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That().Inherit<PublicAbstractClass>();
+            var filters = TypesFromMockedAssembly.All.That.Inherit<PublicAbstractClass>();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -47,8 +47,7 @@ namespace ArchGuard.Filters.Tests
 #pragma warning disable CA2263 // Prefer generic overload when type is known
             Action act = () =>
                 TypesFromMockedAssembly
-                    .All.That()
-                    .Inherit(typeof(IPublicInterface))
+                    .All.That.Inherit(typeof(IPublicInterface))
                     .GetTypes()
                     .GetFullNames();
 #pragma warning restore CA2263 // Prefer generic overload when type is known
@@ -63,8 +62,7 @@ namespace ArchGuard.Filters.Tests
             // Arrange
             Action act = () =>
                 TypesFromMockedAssembly
-                    .All.That()
-                    .Inherit<IPublicInterface>()
+                    .All.That.Inherit<IPublicInterface>()
                     .GetTypes()
                     .GetFullNames();
 
@@ -77,9 +75,9 @@ namespace ArchGuard.Filters.Tests
         {
             // Arrange
 #pragma warning disable CA2263 // Prefer generic overload when type is known
-            var filters = TypesFromMockedAssembly
-                .All.That()
-                .DoNotInherit(typeof(PublicAbstractClass));
+            var filters = TypesFromMockedAssembly.All.That.DoNotInherit(
+                typeof(PublicAbstractClass)
+            );
 #pragma warning restore CA2263 // Prefer generic overload when type is known
 
             // Act
@@ -131,7 +129,7 @@ namespace ArchGuard.Filters.Tests
         public void DoNotInherit_with_generic_overload()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That().DoNotInherit<PublicAbstractClass>();
+            var filters = TypesFromMockedAssembly.All.That.DoNotInherit<PublicAbstractClass>();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -185,8 +183,7 @@ namespace ArchGuard.Filters.Tests
 #pragma warning disable CA2263 // Prefer generic overload when type is known
             Action act = () =>
                 TypesFromMockedAssembly
-                    .All.That()
-                    .DoNotInherit(typeof(IPublicInterface))
+                    .All.That.DoNotInherit(typeof(IPublicInterface))
                     .GetTypes()
                     .GetFullNames();
 #pragma warning restore CA2263 // Prefer generic overload when type is known
@@ -201,8 +198,7 @@ namespace ArchGuard.Filters.Tests
             // Arrange
             Action act = () =>
                 TypesFromMockedAssembly
-                    .All.That()
-                    .DoNotInherit<IPublicInterface>()
+                    .All.That.DoNotInherit<IPublicInterface>()
                     .GetTypes()
                     .GetFullNames();
 

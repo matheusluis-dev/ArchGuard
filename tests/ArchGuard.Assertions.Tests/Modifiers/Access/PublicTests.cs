@@ -1,7 +1,6 @@
 namespace ArchGuard.Assertions.Tests.Modifiers.Access
 {
     using System;
-    using System.Collections.Generic;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Types;
     using FluentAssertions;
@@ -13,9 +12,10 @@ namespace ArchGuard.Assertions.Tests.Modifiers.Access
         public void Public_types()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly
-                .All.That()
-                .ResideInNamespaceContaining(".Public.", StringComparison.Ordinal);
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(
+                ".Public.",
+                StringComparison.Ordinal
+            );
 
             var filtersTypes = filters.GetTypes();
 
@@ -32,9 +32,10 @@ namespace ArchGuard.Assertions.Tests.Modifiers.Access
         public void Public_types_non_successful()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly
-                .All.That()
-                .ResideInNamespace(Namespaces.Interfaces, StringComparison.Ordinal);
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespace(
+                Namespaces.Interfaces,
+                StringComparison.Ordinal
+            );
 
             var filtersTypes = filters.GetTypes();
 

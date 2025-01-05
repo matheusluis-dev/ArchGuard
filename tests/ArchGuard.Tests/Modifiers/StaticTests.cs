@@ -21,7 +21,7 @@ namespace ArchGuard.Filters.Tests.Modifiers
                 TypeNames.InternalStaticClass,
                 TypeNames.PublicStaticClass,
             };
-            var filters = TypesFromMockedAssembly.All.That().AreStatic();
+            var filters = TypesFromMockedAssembly.All.That.AreStatic();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -34,7 +34,7 @@ namespace ArchGuard.Filters.Tests.Modifiers
         public void Non_static_types()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That().AreNotStatic();
+            var filters = TypesFromMockedAssembly.All.That.AreNotStatic();
 
             // Act
             var types = filters.GetTypes().GetFullNames();

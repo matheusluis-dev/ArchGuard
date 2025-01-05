@@ -5,9 +5,12 @@ namespace ArchGuard.PublicApi.Tests.Filters
     using System.Reflection;
     using ArchGuard.Library.Type;
     using ArchGuard.Library.Type.Filters;
+    using ArchGuard.Tests.Common.Extensions;
+    using ArchGuard.Tests.MockedAssembly.Classes.Public;
     using FluentAssertions;
     using Xunit;
 
+    // TODO: fix this
     public sealed class ThatTests
     {
         [Fact]
@@ -18,16 +21,20 @@ namespace ArchGuard.PublicApi.Tests.Filters
             var typesMethodsName = new[] { "FromAssembly" };
 
             var iTypesFilterStart = typeof(ITypesFilterStart);
-            var iTypesFilterStartMethodsName = new[] { "That" };
+            var iTypesFilterStartMembersName = new[] { "That" };
 
             // Act
             var typesMethods = types
                 .GetMethods(BindingFlags.Public | BindingFlags.Static)
                 .Where(m => typesMethodsName.Contains(m.Name, StringComparer.Ordinal));
 
-            var iTypesFilterStartMethods = iTypesFilterStart
-                .GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                .Where(m => iTypesFilterStartMethodsName.Contains(m.Name, StringComparer.Ordinal));
+            var iTypesFilterStartProperties = iTypesFilterStart
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => iTypesFilterStartMembersName.Contains(p.Name, StringComparer.Ordinal));
+
+            var iTypesFilterStartMethods = iTypesFilterStart.GetExtensionMethods(
+                typeof(PublicClass).Assembly
+            );
 
             // Assert
             typesMethods

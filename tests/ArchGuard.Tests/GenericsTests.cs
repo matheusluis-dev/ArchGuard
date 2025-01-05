@@ -12,7 +12,7 @@ namespace ArchGuard.Filters.Tests
         public void Are_generic()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That().AreGeneric();
+            var filters = TypesFromMockedAssembly.All.That.AreGeneric();
 
             // Act
             var types = filters.GetTypes().GetFullNames();

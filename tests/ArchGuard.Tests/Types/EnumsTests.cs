@@ -13,7 +13,7 @@ namespace ArchGuard.Filters.Tests.Types
         public void Get_enums()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That().AreEnums();
+            var filters = TypesFromMockedAssembly.All.That.AreEnums();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -28,7 +28,7 @@ namespace ArchGuard.Filters.Tests.Types
         public void Get_non_enum_types()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That().AreNotEnums();
+            var filters = TypesFromMockedAssembly.All.That.AreNotEnums();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -78,7 +78,7 @@ namespace ArchGuard.Filters.Tests.Types
         public void Get_public_enums()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That().AreEnums().And().ArePublic();
+            var filters = TypesFromMockedAssembly.All.That.AreEnums().And().ArePublic();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -91,7 +91,7 @@ namespace ArchGuard.Filters.Tests.Types
         public void Get_internal_enums()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That().AreEnums().And().AreInternal();
+            var filters = TypesFromMockedAssembly.All.That.AreEnums().And().AreInternal();
 
             // Act
             var types = filters.GetTypes().GetFullNames();

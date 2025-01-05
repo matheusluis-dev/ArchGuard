@@ -15,7 +15,7 @@ namespace ArchGuard.PublicApi.Tests
             var filters = TypesFromMockedAssembly.All;
 
             // Act
-            var conditions = filters.That().AreClasses().And();
+            var conditions = filters.That.AreClasses().And();
 
             // Assert
             conditions.Should().BeAssignableTo<ITypesFilterConditions>();
@@ -28,7 +28,7 @@ namespace ArchGuard.PublicApi.Tests
             var filters = TypesFromMockedAssembly.All;
 
             // Act
-            var conditions = filters.That().AreClasses().And(a => a.ArePublic());
+            var conditions = filters.That.AreClasses().And(a => a.ArePublic());
 
             // Assert
             conditions.Should().BeAssignableTo<ITypesFilterPostConditions>();
@@ -41,7 +41,7 @@ namespace ArchGuard.PublicApi.Tests
             var filters = TypesFromMockedAssembly.All;
 
             // Act
-            var conditions = filters.That().AreClasses().Or();
+            var conditions = filters.That.AreClasses().Or();
 
             // Assert
             conditions.Should().BeAssignableTo<ITypesFilterConditions>();
@@ -54,7 +54,7 @@ namespace ArchGuard.PublicApi.Tests
             var filters = TypesFromMockedAssembly.All;
 
             // Act
-            var conditions = filters.That().AreClasses().Or(a => a.AreInterfaces());
+            var conditions = filters.That.AreClasses().Or(a => a.AreInterfaces());
 
             // Assert
             conditions.Should().BeAssignableTo<ITypesFilterPostConditions>();

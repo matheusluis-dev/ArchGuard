@@ -42,9 +42,9 @@ namespace ArchGuard.Filters.Tests.Namespaces
                 TypeNames.PublicStruct,
             };
 #pragma warning disable CA1307 // Specify StringComparison for clarity
-            var filters = TypesFromMockedAssembly
-                .All.That()
-                .DoNotResideInNamespace(Namespaces.ClassesPublic);
+            var filters = TypesFromMockedAssembly.All.That.DoNotResideInNamespace(
+                Namespaces.ClassesPublic
+            );
 #pragma warning restore CA1307 // Specify StringComparison for clarity
 
             // Act
@@ -85,12 +85,10 @@ namespace ArchGuard.Filters.Tests.Namespaces
                 TypeNames.InternalStruct,
                 TypeNames.PublicStruct,
             };
-            var filters = TypesFromMockedAssembly
-                .All.That()
-                .DoNotResideInNamespace(
-                    Namespaces.ClassesPublic.ToUpperInvariant(),
-                    StringComparison.OrdinalIgnoreCase
-                );
+            var filters = TypesFromMockedAssembly.All.That.DoNotResideInNamespace(
+                Namespaces.ClassesPublic.ToUpperInvariant(),
+                StringComparison.OrdinalIgnoreCase
+            );
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -109,9 +107,9 @@ namespace ArchGuard.Filters.Tests.Namespaces
                 TypeNames.IPublicInterface,
             };
 #pragma warning disable CA1307 // Specify StringComparison for clarity
-            var filters = TypesFromMockedAssembly
-                .All.That()
-                .ResideInNamespaceContaining(".Interfaces.");
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(
+                ".Interfaces."
+            );
 #pragma warning restore CA1307 // Specify StringComparison for clarity
 
             // Act
@@ -130,9 +128,10 @@ namespace ArchGuard.Filters.Tests.Namespaces
                 TypeNames.IInternalInterface,
                 TypeNames.IPublicInterface,
             };
-            var filters = TypesFromMockedAssembly
-                .All.That()
-                .ResideInNamespaceContaining(".InTeRfAcEs.", StringComparison.OrdinalIgnoreCase);
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(
+                ".InTeRfAcEs.",
+                StringComparison.OrdinalIgnoreCase
+            );
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -161,9 +160,7 @@ namespace ArchGuard.Filters.Tests.Namespaces
                 TypeNames.InternalStruct,
             };
 #pragma warning disable CA1307 // Specify StringComparison for clarity
-            var filters = TypesFromMockedAssembly
-                .All.That()
-                .ResideInNamespaceEndingWith(".Internal");
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceEndingWith(".Internal");
 #pragma warning restore CA1307 // Specify StringComparison for clarity
 
             // Act
@@ -192,9 +189,10 @@ namespace ArchGuard.Filters.Tests.Namespaces
                 TypeNames.InternalStaticClass,
                 TypeNames.InternalStruct,
             };
-            var filters = TypesFromMockedAssembly
-                .All.That()
-                .ResideInNamespaceEndingWith(".iNtErNaL", StringComparison.OrdinalIgnoreCase);
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceEndingWith(
+                ".iNtErNaL",
+                StringComparison.OrdinalIgnoreCase
+            );
 
             // Act
             var types = filters.GetTypes().GetFullNames();

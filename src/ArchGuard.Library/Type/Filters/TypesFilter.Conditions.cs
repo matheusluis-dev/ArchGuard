@@ -8,22 +8,7 @@ namespace ArchGuard.Library.Type.Filters
 
     public sealed partial class TypesFilter
     {
-        public ITypesFilterConditions That()
-        {
-            return this;
-        }
-
-        public ITypesFilterPostConditions That(
-            Func<ITypesFilterConditions, ITypesFilterPostConditions> filter
-        )
-        {
-            if (filter is null)
-                throw new ArgumentNullException(nameof(filter));
-
-            filter(this);
-
-            return this;
-        }
+        public ITypesFilterConditions That => this;
 
         public IEnumerable<Type> GetTypes()
         {

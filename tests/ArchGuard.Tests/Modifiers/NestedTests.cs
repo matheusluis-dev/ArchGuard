@@ -13,7 +13,7 @@ namespace ArchGuard.Filters.Tests.Modifiers
         public void Nested_types()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That().AreNested();
+            var filters = TypesFromMockedAssembly.All.That.AreNested();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -36,7 +36,7 @@ namespace ArchGuard.Filters.Tests.Modifiers
         public void Non_nested_types()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That().AreNotNested();
+            var filters = TypesFromMockedAssembly.All.That.AreNotNested();
 
             // Act
             var types = filters.GetTypes().GetFullNames();

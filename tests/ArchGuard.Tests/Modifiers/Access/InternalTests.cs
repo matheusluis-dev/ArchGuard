@@ -29,7 +29,7 @@ namespace ArchGuard.Filters.Tests.Modifiers.Access
                 TypeNames.InternalStruct,
                 TypeNames.PublicParentClass_InternalNestedClass,
             };
-            var filters = TypesFromMockedAssembly.All.That().AreInternal();
+            var filters = TypesFromMockedAssembly.All.That.AreInternal();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -41,7 +41,7 @@ namespace ArchGuard.Filters.Tests.Modifiers.Access
         [Fact]
         public void Non_internal_types()
         {
-            var filters = TypesFromMockedAssembly.All.That().AreNotInternal();
+            var filters = TypesFromMockedAssembly.All.That.AreNotInternal();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
