@@ -2,6 +2,7 @@ namespace ArchGuard.Library.Type.Filters
 {
     using System;
     using System.Collections.Generic;
+    using ArchGuard.Library.Type.Assertions;
     using ArchGuard.Library.Type.Filters.Conditions.Interfaces;
     using ArchGuard.Library.Type.Filters.PostConditions.Interfaces;
 

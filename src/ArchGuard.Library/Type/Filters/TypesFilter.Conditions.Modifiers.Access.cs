@@ -7,62 +7,62 @@ namespace ArchGuard.Library.Type.Filters
     {
         public ITypesFilterPostConditions ArePublic()
         {
-            _context.ApplyFilter(type => type.IsPublic());
+            _context.ApplyFilter(TypePredicates.Public);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotPublic()
         {
-            _context.ApplyFilter(type => type.IsNotPublic());
+            _context.ApplyFilter(TypePredicates.NotPublic);
             return this;
         }
 
         public ITypesFilterPostConditions AreInternal()
         {
-            _context.ApplyFilter(type => type.IsInternal());
+            _context.ApplyFilter(TypePredicates.Internal);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotInternal()
         {
-            _context.ApplyFilter(type => type.IsNotInternal());
+            _context.ApplyFilter(TypePredicates.NotInternal);
             return this;
         }
 
         public ITypesFilterPostConditions ArePrivate()
         {
-            _context.ApplyFilter(type => type.IsPrivate());
+            _context.ApplyFilter(TypePredicates.Private);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotPrivate()
         {
-            _context.ApplyFilter(type => type.IsNotPrivate());
+            _context.ApplyFilter(TypePredicates.NotPrivate);
             return this;
         }
 
         public ITypesFilterPostConditions AreProtected()
         {
-            _context.ApplyFilter(type => type.IsProtected());
+            _context.ApplyFilter(TypePredicates.Protected);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotProtected()
         {
-            _context.ApplyFilter(type => type.IsNotProtected());
+            _context.ApplyFilter(TypePredicates.NotProtected);
             return this;
         }
 
 #if NET7_0_OR_GREATER
         public ITypesFilterPostConditions AreFileScoped()
         {
-            _context.ApplyFilter(type => type.IsFileScoped());
+            _context.ApplyFilter(TypePredicates.FileScoped);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotFileScoped()
         {
-            _context.ApplyFilter(type => type.IsNotFileScoped());
+            _context.ApplyFilter(TypePredicates.NotFileScoped);
             return this;
         }
 #endif

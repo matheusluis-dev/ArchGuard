@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Tests.Common", "t
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.PublicApi.Tests", "tests\ArchGuard.PublicApi.Tests\ArchGuard.PublicApi.Tests.csproj", "{2F891FB1-94A2-4335-8675-7324645F5CEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Assertions.Tests", "tests\ArchGuard.Assertions.Tests\ArchGuard.Assertions.Tests.csproj", "{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{2F891FB1-94A2-4335-8675-7324645F5CEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F891FB1-94A2-4335-8675-7324645F5CEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F891FB1-94A2-4335-8675-7324645F5CEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +74,7 @@ Global
 		{375314E4-0BD9-487E-AE19-ECEF1A9C6C62} = {F676C254-5A24-48D0-8452-557E35A97DCA}
 		{F7F837BB-CA2A-4CC9-AACB-AFAE5C5E34D0} = {F676C254-5A24-48D0-8452-557E35A97DCA}
 		{2F891FB1-94A2-4335-8675-7324645F5CEA} = {F676C254-5A24-48D0-8452-557E35A97DCA}
+		{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C} = {F676C254-5A24-48D0-8452-557E35A97DCA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		FileExplorer = 
