@@ -1,6 +1,7 @@
 namespace ArchGuard.Assertions.Tests.Modifiers.Access
 {
     using System;
+    using System.Collections.Generic;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Types;
     using FluentAssertions;
@@ -25,6 +26,7 @@ namespace ArchGuard.Assertions.Tests.Modifiers.Access
             // Assert
             assertion.IsSuccessful.Should().BeTrue();
             assertion.TypesFiltered.Should().BeEquivalentTo(filtersTypes);
+            assertion.CompliantTypes.Should().BeEquivalentTo(filtersTypes);
             assertion.NonCompliantTypes.Should().BeEmpty();
         }
 
@@ -45,6 +47,10 @@ namespace ArchGuard.Assertions.Tests.Modifiers.Access
             // Assert
             assertion.IsSuccessful.Should().BeFalse();
             assertion.TypesFiltered.Should().BeEquivalentTo(filtersTypes);
+            assertion
+                .CompliantTypes.Should()
+                .ContainSingle()
+                .Which.FullName.Equals(TypeNames.IPublicInterface, StringComparison.Ordinal);
             assertion
                 .NonCompliantTypes.Should()
                 .ContainSingle()

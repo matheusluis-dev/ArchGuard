@@ -7,8 +7,9 @@ namespace ArchGuard.Library.Type.Assertions
     public sealed class TypesAssertionResult
     {
         public bool IsSuccessful => !NonCompliantTypes.Any();
-        public IEnumerable<Type> TypesFiltered { get; set; }
-        public IEnumerable<Type> NonCompliantTypes { get; set; }
+        public IEnumerable<Type> TypesFiltered { get; }
+        public IEnumerable<Type> CompliantTypes { get; }
+        public IEnumerable<Type> NonCompliantTypes => TypesFiltered.Except(CompliantTypes);
 
         internal TypesAssertionResult(
             IEnumerable<Type> typesFiltered,
@@ -16,7 +17,7 @@ namespace ArchGuard.Library.Type.Assertions
         )
         {
             TypesFiltered = typesFiltered;
-            NonCompliantTypes = typesFiltered.Except(typesAsserted);
+            CompliantTypes = typesAsserted;
         }
     }
 }

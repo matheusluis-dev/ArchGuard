@@ -83,7 +83,7 @@ namespace ArchGuard.Filters.Tests.Types
         public void Get_public_records()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.AreRecords().And().ArePublic();
+            var filters = TypesFromMockedAssembly.All.That.AreRecords().And.ArePublic();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -105,7 +105,7 @@ namespace ArchGuard.Filters.Tests.Types
         public void Get_internal_records()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.AreRecords().And().AreInternal();
+            var filters = TypesFromMockedAssembly.All.That.AreRecords().And.AreInternal();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -127,7 +127,7 @@ namespace ArchGuard.Filters.Tests.Types
         public void Get_partial_records()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.AreRecords().And().ArePartial();
+            var filters = TypesFromMockedAssembly.All.That.AreRecords().And.ArePartial();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -148,7 +148,7 @@ namespace ArchGuard.Filters.Tests.Types
         public void Get_sealed_records()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.AreRecords().And().AreSealed();
+            var filters = TypesFromMockedAssembly.All.That.AreRecords().And.AreSealed();
 
             // Act
             var types = filters.GetTypes().GetFullNames();

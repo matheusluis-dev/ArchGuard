@@ -52,9 +52,7 @@ namespace ArchGuard.Filters.Tests.Types
         public void That_nested_And()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That(t =>
-                t.AreClasses().And().AreNotPublic()
-            );
+            var filters = TypesFromMockedAssembly.All.That(t => t.AreClasses().And.AreNotPublic());
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -83,7 +81,7 @@ namespace ArchGuard.Filters.Tests.Types
         public void And()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.AreClasses().And().AreNotPublic();
+            var filters = TypesFromMockedAssembly.All.That.AreClasses().And.AreNotPublic();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -114,10 +112,8 @@ namespace ArchGuard.Filters.Tests.Types
             // Arrange
             var filters = TypesFromMockedAssembly
                 .All.That.AreClasses()
-                .And()
-                .AreNotPublic()
-                .And()
-                .AreSealed();
+                .And.AreNotPublic()
+                .And.AreSealed();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -138,7 +134,7 @@ namespace ArchGuard.Filters.Tests.Types
         public void Or()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.AreInterfaces().Or().AreEnums();
+            var filters = TypesFromMockedAssembly.All.That.AreInterfaces().Or.AreEnums();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -163,10 +159,8 @@ namespace ArchGuard.Filters.Tests.Types
             // Arrange
             var filters = TypesFromMockedAssembly
                 .All.That.AreClasses()
-                .And()
-                .ArePublic()
-                .Or()
-                .AreInterfaces();
+                .And.ArePublic()
+                .Or.AreInterfaces();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -196,12 +190,9 @@ namespace ArchGuard.Filters.Tests.Types
             // Arrange
             var filters = TypesFromMockedAssembly
                 .All.That.AreClasses()
-                .And()
-                .ArePublic()
-                .Or()
-                .AreInterfaces()
-                .And()
-                .AreInternal();
+                .And.ArePublic()
+                .Or.AreInterfaces()
+                .And.AreInternal();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -230,14 +221,10 @@ namespace ArchGuard.Filters.Tests.Types
             // Arrange
             var filters = TypesFromMockedAssembly
                 .All.That.AreClasses()
-                .And()
-                .ArePublic()
-                .Or()
-                .AreInterfaces()
-                .And()
-                .AreInternal()
-                .Or()
-                .AreEnums();
+                .And.ArePublic()
+                .Or.AreInterfaces()
+                .And.AreInternal()
+                .Or.AreEnums();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -268,7 +255,7 @@ namespace ArchGuard.Filters.Tests.Types
             // Arrange
             var filters = TypesFromMockedAssembly
                 .All.That.AreClasses()
-                .And(a => a.AreNotPublic().And().AreSealed());
+                .And(a => a.AreNotPublic().And.AreSealed());
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -314,9 +301,8 @@ namespace ArchGuard.Filters.Tests.Types
             // Arrange
             var filters = TypesFromMockedAssembly
                 .All.That.AreClasses()
-                .And()
-                .ArePublic()
-                .Or(o => o.AreInterfaces().And().AreInternal());
+                .And.ArePublic()
+                .Or(o => o.AreInterfaces().And.AreInternal());
 
             // Act
             var types = filters.GetTypes().GetFullNames();

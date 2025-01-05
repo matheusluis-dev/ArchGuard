@@ -81,7 +81,7 @@ namespace ArchGuard.Filters.Tests.Types
         public void Get_public_interfaces()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.AreInterfaces().And().ArePublic();
+            var filters = TypesFromMockedAssembly.All.That.AreInterfaces().And.ArePublic();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -94,7 +94,7 @@ namespace ArchGuard.Filters.Tests.Types
         public void Get_internal_interfaces()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.AreInterfaces().And().AreInternal();
+            var filters = TypesFromMockedAssembly.All.That.AreInterfaces().And.AreInternal();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
