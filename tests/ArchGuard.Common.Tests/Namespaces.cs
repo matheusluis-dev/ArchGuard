@@ -9,6 +9,7 @@ namespace ArchGuard.Tests.Common
         public const string EnumsPublic = "ArchGuard.Tests.MockedAssembly.Enums.Public";
         public const string EnumsInternal = "ArchGuard.Tests.MockedAssembly.Enums.Internal";
 
+        public const string Interfaces = "ArchGuard.Tests.MockedAssembly.Interfaces";
         public const string InterfacesPublic = "ArchGuard.Tests.MockedAssembly.Interfaces.Public";
         public const string InterfacesInternal =
             "ArchGuard.Tests.MockedAssembly.Interfaces.Internal";

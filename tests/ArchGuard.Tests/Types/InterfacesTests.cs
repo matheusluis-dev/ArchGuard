@@ -21,9 +21,7 @@ namespace ArchGuard.Filters.Tests.Types
             // Assert
             types
                 .Should()
-                .BeEquivalentTo(
-                    new List<string> { TypeNames.IInternalInterface, TypeNames.IPublicInterface }
-                );
+                .BeEquivalentTo(TypeNames.IInternalInterface, TypeNames.IPublicInterface);
         }
 
         [Fact]
