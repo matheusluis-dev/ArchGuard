@@ -5,6 +5,12 @@ namespace ArchGuard.Library.Type.Filters.Conditions.Interfaces
 
     public partial interface ITypesFilterConditions
     {
+        ITypesFilterPostConditions HaveName(string name);
+        ITypesFilterPostConditions HaveName(string name, StringComparison comparison);
+
+        ITypesFilterPostConditions HaveFullName(string name);
+        ITypesFilterPostConditions HaveFullName(string name, StringComparison comparison);
+
         ITypesFilterPostConditions HaveNameStartingWith(string name);
         ITypesFilterPostConditions HaveNameStartingWith(string name, StringComparison comparison);
 

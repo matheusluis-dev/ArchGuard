@@ -10,22 +10,31 @@ namespace ArchGuard.Library.Extensions.Type
             return new Regex("<[^>]+>[^_]+__(.+)$", RegexOptions.None, TimeSpan.FromSeconds(1));
         }
 
-        private static string CleanFileScopedName(string @namespace, string fullName)
+        private static string CleanFileScopedName(string name)
         {
             var regex = FileScopedRegex();
-            var match = regex.Match(fullName);
+            var match = regex.Match(name);
 
-            return match.Success ? @namespace + match.Groups[1].Value : fullName;
+            return match.Success ? match.Groups[1].Value : name;
         }
 
-        private static string CleanGenericTypeName(string fullName)
+        private static string CleanGenericTypeName(string name)
         {
-            var index = fullName.Length - 2;
+            var index = name.Length - 2;
 
-            if (fullName[index] == '`')
-                return fullName.Substring(0, index);
+            if (name[index] == '`')
+                return name.Substring(0, index);
 
-            return fullName;
+            return name;
+        }
+
+        internal static string GetNameClean(this Type type)
+        {
+            var name = type.Name;
+            name = CleanFileScopedName(name);
+            name = CleanGenericTypeName(name);
+
+            return name;
         }
 
         internal static string GetFullNameClean(this Type type)
@@ -35,10 +44,10 @@ namespace ArchGuard.Library.Extensions.Type
                 : $"{type.Namespace}.";
 
             var fullName = type.FullName;
-            fullName = CleanFileScopedName(@namespace, fullName);
+            fullName = CleanFileScopedName(fullName);
             fullName = CleanGenericTypeName(fullName);
 
-            return fullName;
+            return @namespace + "." + fullName;
         }
     }
 }
