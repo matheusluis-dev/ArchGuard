@@ -34,7 +34,8 @@ namespace ArchGuard.Library.Extensions.Type
                 ? string.Empty
                 : $"{type.Namespace}.";
 
-            var fullName = CleanFileScopedName(@namespace, type.FullName);
+            var fullName = type.FullName;
+            fullName = CleanFileScopedName(@namespace, fullName);
             fullName = CleanGenericTypeName(fullName);
 
             return fullName;

@@ -2,6 +2,7 @@ namespace ArchGuard.Library.Type.Filters
 {
     using System;
     using ArchGuard.Library.Type.Filters.PostConditions.Interfaces;
+    using ArchGuard.Library.Type.Predicates;
 
     public sealed partial class TypesFilter
     {
@@ -15,7 +16,7 @@ namespace ArchGuard.Library.Type.Filters
             StringComparison comparison
         )
         {
-            _context.ApplyFilter(type => type.Name.StartsWith(name, comparison));
+            _context.ApplyFilter(TypePredicate.HaveNameStartingWith(name, comparison));
             return this;
         }
 
@@ -29,7 +30,7 @@ namespace ArchGuard.Library.Type.Filters
             StringComparison comparison
         )
         {
-            _context.ApplyFilter(type => type.Name.EndsWith(name, comparison));
+            _context.ApplyFilter(TypePredicate.HaveNameEndingWith(name, comparison));
             return this;
         }
     }

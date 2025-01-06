@@ -1,9 +1,9 @@
-namespace ArchGuard.Library.Type
+namespace ArchGuard.Library.Type.Predicates
 {
     using System;
     using ArchGuard.Library.Extensions.Type;
 
-    internal static partial class TypePredicates
+    internal static partial class TypePredicate
     {
         internal static Func<Type, bool> Public { get; } = type => type.IsPublic();
         internal static Func<Type, bool> NotPublic { get; } = type => type.IsNotPublic();
