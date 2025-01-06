@@ -10,7 +10,7 @@ namespace ArchGuard.Filters.Tests
     using FluentAssertions;
     using Xunit;
 
-    public sealed partial class InheritTests
+    public sealed class InheritTests
     {
         [Fact]
         public void Inherit_with_type_as_argument()

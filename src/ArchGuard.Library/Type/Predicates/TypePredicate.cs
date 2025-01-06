@@ -1,6 +1,12 @@
 namespace ArchGuard.Library.Type.Predicates
 {
-    internal static partial class TypePredicate {
+    using System;
 
+    internal static partial class TypePredicate
+    {
+        internal static Func<Type, bool> AreOfType(Type typeParam)
+        {
+            return type => type == typeParam;
+        }
     }
 }

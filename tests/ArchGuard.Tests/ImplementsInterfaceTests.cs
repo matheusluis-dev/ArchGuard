@@ -17,7 +17,7 @@ namespace ArchGuard.Filters.Tests
         {
             // Arrange
 #pragma warning disable CA2263 // Prefer generic overload when type is known
-            var filters = TypesFromMockedAssembly.All.That.ImplementsInterface(
+            var filters = TypesFromMockedAssembly.All.That.ImplementInterface(
                 typeof(IPublicInterface)
             );
 #pragma warning restore CA2263 // Prefer generic overload when type is known
@@ -33,7 +33,7 @@ namespace ArchGuard.Filters.Tests
         public void ImplementsInterface_with_generic_overload()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.ImplementsInterface<IPublicInterface>();
+            var filters = TypesFromMockedAssembly.All.That.ImplementInterface<IPublicInterface>();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -49,7 +49,7 @@ namespace ArchGuard.Filters.Tests
 #pragma warning disable CA2263 // Prefer generic overload when type is known
             Action act = () =>
                 TypesFromMockedAssembly
-                    .All.That.ImplementsInterface(typeof(PublicAbstractClass))
+                    .All.That.ImplementInterface(typeof(PublicAbstractClass))
                     .GetTypes()
                     .GetFullNames();
 #pragma warning restore CA2263 // Prefer generic overload when type is known
@@ -66,7 +66,7 @@ namespace ArchGuard.Filters.Tests
             // Arrange
             Action act = () =>
                 TypesFromMockedAssembly
-                    .All.That.ImplementsInterface<PublicAbstractClass>()
+                    .All.That.ImplementInterface<PublicAbstractClass>()
                     .GetTypes()
                     .GetFullNames();
 

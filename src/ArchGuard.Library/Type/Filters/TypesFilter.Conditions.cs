@@ -2,9 +2,9 @@ namespace ArchGuard.Library.Type.Filters
 {
     using System;
     using System.Collections.Generic;
-    using ArchGuard.Library.Type.Assertions;
     using ArchGuard.Library.Type.Filters.Conditions.Interfaces;
     using ArchGuard.Library.Type.Filters.PostConditions.Interfaces;
+    using ArchGuard.Library.Type.Predicates;
 
     public sealed partial class TypesFilter
     {
@@ -15,7 +15,7 @@ namespace ArchGuard.Library.Type.Filters
             return _context.Types;
         }
 
-        public ITypesFilterPostConditions ImplementsInterface(Type type)
+        public ITypesFilterPostConditions ImplementInterface(Type type)
         {
             if (type is null)
                 throw new ArgumentNullException(nameof(type));
@@ -28,9 +28,9 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
-        public ITypesFilterPostConditions ImplementsInterface<T>()
+        public ITypesFilterPostConditions ImplementInterface<T>()
         {
-            return ImplementsInterface(typeof(T));
+            return ImplementInterface(typeof(T));
         }
 
         public ITypesFilterPostConditions DoNotImplementsInterface(Type type)
@@ -97,6 +97,17 @@ namespace ArchGuard.Library.Type.Filters
         {
             _context.ApplyFilter(t => !t.IsGenericType);
             return this;
+        }
+
+        public ITypesFilterPostConditions AreOfType(Type type)
+        {
+            _context.ApplyFilter(TypePredicate.AreOfType(type));
+            return this;
+        }
+
+        public ITypesFilterPostConditions AreOfType<T>()
+        {
+            return AreOfType(typeof(T));
         }
     }
 }

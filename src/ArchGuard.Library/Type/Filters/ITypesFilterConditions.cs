@@ -5,8 +5,8 @@ namespace ArchGuard.Library.Type.Filters.Conditions.Interfaces
 
     public partial interface ITypesFilterConditions : IGetTypes
     {
-        ITypesFilterPostConditions ImplementsInterface(System.Type type);
-        ITypesFilterPostConditions ImplementsInterface<T>();
+        ITypesFilterPostConditions ImplementInterface(System.Type type);
+        ITypesFilterPostConditions ImplementInterface<T>();
 
         ITypesFilterPostConditions DoNotImplementsInterface(System.Type type);
         ITypesFilterPostConditions DoNotImplementsInterface<T>();
@@ -19,5 +19,8 @@ namespace ArchGuard.Library.Type.Filters.Conditions.Interfaces
 
         ITypesFilterPostConditions AreGeneric();
         ITypesFilterPostConditions AreNotGeneric();
+
+        ITypesFilterPostConditions AreOfType(System.Type type);
+        ITypesFilterPostConditions AreOfType<T>();
     }
 }
