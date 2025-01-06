@@ -4,13 +4,7 @@ namespace ArchGuard.Library.Type.Filters
 
     public sealed partial class TypesFilter
     {
-        public ITypesFilterConditions And => AndInternal();
-
-        internal ITypesFilterConditions AndInternal()
-        {
-            _context.And();
-            return this;
-        }
+        public ITypesFilterConditions And => this;
 
         public ITypesFilterConditions Or => OrInternal();
 

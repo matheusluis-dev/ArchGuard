@@ -8,29 +8,29 @@ namespace ArchGuard.Library.Type.Filters
     {
         public ITypesFilterPostConditions HaveName(string name)
         {
-            return HaveName(name, StringComparison.CurrentCulture);
+            return HaveName(name, _comparison);
         }
 
         public ITypesFilterPostConditions HaveName(string name, StringComparison comparison)
         {
-            _context.ApplyFilter(TypePredicate.HaveName(name, comparison));
+            _context.AddPredicate(TypePredicate.HaveName(name, comparison));
             return this;
         }
 
         public ITypesFilterPostConditions HaveFullName(string name)
         {
-            return HaveFullName(name, StringComparison.CurrentCulture);
+            return HaveFullName(name, _comparison);
         }
 
         public ITypesFilterPostConditions HaveFullName(string name, StringComparison comparison)
         {
-            _context.ApplyFilter(TypePredicate.HaveFullName(name, comparison));
+            _context.AddPredicate(TypePredicate.HaveFullName(name, comparison));
             return this;
         }
 
         public ITypesFilterPostConditions HaveNameStartingWith(string name)
         {
-            return HaveNameStartingWith(name, StringComparison.CurrentCulture);
+            return HaveNameStartingWith(name, _comparison);
         }
 
         public ITypesFilterPostConditions HaveNameStartingWith(
@@ -38,13 +38,13 @@ namespace ArchGuard.Library.Type.Filters
             StringComparison comparison
         )
         {
-            _context.ApplyFilter(TypePredicate.HaveNameStartingWith(name, comparison));
+            _context.AddPredicate(TypePredicate.HaveNameStartingWith(name, comparison));
             return this;
         }
 
         public ITypesFilterPostConditions HaveNameEndingWith(string name)
         {
-            return HaveNameEndingWith(name, StringComparison.CurrentCulture);
+            return HaveNameEndingWith(name, _comparison);
         }
 
         public ITypesFilterPostConditions HaveNameEndingWith(
@@ -52,7 +52,7 @@ namespace ArchGuard.Library.Type.Filters
             StringComparison comparison
         )
         {
-            _context.ApplyFilter(TypePredicate.HaveNameEndingWith(name, comparison));
+            _context.AddPredicate(TypePredicate.HaveNameEndingWith(name, comparison));
             return this;
         }
     }

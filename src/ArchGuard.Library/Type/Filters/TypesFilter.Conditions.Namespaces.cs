@@ -8,7 +8,7 @@ namespace ArchGuard.Library.Type.Filters
     {
         public ITypesFilterPostConditions ResideInNamespace(string name)
         {
-            return ResideInNamespace(name, StringComparison.CurrentCulture);
+            return ResideInNamespace(name, _comparison);
         }
 
         public ITypesFilterPostConditions ResideInNamespace(
@@ -16,13 +16,13 @@ namespace ArchGuard.Library.Type.Filters
             StringComparison comparison
         )
         {
-            _context.ApplyFilter(TypePredicate.ResideInNamespace(name, comparison));
+            _context.AddPredicate(TypePredicate.ResideInNamespace(name, comparison));
             return this;
         }
 
         public ITypesFilterPostConditions ResideInNamespaceContaining(string name)
         {
-            return ResideInNamespaceContaining(name, StringComparison.CurrentCulture);
+            return ResideInNamespaceContaining(name, _comparison);
         }
 
         public ITypesFilterPostConditions ResideInNamespaceContaining(
@@ -30,13 +30,13 @@ namespace ArchGuard.Library.Type.Filters
             StringComparison comparison
         )
         {
-            _context.ApplyFilter(TypePredicate.ResideInNamespaceContaining(name, comparison));
+            _context.AddPredicate(TypePredicate.ResideInNamespaceContaining(name, comparison));
             return this;
         }
 
         public ITypesFilterPostConditions ResideInNamespaceEndingWith(string name)
         {
-            return ResideInNamespaceEndingWith(name, StringComparison.CurrentCulture);
+            return ResideInNamespaceEndingWith(name, _comparison);
         }
 
         public ITypesFilterPostConditions ResideInNamespaceEndingWith(
@@ -44,13 +44,13 @@ namespace ArchGuard.Library.Type.Filters
             StringComparison comparison
         )
         {
-            _context.ApplyFilter(TypePredicate.ResideInNamespaceEndingWith(name, comparison));
+            _context.AddPredicate(TypePredicate.ResideInNamespaceEndingWith(name, comparison));
             return this;
         }
 
         public ITypesFilterPostConditions DoNotResideInNamespace(string name)
         {
-            return DoNotResideInNamespace(name, StringComparison.CurrentCulture);
+            return DoNotResideInNamespace(name, _comparison);
         }
 
         public ITypesFilterPostConditions DoNotResideInNamespace(
@@ -58,13 +58,13 @@ namespace ArchGuard.Library.Type.Filters
             StringComparison comparison
         )
         {
-            _context.ApplyFilter(TypePredicate.DoNotResideInNamespace(name, comparison));
+            _context.AddPredicate(TypePredicate.DoNotResideInNamespace(name, comparison));
             return this;
         }
 
         public ITypesFilterPostConditions DoNotResideInNamespaceContaining(string name)
         {
-            return DoNotResideInNamespaceContaining(name, StringComparison.CurrentCulture);
+            return DoNotResideInNamespaceContaining(name, _comparison);
         }
 
         public ITypesFilterPostConditions DoNotResideInNamespaceContaining(
@@ -72,13 +72,13 @@ namespace ArchGuard.Library.Type.Filters
             StringComparison comparison
         )
         {
-            _context.ApplyFilter(TypePredicate.DoNotResideInNamespaceContaining(name, comparison));
+            _context.AddPredicate(TypePredicate.DoNotResideInNamespaceContaining(name, comparison));
             return this;
         }
 
         public ITypesFilterPostConditions DoNotResideInNamespaceEndingWith(string name)
         {
-            return DoNotResideInNamespaceEndingWith(name, StringComparison.CurrentCulture);
+            return DoNotResideInNamespaceEndingWith(name, _comparison);
         }
 
         public ITypesFilterPostConditions DoNotResideInNamespaceEndingWith(
@@ -86,7 +86,7 @@ namespace ArchGuard.Library.Type.Filters
             StringComparison comparison
         )
         {
-            _context.ApplyFilter(TypePredicate.DoNotResideInNamespaceEndingWith(name, comparison));
+            _context.AddPredicate(TypePredicate.DoNotResideInNamespaceEndingWith(name, comparison));
             return this;
         }
     }

@@ -1,4 +1,4 @@
-namespace ArchGuard.Library.Type.Assertions
-{
-    public partial interface ITypesAssertionCondition { }
-}
+//namespace ArchGuard.Library.Type.Assertions
+//{
+//    public partial interface ITypesAssertionCondition { }
+//}

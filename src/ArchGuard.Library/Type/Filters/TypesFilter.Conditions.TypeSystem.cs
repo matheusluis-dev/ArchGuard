@@ -7,62 +7,62 @@ namespace ArchGuard.Library.Type.Filters
     {
         public ITypesFilterPostConditions AreClasses()
         {
-            _context.ApplyFilter(TypePredicate.Class);
+            _context.AddPredicate(TypePredicate.Class);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotClasses()
         {
-            _context.ApplyFilter(TypePredicate.NotClass);
+            _context.AddPredicate(TypePredicate.NotClass);
             return this;
         }
 
         public ITypesFilterPostConditions AreInterfaces()
         {
-            _context.ApplyFilter(TypePredicate.Interface);
+            _context.AddPredicate(TypePredicate.Interface);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotInterfaces()
         {
-            _context.ApplyFilter(TypePredicate.NotInterface);
+            _context.AddPredicate(TypePredicate.NotInterface);
             return this;
         }
 
         public ITypesFilterPostConditions AreStructs()
         {
-            _context.ApplyFilter(TypePredicate.Struct);
+            _context.AddPredicate(TypePredicate.Struct);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotStructs()
         {
-            _context.ApplyFilter(TypePredicate.NotStruct);
+            _context.AddPredicate(TypePredicate.NotStruct);
             return this;
         }
 
         public ITypesFilterPostConditions AreEnums()
         {
-            _context.ApplyFilter(TypePredicate.Enum);
+            _context.AddPredicate(TypePredicate.Enum);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotEnums()
         {
-            _context.ApplyFilter(TypePredicate.NotEnum);
+            _context.AddPredicate(TypePredicate.NotEnum);
             return this;
         }
 
 #if NET5_0_OR_GREATER
         public ITypesFilterPostConditions AreRecords()
         {
-            _context.ApplyFilter(TypePredicate.Record);
+            _context.AddPredicate(TypePredicate.Record);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotRecords()
         {
-            _context.ApplyFilter(TypePredicate.NotRecord);
+            _context.AddPredicate(TypePredicate.NotRecord);
             return this;
         }
 #endif

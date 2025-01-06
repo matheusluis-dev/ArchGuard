@@ -3,49 +3,91 @@ namespace ArchGuard.Library.Type.Filters
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ArchGuard.Library.Extensions;
-    using ArchGuard.Library.Type;
+    using ArchGuard.Library.Type.Assertions;
 
     public sealed class TypesFilterContext
     {
-        private readonly IEnumerable<Type> _typesWithoutFilter;
+        private readonly IEnumerable<Type> _types;
 
-        public IEnumerable<Type> Types { get; private set; }
+        private readonly List<List<Func<Type, bool>>> _groupedFilterPredicates =
+            new List<List<Func<Type, bool>>>();
 
-        private LogicalOperator LogicalOperator { get; set; } = LogicalOperator.And;
+        private readonly List<List<Func<Type, bool>>> _groupedAssertionPredicates =
+            new List<List<Func<Type, bool>>>();
 
-        private List<IEnumerable<Type>> GroupedTypes { get; } = new List<IEnumerable<Type>>();
+        private FilterTypeStage _filterTypeStage = FilterTypeStage.Filtering;
 
-        public void And()
+        private List<List<Func<Type, bool>>> GroupedPredicates =>
+            _filterTypeStage == FilterTypeStage.Filtering
+                ? _groupedFilterPredicates
+                : _groupedAssertionPredicates;
+
+        public TypesFilterContext(IEnumerable<Type> types)
         {
-            LogicalOperator = LogicalOperator.And;
+            _types = types;
+        }
+
+        public void StartAssertions()
+        {
+            _filterTypeStage = FilterTypeStage.Asserting;
+        }
+
+        private void CreateGroupedPredicate()
+        {
+            GroupedPredicates.Add(new List<Func<Type, bool>>());
+        }
+
+        public void AddPredicate(Func<Type, bool> predicate)
+        {
+            if (GroupedPredicates.Count == 0)
+                CreateGroupedPredicate();
+
+            GroupedPredicates[GroupedPredicates.Count - 1].Add(predicate);
         }
 
         public void Or()
         {
-            LogicalOperator = LogicalOperator.Or;
-            GroupedTypes.Add(Types.Copy());
+            CreateGroupedPredicate();
         }
 
-        public TypesFilterContext(IEnumerable<Type> types)
+        public TypesAssertionResult GetResult()
         {
-            Types = types.Copy();
-            _typesWithoutFilter = types.Copy();
+            var typesFiltered = GetTypes();
+
+            var typesAsserted = new List<Type>();
+            foreach (var group in _groupedAssertionPredicates)
+            {
+                var typesGrouped = _types;
+                foreach (var predicate in group)
+                {
+                    typesGrouped = typesGrouped.Where(predicate);
+                }
+
+                typesAsserted.AddRange(typesGrouped);
+            }
+
+            return new TypesAssertionResult(typesFiltered, typesAsserted.Distinct());
         }
 
-        public void ApplyFilter(Func<Type, bool> filter)
+        public IEnumerable<Type> GetTypes()
         {
-            if (LogicalOperator == LogicalOperator.Or)
+            if (_groupedFilterPredicates.Count == 0)
+                return _types;
+
+            var types = new List<Type>();
+
+            foreach (var group in _groupedFilterPredicates)
             {
-                var orTypes = _typesWithoutFilter.Where(filter);
-                Types = Types.Union(orTypes);
-            }
-            else
-            {
-                Types = Types.Where(filter);
+                var typesGrouped = _types;
+                foreach (var predicate in group)
+                {
+                    typesGrouped = typesGrouped.Where(predicate);
+                }
+
+                types.AddRange(typesGrouped);
             }
 
-            GroupedTypes.ForEach(group => Types = Types.Union(group));
+            return types.Distinct();
         }
     }
 }

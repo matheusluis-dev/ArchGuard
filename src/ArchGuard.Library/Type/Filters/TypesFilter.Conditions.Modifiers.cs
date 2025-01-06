@@ -7,49 +7,49 @@ namespace ArchGuard.Library.Type.Filters
     {
         public ITypesFilterPostConditions ArePartial()
         {
-            _context.ApplyFilter(TypePredicate.Partial);
+            _context.AddPredicate(TypePredicate.Partial);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotPartial()
         {
-            _context.ApplyFilter(TypePredicate.NotPartial);
+            _context.AddPredicate(TypePredicate.NotPartial);
             return this;
         }
 
         public ITypesFilterPostConditions AreSealed()
         {
-            _context.ApplyFilter(TypePredicate.Sealed);
+            _context.AddPredicate(TypePredicate.Sealed);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotSealed()
         {
-            _context.ApplyFilter(TypePredicate.NotSealed);
+            _context.AddPredicate(TypePredicate.NotSealed);
             return this;
         }
 
         public ITypesFilterPostConditions AreNested()
         {
-            _context.ApplyFilter(TypePredicate.Nested);
+            _context.AddPredicate(TypePredicate.Nested);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotNested()
         {
-            _context.ApplyFilter(TypePredicate.NotNested);
+            _context.AddPredicate(TypePredicate.NotNested);
             return this;
         }
 
         public ITypesFilterPostConditions AreStatic()
         {
-            _context.ApplyFilter(TypePredicate.Static);
+            _context.AddPredicate(TypePredicate.Static);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotStatic()
         {
-            _context.ApplyFilter(TypePredicate.NotStatic);
+            _context.AddPredicate(TypePredicate.NotStatic);
             return this;
         }
     }
