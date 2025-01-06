@@ -20,7 +20,7 @@ namespace ArchGuard.Library.Type.Predicates
             StringComparison comparison
         )
         {
-            return type => type.Name.StartsWith(name, comparison);
+            return type => type.GetNameClean().StartsWith(name, comparison);
         }
 
         internal static Func<Type, bool> HaveNameEndingWith(
@@ -28,7 +28,7 @@ namespace ArchGuard.Library.Type.Predicates
             StringComparison comparison
         )
         {
-            return type => type.Name.EndsWith(name, comparison);
+            return type => type.GetNameClean().EndsWith(name, comparison);
         }
     }
 }

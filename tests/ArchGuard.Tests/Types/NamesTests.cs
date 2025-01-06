@@ -15,7 +15,9 @@ namespace ArchGuard.Filters.Tests.Types
         {
             // Arrange
             var prefix = "PublicSealed";
+#pragma warning disable CA1307 // Specify StringComparison for clarity
             var filters = TypesFromMockedAssembly.All.That.HaveNameStartingWith(prefix);
+#pragma warning restore CA1307 // Specify StringComparison for clarity
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -67,7 +69,9 @@ namespace ArchGuard.Filters.Tests.Types
             // Arrange
             var suffix = "Class";
 
+#pragma warning disable CA1307 // Specify StringComparison for clarity
             var filters = TypesFromMockedAssembly.All.That.HaveNameEndingWith(suffix);
+#pragma warning restore CA1307 // Specify StringComparison for clarity
 
             // Act
             var types = filters.GetTypes().GetFullNames();

@@ -23,7 +23,7 @@ namespace ArchGuard.Library.Type.Filters
             if (!type.IsInterface)
                 throw new ArgumentException("Type must be an interface", nameof(type));
 
-            _context.ApplyFilter(t => t != type && type.IsAssignableFrom(t));
+            _context.ApplyFilter(TypePredicate.ImplementInterface(type));
 
             return this;
         }
@@ -41,7 +41,7 @@ namespace ArchGuard.Library.Type.Filters
             if (!type.IsInterface)
                 throw new ArgumentException("Type must be an interface", nameof(type));
 
-            _context.ApplyFilter(t => !type.IsAssignableFrom(t));
+            _context.ApplyFilter(TypePredicate.DoNotImplementInterface(type));
 
             return this;
         }
@@ -59,7 +59,7 @@ namespace ArchGuard.Library.Type.Filters
             if (!type.IsClass)
                 throw new ArgumentException("Type must be a class", nameof(type));
 
-            _context.ApplyFilter(t => t.IsSubclassOf(type));
+            _context.ApplyFilter(TypePredicate.Inherit(type));
 
             return this;
         }
@@ -69,7 +69,7 @@ namespace ArchGuard.Library.Type.Filters
             return Inherit(typeof(T));
         }
 
-        public ITypesFilterPostConditions DoNotInherit(System.Type type)
+        public ITypesFilterPostConditions DoNotInherit(Type type)
         {
             if (type is null)
                 throw new ArgumentNullException(nameof(type));
@@ -77,7 +77,7 @@ namespace ArchGuard.Library.Type.Filters
             if (!type.IsClass)
                 throw new ArgumentException("Type must be a class", nameof(type));
 
-            _context.ApplyFilter(t => !t.IsSubclassOf(type));
+            _context.ApplyFilter(TypePredicate.NotInherit(type));
 
             return this;
         }
@@ -89,13 +89,13 @@ namespace ArchGuard.Library.Type.Filters
 
         public ITypesFilterPostConditions AreGeneric()
         {
-            _context.ApplyFilter(t => t.IsGenericType);
+            _context.ApplyFilter(TypePredicate.Generic);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotGeneric()
         {
-            _context.ApplyFilter(t => !t.IsGenericType);
+            _context.ApplyFilter(TypePredicate.NotGeneric);
             return this;
         }
 

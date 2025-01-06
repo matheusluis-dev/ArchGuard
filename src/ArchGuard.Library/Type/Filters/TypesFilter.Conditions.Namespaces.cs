@@ -1,7 +1,6 @@
 namespace ArchGuard.Library.Type.Filters
 {
     using System;
-    using System.Linq;
     using ArchGuard.Library.Type.Filters.PostConditions.Interfaces;
     using ArchGuard.Library.Type.Predicates;
 
@@ -9,8 +8,7 @@ namespace ArchGuard.Library.Type.Filters
     {
         public ITypesFilterPostConditions ResideInNamespace(string name)
         {
-            ResideInNamespace(name, StringComparison.CurrentCulture);
-            return this;
+            return ResideInNamespace(name, StringComparison.CurrentCulture);
         }
 
         public ITypesFilterPostConditions ResideInNamespace(
@@ -24,8 +22,7 @@ namespace ArchGuard.Library.Type.Filters
 
         public ITypesFilterPostConditions ResideInNamespaceContaining(string name)
         {
-            ResideInNamespaceContaining(name, StringComparison.CurrentCulture);
-            return this;
+            return ResideInNamespaceContaining(name, StringComparison.CurrentCulture);
         }
 
         public ITypesFilterPostConditions ResideInNamespaceContaining(
@@ -39,8 +36,7 @@ namespace ArchGuard.Library.Type.Filters
 
         public ITypesFilterPostConditions ResideInNamespaceEndingWith(string name)
         {
-            ResideInNamespaceEndingWith(name, StringComparison.CurrentCulture);
-            return this;
+            return ResideInNamespaceEndingWith(name, StringComparison.CurrentCulture);
         }
 
         public ITypesFilterPostConditions ResideInNamespaceEndingWith(
@@ -54,8 +50,7 @@ namespace ArchGuard.Library.Type.Filters
 
         public ITypesFilterPostConditions DoNotResideInNamespace(string name)
         {
-            DoNotResideInNamespace(name, StringComparison.CurrentCulture);
-            return this;
+            return DoNotResideInNamespace(name, StringComparison.CurrentCulture);
         }
 
         public ITypesFilterPostConditions DoNotResideInNamespace(
@@ -69,8 +64,7 @@ namespace ArchGuard.Library.Type.Filters
 
         public ITypesFilterPostConditions DoNotResideInNamespaceContaining(string name)
         {
-            DoNotResideInNamespaceContaining(name, StringComparison.CurrentCulture);
-            return this;
+            return DoNotResideInNamespaceContaining(name, StringComparison.CurrentCulture);
         }
 
         public ITypesFilterPostConditions DoNotResideInNamespaceContaining(
@@ -84,8 +78,7 @@ namespace ArchGuard.Library.Type.Filters
 
         public ITypesFilterPostConditions DoNotResideInNamespaceEndingWith(string name)
         {
-            DoNotResideInNamespaceEndingWith(name, StringComparison.CurrentCulture);
-            return this;
+            return DoNotResideInNamespaceEndingWith(name, StringComparison.CurrentCulture);
         }
 
         public ITypesFilterPostConditions DoNotResideInNamespaceEndingWith(
