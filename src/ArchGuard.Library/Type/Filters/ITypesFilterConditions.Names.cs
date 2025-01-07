@@ -6,13 +6,13 @@ namespace ArchGuard.Library.Type.Filters.Conditions.Interfaces
     {
         ITypesFilterPostConditions HaveName(params string[] name);
 
-        ITypesFilterPostConditions HaveNameMatching(string regex);
-        ITypesFilterPostConditions HaveNameNotMatching(string regex);
+        ITypesFilterPostConditions HaveNameMatching(params string[] regexes);
+        ITypesFilterPostConditions HaveNameNotMatching(params string[] regexes);
 
         ITypesFilterPostConditions HaveFullName(params string[] name);
 
-        ITypesFilterPostConditions HaveFullNameMatching(string regex);
-        ITypesFilterPostConditions HaveFullNameNotMatching(string regex);
+        ITypesFilterPostConditions HaveFullNameMatching(params string[] regexes);
+        ITypesFilterPostConditions HaveFullNameNotMatching(params string[] regexes);
 
         ITypesFilterPostConditions HaveNameStartingWith(params string[] name);
         ITypesFilterPostConditions HaveNameEndingWith(params string[] name);

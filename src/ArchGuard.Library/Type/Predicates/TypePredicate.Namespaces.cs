@@ -1,6 +1,7 @@
 namespace ArchGuard.Library.Type.Predicates
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using ArchGuard.Library.Extensions;
 
@@ -14,7 +15,9 @@ namespace ArchGuard.Library.Type.Predicates
             return !(type.Namespace is null);
         }
 
-        internal static Func<Type, StringComparison, bool> ResideInNamespace(params string[] names)
+        internal static Func<Type, StringComparison, bool> ResideInNamespace(
+            IEnumerable<string> names
+        )
         {
             return (type, comparison) =>
             {
@@ -32,14 +35,14 @@ namespace ArchGuard.Library.Type.Predicates
         }
 
         internal static Func<Type, StringComparison, bool> DoNotResideInNamespace(
-            params string[] name
+            IEnumerable<string> name
         )
         {
             return (type, comparison) => !ResideInNamespace(name)(type, comparison);
         }
 
         internal static Func<Type, StringComparison, bool> ResideInNamespaceContaining(
-            params string[] names
+            IEnumerable<string> names
         )
         {
             return (type, comparison) =>
@@ -50,14 +53,14 @@ namespace ArchGuard.Library.Type.Predicates
         }
 
         internal static Func<Type, StringComparison, bool> DoNotResideInNamespaceContaining(
-            params string[] name
+            IEnumerable<string> name
         )
         {
             return (type, comparison) => !ResideInNamespaceContaining(name)(type, comparison);
         }
 
         internal static Func<Type, StringComparison, bool> ResideInNamespaceEndingWith(
-            params string[] names
+            IEnumerable<string> names
         )
         {
             return (type, comparison) =>
@@ -68,7 +71,7 @@ namespace ArchGuard.Library.Type.Predicates
         }
 
         internal static Func<Type, StringComparison, bool> DoNotResideInNamespaceEndingWith(
-            params string[] name
+            IEnumerable<string> name
         )
         {
             return (type, comparison) => !ResideInNamespaceEndingWith(name)(type, comparison);

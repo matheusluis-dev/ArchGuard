@@ -14,7 +14,7 @@ namespace ArchGuard.Assertions.Tests.Namespaces
             var filters = TypesFromMockedAssembly
                 .All.That.AreNotNested()
                 .And.HaveNameMatching(".*Internal.*");
-            var filtersTypes = filters.GetTypes(StringComparison.Ordinal);
+            var filtersTypes = filters.GetTypes();
 
             // Act
             var assertion = filters
@@ -25,7 +25,34 @@ namespace ArchGuard.Assertions.Tests.Namespaces
                     Namespaces.RecordsInternal,
                     Namespaces.StructsInternal
                 )
-                .GetResult(StringComparison.Ordinal);
+                .GetResult();
+
+            // Assert
+            assertion.IsSuccessful.Should().BeTrue();
+            assertion.TypesFiltered.Should().BeEquivalentTo(filtersTypes);
+            assertion.CompliantTypes.Should().BeEquivalentTo(filtersTypes);
+            assertion.NonCompliantTypes.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void Reside_in_namespace_with_StringComparison()
+        {
+            // Assert
+            var filters = TypesFromMockedAssembly
+                .All.That.AreNotNested()
+                .And.HaveNameMatching(".*Internal.*");
+            var filtersTypes = filters.GetTypes(StringComparison.OrdinalIgnoreCase);
+
+            // Act
+            var assertion = filters
+                .Should.ResideInNamespace(
+                    Namespaces.ClassesInternal.ToUpperInvariant(),
+                    Namespaces.EnumsInternal.ToUpperInvariant(),
+                    Namespaces.InterfacesInternal.ToUpperInvariant(),
+                    Namespaces.RecordsInternal.ToUpperInvariant(),
+                    Namespaces.StructsInternal.ToUpperInvariant()
+                )
+                .GetResult(StringComparison.OrdinalIgnoreCase);
 
             // Assert
             assertion.IsSuccessful.Should().BeTrue();
@@ -41,7 +68,7 @@ namespace ArchGuard.Assertions.Tests.Namespaces
             var filters = TypesFromMockedAssembly
                 .All.That.AreNotNested()
                 .And.HaveNameMatching(".*Internal.*");
-            var filtersTypes = filters.GetTypes(StringComparison.Ordinal);
+            var filtersTypes = filters.GetTypes();
 
             // Act
             var assertion = filters
@@ -52,7 +79,34 @@ namespace ArchGuard.Assertions.Tests.Namespaces
                     Namespaces.RecordsPublic,
                     Namespaces.StructsPublic
                 )
-                .GetResult(StringComparison.Ordinal);
+                .GetResult();
+
+            // Assert
+            assertion.IsSuccessful.Should().BeTrue();
+            assertion.TypesFiltered.Should().BeEquivalentTo(filtersTypes);
+            assertion.CompliantTypes.Should().BeEquivalentTo(filtersTypes);
+            assertion.NonCompliantTypes.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void Not_reside_in_namespace_with_StringComparison()
+        {
+            // Assert
+            var filters = TypesFromMockedAssembly
+                .All.That.AreNotNested()
+                .And.HaveNameMatching(".*Internal.*");
+            var filtersTypes = filters.GetTypes(StringComparison.OrdinalIgnoreCase);
+
+            // Act
+            var assertion = filters
+                .Should.NotResideInNamespace(
+                    Namespaces.ClassesPublic.ToUpperInvariant(),
+                    Namespaces.EnumsPublic.ToUpperInvariant(),
+                    Namespaces.InterfacesPublic.ToUpperInvariant(),
+                    Namespaces.RecordsPublic.ToUpperInvariant(),
+                    Namespaces.StructsPublic.ToUpperInvariant()
+                )
+                .GetResult(StringComparison.OrdinalIgnoreCase);
 
             // Assert
             assertion.IsSuccessful.Should().BeTrue();

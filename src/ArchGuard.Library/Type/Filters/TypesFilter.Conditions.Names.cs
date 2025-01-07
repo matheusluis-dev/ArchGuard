@@ -11,15 +11,15 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
-        public ITypesFilterPostConditions HaveNameMatching(string regex)
+        public ITypesFilterPostConditions HaveNameMatching(params string[] regexes)
         {
-            _context.AddPredicate(TypePredicate.HaveNameMatching(regex));
+            _context.AddPredicate(TypePredicate.HaveNameMatching(regexes));
             return this;
         }
 
-        public ITypesFilterPostConditions HaveNameNotMatching(string regex)
+        public ITypesFilterPostConditions HaveNameNotMatching(params string[] regexes)
         {
-            _context.AddPredicate(TypePredicate.HaveNameNotMatching(regex));
+            _context.AddPredicate(TypePredicate.HaveNameNotMatching(regexes));
             return this;
         }
 
@@ -29,15 +29,15 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
-        public ITypesFilterPostConditions HaveFullNameMatching(string regex)
+        public ITypesFilterPostConditions HaveFullNameMatching(params string[] regexes)
         {
-            _context.AddPredicate(TypePredicate.HaveFullNameMatching(regex));
+            _context.AddPredicate(TypePredicate.HaveFullNameMatching(regexes));
             return this;
         }
 
-        public ITypesFilterPostConditions HaveFullNameNotMatching(string regex)
+        public ITypesFilterPostConditions HaveFullNameNotMatching(params string[] regexes)
         {
-            _context.AddPredicate(TypePredicate.HaveFullNameNotMatching(regex));
+            _context.AddPredicate(TypePredicate.HaveFullNameNotMatching(regexes));
             return this;
         }
 
