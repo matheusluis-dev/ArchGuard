@@ -1,16 +1,16 @@
 namespace ArchGuard.Filters.Tests
 {
     using System;
-    using System.Collections.Generic;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;
     using ArchGuard.Tests.MockedAssembly.Classes.Public;
+    using ArchGuard.Tests.MockedAssembly.Interfaces.Internal;
     using ArchGuard.Tests.MockedAssembly.Interfaces.Public;
     using FluentAssertions;
     using Xunit;
 
-    public sealed partial class ImplementsInterfaceTests
+    public sealed class ImplementsInterfaceTests
     {
         [Fact]
         public void ImplementsInterface_with_type_as_argument()
@@ -26,7 +26,23 @@ namespace ArchGuard.Filters.Tests
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(new List<string> { TypeNames.PublicClass });
+            types.Should().BeEquivalentTo(TypeNames.PublicClass.AsList());
+        }
+
+        [Fact]
+        public void ImplementsInterface_with_type_as_argument_and_params()
+        {
+            // Arrange
+            var filters = TypesFromMockedAssembly.All.That.ImplementInterface(
+                typeof(IPublicInterface),
+                typeof(IInternalInterface)
+            );
+
+            // Act
+            var types = filters.GetTypes().GetFullNames();
+
+            // Assert
+            types.Should().BeEquivalentTo(TypeNames.InternalClass, TypeNames.PublicClass);
         }
 
         [Fact]
@@ -39,7 +55,7 @@ namespace ArchGuard.Filters.Tests
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(new List<string> { TypeNames.PublicClass });
+            types.Should().BeEquivalentTo(TypeNames.PublicClass.AsList());
         }
 
         [Fact]

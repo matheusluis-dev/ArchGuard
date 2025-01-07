@@ -1,4 +1,4 @@
 namespace ArchGuard.Tests.MockedAssembly.Classes.Public
 {
-    public sealed class PublicSealedClass { }
+    public sealed class PublicSealedClass : PublicAbstractClass { }
 }
