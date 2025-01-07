@@ -3,7 +3,6 @@ namespace ArchGuard.Library.Type.Filters
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ArchGuard.Library.Type.Assertions;
 
     public sealed class TypesFilterContext
     {
@@ -12,37 +11,22 @@ namespace ArchGuard.Library.Type.Filters
         private readonly List<List<Func<Type, bool>>> _groupedFilterPredicates =
             new List<List<Func<Type, bool>>>();
 
-        private readonly List<List<Func<Type, bool>>> _groupedAssertionPredicates =
-            new List<List<Func<Type, bool>>>();
-
-        private FilterTypeStage _filterTypeStage = FilterTypeStage.Filtering;
-
-        private List<List<Func<Type, bool>>> GroupedPredicates =>
-            _filterTypeStage == FilterTypeStage.Filtering
-                ? _groupedFilterPredicates
-                : _groupedAssertionPredicates;
-
         public TypesFilterContext(IEnumerable<Type> types)
         {
             _types = types;
         }
 
-        public void StartAssertions()
-        {
-            _filterTypeStage = FilterTypeStage.Asserting;
-        }
-
         private void CreateGroupedPredicate()
         {
-            GroupedPredicates.Add(new List<Func<Type, bool>>());
+            _groupedFilterPredicates.Add(new List<Func<Type, bool>>());
         }
 
         public void AddPredicate(Func<Type, bool> predicate)
         {
-            if (GroupedPredicates.Count == 0)
+            if (_groupedFilterPredicates.Count == 0)
                 CreateGroupedPredicate();
 
-            GroupedPredicates[GroupedPredicates.Count - 1].Add(predicate);
+            _groupedFilterPredicates[_groupedFilterPredicates.Count - 1].Add(predicate);
         }
 
         public void Or()
@@ -50,23 +34,14 @@ namespace ArchGuard.Library.Type.Filters
             CreateGroupedPredicate();
         }
 
-        public TypesAssertionResult GetResult()
+        internal List<List<Func<Type, bool>>> GetFilters()
         {
-            var typesFiltered = GetTypes();
+            return _groupedFilterPredicates;
+        }
 
-            var typesAsserted = new List<Type>();
-            foreach (var group in _groupedAssertionPredicates)
-            {
-                var typesGrouped = _types;
-                foreach (var predicate in group)
-                {
-                    typesGrouped = typesGrouped.Where(predicate);
-                }
-
-                typesAsserted.AddRange(typesGrouped);
-            }
-
-            return new TypesAssertionResult(typesFiltered, typesAsserted.Distinct());
+        internal IEnumerable<Type> GetRawTypes()
+        {
+            return _types;
         }
 
         public IEnumerable<Type> GetTypes()

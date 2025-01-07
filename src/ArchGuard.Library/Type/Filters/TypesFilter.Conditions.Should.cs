@@ -8,7 +8,10 @@ namespace ArchGuard.Library.Type.Filters
         {
             get
             {
-                var context = new TypesAssertionContext(GetTypes());
+                var context = new TypesAssertionContext(
+                    _context.GetRawTypes(),
+                    _context.GetFilters()
+                );
 
                 return TypesAssertion.Create(context);
             }

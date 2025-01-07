@@ -21,7 +21,6 @@ namespace ArchGuard.Library.Type.Filters
             if (filter is null)
                 throw new ArgumentNullException(nameof(filter));
 
-            typesFilter.AndInternal();
             filter(typesFilter);
 
             return typesFilter;

@@ -1,7 +1,5 @@
 namespace ArchGuard.Library.Type.Assertions
 {
-    using System;
-
     public sealed partial class TypesAssertion
         : ITypesAssertionCondition,
             ITypesAssertionPostCondition
@@ -18,41 +16,13 @@ namespace ArchGuard.Library.Type.Assertions
             return new TypesAssertion(context);
         }
 
-        public ITypesAssertionCondition And()
-        {
-            _context.And();
-            return this;
-        }
+        public ITypesAssertionCondition And => this;
 
-        public ITypesAssertionPostCondition And(
-            Func<ITypesAssertionCondition, ITypesAssertionPostCondition> filter
-        )
-        {
-            if (filter is null)
-                throw new ArgumentNullException(nameof(filter));
+        public ITypesAssertionCondition Or => OrInternal();
 
-            _context.And();
-            filter(this);
-
-            return this;
-        }
-
-        public ITypesAssertionCondition Or()
+        internal ITypesAssertionCondition OrInternal()
         {
             _context.Or();
-            return this;
-        }
-
-        public ITypesAssertionPostCondition Or(
-            Func<ITypesAssertionCondition, ITypesAssertionPostCondition> filter
-        )
-        {
-            if (filter is null)
-                throw new ArgumentNullException(nameof(filter));
-
-            _context.Or();
-            filter(this);
-
             return this;
         }
     }

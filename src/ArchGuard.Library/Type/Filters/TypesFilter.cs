@@ -7,9 +7,7 @@ namespace ArchGuard.Library.Type.Filters
     public sealed partial class TypesFilter
         : ITypesFilterStart,
             ITypesFilterConditions,
-            ITypesFilterPostConditions,
-            ITypesAssertionCondition,
-            ITypesAssertionPostCondition
+            ITypesFilterPostConditions
     {
         private readonly TypesFilterContext _context;
 

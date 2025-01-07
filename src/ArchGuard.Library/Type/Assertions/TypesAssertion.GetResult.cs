@@ -4,7 +4,7 @@ namespace ArchGuard.Library.Type.Assertions
     {
         public TypesAssertionResult GetResult()
         {
-            return _context.ToResult();
+            return _context.GetResult();
         }
     }
 }
