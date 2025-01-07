@@ -1,6 +1,5 @@
 namespace ArchGuard.Library.Type.Filters
 {
-    using System;
     using ArchGuard.Library.Type.Filters.Conditions.Interfaces;
     using ArchGuard.Library.Type.Filters.PostConditions.Interfaces;
 
@@ -10,8 +9,6 @@ namespace ArchGuard.Library.Type.Filters
             ITypesFilterPostConditions
     {
         private readonly TypesFilterContext _context;
-
-        private readonly StringComparison _comparison = StringComparison.CurrentCulture;
 
         private TypesFilter(TypesFilterContext context)
         {

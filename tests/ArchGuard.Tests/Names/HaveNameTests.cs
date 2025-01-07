@@ -14,13 +14,10 @@ namespace ArchGuard.Filters.Tests.Names
         public void Have_name()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.HaveName(
-                "PublicClass",
-                StringComparison.Ordinal
-            );
+            var filters = TypesFromMockedAssembly.All.That.HaveName("PublicClass");
 
             // Act
-            var types = filters.GetTypes().GetFullNames();
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(new List<string> { TypeNames.PublicClass });
@@ -30,13 +27,10 @@ namespace ArchGuard.Filters.Tests.Names
         public void Have_full_name()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.HaveFullName(
-                TypeNames.PublicClass,
-                StringComparison.Ordinal
-            );
+            var filters = TypesFromMockedAssembly.All.That.HaveFullName(TypeNames.PublicClass);
 
             // Act
-            var types = filters.GetTypes().GetFullNames();
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(new List<string> { TypeNames.PublicClass });

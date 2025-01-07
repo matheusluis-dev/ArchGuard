@@ -5,16 +5,24 @@ namespace ArchGuard.Library.Type.Predicates
 
     internal static partial class TypePredicate
     {
-        internal static Func<Type, bool> Partial { get; } = type => type.IsPartial();
-        internal static Func<Type, bool> NotPartial { get; } = type => type.IsNotPartial();
+        internal static Func<Type, StringComparison, bool> Partial { get; } =
+            (type, _) => type.IsPartial();
+        internal static Func<Type, StringComparison, bool> NotPartial { get; } =
+            (type, _) => type.IsNotPartial();
 
-        internal static Func<Type, bool> Sealed { get; } = type => type.IsSealed();
-        internal static Func<Type, bool> NotSealed { get; } = type => type.IsNotSealed();
+        internal static Func<Type, StringComparison, bool> Sealed { get; } =
+            (type, _) => type.IsSealed();
+        internal static Func<Type, StringComparison, bool> NotSealed { get; } =
+            (type, _) => type.IsNotSealed();
 
-        internal static Func<Type, bool> Nested { get; } = type => type.IsNested;
-        internal static Func<Type, bool> NotNested { get; } = type => !type.IsNested;
+        internal static Func<Type, StringComparison, bool> Nested { get; } =
+            (type, _) => type.IsNested;
+        internal static Func<Type, StringComparison, bool> NotNested { get; } =
+            (type, _) => !type.IsNested;
 
-        internal static Func<Type, bool> Static { get; } = type => type.IsStatic();
-        internal static Func<Type, bool> NotStatic { get; } = type => type.IsNotStatic();
+        internal static Func<Type, StringComparison, bool> Static { get; } =
+            (type, _) => type.IsStatic();
+        internal static Func<Type, StringComparison, bool> NotStatic { get; } =
+            (type, _) => type.IsNotStatic();
     }
 }

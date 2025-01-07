@@ -3,20 +3,20 @@ namespace ArchGuard.Library.Type.Assertions
     public partial interface ITypesAssertionCondition
     {
         ITypesAssertionPostCondition BePublic();
-        ITypesAssertionPostCondition BeNotPublic();
+        ITypesAssertionPostCondition NotBePublic();
 
         ITypesAssertionPostCondition BeInternal();
-        ITypesAssertionPostCondition BeNotInternal();
+        ITypesAssertionPostCondition NotBeInternal();
 
         ITypesAssertionPostCondition BePrivate();
-        ITypesAssertionPostCondition BeNotPrivate();
+        ITypesAssertionPostCondition NotBePrivate();
 
         ITypesAssertionPostCondition BeProtected();
-        ITypesAssertionPostCondition BeNotProtected();
+        ITypesAssertionPostCondition NotBeProtected();
 
 #if NET7_0_OR_GREATER
         ITypesAssertionPostCondition BeFileScoped();
-        ITypesAssertionPostCondition BeNotFileScoped();
+        ITypesAssertionPostCondition NotBeFileScoped();
 #endif
     }
 }

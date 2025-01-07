@@ -1,7 +1,6 @@
 namespace ArchGuard.Library.Type.Assertions
 {
     using System;
-
 #pragma warning disable CA1716 // Identifiers should not match keywords
     public partial interface ITypesAssertionPostCondition
     {
@@ -9,6 +8,7 @@ namespace ArchGuard.Library.Type.Assertions
         ITypesAssertionCondition Or { get; }
 
         TypesAssertionResult GetResult();
+        TypesAssertionResult GetResult(StringComparison comparison);
     }
 #pragma warning restore CA1716 // Identifiers should not match keywords
 }

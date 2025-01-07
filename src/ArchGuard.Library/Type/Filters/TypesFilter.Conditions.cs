@@ -15,6 +15,11 @@ namespace ArchGuard.Library.Type.Filters
             return _context.GetTypes();
         }
 
+        public IEnumerable<Type> GetTypes(StringComparison comparison)
+        {
+            return _context.GetTypes(comparison);
+        }
+
         public ITypesFilterPostConditions ImplementInterface(Type type)
         {
             if (type is null)

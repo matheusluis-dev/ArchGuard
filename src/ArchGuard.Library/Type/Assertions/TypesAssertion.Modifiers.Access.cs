@@ -10,7 +10,7 @@ namespace ArchGuard.Library.Type.Assertions
             return this;
         }
 
-        public ITypesAssertionPostCondition BeNotPublic()
+        public ITypesAssertionPostCondition NotBePublic()
         {
             _context.AddPredicate(TypePredicate.NotPublic);
             return this;
@@ -22,7 +22,7 @@ namespace ArchGuard.Library.Type.Assertions
             return this;
         }
 
-        public ITypesAssertionPostCondition BeNotInternal()
+        public ITypesAssertionPostCondition NotBeInternal()
         {
             _context.AddPredicate(TypePredicate.NotInternal);
             return this;
@@ -34,7 +34,7 @@ namespace ArchGuard.Library.Type.Assertions
             return this;
         }
 
-        public ITypesAssertionPostCondition BeNotPrivate()
+        public ITypesAssertionPostCondition NotBePrivate()
         {
             _context.AddPredicate(TypePredicate.NotPrivate);
             return this;
@@ -46,7 +46,7 @@ namespace ArchGuard.Library.Type.Assertions
             return this;
         }
 
-        public ITypesAssertionPostCondition BeNotProtected()
+        public ITypesAssertionPostCondition NotBeProtected()
         {
             _context.AddPredicate(TypePredicate.NotProtected);
             return this;
@@ -59,7 +59,7 @@ namespace ArchGuard.Library.Type.Assertions
             return this;
         }
 
-        public ITypesAssertionPostCondition BeNotFileScoped()
+        public ITypesAssertionPostCondition NotBeFileScoped()
         {
             _context.AddPredicate(TypePredicate.NotFileScoped);
             return this;

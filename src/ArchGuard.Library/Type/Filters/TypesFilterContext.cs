@@ -8,8 +8,8 @@ namespace ArchGuard.Library.Type.Filters
     {
         private readonly IEnumerable<Type> _types;
 
-        private readonly List<List<Func<Type, bool>>> _groupedFilterPredicates =
-            new List<List<Func<Type, bool>>>();
+        private readonly List<List<Func<Type, StringComparison, bool>>> _groupedFilterPredicates =
+            new List<List<Func<Type, StringComparison, bool>>>();
 
         public TypesFilterContext(IEnumerable<Type> types)
         {
@@ -18,10 +18,10 @@ namespace ArchGuard.Library.Type.Filters
 
         private void CreateGroupedPredicate()
         {
-            _groupedFilterPredicates.Add(new List<Func<Type, bool>>());
+            _groupedFilterPredicates.Add(new List<Func<Type, StringComparison, bool>>());
         }
 
-        public void AddPredicate(Func<Type, bool> predicate)
+        public void AddPredicate(Func<Type, StringComparison, bool> predicate)
         {
             if (_groupedFilterPredicates.Count == 0)
                 CreateGroupedPredicate();
@@ -34,7 +34,7 @@ namespace ArchGuard.Library.Type.Filters
             CreateGroupedPredicate();
         }
 
-        internal List<List<Func<Type, bool>>> GetFilters()
+        internal List<List<Func<Type, StringComparison, bool>>> GetFilters()
         {
             return _groupedFilterPredicates;
         }
@@ -46,6 +46,11 @@ namespace ArchGuard.Library.Type.Filters
 
         public IEnumerable<Type> GetTypes()
         {
+            return GetTypes(StringComparison.CurrentCulture);
+        }
+
+        public IEnumerable<Type> GetTypes(StringComparison comparison)
+        {
             if (_groupedFilterPredicates.Count == 0)
                 return _types;
 
@@ -56,7 +61,7 @@ namespace ArchGuard.Library.Type.Filters
                 var typesGrouped = _types;
                 foreach (var predicate in group)
                 {
-                    typesGrouped = typesGrouped.Where(predicate);
+                    typesGrouped = typesGrouped.Where(type => predicate(type, comparison));
                 }
 
                 types.AddRange(typesGrouped);

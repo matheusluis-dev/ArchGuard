@@ -5,21 +5,31 @@ namespace ArchGuard.Library.Type.Predicates
 
     internal static partial class TypePredicate
     {
-        internal static Func<Type, bool> Public { get; } = type => type.IsPublic();
-        internal static Func<Type, bool> NotPublic { get; } = type => type.IsNotPublic();
+        internal static Func<Type, StringComparison, bool> Public { get; } =
+            (type, _) => type.IsPublic();
+        internal static Func<Type, StringComparison, bool> NotPublic { get; } =
+            (type, _) => type.IsNotPublic();
 
-        internal static Func<Type, bool> Internal { get; } = type => type.IsInternal();
-        internal static Func<Type, bool> NotInternal { get; } = type => type.IsNotInternal();
+        internal static Func<Type, StringComparison, bool> Internal { get; } =
+            (type, _) => type.IsInternal();
+        internal static Func<Type, StringComparison, bool> NotInternal { get; } =
+            (type, _) => type.IsNotInternal();
 
-        internal static Func<Type, bool> Private { get; } = type => type.IsPrivate();
-        internal static Func<Type, bool> NotPrivate { get; } = type => type.IsNotPrivate();
+        internal static Func<Type, StringComparison, bool> Private { get; } =
+            (type, _) => type.IsPrivate();
+        internal static Func<Type, StringComparison, bool> NotPrivate { get; } =
+            (type, _) => type.IsNotPrivate();
 
-        internal static Func<Type, bool> Protected { get; } = type => type.IsProtected();
-        internal static Func<Type, bool> NotProtected { get; } = type => type.IsNotProtected();
+        internal static Func<Type, StringComparison, bool> Protected { get; } =
+            (type, _) => type.IsProtected();
+        internal static Func<Type, StringComparison, bool> NotProtected { get; } =
+            (type, _) => type.IsNotProtected();
 
 #if NET7_0_OR_GREATER
-        internal static Func<Type, bool> FileScoped { get; } = type => type.IsFileScoped();
-        internal static Func<Type, bool> NotFileScoped { get; } = type => type.IsNotFileScoped();
+        internal static Func<Type, StringComparison, bool> FileScoped { get; } =
+            (type, _) => type.IsFileScoped();
+        internal static Func<Type, StringComparison, bool> NotFileScoped { get; } =
+            (type, _) => type.IsNotFileScoped();
 #endif
     }
 }

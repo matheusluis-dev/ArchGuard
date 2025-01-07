@@ -14,11 +14,9 @@ namespace ArchGuard.Filters.Tests.Namespaces
         public void Reside_in_namespace()
         {
             // Arrange
-#pragma warning disable CA1307 // Specify StringComparison for clarity
             var filters = TypesFromMockedAssembly.All.That.ResideInNamespace(
                 Namespaces.EnumsPublic
             );
-#pragma warning restore CA1307 // Specify StringComparison for clarity
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -32,12 +30,11 @@ namespace ArchGuard.Filters.Tests.Namespaces
         {
             // Arrange
             var filters = TypesFromMockedAssembly.All.That.ResideInNamespace(
-                Namespaces.EnumsPublic,
-                StringComparison.OrdinalIgnoreCase
+                Namespaces.EnumsPublic
             );
 
             // Act
-            var types = filters.GetTypes().GetFullNames();
+            var types = filters.GetTypes(StringComparison.OrdinalIgnoreCase).GetFullNames();
 
             // Assert
             types.Should().BeEquivalentTo(new List<string> { TypeNames.PublicEnum });
@@ -67,12 +64,11 @@ namespace ArchGuard.Filters.Tests.Namespaces
         {
             // Arrange
             var filters = TypesFromMockedAssembly.All.That.ResideInNamespace(
-                "ARCHGUARD.tests.MOCKEDASSEMBLY.enums",
-                StringComparison.OrdinalIgnoreCase
+                "ARCHGUARD.tests.MOCKEDASSEMBLY.enums"
             );
 
             // Act
-            var types = filters.GetTypes().GetFullNames();
+            var types = filters.GetTypes(StringComparison.OrdinalIgnoreCase).GetFullNames();
 
             // Assert
             types
@@ -84,11 +80,9 @@ namespace ArchGuard.Filters.Tests.Namespaces
         public void Reside_in_namespace_should_not_act_as_string_StartsWith()
         {
             // Arrange
-#pragma warning disable CA1307 // Specify StringComparison for clarity
             var filters = TypesFromMockedAssembly.All.That.ResideInNamespace(
                 "ArchGuard.Tests.MockedAssembly.Enu"
             );
-#pragma warning restore CA1307 // Specify StringComparison for clarity
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -102,12 +96,11 @@ namespace ArchGuard.Filters.Tests.Namespaces
         {
             // Arrange
             var filters = TypesFromMockedAssembly.All.That.ResideInNamespace(
-                "ARCHGUARD.tests.MOCKEDASSEMBLY.enu",
-                StringComparison.OrdinalIgnoreCase
+                "ARCHGUARD.tests.MOCKEDASSEMBLY.enu"
             );
 
             // Act
-            var types = filters.GetTypes().GetFullNames();
+            var types = filters.GetTypes(StringComparison.OrdinalIgnoreCase).GetFullNames();
 
             // Assert
             types.Should().BeEmpty();

@@ -1,7 +1,6 @@
 namespace ArchGuard.Assertions.Tests.Modifiers.Access
 {
     using System;
-    using System.Collections.Generic;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Types;
     using FluentAssertions;
@@ -13,15 +12,12 @@ namespace ArchGuard.Assertions.Tests.Modifiers.Access
         public void Public_types()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(
-                ".Public.",
-                StringComparison.Ordinal
-            );
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(".Public.");
 
-            var filtersTypes = filters.GetTypes();
+            var filtersTypes = filters.GetTypes(StringComparison.Ordinal);
 
             // Act
-            var assertion = filters.Should.BePublic().GetResult();
+            var assertion = filters.Should.BePublic().GetResult(StringComparison.Ordinal);
 
             // Assert
             assertion.IsSuccessful.Should().BeTrue();
@@ -34,15 +30,12 @@ namespace ArchGuard.Assertions.Tests.Modifiers.Access
         public void Public_types_non_successful()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.ResideInNamespace(
-                Namespaces.Interfaces,
-                StringComparison.Ordinal
-            );
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespace(Namespaces.Interfaces);
 
-            var filtersTypes = filters.GetTypes();
+            var filtersTypes = filters.GetTypes(StringComparison.Ordinal);
 
             // Act
-            var assertion = filters.Should.BePublic().GetResult();
+            var assertion = filters.Should.BePublic().GetResult(StringComparison.Ordinal);
 
             // Assert
             assertion.IsSuccessful.Should().BeFalse();

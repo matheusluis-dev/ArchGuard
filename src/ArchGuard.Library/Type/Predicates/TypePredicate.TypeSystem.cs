@@ -5,21 +5,30 @@ namespace ArchGuard.Library.Type.Predicates
 
     internal static partial class TypePredicate
     {
-        internal static Func<Type, bool> Class { get; } = type => type.IsNonRecordClass();
-        internal static Func<Type, bool> NotClass { get; } = type => !Class(type);
+        internal static Func<Type, StringComparison, bool> Class { get; } =
+            (type, _) => type.IsNonRecordClass();
+        internal static Func<Type, StringComparison, bool> NotClass { get; } =
+            (type, _) => !Class(type, _);
 
-        internal static Func<Type, bool> Interface { get; } = type => type.IsInterface;
-        internal static Func<Type, bool> NotInterface { get; } = type => !Interface(type);
+        internal static Func<Type, StringComparison, bool> Interface { get; } =
+            (type, _) => type.IsInterface;
+        internal static Func<Type, StringComparison, bool> NotInterface { get; } =
+            (type, _) => !Interface(type, _);
 
-        internal static Func<Type, bool> Struct { get; } = type => type.IsStruct();
-        internal static Func<Type, bool> NotStruct { get; } = type => !Struct(type);
+        internal static Func<Type, StringComparison, bool> Struct { get; } =
+            (type, _) => type.IsStruct();
+        internal static Func<Type, StringComparison, bool> NotStruct { get; } =
+            (type, _) => !Struct(type, _);
 
-        internal static Func<Type, bool> Enum { get; } = type => type.IsEnum;
-        internal static Func<Type, bool> NotEnum { get; } = type => !Enum(type);
+        internal static Func<Type, StringComparison, bool> Enum { get; } = (type, _) => type.IsEnum;
+        internal static Func<Type, StringComparison, bool> NotEnum { get; } =
+            (type, _) => !Enum(type, _);
 
 #if NET5_0_OR_GREATER
-        internal static Func<Type, bool> Record { get; } = type => type.IsRecord();
-        internal static Func<Type, bool> NotRecord { get; } = type => !Record(type);
+        internal static Func<Type, StringComparison, bool> Record { get; } =
+            (type, _) => type.IsRecord();
+        internal static Func<Type, StringComparison, bool> NotRecord { get; } =
+            (type, _) => !Record(type, _);
 #endif
     }
 }

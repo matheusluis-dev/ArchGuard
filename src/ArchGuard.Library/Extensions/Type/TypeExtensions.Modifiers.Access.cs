@@ -4,6 +4,7 @@ namespace ArchGuard.Library.Extensions.Type
 #if NET7_0_OR_GREATER
     using System.Linq;
     using ArchGuard.Library.Helpers;
+    using ArchGuard.Library.Type;
 #endif
 
     internal static partial class TypeExtensions
@@ -80,7 +81,7 @@ namespace ArchGuard.Library.Extensions.Type
             var cleanFullName = type.GetFullNameClean();
 
             // TODO: test it
-            return !fullName.Equals(cleanFullName, StringComparison.Ordinal)
+            return !fullName.Equals(cleanFullName, EngineOptions.StringComparison)
                 && FileAccessModifierHelper.Types.Contains(cleanFullName, StringComparer.Ordinal);
         }
 

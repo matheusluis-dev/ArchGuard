@@ -12,9 +12,9 @@ namespace ArchGuard.Library.Type.Predicates
             return !(type.Namespace is null);
         }
 
-        internal static Func<Type, bool> ResideInNamespace(string name, StringComparison comparison)
+        internal static Func<Type, StringComparison, bool> ResideInNamespace(string name)
         {
-            return type =>
+            return (type, comparison) =>
             {
                 var namespaceExists = type.Namespace.Equals(name, comparison);
                 var @namespace =
@@ -25,47 +25,36 @@ namespace ArchGuard.Library.Type.Predicates
             };
         }
 
-        internal static Func<Type, bool> DoNotResideInNamespace(
-            string name,
-            StringComparison comparison
-        )
+        internal static Func<Type, StringComparison, bool> DoNotResideInNamespace(string name)
         {
-            return type => !ResideInNamespace(name, comparison)(type);
+            return (type, comparison) => !ResideInNamespace(name)(type, comparison);
         }
 
-        internal static Func<Type, bool> ResideInNamespaceContaining(
-            string name,
-            StringComparison comparison
-        )
+        internal static Func<Type, StringComparison, bool> ResideInNamespaceContaining(string name)
         {
-            return type =>
+            return (type, comparison) =>
                 NamespaceDefaultPredicate(type, name)
                 && type.Namespace.IndexOf(name, comparison) >= 0;
         }
 
-        internal static Func<Type, bool> DoNotResideInNamespaceContaining(
-            string name,
-            StringComparison comparison
+        internal static Func<Type, StringComparison, bool> DoNotResideInNamespaceContaining(
+            string name
         )
         {
-            return type => !ResideInNamespaceContaining(name, comparison)(type);
+            return (type, comparison) => !ResideInNamespaceContaining(name)(type, comparison);
         }
 
-        internal static Func<Type, bool> ResideInNamespaceEndingWith(
-            string name,
-            StringComparison comparison
-        )
+        internal static Func<Type, StringComparison, bool> ResideInNamespaceEndingWith(string name)
         {
-            return type =>
+            return (type, comparison) =>
                 NamespaceDefaultPredicate(type, name) && type.Namespace.EndsWith(name, comparison);
         }
 
-        internal static Func<Type, bool> DoNotResideInNamespaceEndingWith(
-            string name,
-            StringComparison comparison
+        internal static Func<Type, StringComparison, bool> DoNotResideInNamespaceEndingWith(
+            string name
         )
         {
-            return type => !ResideInNamespaceEndingWith(name, comparison)(type);
+            return (type, comparison) => !ResideInNamespaceEndingWith(name)(type, comparison);
         }
     }
 }
