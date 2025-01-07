@@ -5,22 +5,22 @@ namespace ArchGuard.Library.Type.Filters.Conditions.Interfaces
 
     public partial interface ITypesFilterConditions : IGetTypes
     {
-        ITypesFilterPostConditions ImplementInterface(System.Type type);
+        ITypesFilterPostConditions ImplementInterface(params System.Type[] types);
         ITypesFilterPostConditions ImplementInterface<T>();
 
-        ITypesFilterPostConditions DoNotImplementsInterface(System.Type type);
+        ITypesFilterPostConditions DoNotImplementsInterface(params System.Type[] types);
         ITypesFilterPostConditions DoNotImplementsInterface<T>();
 
-        ITypesFilterPostConditions Inherit(System.Type type);
+        ITypesFilterPostConditions Inherit(params System.Type[] type);
         ITypesFilterPostConditions Inherit<T>();
 
-        ITypesFilterPostConditions DoNotInherit(System.Type type);
+        ITypesFilterPostConditions DoNotInherit(params System.Type[] types);
         ITypesFilterPostConditions DoNotInherit<T>();
 
         ITypesFilterPostConditions AreGeneric();
         ITypesFilterPostConditions AreNotGeneric();
 
-        ITypesFilterPostConditions AreOfType(System.Type type);
+        ITypesFilterPostConditions AreOfType(params System.Type[] types);
         ITypesFilterPostConditions AreOfType<T>();
     }
 }

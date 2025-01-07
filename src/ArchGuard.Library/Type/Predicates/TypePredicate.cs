@@ -1,30 +1,37 @@
 namespace ArchGuard.Library.Type.Predicates
 {
     using System;
+    using System.Linq;
 
     internal static partial class TypePredicate
     {
-        internal static Func<Type, StringComparison, bool> AreOfType(Type typeParam)
+        internal static Func<Type, StringComparison, bool> AreOfType(params Type[] types)
         {
-            return (type, _) => type == typeParam;
+            return (type, _) => types.Contains(type);
         }
 
-        internal static Func<Type, StringComparison, bool> ImplementInterface(Type @interface)
+        internal static Func<Type, StringComparison, bool> ImplementInterface(
+            params Type[] interfaces
+        )
         {
-            return (type, _) => type != @interface && @interface.IsAssignableFrom(type);
+            return (type, _) =>
+                !interfaces.Contains(type)
+                && interfaces.Any(@interface => @interface.IsAssignableFrom(type));
         }
 
-        internal static Func<Type, StringComparison, bool> DoNotImplementInterface(Type @interface)
+        internal static Func<Type, StringComparison, bool> DoNotImplementInterface(
+            params Type[] interfaces
+        )
         {
-            return (type, _) => !@interface.IsAssignableFrom(type);
+            return (type, _) => interfaces.Any(@interface => !@interface.IsAssignableFrom(type));
         }
 
-        internal static Func<Type, StringComparison, bool> Inherit(Type typeParam)
+        internal static Func<Type, StringComparison, bool> Inherit(params Type[] types)
         {
-            return (type, _) => type.IsSubclassOf(typeParam);
+            return (type, _) => types.Any(t => type.IsSubclassOf(t));
         }
 
-        internal static Func<Type, StringComparison, bool> NotInherit(Type typeParam)
+        internal static Func<Type, StringComparison, bool> NotInherit(params Type[] typeParam)
         {
             return (type, _) => !Inherit(typeParam)(type, _);
         }

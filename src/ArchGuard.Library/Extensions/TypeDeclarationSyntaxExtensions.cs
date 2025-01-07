@@ -4,11 +4,11 @@ namespace ArchGuard.Library.Extensions
 
     internal static class TypeDeclarationSyntaxExtensions
     {
-        internal static string GetFullName(this TypeDeclarationSyntax classDeclarationSyntax)
+        internal static string GetFullName(this TypeDeclarationSyntax typeDeclarationSyntax)
         {
-            var fullClassName = classDeclarationSyntax.Identifier.ValueText;
+            var fullClassName = typeDeclarationSyntax.Identifier.ValueText;
 
-            var parent = classDeclarationSyntax.Parent;
+            var parent = typeDeclarationSyntax.Parent;
             while (
                 parent != null
                 && !(parent is BaseNamespaceDeclarationSyntax)

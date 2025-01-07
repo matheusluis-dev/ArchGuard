@@ -2,6 +2,7 @@ namespace ArchGuard.Library.Type.Filters
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using ArchGuard.Library.Type.Filters.Conditions.Interfaces;
     using ArchGuard.Library.Type.Filters.PostConditions.Interfaces;
     using ArchGuard.Library.Type.Predicates;
@@ -20,15 +21,15 @@ namespace ArchGuard.Library.Type.Filters
             return _context.GetTypes(comparison);
         }
 
-        public ITypesFilterPostConditions ImplementInterface(Type type)
+        public ITypesFilterPostConditions ImplementInterface(params Type[] types)
         {
-            if (type is null)
-                throw new ArgumentNullException(nameof(type));
+            if (types is null)
+                throw new ArgumentNullException(nameof(types));
 
-            if (!type.IsInterface)
-                throw new ArgumentException("Type must be an interface", nameof(type));
+            if (types.Any(type => !type.IsInterface))
+                throw new ArgumentException("Type must be an interface", nameof(types));
 
-            _context.AddPredicate(TypePredicate.ImplementInterface(type));
+            _context.AddPredicate(TypePredicate.ImplementInterface(types));
 
             return this;
         }
@@ -38,15 +39,15 @@ namespace ArchGuard.Library.Type.Filters
             return ImplementInterface(typeof(T));
         }
 
-        public ITypesFilterPostConditions DoNotImplementsInterface(Type type)
+        public ITypesFilterPostConditions DoNotImplementsInterface(params Type[] types)
         {
-            if (type is null)
-                throw new ArgumentNullException(nameof(type));
+            if (types is null)
+                throw new ArgumentNullException(nameof(types));
 
-            if (!type.IsInterface)
-                throw new ArgumentException("Type must be an interface", nameof(type));
+            if (types.Any(type => !type.IsInterface))
+                throw new ArgumentException("Type must be an interface", nameof(types));
 
-            _context.AddPredicate(TypePredicate.DoNotImplementInterface(type));
+            _context.AddPredicate(TypePredicate.DoNotImplementInterface(types));
 
             return this;
         }
@@ -56,15 +57,15 @@ namespace ArchGuard.Library.Type.Filters
             return DoNotImplementsInterface(typeof(T));
         }
 
-        public ITypesFilterPostConditions Inherit(Type type)
+        public ITypesFilterPostConditions Inherit(params Type[] types)
         {
-            if (type is null)
-                throw new ArgumentNullException(nameof(type));
+            if (types is null)
+                throw new ArgumentNullException(nameof(types));
 
-            if (!type.IsClass)
-                throw new ArgumentException("Type must be a class", nameof(type));
+            if (types.Any(type => !type.IsClass))
+                throw new ArgumentException("Type must be a class", nameof(types));
 
-            _context.AddPredicate(TypePredicate.Inherit(type));
+            _context.AddPredicate(TypePredicate.Inherit(types));
 
             return this;
         }
@@ -74,15 +75,15 @@ namespace ArchGuard.Library.Type.Filters
             return Inherit(typeof(T));
         }
 
-        public ITypesFilterPostConditions DoNotInherit(Type type)
+        public ITypesFilterPostConditions DoNotInherit(params Type[] types)
         {
-            if (type is null)
-                throw new ArgumentNullException(nameof(type));
+            if (types is null)
+                throw new ArgumentNullException(nameof(types));
 
-            if (!type.IsClass)
-                throw new ArgumentException("Type must be a class", nameof(type));
+            if (types.Any(type => !type.IsClass))
+                throw new ArgumentException("Type must be a class", nameof(types));
 
-            _context.AddPredicate(TypePredicate.NotInherit(type));
+            _context.AddPredicate(TypePredicate.NotInherit(types));
 
             return this;
         }
@@ -104,9 +105,9 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
-        public ITypesFilterPostConditions AreOfType(Type type)
+        public ITypesFilterPostConditions AreOfType(params Type[] types)
         {
-            _context.AddPredicate(TypePredicate.AreOfType(type));
+            _context.AddPredicate(TypePredicate.AreOfType(types));
             return this;
         }
 
