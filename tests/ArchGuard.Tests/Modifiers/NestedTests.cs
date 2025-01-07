@@ -1,6 +1,5 @@
 namespace ArchGuard.Filters.Tests.Modifiers
 {
-    using System.Collections.Generic;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;
@@ -22,13 +21,10 @@ namespace ArchGuard.Filters.Tests.Modifiers
             types
                 .Should()
                 .BeEquivalentTo(
-                    new List<string>
-                    {
-                        TypeNames.PublicParentClass_InternalNestedClass,
-                        TypeNames.PublicParentClass_PrivateNestedClass,
-                        TypeNames.PublicParentClass_PublicNestedClass,
-                        TypeNames.PublicParentClass_PublicNestedPartialClass,
-                    }
+                    TypeNames.PublicParentClass_InternalNestedClass,
+                    TypeNames.PublicParentClass_PrivateNestedClass,
+                    TypeNames.PublicParentClass_PublicNestedClass,
+                    TypeNames.PublicParentClass_PublicNestedPartialClass
                 );
         }
 

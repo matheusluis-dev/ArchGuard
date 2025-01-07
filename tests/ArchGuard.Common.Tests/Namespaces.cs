@@ -2,6 +2,7 @@ namespace ArchGuard.Tests.Common
 {
     public static class Namespaces
     {
+        public const string Classes = "ArchGuard.Tests.MockedAssembly.Classes";
         public const string ClassesFile = "ArchGuard.Tests.MockedAssembly.Classes.File";
         public const string ClassesInternal = "ArchGuard.Tests.MockedAssembly.Classes.Internal";
         public const string ClassesPublic = "ArchGuard.Tests.MockedAssembly.Classes.Public";

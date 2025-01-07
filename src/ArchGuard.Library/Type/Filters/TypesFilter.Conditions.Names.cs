@@ -11,9 +11,33 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
+        public ITypesFilterPostConditions HaveNameMatching(string regex)
+        {
+            _context.AddPredicate(TypePredicate.HaveNameMatching(regex));
+            return this;
+        }
+
+        public ITypesFilterPostConditions HaveNameNotMatching(string regex)
+        {
+            _context.AddPredicate(TypePredicate.HaveNameNotMatching(regex));
+            return this;
+        }
+
         public ITypesFilterPostConditions HaveFullName(params string[] name)
         {
             _context.AddPredicate(TypePredicate.HaveFullName(name));
+            return this;
+        }
+
+        public ITypesFilterPostConditions HaveFullNameMatching(string regex)
+        {
+            _context.AddPredicate(TypePredicate.HaveFullNameMatching(regex));
+            return this;
+        }
+
+        public ITypesFilterPostConditions HaveFullNameNotMatching(string regex)
+        {
+            _context.AddPredicate(TypePredicate.HaveFullNameNotMatching(regex));
             return this;
         }
 

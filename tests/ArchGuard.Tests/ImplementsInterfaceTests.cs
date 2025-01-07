@@ -26,7 +26,7 @@ namespace ArchGuard.Filters.Tests
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.PublicClass.AsList());
+            types.Should().BeEquivalentTo(TypeNames.PublicClass.AsStringList());
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace ArchGuard.Filters.Tests
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.PublicClass.AsList());
+            types.Should().BeEquivalentTo(TypeNames.PublicClass.AsStringList());
         }
 
         [Fact]

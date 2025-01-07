@@ -7,18 +7,20 @@ namespace ArchGuard.Assertions.Tests.Modifiers.Access
     using FluentAssertions;
     using Xunit;
 
-    public sealed class PublicTests
+    public sealed class InternalTests
     {
         [Fact]
-        public void Public_types()
+        public void Internal_types()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(".Public.");
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(
+                ".Internal."
+            );
 
             var filtersTypes = filters.GetTypes(StringComparison.Ordinal);
 
             // Act
-            var assertion = filters.Should.BePublic().GetResult(StringComparison.Ordinal);
+            var assertion = filters.Should.BeInternal().GetResult(StringComparison.Ordinal);
 
             // Assert
             assertion.IsSuccessful.Should().BeTrue();
@@ -28,7 +30,7 @@ namespace ArchGuard.Assertions.Tests.Modifiers.Access
         }
 
         [Fact]
-        public void Public_types_non_successful()
+        public void Internal_types_non_successful()
         {
             // Arrange
             var filters = TypesFromMockedAssembly.All.That.ResideInNamespace(Namespaces.Interfaces);
@@ -36,7 +38,7 @@ namespace ArchGuard.Assertions.Tests.Modifiers.Access
             var filtersTypes = filters.GetTypes(StringComparison.Ordinal);
 
             // Act
-            var assertion = filters.Should.BePublic().GetResult(StringComparison.Ordinal);
+            var assertion = filters.Should.BeInternal().GetResult(StringComparison.Ordinal);
 
             // Assert
             assertion.IsSuccessful.Should().BeFalse();
@@ -44,11 +46,11 @@ namespace ArchGuard.Assertions.Tests.Modifiers.Access
             assertion
                 .CompliantTypes.GetFullNames()
                 .Should()
-                .BeEquivalentTo(TypeNames.IPublicInterface.AsStringList());
+                .BeEquivalentTo(TypeNames.IInternalInterface.AsStringList());
             assertion
                 .NonCompliantTypes.GetFullNames()
                 .Should()
-                .BeEquivalentTo(TypeNames.IInternalInterface.AsStringList());
+                .BeEquivalentTo(TypeNames.IPublicInterface.AsStringList());
         }
     }
 }

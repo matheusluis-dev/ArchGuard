@@ -22,7 +22,7 @@ namespace ArchGuard.Filters.Tests.Namespaces
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.PublicEnum.AsList());
+            types.Should().BeEquivalentTo(TypeNames.PublicEnum.AsStringList());
         }
 
         [Fact]
@@ -37,7 +37,7 @@ namespace ArchGuard.Filters.Tests.Namespaces
             var types = filters.GetTypes(StringComparison.OrdinalIgnoreCase).GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.PublicEnum.AsList());
+            types.Should().BeEquivalentTo(TypeNames.PublicEnum.AsStringList());
         }
 
         [Fact]
