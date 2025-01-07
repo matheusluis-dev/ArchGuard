@@ -6,9 +6,9 @@ namespace ArchGuard.Library.Type.Predicates
     internal static partial class TypePredicate
     {
         internal static Func<Type, StringComparison, bool> Class { get; } =
-            (type, _) => type.IsNonRecordClass();
+            (type, comparison) => type.IsNonRecordClass(comparison);
         internal static Func<Type, StringComparison, bool> NotClass { get; } =
-            (type, _) => !Class(type, _);
+            (type, comparison) => !Class(type, comparison);
 
         internal static Func<Type, StringComparison, bool> Interface { get; } =
             (type, _) => type.IsInterface;
@@ -26,9 +26,9 @@ namespace ArchGuard.Library.Type.Predicates
 
 #if NET5_0_OR_GREATER
         internal static Func<Type, StringComparison, bool> Record { get; } =
-            (type, _) => type.IsRecord();
+            (type, comparison) => type.IsRecord(comparison);
         internal static Func<Type, StringComparison, bool> NotRecord { get; } =
-            (type, _) => !Record(type, _);
+            (type, comparison) => !Record(type, comparison);
 #endif
     }
 }

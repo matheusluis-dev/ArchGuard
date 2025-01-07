@@ -19,21 +19,21 @@ namespace ArchGuard.Library.Extensions.Type
             return type.IsNotPublic && !type.IsNestedPublic;
         }
 
-        internal static bool IsInternal(this Type type)
+        internal static bool IsInternal(this Type type, StringComparison comparison)
         {
             // https://stackoverflow.com/questions/4971213/how-to-use-reflection-to-determine-if-a-class-is-internal
             var isInternal = type.IsNotPublic;
 #if NET7_0_OR_GREATER
-            isInternal = isInternal && !type.IsFileScoped();
+            isInternal = isInternal && !type.IsFileScoped(comparison);
 #endif
             isInternal = isInternal || (type.IsNested && type.IsNestedAssembly);
 
             return isInternal;
         }
 
-        internal static bool IsNotInternal(this Type type)
+        internal static bool IsNotInternal(this Type type, StringComparison comparison)
         {
-            return !type.IsInternal();
+            return !type.IsInternal(comparison);
         }
 
         internal static bool IsPrivate(this Type type)
@@ -75,19 +75,19 @@ namespace ArchGuard.Library.Extensions.Type
         }
 
 #if NET7_0_OR_GREATER
-        internal static bool IsFileScoped(this Type type)
+        internal static bool IsFileScoped(this Type type, StringComparison comparison)
         {
             var fullName = type.FullName;
             var cleanFullName = type.GetFullNameClean();
 
             // TODO: test it
-            return !fullName.Equals(cleanFullName, EngineOptions.StringComparison)
+            return !fullName.Equals(cleanFullName, comparison)
                 && FileAccessModifierHelper.Types.Contains(cleanFullName, StringComparer.Ordinal);
         }
 
-        internal static bool IsNotFileScoped(this Type type)
+        internal static bool IsNotFileScoped(this Type type, StringComparison comparison)
         {
-            return !type.IsFileScoped();
+            return !type.IsFileScoped(comparison);
         }
 #endif
     }

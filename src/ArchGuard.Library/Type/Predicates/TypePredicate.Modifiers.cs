@@ -6,9 +6,9 @@ namespace ArchGuard.Library.Type.Predicates
     internal static partial class TypePredicate
     {
         internal static Func<Type, StringComparison, bool> Partial { get; } =
-            (type, _) => type.IsPartial();
+            (type, comparison) => type.IsPartial(comparison);
         internal static Func<Type, StringComparison, bool> NotPartial { get; } =
-            (type, _) => type.IsNotPartial();
+            (type, comparison) => type.IsNotPartial(comparison);
 
         internal static Func<Type, StringComparison, bool> Sealed { get; } =
             (type, _) => type.IsSealed();

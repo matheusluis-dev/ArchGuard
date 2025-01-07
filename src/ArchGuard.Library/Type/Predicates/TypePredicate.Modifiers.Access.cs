@@ -11,9 +11,9 @@ namespace ArchGuard.Library.Type.Predicates
             (type, _) => type.IsNotPublic();
 
         internal static Func<Type, StringComparison, bool> Internal { get; } =
-            (type, _) => type.IsInternal();
+            (type, comparison) => type.IsInternal(comparison);
         internal static Func<Type, StringComparison, bool> NotInternal { get; } =
-            (type, _) => type.IsNotInternal();
+            (type, comparison) => type.IsNotInternal(comparison);
 
         internal static Func<Type, StringComparison, bool> Private { get; } =
             (type, _) => type.IsPrivate();
@@ -27,9 +27,9 @@ namespace ArchGuard.Library.Type.Predicates
 
 #if NET7_0_OR_GREATER
         internal static Func<Type, StringComparison, bool> FileScoped { get; } =
-            (type, _) => type.IsFileScoped();
+            (type, comparison) => type.IsFileScoped(comparison);
         internal static Func<Type, StringComparison, bool> NotFileScoped { get; } =
-            (type, _) => type.IsNotFileScoped();
+            (type, comparison) => type.IsNotFileScoped(comparison);
 #endif
     }
 }

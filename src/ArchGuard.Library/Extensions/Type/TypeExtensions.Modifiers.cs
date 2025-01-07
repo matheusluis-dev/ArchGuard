@@ -6,15 +6,15 @@ namespace ArchGuard.Library.Extensions.Type
 
     internal static partial class TypeExtensions
     {
-        internal static bool IsNonRecordClass(this Type type)
+        internal static bool IsNonRecordClass(this Type type, StringComparison comparison)
         {
             return type.IsClass
-                && !RecordsHelper.Records.Contains(type.FullName, StringComparer.Ordinal);
+                && !RecordsHelper.Records.Contains(type.FullName, comparison.ToComparer());
         }
 
-        internal static bool IsNotNonRecordClass(this Type type)
+        internal static bool IsNotNonRecordClass(this Type type, StringComparison comparison)
         {
-            return !type.IsNonRecordClass();
+            return !type.IsNonRecordClass(comparison);
         }
 
         /// <summary>
@@ -32,25 +32,25 @@ namespace ArchGuard.Library.Extensions.Type
             return !type.IsStruct();
         }
 
-        internal static bool IsPartial(this Type type)
+        internal static bool IsPartial(this Type type, StringComparison comparison)
         {
-            return PartialHelper.Types.Contains(type.FullName, StringComparer.Ordinal);
+            return PartialHelper.Types.Contains(type.FullName, comparison.ToComparer());
         }
 
-        internal static bool IsNotPartial(this Type type)
+        internal static bool IsNotPartial(this Type type, StringComparison comparison)
         {
-            return !type.IsPartial();
+            return !type.IsPartial(comparison);
         }
 
 #if NET5_0_OR_GREATER
-        internal static bool IsRecord(this Type type)
+        internal static bool IsRecord(this Type type, StringComparison comparison)
         {
-            return RecordsHelper.Records.Contains(type.FullName, StringComparer.Ordinal);
+            return RecordsHelper.Records.Contains(type.FullName, comparison.ToComparer());
         }
 
-        internal static bool IsNotRecord(this Type type)
+        internal static bool IsNotRecord(this Type type, StringComparison comparison)
         {
-            return !type.IsRecord();
+            return !type.IsRecord(comparison);
         }
 #endif
 
