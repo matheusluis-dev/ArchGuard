@@ -5,37 +5,37 @@ namespace ArchGuard.Library.Type.Filters
 
     public sealed partial class TypesFilter
     {
-        public ITypesFilterPostConditions ResideInNamespace(string name)
+        public ITypesFilterPostConditions ResideInNamespace(params string[] name)
         {
             _context.AddPredicate(TypePredicate.ResideInNamespace(name));
             return this;
         }
 
-        public ITypesFilterPostConditions ResideInNamespaceContaining(string name)
+        public ITypesFilterPostConditions ResideInNamespaceContaining(params string[] name)
         {
             _context.AddPredicate(TypePredicate.ResideInNamespaceContaining(name));
             return this;
         }
 
-        public ITypesFilterPostConditions ResideInNamespaceEndingWith(string name)
+        public ITypesFilterPostConditions ResideInNamespaceEndingWith(params string[] name)
         {
             _context.AddPredicate(TypePredicate.ResideInNamespaceEndingWith(name));
             return this;
         }
 
-        public ITypesFilterPostConditions DoNotResideInNamespace(string name)
+        public ITypesFilterPostConditions DoNotResideInNamespace(params string[] name)
         {
             _context.AddPredicate(TypePredicate.DoNotResideInNamespace(name));
             return this;
         }
 
-        public ITypesFilterPostConditions DoNotResideInNamespaceContaining(string name)
+        public ITypesFilterPostConditions DoNotResideInNamespaceContaining(params string[] name)
         {
             _context.AddPredicate(TypePredicate.DoNotResideInNamespaceContaining(name));
             return this;
         }
 
-        public ITypesFilterPostConditions DoNotResideInNamespaceEndingWith(string name)
+        public ITypesFilterPostConditions DoNotResideInNamespaceEndingWith(params string[] name)
         {
             _context.AddPredicate(TypePredicate.DoNotResideInNamespaceEndingWith(name));
             return this;

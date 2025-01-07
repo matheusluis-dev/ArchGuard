@@ -4,9 +4,9 @@ namespace ArchGuard.Library.Type.Filters.Conditions.Interfaces
 
     public partial interface ITypesFilterConditions
     {
-        ITypesFilterPostConditions HaveName(string name);
-        ITypesFilterPostConditions HaveFullName(string name);
-        ITypesFilterPostConditions HaveNameStartingWith(string name);
-        ITypesFilterPostConditions HaveNameEndingWith(string name);
+        ITypesFilterPostConditions HaveName(params string[] name);
+        ITypesFilterPostConditions HaveFullName(params string[] name);
+        ITypesFilterPostConditions HaveNameStartingWith(params string[] name);
+        ITypesFilterPostConditions HaveNameEndingWith(params string[] name);
     }
 }
