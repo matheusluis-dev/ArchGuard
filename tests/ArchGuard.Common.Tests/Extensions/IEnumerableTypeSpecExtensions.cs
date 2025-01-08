@@ -3,13 +3,14 @@ namespace ArchGuard.Tests.Common.Extensions
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using ArchGuard.Library;
 
-    public static class IEnumerableTypeExtensions
+    public static class IEnumerableTypeSpecExtensions
     {
-        public static List<string> GetFullNames(this IEnumerable<Type> types)
+        public static IList<string> GetFullNames(this IEnumerable<TypeSpec> types)
         {
             return types
-                .Select(type => type.FullNameClean())
+                .Select(type => type.FullName)
                 .OrderBy(fullName => fullName, StringComparer.Ordinal)
                 .ToList();
         }

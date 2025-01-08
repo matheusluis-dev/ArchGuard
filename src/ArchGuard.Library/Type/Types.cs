@@ -1,7 +1,6 @@
 namespace ArchGuard.Library.Type
 {
     using System;
-    using System.Linq;
     using System.Reflection;
     using ArchGuard.Library.Type.Filters;
 
@@ -9,30 +8,12 @@ namespace ArchGuard.Library.Type
     {
         private Types() { }
 
-        public static ITypesFilterStart FromAssembly(
-            Assembly assembly,
-            bool ignoreSystem = true,
-            bool ignoreMicrosoft = true
-        )
+        public static ITypesFilterStart FromAssembly(Assembly assembly)
         {
             if (assembly is null)
                 throw new ArgumentNullException(nameof(assembly));
 
-            var types = assembly.GetTypes();
-
-            if (ignoreSystem)
-            {
-                types = types
-                    .Where(t => !t.Namespace.StartsWith("System", StringComparison.Ordinal))
-                    .ToArray();
-            }
-
-            if (ignoreMicrosoft)
-            {
-                types = types
-                    .Where(t => !t.Namespace.StartsWith("Microsoft", StringComparison.Ordinal))
-                    .ToArray();
-            }
+            var types = TypesLoader.LoadFromAssembly(assembly);
 
             var context = new TypesFilterContext(types);
 

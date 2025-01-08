@@ -11,12 +11,12 @@ namespace ArchGuard.Library.Type.Filters
     {
         public ITypesFilterConditions That => this;
 
-        public IEnumerable<Type> GetTypes()
+        public IEnumerable<TypeSpec> GetTypes()
         {
-            return _context.GetTypes();
+            return _context.GetTypes(StringComparison.CurrentCulture);
         }
 
-        public IEnumerable<Type> GetTypes(StringComparison comparison)
+        public IEnumerable<TypeSpec> GetTypes(StringComparison comparison)
         {
             return _context.GetTypes(comparison);
         }
@@ -29,7 +29,7 @@ namespace ArchGuard.Library.Type.Filters
             if (types.Any(type => !type.IsInterface))
                 throw new ArgumentException("Type must be an interface", nameof(types));
 
-            _context.AddPredicate(TypePredicate.ImplementInterface(types));
+            _context.AddPredicate(TypeSpecPredicate.ImplementInterface(types));
 
             return this;
         }
@@ -47,7 +47,7 @@ namespace ArchGuard.Library.Type.Filters
             if (types.Any(type => !type.IsInterface))
                 throw new ArgumentException("Type must be an interface", nameof(types));
 
-            _context.AddPredicate(TypePredicate.DoNotImplementInterface(types));
+            _context.AddPredicate(TypeSpecPredicate.DoNotImplementInterface(types));
 
             return this;
         }
@@ -65,7 +65,7 @@ namespace ArchGuard.Library.Type.Filters
             if (types.Any(type => !type.IsClass))
                 throw new ArgumentException("Type must be a class", nameof(types));
 
-            _context.AddPredicate(TypePredicate.Inherit(types));
+            _context.AddPredicate(TypeSpecPredicate.Inherit(types));
 
             return this;
         }
@@ -83,7 +83,7 @@ namespace ArchGuard.Library.Type.Filters
             if (types.Any(type => !type.IsClass))
                 throw new ArgumentException("Type must be a class", nameof(types));
 
-            _context.AddPredicate(TypePredicate.NotInherit(types));
+            _context.AddPredicate(TypeSpecPredicate.NotInherit(types));
 
             return this;
         }
@@ -95,19 +95,19 @@ namespace ArchGuard.Library.Type.Filters
 
         public ITypesFilterPostConditions AreGeneric()
         {
-            _context.AddPredicate(TypePredicate.Generic);
+            _context.AddPredicate(TypeSpecPredicate.Generic);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotGeneric()
         {
-            _context.AddPredicate(TypePredicate.NotGeneric);
+            _context.AddPredicate(TypeSpecPredicate.NotGeneric);
             return this;
         }
 
         public ITypesFilterPostConditions AreOfType(params Type[] types)
         {
-            _context.AddPredicate(TypePredicate.AreOfType(types));
+            _context.AddPredicate(TypeSpecPredicate.AreOfType(types));
             return this;
         }
 

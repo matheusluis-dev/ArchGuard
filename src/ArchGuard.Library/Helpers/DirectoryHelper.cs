@@ -3,6 +3,7 @@ namespace ArchGuard.Library.Helpers
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
 
     internal static class DirectoryHelper
     {
@@ -19,13 +20,16 @@ namespace ArchGuard.Library.Helpers
             var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
             while (directory != null)
             {
-                var directoryInfo = new DirectoryInfo(
-                    Path.Combine(directory.FullName, subDirectory)
-                );
-                if (directoryInfo.Exists)
+                var projectFile = directory
+                    .EnumerateFiles($"{subDirectory}.csproj", SearchOption.AllDirectories)
+                    .FirstOrDefault();
+
+                if (!(projectFile is null))
                 {
-                    _cache.Add(subDirectory, directoryInfo);
-                    return directoryInfo;
+                    var dir = new DirectoryInfo(Path.GetDirectoryName(projectFile.FullName));
+                    _cache[subDirectory] = dir;
+
+                    return dir;
                 }
 
                 directory = directory.Parent;

@@ -6,62 +6,62 @@ namespace ArchGuard.Library.Type.Assertions
     {
         public ITypesAssertionPostCondition BePublic()
         {
-            _context.AddPredicate(TypePredicate.Public);
+            _context.AddPredicate(TypeSpecPredicate.Public);
             return this;
         }
 
         public ITypesAssertionPostCondition NotBePublic()
         {
-            _context.AddPredicate(TypePredicate.NotPublic);
+            _context.AddPredicate(TypeSpecPredicate.NotPublic);
             return this;
         }
 
         public ITypesAssertionPostCondition BeInternal()
         {
-            _context.AddPredicate(TypePredicate.Internal);
+            _context.AddPredicate(TypeSpecPredicate.Internal);
             return this;
         }
 
         public ITypesAssertionPostCondition NotBeInternal()
         {
-            _context.AddPredicate(TypePredicate.NotInternal);
+            _context.AddPredicate(TypeSpecPredicate.NotInternal);
             return this;
         }
 
         public ITypesAssertionPostCondition BePrivate()
         {
-            _context.AddPredicate(TypePredicate.Private);
+            _context.AddPredicate(TypeSpecPredicate.Private);
             return this;
         }
 
         public ITypesAssertionPostCondition NotBePrivate()
         {
-            _context.AddPredicate(TypePredicate.NotPrivate);
+            _context.AddPredicate(TypeSpecPredicate.NotPrivate);
             return this;
         }
 
         public ITypesAssertionPostCondition BeProtected()
         {
-            _context.AddPredicate(TypePredicate.Protected);
+            _context.AddPredicate(TypeSpecPredicate.Protected);
             return this;
         }
 
         public ITypesAssertionPostCondition NotBeProtected()
         {
-            _context.AddPredicate(TypePredicate.NotProtected);
+            _context.AddPredicate(TypeSpecPredicate.NotProtected);
             return this;
         }
 
 #if NET7_0_OR_GREATER
         public ITypesAssertionPostCondition BeFileScoped()
         {
-            _context.AddPredicate(TypePredicate.FileScoped);
+            _context.AddPredicate(TypeSpecPredicate.FileScoped);
             return this;
         }
 
         public ITypesAssertionPostCondition NotBeFileScoped()
         {
-            _context.AddPredicate(TypePredicate.NotFileScoped);
+            _context.AddPredicate(TypeSpecPredicate.NotFileScoped);
             return this;
         }
 #endif

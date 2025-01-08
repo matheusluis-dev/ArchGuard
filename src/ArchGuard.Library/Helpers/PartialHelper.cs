@@ -11,30 +11,26 @@ namespace ArchGuard.Library.Helpers
 
     internal static class PartialHelper
     {
-        private static readonly Lazy<IEnumerable<string>> _cache = new Lazy<IEnumerable<string>>(
-            Load
-        );
-
-        internal static IEnumerable<string> Types => _cache.Value;
-
-        private static IEnumerable<string> Load()
+        internal static IEnumerable<string> GetPartialTypes(AssemblySpec assemblySpecification)
         {
-            return ApplicationCSharpFilesHelper.Files.SelectMany(file =>
-            {
-                var code = File.ReadAllText(file.FullName);
-                var syntaxTree = CSharpSyntaxTree.ParseText(
-                    code,
-                    // TODO find a way to treat preprocessors and stuff
-                    new CSharpParseOptions().WithPreprocessorSymbols("NET5_0_OR_GREATER")
-                );
-                var root = syntaxTree.GetRoot();
+            return AssemblyFilesHelper
+                .GetFiles(assemblySpecification)
+                .SelectMany(file =>
+                {
+                    var code = File.ReadAllText(file.FullName);
+                    var syntaxTree = CSharpSyntaxTree.ParseText(
+                        code,
+                        // TODO find a way to treat preprocessors and stuff
+                        new CSharpParseOptions().WithPreprocessorSymbols("NET5_0_OR_GREATER")
+                    );
+                    var root = syntaxTree.GetRoot();
 
-                return root.DescendantNodes()
-                    .OfType<TypeDeclarationSyntax>()
-                    .Where(c => c.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword)))
-                    .Select(c => c.GetFullName())
-                    .Distinct(StringComparer.Ordinal);
-            });
+                    return root.DescendantNodes()
+                        .OfType<TypeDeclarationSyntax>()
+                        .Where(c => c.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword)))
+                        .Select(c => c.GetFullName())
+                        .Distinct(StringComparer.Ordinal);
+                });
         }
     }
 }
