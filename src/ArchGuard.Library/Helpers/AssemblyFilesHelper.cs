@@ -4,31 +4,66 @@ namespace ArchGuard.Library.Helpers
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using ArchGuard.Library.Extensions.Type;
+    using ArchGuard.Library.Extensions;
+    using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.CSharp;
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-    internal static class AssemblyFilesHelper
+    public static class AssemblyFilesHelper
     {
-        private static readonly Dictionary<AssemblySpec, IEnumerable<FileInfo>> _cache =
-            new Dictionary<AssemblySpec, IEnumerable<FileInfo>>();
+        private static readonly List<string> _partials = new List<string>();
+        private static readonly List<string> _records = new List<string>();
+        private static readonly List<string> _fileScoped = new List<string>();
 
-        private static readonly IReadOnlyList<string> _excludedDirectories = new List<string>
+        private static void AddPartials(IEnumerable<string> partials)
         {
-            "bin".BetweenDirectorySeparator(),
-            "dir".BetweenDirectorySeparator(),
-        };
+            _partials.AddRange(partials);
+        }
 
-        internal static IEnumerable<FileInfo> GetFiles(AssemblySpec assemblySpecification)
+        private static void AddRecords(IEnumerable<string> records)
         {
-            if (_cache.TryGetValue(assemblySpecification, out var files))
-                return files;
+            _records.AddRange(records);
+        }
 
-            return assemblySpecification
-                .Location.EnumerateFiles("*.cs", SearchOption.AllDirectories)
-                .Where(file =>
-                    _excludedDirectories.Any(dir =>
-                        file.FullName.IndexOf(dir, StringComparison.OrdinalIgnoreCase) == -1
-                    )
-                );
+        private static void AddFileScoped(IEnumerable<string> fileScoped)
+        {
+            _fileScoped.AddRange(fileScoped);
+        }
+
+        private static void Load(AssemblySpec assemblySpec)
+        {
+            AssemblyFilesReaderHelper
+                .GetFiles(assemblySpec)
+                .ForEach(file =>
+                {
+                    var code = File.ReadAllText(file.FullName);
+                    var syntaxTree = CSharpSyntaxTree.ParseText(
+                        code,
+                        new CSharpParseOptions()
+                            .WithPreprocessorSymbols("NET7_0_OR_GREATER")
+                            .WithPreprocessorSymbols("NET5_0_OR_GREATER")
+                    );
+                    var root = syntaxTree.GetRoot();
+
+                    AddRecords(
+                        root.DescendantNodes()
+                            .OfType<RecordDeclarationSyntax>()
+                            .Select(c => c.GetFullName())
+                    );
+
+                    var types = root.DescendantNodes().OfType<TypeDeclarationSyntax>();
+                    AddPartials(
+                        types
+                            .Where(t => t.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword)))
+                            .Select(t => t.GetFullName())
+                    );
+
+                    AddFileScoped(
+                        types
+                            .Where(c => c.Modifiers.Any(m => m.IsKind(SyntaxKind.FileKeyword)))
+                            .Select(c => c.GetFullName())
+                    );
+                });
         }
     }
 }

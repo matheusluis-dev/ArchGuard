@@ -13,7 +13,7 @@ namespace ArchGuard.Library.Helpers
     {
         internal static IEnumerable<string> GetPartialTypes(AssemblySpec assemblySpecification)
         {
-            return AssemblyFilesHelper
+            return AssemblyFilesReaderHelper
                 .GetFiles(assemblySpecification)
                 .SelectMany(file =>
                 {
