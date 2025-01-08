@@ -109,12 +109,10 @@ namespace ArchGuard.Filters.Tests
             types
                 .Should()
                 .BeEquivalentTo(
-#if NET7_0_OR_GREATER
                     TypeNames.FileClass,
                     TypeNames.FilePartialClass,
                     TypeNames.FileSealedClass,
                     TypeNames.FileStaticClass,
-#endif
                     TypeNames.InternalClass,
                     TypeNames.InternalPartialClass,
                     TypeNames.InternalSealedClass,
@@ -133,14 +131,12 @@ namespace ArchGuard.Filters.Tests
                     TypeNames.InternalEnum,
                     TypeNames.PublicEnum,
                     TypeNames.IInternalInterface,
-#if NET5_0_OR_GREATER
                     TypeNames.InternalRecord,
                     TypeNames.InternalPartialRecord,
                     TypeNames.InternalSealedRecord,
                     TypeNames.PublicRecord,
                     TypeNames.PublicPartialRecord,
                     TypeNames.PublicSealedRecord,
-#endif
                     TypeNames.InternalStruct,
                     TypeNames.PublicStruct
                 );
@@ -160,12 +156,10 @@ namespace ArchGuard.Filters.Tests
             types
                 .Should()
                 .BeEquivalentTo(
-#if NET7_0_OR_GREATER
                     TypeNames.FileClass,
                     TypeNames.FilePartialClass,
                     TypeNames.FileSealedClass,
                     TypeNames.FileStaticClass,
-#endif
                     TypeNames.InternalClass,
                     TypeNames.InternalPartialClass,
                     TypeNames.InternalSealedClass,
@@ -184,14 +178,12 @@ namespace ArchGuard.Filters.Tests
                     TypeNames.InternalEnum,
                     TypeNames.PublicEnum,
                     TypeNames.IInternalInterface,
-#if NET5_0_OR_GREATER
                     TypeNames.InternalRecord,
                     TypeNames.InternalPartialRecord,
                     TypeNames.InternalSealedRecord,
                     TypeNames.PublicRecord,
                     TypeNames.PublicPartialRecord,
                     TypeNames.PublicSealedRecord,
-#endif
                     TypeNames.InternalStruct,
                     TypeNames.PublicStruct
                 );

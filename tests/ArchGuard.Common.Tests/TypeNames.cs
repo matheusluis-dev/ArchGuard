@@ -82,7 +82,6 @@ namespace ArchGuard.Tests.Common.Types
             Namespaces.ClassesPublic + "." + nameof(PublicStaticClass);
     }
 
-#if NET5_0_OR_GREATER
     public static partial class TypeNames
     {
         public const string InternalRecord =
@@ -102,7 +101,6 @@ namespace ArchGuard.Tests.Common.Types
         public const string PublicSealedRecord =
             Namespaces.RecordsPublic + "." + nameof(PublicSealedRecord);
     }
-#endif
 
     public static partial class TypeNames
     {

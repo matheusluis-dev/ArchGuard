@@ -45,9 +45,7 @@ namespace ArchGuard.Assertions.Tests.Modifiers
                 .CompliantTypes.GetFullNames()
                 .Should()
                 .BeEquivalentTo(
-#if NET7_0_OR_GREATER
                     TypeNames.FileStaticClass,
-#endif
                     TypeNames.InternalStaticClass,
                     TypeNames.PublicStaticClass
                 );
@@ -55,11 +53,9 @@ namespace ArchGuard.Assertions.Tests.Modifiers
                 .NonCompliantTypes.GetFullNames()
                 .Should()
                 .BeEquivalentTo(
-#if NET7_0_OR_GREATER
                     TypeNames.FileClass,
                     TypeNames.FilePartialClass,
                     TypeNames.FileSealedClass,
-#endif
                     TypeNames.InternalClass,
                     TypeNames.InternalPartialClass,
                     TypeNames.InternalSealedClass,

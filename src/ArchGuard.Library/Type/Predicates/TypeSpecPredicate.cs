@@ -5,40 +5,51 @@ namespace ArchGuard.Library.Type.Predicates
 
     internal static partial class TypeSpecPredicate
     {
-        internal static Func<TypeSpec, StringComparison, bool> AreOfType(Type[] types)
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> AreOfType(Type[] types)
         {
-            return (type, _) => types.Contains(type.ReflectionType);
+            return (type, _) => false;
+            //return (type, _) => types.Contains(type.ReflectionType);
         }
 
-        internal static Func<TypeSpec, StringComparison, bool> ImplementInterface(Type[] interfaces)
-        {
-            return (type, _) =>
-                !interfaces.Contains(type.ReflectionType)
-                && interfaces.Any(@interface => @interface.IsAssignableFrom(type.ReflectionType));
-        }
-
-        internal static Func<TypeSpec, StringComparison, bool> DoNotImplementInterface(
+        // TODO: refactor fullnames
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> ImplementInterface(
             Type[] interfaces
         )
         {
             return (type, _) =>
-                interfaces.Any(@interface => !@interface.IsAssignableFrom(type.ReflectionType));
+                !interfaces.Any(i =>
+                    type.Name.Equals(i.Name, StringComparison.Ordinal)
+                    && interfaces.Any(j =>
+                        type.InterfacesImplemented.Contains(j.FullName, StringComparer.Ordinal)
+                    )
+                );
         }
 
-        internal static Func<TypeSpec, StringComparison, bool> Inherit(Type[] types)
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> DoNotImplementInterface(
+            Type[] interfaces
+        )
         {
-            return (type, _) => types.Any(t => type.ReflectionType.IsSubclassOf(t));
+            return (type, _) =>
+                interfaces.Any(i =>
+                    type.InterfacesImplemented.Contains(i.FullName, StringComparer.Ordinal)
+                );
         }
 
-        internal static Func<TypeSpec, StringComparison, bool> NotInherit(Type[] typeParam)
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> Inherit(Type[] types)
+        {
+            return (type, _) => false;
+            //return (type, _) => types.Any(t => type.ReflectionType.IsSubclassOf(t));
+        }
+
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> NotInherit(Type[] typeParam)
         {
             return (type, _) => !Inherit(typeParam)(type, _);
         }
 
-        internal static Func<TypeSpec, StringComparison, bool> Generic =>
-            (type, _) => type.ReflectionType.IsGenericType;
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> Generic =>
+            (type, _) => type.IsGeneric;
 
-        internal static Func<TypeSpec, StringComparison, bool> NotGeneric =>
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> NotGeneric =>
             (type, _) => !Generic(type, _);
     }
 }

@@ -56,12 +56,10 @@ namespace ArchGuard.Assertions.Tests.Modifiers
                 .NonCompliantTypes.GetFullNames()
                 .Should()
                 .BeEquivalentTo(
-#if NET7_0_OR_GREATER
                     TypeNames.FileClass,
                     TypeNames.FilePartialClass,
                     TypeNames.FileSealedClass,
                     TypeNames.FileStaticClass,
-#endif
                     TypeNames.InternalClass,
                     TypeNames.InternalPartialClass,
                     TypeNames.InternalSealedClass,

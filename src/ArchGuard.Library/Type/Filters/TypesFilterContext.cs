@@ -6,23 +6,23 @@ namespace ArchGuard.Library.Type.Filters
 
     public sealed class TypesFilterContext
     {
-        private readonly IEnumerable<TypeSpec> _types;
+        private readonly IEnumerable<TypeSpecRoslyn> _types;
 
         private readonly List<
-            List<Func<TypeSpec, StringComparison, bool>>
-        > _groupedFilterPredicates = new List<List<Func<TypeSpec, StringComparison, bool>>>();
+            List<Func<TypeSpecRoslyn, StringComparison, bool>>
+        > _groupedFilterPredicates = new List<List<Func<TypeSpecRoslyn, StringComparison, bool>>>();
 
-        public TypesFilterContext(IEnumerable<TypeSpec> types)
+        public TypesFilterContext(IEnumerable<TypeSpecRoslyn> types)
         {
             _types = types;
         }
 
         private void CreateGroupedPredicate()
         {
-            _groupedFilterPredicates.Add(new List<Func<TypeSpec, StringComparison, bool>>());
+            _groupedFilterPredicates.Add(new List<Func<TypeSpecRoslyn, StringComparison, bool>>());
         }
 
-        public void AddPredicate(Func<TypeSpec, StringComparison, bool> predicate)
+        public void AddPredicate(Func<TypeSpecRoslyn, StringComparison, bool> predicate)
         {
             if (_groupedFilterPredicates.Count == 0)
                 CreateGroupedPredicate();
@@ -35,27 +35,27 @@ namespace ArchGuard.Library.Type.Filters
             CreateGroupedPredicate();
         }
 
-        internal List<List<Func<TypeSpec, StringComparison, bool>>> GetFilters()
+        internal List<List<Func<TypeSpecRoslyn, StringComparison, bool>>> GetFilters()
         {
             return _groupedFilterPredicates;
         }
 
-        internal IEnumerable<TypeSpec> GetRawTypes()
+        internal IEnumerable<TypeSpecRoslyn> GetRawTypes()
         {
             return _types;
         }
 
-        public IEnumerable<TypeSpec> GetTypes()
+        public IEnumerable<TypeSpecRoslyn> GetTypes()
         {
             return GetTypes(StringComparison.CurrentCulture);
         }
 
-        public IEnumerable<TypeSpec> GetTypes(StringComparison comparison)
+        public IEnumerable<TypeSpecRoslyn> GetTypes(StringComparison comparison)
         {
             if (_groupedFilterPredicates.Count == 0)
                 return _types;
 
-            var types = new List<TypeSpec>();
+            var types = new List<TypeSpecRoslyn>();
 
             foreach (var group in _groupedFilterPredicates)
             {

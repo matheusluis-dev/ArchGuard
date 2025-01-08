@@ -7,7 +7,7 @@ namespace ArchGuard.Tests.Common.Extensions
 
     public static class IEnumerableTypeSpecExtensions
     {
-        public static IList<string> GetFullNames(this IEnumerable<TypeSpec> types)
+        public static IList<string> GetFullNames(this IEnumerable<TypeSpecRoslyn> types)
         {
             return types
                 .Select(type => type.FullName)

@@ -1,28 +1,27 @@
 namespace ArchGuard.Library.Type.Predicates
 {
     using System;
-    using ArchGuard.Library.Extensions.Type;
 
     internal static partial class TypeSpecPredicate
     {
-        internal static Func<TypeSpec, StringComparison, bool> Partial { get; } =
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> Partial =>
             (type, _) => type.IsPartial;
-        internal static Func<TypeSpec, StringComparison, bool> NotPartial { get; } =
-            (type, _) => !type.IsPartial;
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> NotPartial =>
+            (type, _) => !Partial(type, _);
 
-        internal static Func<TypeSpec, StringComparison, bool> Sealed { get; } =
-            (type, _) => type.ReflectionType.IsSealed();
-        internal static Func<TypeSpec, StringComparison, bool> NotSealed { get; } =
-            (type, _) => type.ReflectionType.IsNotSealed();
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> Sealed =>
+            (type, _) => type.IsSealed;
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> NotSealed =>
+            (type, _) => !Sealed(type, _);
 
-        internal static Func<TypeSpec, StringComparison, bool> Nested { get; } =
-            (type, _) => type.ReflectionType.IsNested;
-        internal static Func<TypeSpec, StringComparison, bool> NotNested { get; } =
-            (type, _) => !type.ReflectionType.IsNested;
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> Nested =>
+            (type, _) => type.IsNested;
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> NotNested =>
+            (type, _) => !Nested(type, _);
 
-        internal static Func<TypeSpec, StringComparison, bool> Static { get; } =
-            (type, _) => type.ReflectionType.IsStatic();
-        internal static Func<TypeSpec, StringComparison, bool> NotStatic { get; } =
-            (type, _) => type.ReflectionType.IsNotStatic();
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> Static =>
+            (type, _) => type.IsStatic;
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> NotStatic =>
+            (type, _) => !Static(type, _);
     }
 }

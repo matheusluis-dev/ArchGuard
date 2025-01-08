@@ -1,10 +1,8 @@
 namespace ArchGuard.Library
 {
-    using System;
     using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
     using System.Reflection;
+    using ArchGuard.Library.Helpers;
 
     internal static class TypesLoader
     {
@@ -21,16 +19,11 @@ namespace ArchGuard.Library
             "ArchGuard.Library",
         };
 
-        internal static IEnumerable<TypeSpec> LoadFromAssembly(Assembly assembly)
+        internal static IEnumerable<TypeSpecRoslyn> LoadFromAssembly(Assembly assembly)
         {
             var assemblySpecification = new AssemblySpec(assembly);
 
-            return assembly
-                .GetTypes()
-                .Select(type => new TypeSpec(assemblySpecification, type))
-                .Where(type =>
-                    !_exclusionList.Any(e => type.FullName.StartsWith(e, StringComparison.Ordinal))
-                );
+            return AssemblyFilesHelper.Load(assemblySpecification);
         }
     }
 }

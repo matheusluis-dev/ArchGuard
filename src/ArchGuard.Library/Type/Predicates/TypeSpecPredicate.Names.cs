@@ -5,68 +5,63 @@ namespace ArchGuard.Library.Type.Predicates
     using System.Linq;
     using System.Text.RegularExpressions;
     using ArchGuard.Library.Extensions;
-    using ArchGuard.Library.Extensions.Type;
 
     internal static partial class TypeSpecPredicate
     {
-        internal static Func<TypeSpec, StringComparison, bool> HaveName(IEnumerable<string> name)
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> HaveName(
+            IEnumerable<string> name
+        )
         {
-            return (type, comparison) =>
-                name.Contains(type.ReflectionType.GetNameClean(), comparison.ToComparer());
+            return (type, comparison) => name.Contains(type.Name, comparison.ToComparer());
         }
 
-        internal static Func<TypeSpec, StringComparison, bool> HaveNameMatching(
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> HaveNameMatching(
             IEnumerable<string> regexes
         )
         {
-            return (type, _) =>
-                regexes.Any(regex => Regex.IsMatch(type.ReflectionType.GetNameClean(), regex));
+            return (type, _) => regexes.Any(regex => Regex.IsMatch(type.Name, regex));
         }
 
-        internal static Func<TypeSpec, StringComparison, bool> HaveNameNotMatching(
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> HaveNameNotMatching(
             IEnumerable<string> regex
         )
         {
             return (type, _) => !HaveNameMatching(regex)(type, _);
         }
 
-        internal static Func<TypeSpec, StringComparison, bool> HaveFullName(
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> HaveFullName(
             IEnumerable<string> name
         )
         {
-            return (type, comparison) =>
-                name.Contains(type.ReflectionType.GetFullNameClean(), comparison.ToComparer());
+            return (type, comparison) => name.Contains(type.FullName, comparison.ToComparer());
         }
 
-        internal static Func<TypeSpec, StringComparison, bool> HaveFullNameMatching(
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> HaveFullNameMatching(
             IEnumerable<string> regexes
         )
         {
-            return (type, _) =>
-                regexes.Any(regex => Regex.IsMatch(type.ReflectionType.GetFullNameClean(), regex));
+            return (type, _) => regexes.Any(regex => Regex.IsMatch(type.FullName, regex));
         }
 
-        internal static Func<TypeSpec, StringComparison, bool> HaveFullNameNotMatching(
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> HaveFullNameNotMatching(
             IEnumerable<string> regexes
         )
         {
             return (type, _) => !HaveFullNameMatching(regexes)(type, _);
         }
 
-        internal static Func<TypeSpec, StringComparison, bool> HaveNameStartingWith(
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> HaveNameStartingWith(
             IEnumerable<string> name
         )
         {
-            return (type, comparison) =>
-                name.Any(n => type.ReflectionType.GetNameClean().StartsWith(n, comparison));
+            return (type, comparison) => name.Any(n => type.Name.StartsWith(n, comparison));
         }
 
-        internal static Func<TypeSpec, StringComparison, bool> HaveNameEndingWith(
+        internal static Func<TypeSpecRoslyn, StringComparison, bool> HaveNameEndingWith(
             IEnumerable<string> name
         )
         {
-            return (type, comparison) =>
-                name.Any(n => type.ReflectionType.GetNameClean().EndsWith(n, comparison));
+            return (type, comparison) => name.Any(n => type.Name.EndsWith(n, comparison));
         }
     }
 }
