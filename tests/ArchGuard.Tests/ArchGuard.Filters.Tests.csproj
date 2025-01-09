@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\ArchGuard.Library\ArchGuard.Library.csproj" />
+    <ProjectReference Include="..\..\src\ArchGuard.Roslyn\ArchGuard.Roslyn.csproj" />
     <ProjectReference Include="..\ArchGuard.Common.Tests\ArchGuard.Tests.Common.csproj" />
     <ProjectReference Include="..\ArchGuard.Tests.MockedAssembly\ArchGuard.Tests.MockedAssembly.csproj" />
   </ItemGroup>
