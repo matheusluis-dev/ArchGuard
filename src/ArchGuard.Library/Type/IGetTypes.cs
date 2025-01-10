@@ -2,10 +2,11 @@ namespace ArchGuard.Library.Type
 {
     using System;
     using System.Collections.Generic;
+    using Microsoft.CodeAnalysis;
 
     public interface IGetTypes
     {
-        IEnumerable<TypeSpecRoslyn> GetTypes();
-        IEnumerable<TypeSpecRoslyn> GetTypes(StringComparison comparison);
+        IEnumerable<INamedTypeSymbol> GetTypes();
+        IEnumerable<INamedTypeSymbol> GetTypes(StringComparison comparison);
     }
 }

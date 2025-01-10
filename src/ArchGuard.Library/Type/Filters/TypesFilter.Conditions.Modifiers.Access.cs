@@ -1,67 +1,64 @@
 namespace ArchGuard.Library.Type.Filters
 {
-    using ArchGuard.Library.Type.Filters.PostConditions.Interfaces;
-    using ArchGuard.Library.Type.Predicates;
-
     public sealed partial class TypesFilter
     {
         public ITypesFilterPostConditions ArePublic()
         {
-            _context.AddPredicate(TypeSpecPredicate.Public);
+            _context.AddPredicate(TypePredicate.Public);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotPublic()
         {
-            _context.AddPredicate(TypeSpecPredicate.NotPublic);
+            _context.AddPredicate(TypePredicate.NotPublic);
             return this;
         }
 
         public ITypesFilterPostConditions AreInternal()
         {
-            _context.AddPredicate(TypeSpecPredicate.Internal);
+            _context.AddPredicate(TypePredicate.Internal);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotInternal()
         {
-            _context.AddPredicate(TypeSpecPredicate.NotInternal);
+            _context.AddPredicate(TypePredicate.NotInternal);
             return this;
         }
 
         public ITypesFilterPostConditions ArePrivate()
         {
-            _context.AddPredicate(TypeSpecPredicate.Private);
+            _context.AddPredicate(TypePredicate.Private);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotPrivate()
         {
-            _context.AddPredicate(TypeSpecPredicate.NotPrivate);
+            _context.AddPredicate(TypePredicate.NotPrivate);
             return this;
         }
 
         public ITypesFilterPostConditions AreProtected()
         {
-            _context.AddPredicate(TypeSpecPredicate.Protected);
+            _context.AddPredicate(TypePredicate.Protected);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotProtected()
         {
-            _context.AddPredicate(TypeSpecPredicate.NotProtected);
+            _context.AddPredicate(TypePredicate.NotProtected);
             return this;
         }
 
         public ITypesFilterPostConditions AreFileScoped()
         {
-            _context.AddPredicate(TypeSpecPredicate.FileScoped);
+            _context.AddPredicate(TypePredicate.FileScoped);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotFileScoped()
         {
-            _context.AddPredicate(TypeSpecPredicate.NotFileScoped);
+            _context.AddPredicate(TypePredicate.NotFileScoped);
             return this;
         }
     }

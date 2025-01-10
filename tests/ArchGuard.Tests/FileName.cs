@@ -1,7 +1,8 @@
 namespace ArchGuard.Filters.Tests
 {
     using System;
-    using ArchGuard.Roslyn;
+    using ArchGuard.Library;
+    using ArchGuard.Library;
     using Xunit;
 
     public sealed class FileName

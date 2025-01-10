@@ -1,4 +1,4 @@
-namespace ArchGuard.Roslyn.Extensions
+namespace ArchGuard.Library.Extensions
 {
     using Microsoft.CodeAnalysis;
 
@@ -7,15 +7,15 @@ namespace ArchGuard.Roslyn.Extensions
         public static string GetName(this INamedTypeSymbol iNamedTypeSymbol)
         {
             var name = iNamedTypeSymbol.Name;
-
             var containingType = iNamedTypeSymbol.ContainingType;
+
             while (containingType != null)
             {
                 name = $"{containingType.Name}+{name}";
                 containingType = containingType.ContainingType;
             }
 
-            return "";
+            return name;
         }
 
         public static string GetFullName(this INamedTypeSymbol iNamedTypeSymbol)

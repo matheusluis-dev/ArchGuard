@@ -1,7 +1,5 @@
 namespace ArchGuard.Library.Type.Filters
 {
-    using ArchGuard.Library.Type.Filters.Conditions.Interfaces;
-
     public sealed partial class TypesFilter
     {
         public ITypesFilterConditions And => this;

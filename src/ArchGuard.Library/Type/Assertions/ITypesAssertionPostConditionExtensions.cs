@@ -1,3 +1,5 @@
+using ArchGuard.Library.Type.Assertions;
+
 namespace ArchGuard.Library.Type.Assertions
 {
     using System;

@@ -1,10 +1,10 @@
-namespace ArchGuard.Roslyn
+namespace ArchGuard.Library
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using ArchGuard.Roslyn.Extensions;
+    using ArchGuard.Library.Extensions;
     using Microsoft.CodeAnalysis;
 
     internal static partial class TypePredicate

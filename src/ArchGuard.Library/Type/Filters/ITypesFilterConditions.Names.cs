@@ -1,7 +1,5 @@
-namespace ArchGuard.Library.Type.Filters.Conditions.Interfaces
+namespace ArchGuard.Library.Type.Filters
 {
-    using ArchGuard.Library.Type.Filters.PostConditions.Interfaces;
-
     public partial interface ITypesFilterConditions
     {
         ITypesFilterPostConditions HaveName(params string[] name);

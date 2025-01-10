@@ -1,4 +1,4 @@
-namespace ArchGuard.Library.Type.Filters.PostConditions.Interfaces
+namespace ArchGuard.Library.Type.Filters
 {
     using ArchGuard.Library.Type.Assertions;
 

@@ -143,6 +143,7 @@ namespace ArchGuard.Filters.Tests.Types
                 .BeEquivalentTo(
                     new List<string>
                     {
+                        TypeNames.FilePartialClass,
                         TypeNames.InternalPartialClass,
                         TypeNames.PublicParentClass_PublicNestedPartialClass,
                         TypeNames.PublicPartialClass,

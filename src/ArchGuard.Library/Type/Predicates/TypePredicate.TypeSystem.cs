@@ -1,4 +1,4 @@
-namespace ArchGuard.Roslyn
+namespace ArchGuard.Library
 {
     using System;
     using Microsoft.CodeAnalysis;
@@ -6,7 +6,7 @@ namespace ArchGuard.Roslyn
     internal static partial class TypePredicate
     {
         internal static Func<INamedTypeSymbol, StringComparison, bool> Class =>
-            (type, _) => type.TypeKind == TypeKind.Class;
+            (type, _) => type.TypeKind == TypeKind.Class && NotRecord(type, _);
         internal static Func<INamedTypeSymbol, StringComparison, bool> NotClass =>
             (type, comparison) => !Class(type, comparison);
 

@@ -4,7 +4,6 @@ namespace ArchGuard.PublicApi.Tests.Version
     using System.Linq;
     using System.Reflection;
     using ArchGuard.Library.Type.Filters;
-    using ArchGuard.Library.Type.Filters.Conditions.Interfaces;
     using ArchGuard.Tests.Common.Extensions;
     using FluentAssertions;
     using Xunit;

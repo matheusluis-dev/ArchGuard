@@ -1,67 +1,64 @@
 namespace ArchGuard.Library.Type.Filters
 {
-    using ArchGuard.Library.Type.Filters.PostConditions.Interfaces;
-    using ArchGuard.Library.Type.Predicates;
-
     public sealed partial class TypesFilter
     {
         public ITypesFilterPostConditions AreClasses()
         {
-            _context.AddPredicate(TypeSpecPredicate.Class);
+            _context.AddPredicate(TypePredicate.Class);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotClasses()
         {
-            _context.AddPredicate(TypeSpecPredicate.NotClass);
+            _context.AddPredicate(TypePredicate.NotClass);
             return this;
         }
 
         public ITypesFilterPostConditions AreInterfaces()
         {
-            _context.AddPredicate(TypeSpecPredicate.Interface);
+            _context.AddPredicate(TypePredicate.Interface);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotInterfaces()
         {
-            _context.AddPredicate(TypeSpecPredicate.NotInterface);
+            _context.AddPredicate(TypePredicate.NotInterface);
             return this;
         }
 
         public ITypesFilterPostConditions AreStructs()
         {
-            _context.AddPredicate(TypeSpecPredicate.Struct);
+            _context.AddPredicate(TypePredicate.Struct);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotStructs()
         {
-            _context.AddPredicate(TypeSpecPredicate.NotStruct);
+            _context.AddPredicate(TypePredicate.NotStruct);
             return this;
         }
 
         public ITypesFilterPostConditions AreEnums()
         {
-            _context.AddPredicate(TypeSpecPredicate.Enum);
+            _context.AddPredicate(TypePredicate.Enum);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotEnums()
         {
-            _context.AddPredicate(TypeSpecPredicate.NotEnum);
+            _context.AddPredicate(TypePredicate.NotEnum);
             return this;
         }
 
         public ITypesFilterPostConditions AreRecords()
         {
-            _context.AddPredicate(TypeSpecPredicate.Record);
+            _context.AddPredicate(TypePredicate.Record);
             return this;
         }
 
         public ITypesFilterPostConditions AreNotRecords()
         {
-            _context.AddPredicate(TypeSpecPredicate.NotRecord);
+            _context.AddPredicate(TypePredicate.NotRecord);
             return this;
         }
     }

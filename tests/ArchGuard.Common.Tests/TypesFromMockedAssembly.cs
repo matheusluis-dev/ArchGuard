@@ -1,13 +1,19 @@
 namespace ArchGuard.Tests.Common
 {
-    using System.Reflection;
+    using ArchGuard.Library;
     using ArchGuard.Library.Type.Filters;
-    using ArchGuard.Tests.MockedAssembly.Classes.Public;
 
     public static class TypesFromMockedAssembly
     {
-        private static readonly Assembly _assembly = typeof(PublicClass).Assembly;
-
-        public static ITypesFilterStart All => Library.Type.Types.FromAssembly(_assembly);
+        public static ITypesFilterStart All =>
+            Library.Type.Types.FromSln(
+                new SlnSearchParameters
+                {
+                    SlnPath =
+                        "C:\\Users\\matheus.oliveira\\source\\repos\\ArchGuard\\ArchGuard.sln",
+                    Preprocessor = "net9_0",
+                    ProjectName = "ArchGuard.Tests.MockedAssembly",
+                }
+            );
     }
 }

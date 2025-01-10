@@ -1,27 +1,32 @@
-namespace ArchGuard.Library.Type.Predicates
+namespace ArchGuard.Library
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using ArchGuard.Library.Extensions;
+    using Microsoft.CodeAnalysis;
 
-    internal static partial class TypeSpecPredicate
+    internal static partial class TypePredicate
     {
-        private static bool NamespaceDefaultPredicate(TypeSpecRoslyn typeSpec, string name)
+        private static bool NamespaceDefaultPredicate(INamedTypeSymbol typeSpec, string name)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentNullException(nameof(name));
 
-            return !(typeSpec.Namespace is null);
+            return !(typeSpec.ContainingNamespace is null)
+                && !typeSpec.ContainingNamespace.IsGlobalNamespace;
         }
 
-        internal static Func<TypeSpecRoslyn, StringComparison, bool> ResideInNamespace(
+        internal static Func<INamedTypeSymbol, StringComparison, bool> ResideInNamespace(
             IEnumerable<string> names
         )
         {
             return (type, comparison) =>
             {
-                var namespaceExists = names.Contains(type.Namespace, comparison.ToComparer());
+                var namespaceExists = names.Contains(
+                    type.ContainingNamespace.GetFullName(),
+                    comparison.ToComparer()
+                );
 
                 return names.Any(name =>
                 {
@@ -29,31 +34,32 @@ namespace ArchGuard.Library.Type.Predicates
                         namespaceExists || name[name.Length - 1] == '.' ? name : name + ".";
 
                     return NamespaceDefaultPredicate(type, name)
-                        && type.Namespace.StartsWith(@namespace, comparison);
+                        && type.ContainingNamespace.GetFullName()
+                            .StartsWith(@namespace, comparison);
                 });
             };
         }
 
-        internal static Func<TypeSpecRoslyn, StringComparison, bool> DoNotResideInNamespace(
+        internal static Func<INamedTypeSymbol, StringComparison, bool> DoNotResideInNamespace(
             IEnumerable<string> name
         )
         {
             return (type, comparison) => !ResideInNamespace(name)(type, comparison);
         }
 
-        internal static Func<TypeSpecRoslyn, StringComparison, bool> ResideInNamespaceContaining(
+        internal static Func<INamedTypeSymbol, StringComparison, bool> ResideInNamespaceContaining(
             IEnumerable<string> names
         )
         {
             return (type, comparison) =>
                 names.Any(name =>
                     NamespaceDefaultPredicate(type, name)
-                    && type.Namespace.IndexOf(name, comparison) != -1
+                    && type.ContainingNamespace.GetFullName().IndexOf(name, comparison) != -1
                 );
         }
 
         internal static Func<
-            TypeSpecRoslyn,
+            INamedTypeSymbol,
             StringComparison,
             bool
         > DoNotResideInNamespaceContaining(IEnumerable<string> name)
@@ -61,19 +67,19 @@ namespace ArchGuard.Library.Type.Predicates
             return (type, comparison) => !ResideInNamespaceContaining(name)(type, comparison);
         }
 
-        internal static Func<TypeSpecRoslyn, StringComparison, bool> ResideInNamespaceEndingWith(
+        internal static Func<INamedTypeSymbol, StringComparison, bool> ResideInNamespaceEndingWith(
             IEnumerable<string> names
         )
         {
             return (type, comparison) =>
                 names.Any(name =>
                     NamespaceDefaultPredicate(type, name)
-                    && type.Namespace.EndsWith(name, comparison)
+                    && type.ContainingNamespace.GetFullName().EndsWith(name, comparison)
                 );
         }
 
         internal static Func<
-            TypeSpecRoslyn,
+            INamedTypeSymbol,
             StringComparison,
             bool
         > DoNotResideInNamespaceEndingWith(IEnumerable<string> name)

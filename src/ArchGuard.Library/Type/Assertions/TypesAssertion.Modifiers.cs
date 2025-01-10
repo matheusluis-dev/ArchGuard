@@ -1,54 +1,54 @@
 namespace ArchGuard.Library.Type.Assertions
 {
-    using ArchGuard.Library.Type.Predicates;
+    using ArchGuard.Library.Type.Assertions;
 
     public sealed partial class TypesAssertion
     {
         public ITypesAssertionPostCondition BePartial()
         {
-            _context.AddPredicate(TypeSpecPredicate.Partial);
+            _context.AddPredicate(TypePredicate.Partial);
             return this;
         }
 
         public ITypesAssertionPostCondition NotBePartial()
         {
-            _context.AddPredicate(TypeSpecPredicate.NotPartial);
+            _context.AddPredicate(TypePredicate.NotPartial);
             return this;
         }
 
         public ITypesAssertionPostCondition BeSealed()
         {
-            _context.AddPredicate(TypeSpecPredicate.Sealed);
+            _context.AddPredicate(TypePredicate.Sealed);
             return this;
         }
 
         public ITypesAssertionPostCondition NotBeSealed()
         {
-            _context.AddPredicate(TypeSpecPredicate.NotSealed);
+            _context.AddPredicate(TypePredicate.NotSealed);
             return this;
         }
 
         public ITypesAssertionPostCondition BeNested()
         {
-            _context.AddPredicate(TypeSpecPredicate.Nested);
+            _context.AddPredicate(TypePredicate.Nested);
             return this;
         }
 
         public ITypesAssertionPostCondition NotBeNested()
         {
-            _context.AddPredicate(TypeSpecPredicate.NotNested);
+            _context.AddPredicate(TypePredicate.NotNested);
             return this;
         }
 
         public ITypesAssertionPostCondition BeStatic()
         {
-            _context.AddPredicate(TypeSpecPredicate.Static);
+            _context.AddPredicate(TypePredicate.Static);
             return this;
         }
 
         public ITypesAssertionPostCondition NotBeStatic()
         {
-            _context.AddPredicate(TypeSpecPredicate.NotStatic);
+            _context.AddPredicate(TypePredicate.NotStatic);
             return this;
         }
     }

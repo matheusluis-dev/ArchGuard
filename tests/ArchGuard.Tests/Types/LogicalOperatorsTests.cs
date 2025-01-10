@@ -73,6 +73,8 @@ namespace ArchGuard.Filters.Tests.Types
                         TypeNames.InternalPartialClass,
                         TypeNames.InternalSealedClass,
                         TypeNames.InternalStaticClass,
+                        TypeNames.PublicParentClass_InternalNestedClass,
+                        TypeNames.PublicParentClass_PrivateNestedClass,
                     }
                 );
         }
@@ -102,6 +104,8 @@ namespace ArchGuard.Filters.Tests.Types
                         TypeNames.InternalPartialClass,
                         TypeNames.InternalSealedClass,
                         TypeNames.InternalStaticClass,
+                        TypeNames.PublicParentClass_InternalNestedClass,
+                        TypeNames.PublicParentClass_PrivateNestedClass,
                     }
                 );
         }

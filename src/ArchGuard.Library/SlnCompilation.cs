@@ -1,4 +1,4 @@
-namespace ArchGuard.Roslyn
+namespace ArchGuard.Library
 {
     using System.Collections.Generic;
     using System.Linq;

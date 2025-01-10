@@ -1,8 +1,6 @@
 namespace ArchGuard.PublicApi.Tests
 {
     using ArchGuard.Library.Type.Filters;
-    using ArchGuard.Library.Type.Filters.Conditions.Interfaces;
-    using ArchGuard.Library.Type.Filters.PostConditions.Interfaces;
     using ArchGuard.Tests.Common;
     using FluentAssertions;
     using Xunit;

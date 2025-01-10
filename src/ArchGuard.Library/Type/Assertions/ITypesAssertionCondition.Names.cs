@@ -1,5 +1,7 @@
 namespace ArchGuard.Library.Type.Assertions
 {
+    using ArchGuard.Library.Type.Assertions;
+
     public partial interface ITypesAssertionCondition
     {
         ITypesAssertionPostCondition HaveName(params string[] names);
