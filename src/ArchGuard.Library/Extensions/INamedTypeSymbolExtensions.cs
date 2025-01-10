@@ -1,6 +1,7 @@
 namespace ArchGuard.Library.Extensions
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Microsoft.CodeAnalysis;
 
@@ -49,6 +50,33 @@ namespace ArchGuard.Library.Extensions
             }
 
             return false;
+        }
+
+        public static bool IsImmutable(this INamedTypeSymbol iNamedTypeSymbol)
+        {
+            var list = new List<INamedTypeSymbol> { iNamedTypeSymbol };
+
+            var baseType = iNamedTypeSymbol.BaseType;
+            while (baseType is not null)
+            {
+                list.Add(baseType);
+                baseType = baseType.BaseType;
+            }
+
+            return list.All(IsImmutable);
+
+            static bool IsImmutable(INamedTypeSymbol t)
+            {
+                var allFieldsReadonly = t.GetMembers()
+                    .OfType<IFieldSymbol>()
+                    .All(field => field.IsReadOnly || field.IsConst);
+
+                var allPropertiesReadonly = t.GetMembers()
+                    .OfType<IPropertySymbol>()
+                    .All(property => property.IsReadOnly || property.SetMethod.IsInitOnly);
+
+                return allFieldsReadonly && allPropertiesReadonly;
+            }
         }
     }
 }

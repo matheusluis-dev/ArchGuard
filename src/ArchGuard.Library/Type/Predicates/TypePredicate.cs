@@ -41,5 +41,11 @@ namespace ArchGuard.Library.Type.Predicates
 
         public static Func<INamedTypeSymbol, StringComparison, bool> NotGeneric =>
             (type, _) => !Generic(type, _);
+
+        public static Func<INamedTypeSymbol, StringComparison, bool> Immutable =>
+            (type, _) => type.IsImmutable();
+
+        public static Func<INamedTypeSymbol, StringComparison, bool> Mutable =>
+            (type, _) => !Immutable(type, _);
     }
 }

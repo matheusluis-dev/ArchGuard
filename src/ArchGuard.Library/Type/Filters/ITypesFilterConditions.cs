@@ -17,6 +17,9 @@ namespace ArchGuard.Library.Type.Filters
         ITypesFilterPostConditions AreGeneric();
         ITypesFilterPostConditions AreNotGeneric();
 
+        ITypesFilterPostConditions AreImmutable();
+        ITypesFilterPostConditions AreMutable();
+
         //        ITypesFilterPostConditions AreOfType(params System.Type[] types);
         //        ITypesFilterPostConditions AreOfType<T>();
     }

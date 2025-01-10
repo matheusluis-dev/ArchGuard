@@ -104,6 +104,18 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
+        public ITypesFilterPostConditions AreImmutable()
+        {
+            _context.AddPredicate(TypePredicate.Immutable);
+            return this;
+        }
+
+        public ITypesFilterPostConditions AreMutable()
+        {
+            _context.AddPredicate(TypePredicate.Mutable);
+            return this;
+        }
+
         //public ITypesFilterPostConditions AreOfType(params Type[] types)
         //{
         //    _context.AddPredicate(TypePredicate.AreOfType(types));
