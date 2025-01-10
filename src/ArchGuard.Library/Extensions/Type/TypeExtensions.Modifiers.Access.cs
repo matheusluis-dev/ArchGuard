@@ -1,11 +1,6 @@
 namespace ArchGuard.Library.Extensions.Type
 {
     using System;
-#if NET7_0_OR_GREATER
-    using System.Linq;
-    using ArchGuard.Library.Helpers;
-    using ArchGuard.Library.Type;
-#endif
 
     internal static partial class TypeExtensions
     {

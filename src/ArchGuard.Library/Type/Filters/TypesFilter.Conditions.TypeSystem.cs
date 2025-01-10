@@ -53,7 +53,6 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
-#if NET5_0_OR_GREATER
         public ITypesFilterPostConditions AreRecords()
         {
             _context.AddPredicate(TypeSpecPredicate.Record);
@@ -65,6 +64,5 @@ namespace ArchGuard.Library.Type.Filters
             _context.AddPredicate(TypeSpecPredicate.NotRecord);
             return this;
         }
-#endif
     }
 }

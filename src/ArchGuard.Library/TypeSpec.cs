@@ -13,11 +13,7 @@ namespace ArchGuard.Library
         public string Name => ReflectionType.GetNameClean();
         public string FullName => ReflectionType.GetFullNameClean();
 
-        public bool IsClass => ReflectionType.IsClass
-#if NET5_0_OR_GREATER
-            && !IsRecord
-#endif
-        ;
+        public bool IsClass => ReflectionType.IsClass && !IsRecord;
 
         public bool IsInternal
         {
@@ -25,9 +21,9 @@ namespace ArchGuard.Library
             {
                 // https://stackoverflow.com/questions/4971213/how-to-use-reflection-to-determine-if-a-class-is-internal
                 var isInternal = ReflectionType.IsNotPublic;
-#if NET7_0_OR_GREATER
+
                 isInternal = isInternal && !IsFileScoped;
-#endif
+
                 isInternal =
                     isInternal || (ReflectionType.IsNested && ReflectionType.IsNestedAssembly);
 
@@ -35,20 +31,16 @@ namespace ArchGuard.Library
             }
         }
 
-#if NET5_0_OR_GREATER
         public bool IsRecord =>
             RecordsHelper
                 .GetRecords(AssemblySpecification)
                 .Contains(FullName, StringComparer.Ordinal);
-#endif
 
-#if NET7_0_OR_GREATER
         public bool IsFileScoped =>
             !ReflectionType.FullName.Equals(FullName, StringComparison.Ordinal)
             && FileAccessModifierHelper
                 .GetFileScopedTypes(AssemblySpecification)
                 .Contains(FullName, StringComparer.Ordinal);
-#endif
 
         public bool IsPartial =>
             PartialHelper

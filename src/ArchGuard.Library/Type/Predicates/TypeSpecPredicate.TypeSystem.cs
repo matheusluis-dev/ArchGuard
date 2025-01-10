@@ -24,11 +24,9 @@ namespace ArchGuard.Library.Type.Predicates
         internal static Func<TypeSpecRoslyn, StringComparison, bool> NotEnum =>
             (type, _) => !Enum(type, _);
 
-#if NET5_0_OR_GREATER
         internal static Func<TypeSpecRoslyn, StringComparison, bool> Record =>
             (type, _) => type.IsRecord;
         internal static Func<TypeSpecRoslyn, StringComparison, bool> NotRecord =>
             (type, _) => !Record(type, _);
-#endif
     }
 }

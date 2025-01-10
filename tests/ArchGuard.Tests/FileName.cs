@@ -1,9 +1,6 @@
-#if NET8_0_OR_GREATER
 namespace ArchGuard.Filters.Tests
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
     using ArchGuard.Roslyn;
     using Xunit;
 
@@ -12,14 +9,29 @@ namespace ArchGuard.Filters.Tests
         [Fact]
         public void Compile()
         {
-            CompileSolution.Compile(
-                "C:\\Users\\matheus.oliveira\\source\\repos\\ArchGuard\\ArchGuard.sln",
-                "net9_0"
-            );
-            CompileSolution.ReadAllDocuments(
-                "C:\\Users\\matheus.oliveira\\source\\repos\\ArchGuard\\ArchGuard.sln"
-            );
+            var parameters = new SlnSearchParameters
+            {
+                SlnPath = "C:\\Users\\matheus.oliveira\\source\\repos\\ArchGuard\\ArchGuard.sln",
+                Preprocessor = "net9_0",
+                ProjectName = "ArchGuard.Tests.MockedAssembly",
+            };
+            var t = SolutionReader.CompileSolution(parameters);
+
+            Console.WriteLine();
+        }
+
+        [Fact]
+        public void Compile2()
+        {
+            var parameters = new SlnSearchParameters
+            {
+                SlnPath = "C:\\Users\\matheus.oliveira\\source\\repos\\ArchGuard\\ArchGuard.sln",
+                Preprocessor = "net9_0",
+                ProjectName = "ArchGuard.Filters.Tests",
+            };
+            var t = SolutionReader.CompileSolution(parameters);
+
+            Console.WriteLine();
         }
     }
 }
-#endif

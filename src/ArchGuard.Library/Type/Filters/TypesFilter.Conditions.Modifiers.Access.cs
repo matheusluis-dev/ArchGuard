@@ -53,7 +53,6 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
-#if NET7_0_OR_GREATER
         public ITypesFilterPostConditions AreFileScoped()
         {
             _context.AddPredicate(TypeSpecPredicate.FileScoped);
@@ -65,6 +64,5 @@ namespace ArchGuard.Library.Type.Filters
             _context.AddPredicate(TypeSpecPredicate.NotFileScoped);
             return this;
         }
-#endif
     }
 }

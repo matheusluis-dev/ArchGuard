@@ -14,9 +14,7 @@ namespace ArchGuard.Library.Type.Assertions
         ITypesAssertionPostCondition BeProtected();
         ITypesAssertionPostCondition NotBeProtected();
 
-#if NET7_0_OR_GREATER
         ITypesAssertionPostCondition BeFileScoped();
         ITypesAssertionPostCondition NotBeFileScoped();
-#endif
     }
 }

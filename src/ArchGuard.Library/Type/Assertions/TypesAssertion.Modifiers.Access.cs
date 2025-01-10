@@ -52,7 +52,6 @@ namespace ArchGuard.Library.Type.Assertions
             return this;
         }
 
-#if NET7_0_OR_GREATER
         public ITypesAssertionPostCondition BeFileScoped()
         {
             _context.AddPredicate(TypeSpecPredicate.FileScoped);
@@ -64,6 +63,5 @@ namespace ArchGuard.Library.Type.Assertions
             _context.AddPredicate(TypeSpecPredicate.NotFileScoped);
             return this;
         }
-#endif
     }
 }

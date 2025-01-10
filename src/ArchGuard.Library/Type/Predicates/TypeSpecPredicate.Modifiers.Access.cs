@@ -24,11 +24,9 @@ namespace ArchGuard.Library.Type.Predicates
         internal static Func<TypeSpecRoslyn, StringComparison, bool> NotProtected =>
             (type, _) => !Protected(type, _);
 
-#if NET7_0_OR_GREATER
         internal static Func<TypeSpecRoslyn, StringComparison, bool> FileScoped =>
             (type, _) => type.IsFileScoped;
         internal static Func<TypeSpecRoslyn, StringComparison, bool> NotFileScoped =>
             (type, _) => !FileScoped(type, _);
-#endif
     }
 }

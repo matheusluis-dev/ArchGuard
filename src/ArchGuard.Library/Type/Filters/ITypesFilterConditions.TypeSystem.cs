@@ -16,9 +16,7 @@ namespace ArchGuard.Library.Type.Filters.Conditions.Interfaces
         ITypesFilterPostConditions AreEnums();
         ITypesFilterPostConditions AreNotEnums();
 
-#if NET5_0_OR_GREATER
         ITypesFilterPostConditions AreRecords();
         ITypesFilterPostConditions AreNotRecords();
-#endif
     }
 }

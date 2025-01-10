@@ -16,9 +16,7 @@ namespace ArchGuard.Library.Type.Filters.Conditions.Interfaces
         ITypesFilterPostConditions AreProtected();
         ITypesFilterPostConditions AreNotProtected();
 
-#if NET7_0_OR_GREATER
         ITypesFilterPostConditions AreFileScoped();
         ITypesFilterPostConditions AreNotFileScoped();
-#endif
     }
 }
