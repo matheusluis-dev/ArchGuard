@@ -9,7 +9,7 @@ namespace ArchGuard.Library.Extensions
             var fullName = iNamespaceSymbolExtensions.Name;
 
             var containingNamespace = iNamespaceSymbolExtensions.ContainingNamespace;
-            while (containingNamespace is not null && !containingNamespace.IsGlobalNamespace)
+            while (containingNamespace?.IsGlobalNamespace == false)
             {
                 fullName = $"{containingNamespace.Name}.{fullName}";
                 containingNamespace = containingNamespace.ContainingNamespace;

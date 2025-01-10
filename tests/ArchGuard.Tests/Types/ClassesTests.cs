@@ -1,7 +1,6 @@
 namespace ArchGuard.Filters.Tests.Types
 {
     // TODO: remove new List<string> from tests, not necessary in any runtime
-    using System.Collections.Generic;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;
@@ -61,23 +60,20 @@ namespace ArchGuard.Filters.Tests.Types
             types
                 .Should()
                 .BeEquivalentTo(
-                    new List<string>
-                    {
-                        TypeNames.InternalEnum,
-                        TypeNames.PublicEnum,
-                        TypeNames.IInternalInterface,
-                        TypeNames.IPublicInterface,
+                    TypeNames.InternalEnum,
+                    TypeNames.PublicEnum,
+                    TypeNames.IInternalInterface,
+                    TypeNames.IPublicInterface,
 #if NET5_0_OR_GREATER
-                        TypeNames.InternalPartialRecord,
-                        TypeNames.InternalRecord,
-                        TypeNames.InternalSealedRecord,
-                        TypeNames.PublicPartialRecord,
-                        TypeNames.PublicRecord,
-                        TypeNames.PublicSealedRecord,
+                    TypeNames.InternalPartialRecord,
+                    TypeNames.InternalRecord,
+                    TypeNames.InternalSealedRecord,
+                    TypeNames.PublicPartialRecord,
+                    TypeNames.PublicRecord,
+                    TypeNames.PublicSealedRecord,
 #endif
-                        TypeNames.InternalStruct,
-                        TypeNames.PublicStruct,
-                    }
+                    TypeNames.InternalStruct,
+                    TypeNames.PublicStruct
                 );
         }
 
@@ -141,13 +137,10 @@ namespace ArchGuard.Filters.Tests.Types
             types
                 .Should()
                 .BeEquivalentTo(
-                    new List<string>
-                    {
-                        TypeNames.FilePartialClass,
-                        TypeNames.InternalPartialClass,
-                        TypeNames.PublicParentClass_PublicNestedPartialClass,
-                        TypeNames.PublicPartialClass,
-                    }
+                    TypeNames.FilePartialClass,
+                    TypeNames.InternalPartialClass,
+                    TypeNames.PublicParentClass_PublicNestedPartialClass,
+                    TypeNames.PublicPartialClass
                 );
         }
 

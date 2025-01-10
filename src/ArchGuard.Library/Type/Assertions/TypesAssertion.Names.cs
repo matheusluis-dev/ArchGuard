@@ -1,6 +1,6 @@
 namespace ArchGuard.Library.Type.Assertions
 {
-    using ArchGuard.Library.Type.Assertions;
+    using ArchGuard.Library.Type.Predicates;
 
     public sealed partial class TypesAssertion
     {

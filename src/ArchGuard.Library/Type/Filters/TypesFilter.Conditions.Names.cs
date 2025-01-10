@@ -1,5 +1,7 @@
 namespace ArchGuard.Library.Type.Filters
 {
+    using ArchGuard.Library.Type.Predicates;
+
     public sealed partial class TypesFilter
     {
         public ITypesFilterPostConditions HaveName(params string[] name)

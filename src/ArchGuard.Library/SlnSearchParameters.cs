@@ -9,7 +9,7 @@ namespace ArchGuard.Library
         public required string ProjectName { get; set; }
         public string Preprocessor { get; set; }
 
-        public override bool Equals([NotNullWhen(true)] object obj)
+        public override readonly bool Equals([NotNullWhen(true)] object obj)
         {
             if (obj is not SlnSearchParameters other)
                 return false;
@@ -19,7 +19,7 @@ namespace ArchGuard.Library
                 && Preprocessor.Equals(other.Preprocessor, StringComparison.OrdinalIgnoreCase);
         }
 
-        public override int GetHashCode()
+        public override readonly int GetHashCode()
         {
             return new
             {
