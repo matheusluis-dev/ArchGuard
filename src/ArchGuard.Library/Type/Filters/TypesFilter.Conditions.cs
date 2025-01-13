@@ -128,6 +128,12 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
+        public ITypesFilterPostConditions AreNotStaticless()
+        {
+            _context.AddPredicate(TypePredicate.NotStaticless);
+            return this;
+        }
+
         //public ITypesFilterPostConditions AreOfType(params Type[] types)
         //{
         //    _context.AddPredicate(TypePredicate.AreOfType(types));

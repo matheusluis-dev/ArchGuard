@@ -24,6 +24,7 @@ namespace ArchGuard.Library.Type.Filters
         ITypesFilterPostConditions AreNotStateless();
 
         ITypesFilterPostConditions AreStaticless();
+        ITypesFilterPostConditions AreNotStaticless();
 
         //        ITypesFilterPostConditions AreOfType(params System.Type[] types);
         //        ITypesFilterPostConditions AreOfType<T>();
