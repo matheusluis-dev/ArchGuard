@@ -34,6 +34,15 @@ namespace ArchGuard.Library.Extensions
 
         public static bool Inherit(this INamedTypeSymbol iNamedTypeSymbol, params Type[] types)
         {
+            if (iNamedTypeSymbol.TypeKind == TypeKind.Interface)
+            {
+                return iNamedTypeSymbol.AllInterfaces.Any(i =>
+                    types.Any(t =>
+                        t.GetFullName().Contains(i.GetFullName(), StringComparison.Ordinal)
+                    )
+                );
+            }
+
             var baseType = iNamedTypeSymbol.BaseType;
 
             while (baseType != null)

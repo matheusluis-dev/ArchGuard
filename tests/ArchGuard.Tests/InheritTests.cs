@@ -1,262 +1,224 @@
 namespace ArchGuard.Filters.Tests
 {
     using System;
-    using System.Collections.Generic;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;
-    using ArchGuard.Tests.MockedAssembly.Classes.Public;
-    using ArchGuard.Tests.MockedAssembly.Interfaces.Public;
+    using ArchGuard.Tests.MockedAssembly.Inherit;
     using FluentAssertions;
     using Xunit;
 
+    // TODO: tests with multiple types as params
     public sealed class InheritTests
     {
         [Fact]
-        public void Inherit_with_type_as_argument()
+        public void Inherit_interface_with_type_as_argument()
         {
             // Arrange
-#pragma warning disable CA2263 // Prefer generic overload when type is known
-            var filters = TypesFromMockedAssembly.All.That.Inherit(typeof(PublicAbstractClass));
-#pragma warning restore CA2263 // Prefer generic overload when type is known
+            var filters = TypesFromMockedAssembly
+                .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.Inherit)
+                .And.Inherit(typeof(IPublicInterface));
 
             // Act
-            var types = filters.GetTypes().GetFullNames();
-
-            // Assert
-            types.Should().BeEquivalentTo(TypeNames.PublicClass, TypeNames.PublicSealedClass);
-        }
-
-        [Fact]
-        public void Inherit_with_type_as_argument_and_params()
-        {
-            // Arrange
-            var filters = TypesFromMockedAssembly.All.That.Inherit(
-                typeof(PublicAbstractClass),
-                typeof(PublicClass)
-            );
-
-            // Act
-            var types = filters.GetTypes().GetFullNames();
-
-            // Assert
-            types.Should().BeEquivalentTo(TypeNames.PublicClass, TypeNames.PublicSealedClass);
-        }
-
-        [Fact]
-        public void Inherit_with_generic_overload()
-        {
-            // Arrange
-            var filters = TypesFromMockedAssembly.All.That.Inherit<PublicAbstractClass>();
-
-            // Act
-            var types = filters.GetTypes().GetFullNames();
-
-            // Assert
-            types.Should().BeEquivalentTo(TypeNames.PublicClass, TypeNames.PublicSealedClass);
-        }
-
-        [Fact]
-        public void Inherit_with_type_as_argument_should_Throw_ArgumentException_when_type_is_not_class()
-        {
-            // Arrange
-#pragma warning disable CA2263 // Prefer generic overload when type is known
-            Action act = () =>
-                TypesFromMockedAssembly
-                    .All.That.Inherit(typeof(IPublicInterface))
-                    .GetTypes()
-                    .GetFullNames();
-#pragma warning restore CA2263 // Prefer generic overload when type is known
-
-            // Assert
-            act.Should().ThrowExactly<ArgumentException>().WithMessage("Type must be a class*");
-        }
-
-        [Fact]
-        public void Inherit_with_generic_overload_should_Throw_ArgumentException_when_type_is_not_class()
-        {
-            // Arrange
-            Action act = () =>
-                TypesFromMockedAssembly
-                    .All.That.Inherit<IPublicInterface>()
-                    .GetTypes()
-                    .GetFullNames();
-
-            // Assert
-            act.Should().ThrowExactly<ArgumentException>().WithMessage("Type must be a class*");
-        }
-
-        [Fact]
-        public void DoNotInherit_with_type_as_argument()
-        {
-            // Arrange
-#pragma warning disable CA2263 // Prefer generic overload when type is known
-            var filters = TypesFromMockedAssembly.All.That.DoNotInherit(
-                typeof(PublicAbstractClass)
-            );
-#pragma warning restore CA2263 // Prefer generic overload when type is known
-
-            // Act
-            var types = filters.GetTypes().GetFullNames();
-
-            var dbg = new List<string>
-            {
-#if NET7_0_OR_GREATER
-                TypeNames.FileClass,
-                TypeNames.FilePartialClass,
-                TypeNames.FileSealedClass,
-                TypeNames.FileStaticClass,
-#endif
-                TypeNames.InternalClass,
-                TypeNames.InternalPartialClass,
-                TypeNames.InternalSealedClass,
-                TypeNames.InternalStaticClass,
-                TypeNames.PublicAbstractClass,
-                TypeNames.PublicGenericClassWithOneType,
-                TypeNames.PublicGenericClassWithTwoTypes,
-                TypeNames.PublicParentClass,
-                TypeNames.PublicParentClass_InternalNestedClass,
-                TypeNames.PublicParentClass_PrivateNestedClass,
-                TypeNames.PublicParentClass_PublicNestedClass,
-                TypeNames.PublicParentClass_PublicNestedPartialClass,
-                TypeNames.PublicPartialClass,
-                TypeNames.PublicSealedClass,
-                TypeNames.PublicStaticClass,
-                TypeNames.IInternalInterface,
-                TypeNames.IPublicInterface,
-                TypeNames.InternalEnum,
-                TypeNames.PublicEnum,
-#if NET5_0_OR_GREATER
-                TypeNames.InternalRecord,
-                TypeNames.InternalPartialRecord,
-                TypeNames.InternalSealedRecord,
-                TypeNames.PublicRecord,
-                TypeNames.PublicPartialRecord,
-                TypeNames.PublicSealedRecord,
-#endif
-                TypeNames.InternalStruct,
-                TypeNames.PublicStruct,
-            };
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
             types
                 .Should()
                 .BeEquivalentTo(
-#if NET7_0_OR_GREATER
-                    TypeNames.FileClass,
-                    TypeNames.FilePartialClass,
-                    TypeNames.FileSealedClass,
-                    TypeNames.FileStaticClass,
-#endif
-                    TypeNames.InternalClass,
-                    TypeNames.InternalPartialClass,
-                    TypeNames.InternalSealedClass,
-                    TypeNames.InternalStaticClass,
-                    TypeNames.PublicAbstractClass,
-                    TypeNames.PublicGenericClassWithOneType,
-                    TypeNames.PublicGenericClassWithTwoTypes,
-                    TypeNames.PublicParentClass,
-                    TypeNames.PublicParentClass_InternalNestedClass,
-                    TypeNames.PublicParentClass_PrivateNestedClass,
-                    TypeNames.PublicParentClass_PublicNestedClass,
-                    TypeNames.PublicParentClass_PublicNestedPartialClass,
-                    TypeNames.PublicPartialClass,
-                    TypeNames.PublicStaticClass,
-                    TypeNames.IInternalInterface,
-                    TypeNames.IPublicInterface,
-                    TypeNames.InternalEnum,
-                    TypeNames.PublicEnum,
-#if NET5_0_OR_GREATER
-                    TypeNames.InternalRecord,
-                    TypeNames.InternalPartialRecord,
-                    TypeNames.InternalSealedRecord,
-                    TypeNames.PublicRecord,
-                    TypeNames.PublicPartialRecord,
-                    TypeNames.PublicSealedRecord,
-#endif
-                    TypeNames.InternalStruct,
-                    TypeNames.PublicStruct
+                    TypeNames.Inherit.IPublicInheritIPublicInterfaceInterface,
+                    TypeNames.Inherit.IPublicInheritIPublicInterfaceByInheritanceInterface,
+                    TypeNames.Inherit.IPublicParentInheritIPublicInterfaceByInheritanceInterface
                 );
         }
 
         [Fact]
-        public void DoNotInherit_with_generic_overload()
+        public void Inherit_interface_with_generic_overload()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.DoNotInherit<PublicAbstractClass>();
+            var filters = TypesFromMockedAssembly
+                .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.Inherit)
+                .And.Inherit<IPublicInterface>();
 
             // Act
-            var types = filters.GetTypes().GetFullNames();
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
             types
                 .Should()
                 .BeEquivalentTo(
-#if NET7_0_OR_GREATER
-                    TypeNames.FileClass,
-                    TypeNames.FilePartialClass,
-                    TypeNames.FileSealedClass,
-                    TypeNames.FileStaticClass,
-#endif
-                    TypeNames.InternalClass,
-                    TypeNames.InternalPartialClass,
-                    TypeNames.InternalSealedClass,
-                    TypeNames.InternalStaticClass,
-                    TypeNames.PublicAbstractClass,
-                    TypeNames.PublicGenericClassWithOneType,
-                    TypeNames.PublicGenericClassWithTwoTypes,
-                    TypeNames.PublicParentClass,
-                    TypeNames.PublicParentClass_InternalNestedClass,
-                    TypeNames.PublicParentClass_PrivateNestedClass,
-                    TypeNames.PublicParentClass_PublicNestedClass,
-                    TypeNames.PublicParentClass_PublicNestedPartialClass,
-                    TypeNames.PublicPartialClass,
-                    TypeNames.PublicStaticClass,
-                    TypeNames.IInternalInterface,
-                    TypeNames.IPublicInterface,
-                    TypeNames.InternalEnum,
-                    TypeNames.PublicEnum,
-#if NET5_0_OR_GREATER
-                    TypeNames.InternalRecord,
-                    TypeNames.InternalPartialRecord,
-                    TypeNames.InternalSealedRecord,
-                    TypeNames.PublicRecord,
-                    TypeNames.PublicPartialRecord,
-                    TypeNames.PublicSealedRecord,
-#endif
-                    TypeNames.InternalStruct,
-                    TypeNames.PublicStruct
+                    TypeNames.Inherit.IPublicInheritIPublicInterfaceInterface,
+                    TypeNames.Inherit.IPublicInheritIPublicInterfaceByInheritanceInterface,
+                    TypeNames.Inherit.IPublicParentInheritIPublicInterfaceByInheritanceInterface
                 );
         }
 
         [Fact]
-        public void DoNotInherit_with_type_as_argument_should_Throw_ArgumentException_when_type_is_not_class()
+        public void Inherit_class_with_type_as_argument()
         {
             // Arrange
-#pragma warning disable CA2263 // Prefer generic overload when type is known
-            Action act = () =>
-                TypesFromMockedAssembly
-                    .All.That.DoNotInherit(typeof(IPublicInterface))
-                    .GetTypes()
-                    .GetFullNames();
-#pragma warning restore CA2263 // Prefer generic overload when type is known
+            var filters = TypesFromMockedAssembly
+                .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.Inherit)
+                .And.Inherit(typeof(PublicClass));
+
+            // Act
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
-            act.Should().ThrowExactly<ArgumentException>().WithMessage("Type must be a class*");
+            types
+                .Should()
+                .BeEquivalentTo(
+                    TypeNames.Inherit.PublicInheritPublicClassClass,
+                    TypeNames.Inherit.PublicInheritPublicClassByInheritanceClass,
+                    TypeNames.Inherit.PublicParentInheritPublicClassByInheritanceClass
+                );
         }
 
         [Fact]
-        public void DoNotInherit_with_generic_overload_should_Throw_ArgumentException_when_type_is_not_class()
+        public void Inherit_class_with_generic_overload()
         {
             // Arrange
-            Action act = () =>
-                TypesFromMockedAssembly
-                    .All.That.DoNotInherit<IPublicInterface>()
-                    .GetTypes()
-                    .GetFullNames();
+            var filters = TypesFromMockedAssembly
+                .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.Inherit)
+                .And.Inherit<PublicClass>();
+
+            // Act
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
-            act.Should().ThrowExactly<ArgumentException>().WithMessage("Type must be a class*");
+            types
+                .Should()
+                .BeEquivalentTo(
+                    TypeNames.Inherit.PublicInheritPublicClassClass,
+                    TypeNames.Inherit.PublicInheritPublicClassByInheritanceClass,
+                    TypeNames.Inherit.PublicParentInheritPublicClassByInheritanceClass
+                );
+        }
+
+        [Fact]
+        public void DoNotInherit_interface_with_type_as_argument()
+        {
+            // Arrange
+            var filters = TypesFromMockedAssembly
+                .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.Inherit)
+                .And.DoNotInherit(typeof(IPublicInterface));
+
+            // Act
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
+
+            // Assert
+            types
+                .Should()
+                .BeEquivalentTo(
+                    TypeNames.Inherit.IPublicInterface,
+                    TypeNames.Inherit.PublicClass,
+                    TypeNames.Inherit.PublicImplementIPublicInterfaceClass,
+                    TypeNames.Inherit.PublicInheritPublicClassByInheritanceClass,
+                    TypeNames.Inherit.PublicParentInheritPublicClassByInheritanceClass,
+                    TypeNames.Inherit.PublicInheritPublicClassClass
+                );
+        }
+
+        [Fact]
+        public void DoNotInherit_interface_with_generic_overload()
+        {
+            // Arrange
+            var filters = TypesFromMockedAssembly
+                .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.Inherit)
+                .And.DoNotInherit<IPublicInterface>();
+
+            // Act
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
+
+            // Assert
+            types
+                .Should()
+                .BeEquivalentTo(
+                    TypeNames.Inherit.IPublicInterface,
+                    TypeNames.Inherit.PublicClass,
+                    TypeNames.Inherit.PublicImplementIPublicInterfaceClass,
+                    TypeNames.Inherit.PublicInheritPublicClassByInheritanceClass,
+                    TypeNames.Inherit.PublicParentInheritPublicClassByInheritanceClass,
+                    TypeNames.Inherit.PublicInheritPublicClassClass
+                );
+        }
+
+        [Fact]
+        public void DoNotInherit_class_with_type_as_argument()
+        {
+            // Arrange
+            var filters = TypesFromMockedAssembly
+                .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.Inherit)
+                .And.DoNotInherit(typeof(PublicClass));
+
+            // Act
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
+
+            // Assert
+            types
+                .Should()
+                .BeEquivalentTo(
+                    TypeNames.Inherit.IPublicInheritIPublicInterfaceInterface,
+                    TypeNames.Inherit.IPublicInheritIPublicInterfaceByInheritanceInterface,
+                    TypeNames.Inherit.IPublicParentInheritIPublicInterfaceByInheritanceInterface,
+                    TypeNames.Inherit.IPublicInterface,
+                    TypeNames.Inherit.PublicClass,
+                    TypeNames.Inherit.PublicImplementIPublicInterfaceClass
+                );
+        }
+
+        [Fact]
+        public void DoNotInherit_class_with_generic_overload()
+        {
+            // Arrange
+            var filters = TypesFromMockedAssembly
+                .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.Inherit)
+                .And.DoNotInherit<PublicClass>();
+
+            // Act
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
+
+            // Assert
+            types
+                .Should()
+                .BeEquivalentTo(
+                    TypeNames.Inherit.IPublicInheritIPublicInterfaceInterface,
+                    TypeNames.Inherit.IPublicInheritIPublicInterfaceByInheritanceInterface,
+                    TypeNames.Inherit.IPublicParentInheritIPublicInterfaceByInheritanceInterface,
+                    TypeNames.Inherit.IPublicInterface,
+                    TypeNames.Inherit.PublicClass,
+                    TypeNames.Inherit.PublicImplementIPublicInterfaceClass
+                );
+        }
+
+        [Fact]
+        public void Inherit_should_not_treat_interface_implementation_as_interface_inheritance()
+        {
+            // Arrange
+            var filters = TypesFromMockedAssembly
+                .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.Inherit)
+                .And.Inherit<IPublicInterface>();
+
+            // Act
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
+
+            // Assert
+            types.Should().NotContain(TypeNames.Inherit.PublicImplementIPublicInterfaceClass);
+        }
+
+        [Fact]
+        public void DoNotInherit_should_not_treat_interface_implementation_as_interface_inheritance()
+        {
+            // Arrange
+            var filters = TypesFromMockedAssembly
+                .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.Inherit)
+                .And.DoNotInherit<IPublicInterface>();
+
+            // Act
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
+
+            // Assert
+            types.Should().Contain(TypeNames.Inherit.PublicImplementIPublicInterfaceClass);
         }
     }
 }

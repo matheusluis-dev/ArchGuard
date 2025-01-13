@@ -61,9 +61,6 @@ namespace ArchGuard.Library.Type.Filters
             if (types is null)
                 throw new ArgumentNullException(nameof(types));
 
-            if (types.Any(type => !type.IsClass))
-                throw new ArgumentException("Type must be a class", nameof(types));
-
             _context.AddPredicate(TypePredicate.Inherit(types));
 
             return this;
@@ -78,9 +75,6 @@ namespace ArchGuard.Library.Type.Filters
         {
             if (types is null)
                 throw new ArgumentNullException(nameof(types));
-
-            if (types.Any(type => !type.IsClass))
-                throw new ArgumentException("Type must be a class", nameof(types));
 
             _context.AddPredicate(TypePredicate.NotInherit(types));
 
