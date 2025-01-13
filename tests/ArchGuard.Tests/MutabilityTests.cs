@@ -24,10 +24,10 @@ namespace ArchGuard.Filters.Tests
             types
                 .Should()
                 .BeEquivalentTo(
-                    TypeNames.PublicMutableClass,
-                    TypeNames.PublicMutableRecord,
-                    TypeNames.PublicMutableParentClass,
-                    TypeNames.PublicMutableByInheritanceClass
+                    TypeNames.Mutability.PublicMutableClass,
+                    TypeNames.Mutability.PublicMutableRecord,
+                    TypeNames.Mutability.PublicMutableParentClass,
+                    TypeNames.Mutability.PublicMutableByInheritanceClass
                 );
         }
 
@@ -46,13 +46,13 @@ namespace ArchGuard.Filters.Tests
             types
                 .Should()
                 .BeEquivalentTo(
-                    TypeNames.PublicImmutableClass,
-                    TypeNames.PublicImmutableWithInitPropertyClass,
-                    TypeNames.PublicImmutableWithReadOnlyFieldClass,
-                    TypeNames.PublicImmutableWithConstFieldClass,
-                    TypeNames.PublicImmutableRecord,
-                    TypeNames.PublicImmutableParentClass,
-                    TypeNames.PublicImmutableWithInheritanceClass
+                    TypeNames.Mutability.PublicImmutableClass,
+                    TypeNames.Mutability.PublicImmutableWithInitPropertyClass,
+                    TypeNames.Mutability.PublicImmutableWithReadOnlyFieldClass,
+                    TypeNames.Mutability.PublicImmutableWithConstFieldClass,
+                    TypeNames.Mutability.PublicImmutableRecord,
+                    TypeNames.Mutability.PublicImmutableParentClass,
+                    TypeNames.Mutability.PublicImmutableWithInheritanceClass
                 );
         }
     }

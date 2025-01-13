@@ -12,7 +12,9 @@ namespace ArchGuard.Library.Type.Predicates
         )
         {
             return (type, _) =>
-                type.AllInterfaces.Any(@interface =>
+                // Interfaces do not implement each other, they inherit
+                type.TypeKind != TypeKind.Interface
+                && type.AllInterfaces.Any(@interface =>
                     types
                         .Select(t => t.GetFullName())
                         .Contains(@interface.GetFullName(), StringComparer.CurrentCulture)

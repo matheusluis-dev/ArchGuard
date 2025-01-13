@@ -5,7 +5,7 @@ namespace ArchGuard.Library.Type.Filters
         ITypesFilterPostConditions ImplementInterface(params System.Type[] types);
         ITypesFilterPostConditions ImplementInterface<T>();
 
-        ITypesFilterPostConditions DoNotImplementsInterface(params System.Type[] types);
+        ITypesFilterPostConditions DoNotImplementInterface(params System.Type[] types);
         ITypesFilterPostConditions DoNotImplementInterface<T>();
 
         ITypesFilterPostConditions Inherit(params System.Type[] type);

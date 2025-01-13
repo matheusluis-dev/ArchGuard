@@ -38,7 +38,7 @@ namespace ArchGuard.Library.Type.Filters
             return ImplementInterface(typeof(T));
         }
 
-        public ITypesFilterPostConditions DoNotImplementsInterface(params Type[] types)
+        public ITypesFilterPostConditions DoNotImplementInterface(params Type[] types)
         {
             if (types is null)
                 throw new ArgumentNullException(nameof(types));
@@ -53,7 +53,7 @@ namespace ArchGuard.Library.Type.Filters
 
         public ITypesFilterPostConditions DoNotImplementInterface<T>()
         {
-            return DoNotImplementsInterface(typeof(T));
+            return DoNotImplementInterface(typeof(T));
         }
 
         public ITypesFilterPostConditions Inherit(params Type[] types)
