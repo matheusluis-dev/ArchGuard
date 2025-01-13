@@ -110,6 +110,24 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
+        public ITypesFilterPostConditions AreStateless()
+        {
+            _context.AddPredicate(TypePredicate.Stateless);
+            return this;
+        }
+
+        public ITypesFilterPostConditions AreNotStateless()
+        {
+            _context.AddPredicate(TypePredicate.NotStateless);
+            return this;
+        }
+
+        public ITypesFilterPostConditions AreStaticless()
+        {
+            _context.AddPredicate(TypePredicate.Staticless);
+            return this;
+        }
+
         //public ITypesFilterPostConditions AreOfType(params Type[] types)
         //{
         //    _context.AddPredicate(TypePredicate.AreOfType(types));

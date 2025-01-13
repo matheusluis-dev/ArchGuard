@@ -87,5 +87,60 @@ namespace ArchGuard.Library.Extensions
                 return allFieldsReadonly && allPropertiesReadonly;
             }
         }
+
+        public static bool IsStateless(this INamedTypeSymbol iNamedTypeSymbol)
+        {
+            // Check if there are any instance fields
+            var hasInstanceFields = iNamedTypeSymbol
+                .GetMembers()
+                .OfType<IFieldSymbol>()
+                .Any(field => !field.IsStatic);
+
+            // Check if there are any instance properties
+            var hasInstanceProperties = iNamedTypeSymbol
+                .GetMembers()
+                .OfType<IPropertySymbol>()
+                .Any(property => !property.IsStatic);
+
+            // Check if there are any instance events
+            var hasInstanceEvents = iNamedTypeSymbol
+                .GetMembers()
+                .OfType<IEventSymbol>()
+                .Any(@event => !@event.IsStatic);
+
+            return !hasInstanceFields && !hasInstanceProperties && !hasInstanceEvents;
+        }
+
+        public static bool IsStaticless(this INamedTypeSymbol iNamedTypeSymbol)
+        {
+            // Check if there are any static fields
+            var hasStaticFields = iNamedTypeSymbol
+                .GetMembers()
+                .OfType<IFieldSymbol>()
+                .Any(field => field.IsStatic);
+
+            // Check if there are any static properties
+            var hasStaticProperties = iNamedTypeSymbol
+                .GetMembers()
+                .OfType<IPropertySymbol>()
+                .Any(property => property.IsStatic);
+
+            // Check if there are any static methods
+            var hasStaticMethods = iNamedTypeSymbol
+                .GetMembers()
+                .OfType<IMethodSymbol>()
+                .Any(method => method.IsStatic);
+
+            // Check if there are any static events
+            var hasStaticEvents = iNamedTypeSymbol
+                .GetMembers()
+                .OfType<IEventSymbol>()
+                .Any(@event => @event.IsStatic);
+
+            return !hasStaticFields
+                && !hasStaticProperties
+                && !hasStaticMethods
+                && !hasStaticEvents;
+        }
     }
 }

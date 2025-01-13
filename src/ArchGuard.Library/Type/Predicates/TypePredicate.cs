@@ -49,5 +49,14 @@ namespace ArchGuard.Library.Type.Predicates
 
         public static Func<INamedTypeSymbol, StringComparison, bool> Mutable =>
             (type, _) => !Immutable(type, _);
+
+        public static Func<INamedTypeSymbol, StringComparison, bool> Stateless =>
+            (type, _) => type.IsStateless();
+
+        public static Func<INamedTypeSymbol, StringComparison, bool> NotStateless =>
+            (type, _) => !Stateless(type, _);
+
+        public static Func<INamedTypeSymbol, StringComparison, bool> Staticless =>
+            (type, _) => type.IsStaticless();
     }
 }

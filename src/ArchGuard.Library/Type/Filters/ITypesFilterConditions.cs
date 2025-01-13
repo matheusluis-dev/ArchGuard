@@ -20,6 +20,11 @@ namespace ArchGuard.Library.Type.Filters
         ITypesFilterPostConditions AreImmutable();
         ITypesFilterPostConditions AreMutable();
 
+        ITypesFilterPostConditions AreStateless();
+        ITypesFilterPostConditions AreNotStateless();
+
+        ITypesFilterPostConditions AreStaticless();
+
         //        ITypesFilterPostConditions AreOfType(params System.Type[] types);
         //        ITypesFilterPostConditions AreOfType<T>();
     }

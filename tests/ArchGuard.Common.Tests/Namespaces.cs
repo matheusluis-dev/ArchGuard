@@ -28,5 +28,6 @@ namespace ArchGuard.Tests.Common
         public const string Internal = "ArchGuard.Tests.MockedAssembly.Internal";
         public const string Mutability = "ArchGuard.Tests.MockedAssembly.Mutability";
         public const string Public = "ArchGuard.Tests.MockedAssembly.Public";
+        public const string Stateless = "ArchGuard.Tests.MockedAssembly.Stateless";
     }
 }
