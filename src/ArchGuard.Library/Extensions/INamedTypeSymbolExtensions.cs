@@ -68,7 +68,9 @@ namespace ArchGuard.Library.Extensions
             var baseType = iNamedTypeSymbol.BaseType;
             while (baseType is not null)
             {
-                list.Add(baseType);
+                if (!baseType.Name.Equals("object", StringComparison.OrdinalIgnoreCase))
+                    list.Add(baseType);
+
                 baseType = baseType.BaseType;
             }
 
@@ -85,6 +87,41 @@ namespace ArchGuard.Library.Extensions
                     .All(property => property.IsReadOnly || property.SetMethod.IsInitOnly);
 
                 return allFieldsReadonly && allPropertiesReadonly;
+            }
+        }
+
+        public static bool IsImmutableExternally(this INamedTypeSymbol iNamedTypeSymbol)
+        {
+            var list = new List<INamedTypeSymbol> { iNamedTypeSymbol };
+
+            var baseType = iNamedTypeSymbol.BaseType;
+            while (baseType is not null)
+            {
+                list.Add(baseType);
+                baseType = baseType.BaseType;
+            }
+
+            return list.All(IsImmutableExternally);
+
+            static bool IsImmutableExternally(INamedTypeSymbol t)
+            {
+                var allFieldsReadonlyOrPrivate = t.GetMembers()
+                    .OfType<IFieldSymbol>()
+                    .All(field =>
+                        field.IsReadOnly
+                        || field.IsConst
+                        || field.DeclaredAccessibility == Accessibility.Private
+                    );
+
+                var allPropertiesReadonlyOrPrivate = t.GetMembers()
+                    .OfType<IPropertySymbol>()
+                    .All(property =>
+                        property.IsReadOnly
+                        || property.SetMethod.IsInitOnly
+                        || property.DeclaredAccessibility == Accessibility.Private
+                    );
+
+                return allFieldsReadonlyOrPrivate && allPropertiesReadonlyOrPrivate;
             }
         }
 
@@ -113,34 +150,7 @@ namespace ArchGuard.Library.Extensions
 
         public static bool IsStaticless(this INamedTypeSymbol iNamedTypeSymbol)
         {
-            // Check if there are any static fields
-            var hasStaticFields = iNamedTypeSymbol
-                .GetMembers()
-                .OfType<IFieldSymbol>()
-                .Any(field => field.IsStatic);
-
-            // Check if there are any static properties
-            var hasStaticProperties = iNamedTypeSymbol
-                .GetMembers()
-                .OfType<IPropertySymbol>()
-                .Any(property => property.IsStatic);
-
-            // Check if there are any static methods
-            var hasStaticMethods = iNamedTypeSymbol
-                .GetMembers()
-                .OfType<IMethodSymbol>()
-                .Any(method => method.IsStatic);
-
-            // Check if there are any static events
-            var hasStaticEvents = iNamedTypeSymbol
-                .GetMembers()
-                .OfType<IEventSymbol>()
-                .Any(@event => @event.IsStatic);
-
-            return !hasStaticFields
-                && !hasStaticProperties
-                && !hasStaticMethods
-                && !hasStaticEvents;
+            return iNamedTypeSymbol.GetMembers().All(m => !m.IsStatic);
         }
     }
 }
