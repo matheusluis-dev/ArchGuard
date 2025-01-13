@@ -21,10 +21,12 @@ namespace ArchGuard.Tests.Common
         public const string StructsPublic = "ArchGuard.Tests.MockedAssembly.Structs.Public";
         public const string StructsInternal = "ArchGuard.Tests.MockedAssembly.Structs.Internal";
 
-        public const string Inherit = "ArchGuard.Tests.MockedAssembly.Inherit";
+        public const string Generics = "ArchGuard.Tests.MockedAssembly.Generics";
         public const string ImplementInterface =
             "ArchGuard.Tests.MockedAssembly.ImplementInterface";
-        public const string Generics = "ArchGuard.Tests.MockedAssembly.Generics";
+        public const string Inherit = "ArchGuard.Tests.MockedAssembly.Inherit";
+        public const string Internal = "ArchGuard.Tests.MockedAssembly.Internal";
         public const string Mutability = "ArchGuard.Tests.MockedAssembly.Mutability";
+        public const string Public = "ArchGuard.Tests.MockedAssembly.Public";
     }
 }

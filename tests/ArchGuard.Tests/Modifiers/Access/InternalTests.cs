@@ -1,6 +1,6 @@
 namespace ArchGuard.Filters.Tests.Modifiers.Access
 {
-    using System.Collections.Generic;
+    using System;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;
@@ -13,68 +13,43 @@ namespace ArchGuard.Filters.Tests.Modifiers.Access
         public void Internal_types()
         {
             // Arrange
-            var expected = new List<string>
-            {
-                TypeNames.InternalEnum,
-                TypeNames.IInternalInterface,
-#if NET5_0_OR_GREATER
-                TypeNames.InternalRecord,
-                TypeNames.InternalPartialRecord,
-                TypeNames.InternalSealedRecord,
-#endif
-                TypeNames.InternalClass,
-                TypeNames.InternalPartialClass,
-                TypeNames.InternalSealedClass,
-                TypeNames.InternalStaticClass,
-                TypeNames.InternalStruct,
-                TypeNames.PublicParentClass_InternalNestedClass,
-            };
-            var filters = TypesFromMockedAssembly.All.That.AreInternal();
+            var filters = TypesFromMockedAssembly
+                .All.That.ResideInNamespace(Namespaces.Internal)
+                .And.AreInternal();
 
             // Act
-            var types = filters.GetTypes().GetFullNames();
-
-            // Assert
-            types.Should().BeEquivalentTo(expected);
-        }
-
-        [Fact]
-        public void Non_internal_types()
-        {
-            var filters = TypesFromMockedAssembly.All.That.AreNotInternal();
-
-            // Act
-            var types = filters.GetTypes().GetFullNames();
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
             types
                 .Should()
                 .BeEquivalentTo(
-                    TypeNames.PublicEnum,
-                    TypeNames.IPublicInterface,
-#if NET5_0_OR_GREATER
-                    TypeNames.PublicRecord,
-                    TypeNames.PublicPartialRecord,
-                    TypeNames.PublicSealedRecord,
-#endif
-#if NET7_0_OR_GREATER
-                    TypeNames.FileClass,
-                    TypeNames.FilePartialClass,
-                    TypeNames.FileSealedClass,
-                    TypeNames.FileStaticClass,
-#endif
-                    TypeNames.PublicAbstractClass,
-                    TypeNames.PublicClass,
-                    TypeNames.PublicGenericClassWithOneType,
-                    TypeNames.PublicGenericClassWithTwoTypes,
-                    TypeNames.PublicParentClass,
-                    TypeNames.PublicParentClass_PrivateNestedClass,
-                    TypeNames.PublicParentClass_PublicNestedClass,
-                    TypeNames.PublicParentClass_PublicNestedPartialClass,
-                    TypeNames.PublicPartialClass,
-                    TypeNames.PublicSealedClass,
-                    TypeNames.PublicStaticClass,
-                    TypeNames.PublicStruct
+                    TypeNames.Internal.IInternalInterface,
+                    TypeNames.Internal.InternalEnum,
+                    TypeNames.Internal.InternalClass
+                );
+        }
+
+        [Fact]
+        public void Non_public_types()
+        {
+            var filters = TypesFromMockedAssembly
+                .All.That.ResideInNamespace(Namespaces.Internal)
+                .And.AreNotInternal();
+
+            // Act
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
+
+            // Assert
+            types
+                .Should()
+                .BeEquivalentTo(
+                    TypeNames.Internal.IFileInterface,
+                    TypeNames.Internal.FileClass,
+                    TypeNames.Internal.FileEnum,
+                    TypeNames.Internal.IPublicInterface,
+                    TypeNames.Internal.PublicClass,
+                    TypeNames.Internal.PublicEnum
                 );
         }
     }
