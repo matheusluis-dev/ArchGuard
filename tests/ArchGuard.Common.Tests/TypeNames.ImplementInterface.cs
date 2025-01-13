@@ -4,26 +4,32 @@ namespace ArchGuard.Tests.Common.Types
     {
         public static class ImplementInterface
         {
-            public const string IPublicInterface =
-                Namespaces.ImplementInterface + "." + nameof(IPublicInterface);
+            public const string IPublicInterface1 =
+                Namespaces.ImplementInterface + "." + nameof(IPublicInterface1);
 
-            public const string IPublicInheritIPublicInterfaceInterface =
+            public const string IPublicInheritIPublicInterface1Interface =
                 Namespaces.ImplementInterface
                 + "."
-                + nameof(IPublicInheritIPublicInterfaceInterface);
+                + nameof(IPublicInheritIPublicInterface1Interface);
 
-            public const string PublicImplementIPublicInterfaceClass =
-                Namespaces.ImplementInterface + "." + nameof(PublicImplementIPublicInterfaceClass);
+            public const string PublicImplementIPublicInterface1Class =
+                Namespaces.ImplementInterface + "." + nameof(PublicImplementIPublicInterface1Class);
 
-            public const string PublicImplementPublicInterfaceByInheritanceClass =
+            public const string PublicImplementPublicInterface1ByInheritanceClass =
                 Namespaces.ImplementInterface
                 + "."
-                + nameof(PublicImplementPublicInterfaceByInheritanceClass);
+                + nameof(PublicImplementPublicInterface1ByInheritanceClass);
 
-            public const string PublicParentImplementPublicInterfaceByInheritanceClass =
+            public const string PublicParentImplementPublicInterface1ByInheritanceClass =
                 Namespaces.ImplementInterface
                 + "."
-                + nameof(PublicParentImplementPublicInterfaceByInheritanceClass);
+                + nameof(PublicParentImplementPublicInterface1ByInheritanceClass);
+
+            public const string IPublicInterface2 =
+                Namespaces.ImplementInterface + "." + nameof(IPublicInterface2);
+
+            public const string PublicImplementPublicInterface2Class =
+                Namespaces.ImplementInterface + "." + nameof(PublicImplementPublicInterface2Class);
         }
     }
 }

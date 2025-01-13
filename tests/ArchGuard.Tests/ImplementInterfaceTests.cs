@@ -16,7 +16,7 @@ namespace ArchGuard.Filters.Tests
             // Arrange
             var filters = TypesFromMockedAssembly
                 .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.ImplementInterface)
-                .And.ImplementInterface(typeof(IPublicInterface));
+                .And.ImplementInterface(typeof(IPublicInterface1));
 
             // Act
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
@@ -25,29 +25,37 @@ namespace ArchGuard.Filters.Tests
             types
                 .Should()
                 .BeEquivalentTo(
-                    TypeNames.ImplementInterface.PublicImplementIPublicInterfaceClass,
-                    TypeNames.ImplementInterface.PublicImplementPublicInterfaceByInheritanceClass,
+                    TypeNames.ImplementInterface.PublicImplementIPublicInterface1Class,
+                    TypeNames.ImplementInterface.PublicImplementPublicInterface1ByInheritanceClass,
                     TypeNames
                         .ImplementInterface
-                        .PublicParentImplementPublicInterfaceByInheritanceClass
+                        .PublicParentImplementPublicInterface1ByInheritanceClass
                 );
         }
 
-        //[Fact]
-        //public void ImplementsInterface_with_type_as_argument_and_params()
-        //{
-        //    // Arrange
-        //    var filters = TypesFromMockedAssembly.All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.ImplementInterface).And.ImplementInterface(
-        //        typeof(IPublicInterface),
-        //        typeof(IInternalInterface)
-        //    );
+        [Fact]
+        public void ImplementsInterface_with_type_as_argument_and_params()
+        {
+            // Arrange
+            var filters = TypesFromMockedAssembly
+                .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.ImplementInterface)
+                .And.ImplementInterface(typeof(IPublicInterface1), typeof(IPublicInterface2));
 
-        //    // Act
-        //    var types = filters.GetTypes().GetFullNames();
+            // Act
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
-        //    // Assert
-        //    types.Should().BeEquivalentTo(TypeNames.InternalClass, TypeNames.PublicClass);
-        //}
+            // Assert
+            types
+                .Should()
+                .BeEquivalentTo(
+                    TypeNames.ImplementInterface.PublicImplementIPublicInterface1Class,
+                    TypeNames.ImplementInterface.PublicImplementPublicInterface1ByInheritanceClass,
+                    TypeNames
+                        .ImplementInterface
+                        .PublicParentImplementPublicInterface1ByInheritanceClass,
+                    TypeNames.ImplementInterface.PublicImplementPublicInterface2Class
+                );
+        }
 
         [Fact]
         public void ImplementsInterface_with_generic_overload()
@@ -55,7 +63,7 @@ namespace ArchGuard.Filters.Tests
             // Arrange
             var filters = TypesFromMockedAssembly
                 .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.ImplementInterface)
-                .And.ImplementInterface<IPublicInterface>();
+                .And.ImplementInterface<IPublicInterface1>();
 
             // Act
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
@@ -64,11 +72,11 @@ namespace ArchGuard.Filters.Tests
             types
                 .Should()
                 .BeEquivalentTo(
-                    TypeNames.ImplementInterface.PublicImplementIPublicInterfaceClass,
-                    TypeNames.ImplementInterface.PublicImplementPublicInterfaceByInheritanceClass,
+                    TypeNames.ImplementInterface.PublicImplementIPublicInterface1Class,
+                    TypeNames.ImplementInterface.PublicImplementPublicInterface1ByInheritanceClass,
                     TypeNames
                         .ImplementInterface
-                        .PublicParentImplementPublicInterfaceByInheritanceClass
+                        .PublicParentImplementPublicInterface1ByInheritanceClass
                 );
         }
 
@@ -81,7 +89,7 @@ namespace ArchGuard.Filters.Tests
                     .All.That.ResideInNamespace(
                         ArchGuard.Tests.Common.Namespaces.ImplementInterface
                     )
-                    .And.ImplementInterface(typeof(PublicImplementIPublicInterfaceClass))
+                    .And.ImplementInterface(typeof(PublicImplementIPublicInterface1Class))
                     .GetTypes(StringComparison.Ordinal)
                     .GetFullNames();
 
@@ -100,7 +108,7 @@ namespace ArchGuard.Filters.Tests
                     .All.That.ResideInNamespace(
                         ArchGuard.Tests.Common.Namespaces.ImplementInterface
                     )
-                    .And.ImplementInterface<PublicImplementIPublicInterfaceClass>()
+                    .And.ImplementInterface<PublicImplementIPublicInterface1Class>()
                     .GetTypes(StringComparison.Ordinal)
                     .GetFullNames();
 
@@ -116,7 +124,7 @@ namespace ArchGuard.Filters.Tests
             // Arrange
             var filters = TypesFromMockedAssembly
                 .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.ImplementInterface)
-                .And.DoNotImplementInterface(typeof(IPublicInterface));
+                .And.DoNotImplementInterface(typeof(IPublicInterface1));
 
             // Act
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
@@ -125,8 +133,10 @@ namespace ArchGuard.Filters.Tests
             types
                 .Should()
                 .BeEquivalentTo(
-                    TypeNames.ImplementInterface.IPublicInterface,
-                    TypeNames.ImplementInterface.IPublicInheritIPublicInterfaceInterface
+                    TypeNames.ImplementInterface.IPublicInterface1,
+                    TypeNames.ImplementInterface.IPublicInheritIPublicInterface1Interface,
+                    TypeNames.ImplementInterface.IPublicInterface2,
+                    TypeNames.ImplementInterface.PublicImplementPublicInterface2Class
                 );
         }
 
@@ -136,7 +146,7 @@ namespace ArchGuard.Filters.Tests
             // Arrange
             var filters = TypesFromMockedAssembly
                 .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.ImplementInterface)
-                .And.DoNotImplementInterface<IPublicInterface>();
+                .And.DoNotImplementInterface<IPublicInterface1>();
 
             // Act
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
@@ -145,8 +155,10 @@ namespace ArchGuard.Filters.Tests
             types
                 .Should()
                 .BeEquivalentTo(
-                    TypeNames.ImplementInterface.IPublicInterface,
-                    TypeNames.ImplementInterface.IPublicInheritIPublicInterfaceInterface
+                    TypeNames.ImplementInterface.IPublicInterface1,
+                    TypeNames.ImplementInterface.IPublicInheritIPublicInterface1Interface,
+                    TypeNames.ImplementInterface.IPublicInterface2,
+                    TypeNames.ImplementInterface.PublicImplementPublicInterface2Class
                 );
         }
 
@@ -159,7 +171,7 @@ namespace ArchGuard.Filters.Tests
                     .All.That.ResideInNamespace(
                         ArchGuard.Tests.Common.Namespaces.ImplementInterface
                     )
-                    .And.DoNotImplementInterface(typeof(PublicImplementIPublicInterfaceClass))
+                    .And.DoNotImplementInterface(typeof(PublicImplementIPublicInterface1Class))
                     .GetTypes(StringComparison.Ordinal)
                     .GetFullNames();
 
@@ -178,7 +190,7 @@ namespace ArchGuard.Filters.Tests
                     .All.That.ResideInNamespace(
                         ArchGuard.Tests.Common.Namespaces.ImplementInterface
                     )
-                    .And.DoNotImplementInterface<PublicImplementIPublicInterfaceClass>()
+                    .And.DoNotImplementInterface<PublicImplementIPublicInterface1Class>()
                     .GetTypes(StringComparison.Ordinal)
                     .GetFullNames();
 
@@ -194,7 +206,7 @@ namespace ArchGuard.Filters.Tests
             // Arrange
             var filters = TypesFromMockedAssembly
                 .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.ImplementInterface)
-                .And.ImplementInterface(typeof(IPublicInterface));
+                .And.ImplementInterface(typeof(IPublicInterface1));
 
             // Act
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
@@ -202,7 +214,7 @@ namespace ArchGuard.Filters.Tests
             // Assert
             types
                 .Should()
-                .NotContain(TypeNames.ImplementInterface.IPublicInheritIPublicInterfaceInterface);
+                .NotContain(TypeNames.ImplementInterface.IPublicInheritIPublicInterface1Interface);
         }
 
         [Fact]
@@ -211,7 +223,7 @@ namespace ArchGuard.Filters.Tests
             // Arrange
             var filters = TypesFromMockedAssembly
                 .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.ImplementInterface)
-                .And.DoNotImplementInterface(typeof(IPublicInterface));
+                .And.DoNotImplementInterface(typeof(IPublicInterface1));
 
             // Act
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
@@ -219,7 +231,7 @@ namespace ArchGuard.Filters.Tests
             // Assert
             types
                 .Should()
-                .Contain(TypeNames.ImplementInterface.IPublicInheritIPublicInterfaceInterface);
+                .Contain(TypeNames.ImplementInterface.IPublicInheritIPublicInterface1Interface);
         }
     }
 }
