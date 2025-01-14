@@ -21,6 +21,8 @@ namespace ArchGuard.Tests.Common
         public const string StructsPublic = "ArchGuard.Tests.MockedAssembly.Structs.Public";
         public const string StructsInternal = "ArchGuard.Tests.MockedAssembly.Structs.Internal";
 
+        public const string ExternalMutability =
+            "ArchGuard.Tests.MockedAssembly.ExternalMutability";
         public const string Generics = "ArchGuard.Tests.MockedAssembly.Generics";
         public const string ImplementInterface =
             "ArchGuard.Tests.MockedAssembly.ImplementInterface";

@@ -9,60 +9,61 @@ namespace ArchGuard.Library.Type.Predicates
 
     internal static partial class TypePredicate
     {
-        internal static Func<INamedTypeSymbol, StringComparison, bool> HaveName(
-            IEnumerable<string> names
-        )
+        internal static Func<Type_, StringComparison, bool> HaveName(IEnumerable<string> names)
         {
-            return (type, comparison) => names.Contains(type.GetName(), comparison.ToComparer());
+            return (type, comparison) =>
+                names.Contains(type.Symbol.GetName(), comparison.ToComparer());
         }
 
-        internal static Func<INamedTypeSymbol, StringComparison, bool> HaveNameMatching(
+        internal static Func<Type_, StringComparison, bool> HaveNameMatching(
             IEnumerable<string> regexes
         )
         {
-            return (type, _) => regexes.Any(regex => Regex.IsMatch(type.GetName(), regex));
+            return (type, _) => regexes.Any(regex => Regex.IsMatch(type.Symbol.GetName(), regex));
         }
 
-        internal static Func<INamedTypeSymbol, StringComparison, bool> HaveNameNotMatching(
+        internal static Func<Type_, StringComparison, bool> HaveNameNotMatching(
             IEnumerable<string> regex
         )
         {
             return (type, _) => !HaveNameMatching(regex)(type, _);
         }
 
-        internal static Func<INamedTypeSymbol, StringComparison, bool> HaveFullName(
-            IEnumerable<string> name
-        )
+        internal static Func<Type_, StringComparison, bool> HaveFullName(IEnumerable<string> name)
         {
-            return (type, comparison) => name.Contains(type.GetFullName(), comparison.ToComparer());
+            return (type, comparison) =>
+                name.Contains(type.Symbol.GetFullName(), comparison.ToComparer());
         }
 
-        internal static Func<INamedTypeSymbol, StringComparison, bool> HaveFullNameMatching(
+        internal static Func<Type_, StringComparison, bool> HaveFullNameMatching(
             IEnumerable<string> regexes
         )
         {
-            return (type, _) => regexes.Any(regex => Regex.IsMatch(type.GetFullName(), regex));
+            return (type, _) =>
+                regexes.Any(regex => Regex.IsMatch(type.Symbol.GetFullName(), regex));
         }
 
-        internal static Func<INamedTypeSymbol, StringComparison, bool> HaveFullNameNotMatching(
+        internal static Func<Type_, StringComparison, bool> HaveFullNameNotMatching(
             IEnumerable<string> regexes
         )
         {
             return (type, _) => !HaveFullNameMatching(regexes)(type, _);
         }
 
-        internal static Func<INamedTypeSymbol, StringComparison, bool> HaveNameStartingWith(
+        internal static Func<Type_, StringComparison, bool> HaveNameStartingWith(
             IEnumerable<string> name
         )
         {
-            return (type, comparison) => name.Any(n => type.GetName().StartsWith(n, comparison));
+            return (type, comparison) =>
+                name.Any(n => type.Symbol.GetName().StartsWith(n, comparison));
         }
 
-        internal static Func<INamedTypeSymbol, StringComparison, bool> HaveNameEndingWith(
+        internal static Func<Type_, StringComparison, bool> HaveNameEndingWith(
             IEnumerable<string> name
         )
         {
-            return (type, comparison) => name.Any(n => type.GetName().EndsWith(n, comparison));
+            return (type, comparison) =>
+                name.Any(n => type.Symbol.GetName().EndsWith(n, comparison));
         }
     }
 }

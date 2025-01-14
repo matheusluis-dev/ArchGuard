@@ -7,26 +7,26 @@ namespace ArchGuard.Library.Type.Filters
 
     public sealed class TypesFilterContext
     {
-        private readonly IEnumerable<INamedTypeSymbol> _types;
+        private readonly SlnCompilation _slnCompilation;
+        private readonly IEnumerable<Type_> _types;
 
-        private readonly List<
-            List<Func<INamedTypeSymbol, StringComparison, bool>>
-        > _groupedFilterPredicates =
-            new List<List<Func<INamedTypeSymbol, StringComparison, bool>>>();
+        private readonly List<List<Func<Type_, StringComparison, bool>>> _groupedFilterPredicates =
+            new();
 
-        public TypesFilterContext(IEnumerable<INamedTypeSymbol> types)
+        public TypesFilterContext(SlnCompilation slnCompilation)
         {
-            _types = types;
+            ArgumentNullException.ThrowIfNull(slnCompilation);
+
+            _slnCompilation = slnCompilation;
+            _types = slnCompilation.Types;
         }
 
         private void CreateGroupedPredicate()
         {
-            _groupedFilterPredicates.Add(
-                new List<Func<INamedTypeSymbol, StringComparison, bool>>()
-            );
+            _groupedFilterPredicates.Add(new());
         }
 
-        public void AddPredicate(Func<INamedTypeSymbol, StringComparison, bool> predicate)
+        public void AddPredicate(Func<Type_, StringComparison, bool> predicate)
         {
             if (_groupedFilterPredicates.Count == 0)
                 CreateGroupedPredicate();
@@ -39,27 +39,27 @@ namespace ArchGuard.Library.Type.Filters
             CreateGroupedPredicate();
         }
 
-        internal List<List<Func<INamedTypeSymbol, StringComparison, bool>>> GetFilters()
+        internal List<List<Func<Type_, StringComparison, bool>>> GetFilters()
         {
             return _groupedFilterPredicates;
         }
 
-        internal IEnumerable<INamedTypeSymbol> GetRawTypes()
+        internal IEnumerable<Type_> GetRawTypes()
         {
             return _types;
         }
 
-        public IEnumerable<INamedTypeSymbol> GetTypes()
+        public IEnumerable<Type_> GetTypes()
         {
             return GetTypes(StringComparison.CurrentCulture);
         }
 
-        public IEnumerable<INamedTypeSymbol> GetTypes(StringComparison comparison)
+        public IEnumerable<Type_> GetTypes(StringComparison comparison)
         {
             if (_groupedFilterPredicates.Count == 0)
                 return _types;
 
-            var types = new List<INamedTypeSymbol>();
+            var types = new List<Type_>();
 
             foreach (var group in _groupedFilterPredicates)
             {

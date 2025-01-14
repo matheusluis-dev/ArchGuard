@@ -10,12 +10,12 @@ namespace ArchGuard.Library.Type.Filters
     {
         public ITypesFilterConditions That => this;
 
-        public IEnumerable<INamedTypeSymbol> GetTypes()
+        public IEnumerable<Type_> GetTypes()
         {
             return _context.GetTypes(StringComparison.CurrentCulture);
         }
 
-        public IEnumerable<INamedTypeSymbol> GetTypes(StringComparison comparison)
+        public IEnumerable<Type_> GetTypes(StringComparison comparison)
         {
             return _context.GetTypes(comparison);
         }
@@ -131,6 +131,18 @@ namespace ArchGuard.Library.Type.Filters
         public ITypesFilterPostConditions AreNotStaticless()
         {
             _context.AddPredicate(TypePredicate.NotStaticless);
+            return this;
+        }
+
+        public ITypesFilterPostConditions AreExternallyImmutable()
+        {
+            _context.AddPredicate(TypePredicate.ExternallyImmutable);
+            return this;
+        }
+
+        public ITypesFilterPostConditions AreExternallyMutable()
+        {
+            _context.AddPredicate(TypePredicate.ExternallyMutable);
             return this;
         }
 

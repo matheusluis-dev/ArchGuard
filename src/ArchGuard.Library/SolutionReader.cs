@@ -34,25 +34,21 @@ namespace ArchGuard.Library
                         )
                     )
                 );
-                var compilations = new List<(Project, Compilation)>();
-                var types = new Dictionary<Project, IEnumerable<INamedTypeSymbol>>();
+
+                var types = new List<Type_>();
                 foreach (var project in projects)
                 {
                     var compilation = project.GetCompilationAsync().Result;
-
-                    compilations.Add((project, compilation));
-                    types.Add(
-                        project,
-                        GetAllTypeMembers(compilation.GlobalNamespace, compilation.Assembly)
+                    var allTypes = GetAllTypeMembers(
+                        compilation.GlobalNamespace,
+                        compilation.Assembly
                     );
+
+                    foreach (var type in allTypes)
+                        types.Add(new(project, type));
                 }
 
-                var slnCompilation = new SlnCompilation
-                {
-                    Solution = solution,
-                    Compilations = compilations,
-                    Types = types,
-                };
+                var slnCompilation = new SlnCompilation { Solution = solution, Types = types };
 
                 _cache.TryAdd(parameters, slnCompilation);
 

@@ -10,7 +10,7 @@ namespace ArchGuard.Library.Type
         public static ITypesFilterStart FromSln(SlnSearchParameters parameters)
         {
             var sln = SolutionReader.CompileSolution(parameters);
-            var context = new TypesFilterContext(sln.AllTypes);
+            var context = new TypesFilterContext(sln);
 
             return TypesFilter.Create(context);
         }
