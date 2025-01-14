@@ -8,28 +8,28 @@ namespace ArchGuard.Library.Type.Predicates
 
     internal static partial class TypePredicate
     {
-        internal static Func<Type_, StringComparison, bool> Partial =>
+        internal static Func<TypeDefinition, StringComparison, bool> Partial =>
             (type, _) =>
                 type
                     .Symbol.DeclaringSyntaxReferences.Select(reference => reference.GetSyntax())
                     .OfType<TypeDeclarationSyntax>()
                     .Any(syntax => syntax.Modifiers.Any(SyntaxKind.PartialKeyword));
-        internal static Func<Type_, StringComparison, bool> NotPartial =>
+        internal static Func<TypeDefinition, StringComparison, bool> NotPartial =>
             (type, _) => !Partial(type, _);
 
-        internal static Func<Type_, StringComparison, bool> Sealed =>
+        internal static Func<TypeDefinition, StringComparison, bool> Sealed =>
             (type, _) => type.Symbol.IsSealed;
-        internal static Func<Type_, StringComparison, bool> NotSealed =>
+        internal static Func<TypeDefinition, StringComparison, bool> NotSealed =>
             (type, _) => !Sealed(type, _);
 
-        internal static Func<Type_, StringComparison, bool> Nested =>
+        internal static Func<TypeDefinition, StringComparison, bool> Nested =>
             (type, _) => type.Symbol.ContainingType != null;
-        internal static Func<Type_, StringComparison, bool> NotNested =>
+        internal static Func<TypeDefinition, StringComparison, bool> NotNested =>
             (type, _) => !Nested(type, _);
 
-        internal static Func<Type_, StringComparison, bool> Static =>
+        internal static Func<TypeDefinition, StringComparison, bool> Static =>
             (type, _) => type.Symbol.IsStatic;
-        internal static Func<Type_, StringComparison, bool> NotStatic =>
+        internal static Func<TypeDefinition, StringComparison, bool> NotStatic =>
             (type, _) => !Static(type, _);
     }
 }

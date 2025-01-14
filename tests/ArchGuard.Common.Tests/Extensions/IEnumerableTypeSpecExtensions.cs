@@ -9,7 +9,7 @@ namespace ArchGuard.Tests.Common.Extensions
 
     public static class IEnumerableTypeSpecExtensions
     {
-        public static IList<string> GetFullNames(this IEnumerable<Type_> types)
+        public static IList<string> GetFullNames(this IEnumerable<TypeDefinition> types)
         {
             return types
                 .Select(type => type.Symbol.GetFullName())

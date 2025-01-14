@@ -10,12 +10,12 @@ namespace ArchGuard.Library.Type.Filters
     {
         public ITypesFilterConditions That => this;
 
-        public IEnumerable<Type_> GetTypes()
+        public IEnumerable<TypeDefinition> GetTypes()
         {
             return _context.GetTypes(StringComparison.CurrentCulture);
         }
 
-        public IEnumerable<Type_> GetTypes(StringComparison comparison)
+        public IEnumerable<TypeDefinition> GetTypes(StringComparison comparison)
         {
             return _context.GetTypes(comparison);
         }

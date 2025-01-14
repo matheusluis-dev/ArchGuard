@@ -6,6 +6,6 @@ namespace ArchGuard.Library
     public sealed class SlnCompilation
     {
         public Solution Solution { get; set; }
-        public IEnumerable<Type_> Types { get; set; }
+        public IEnumerable<TypeDefinition> Types { get; set; }
     }
 }

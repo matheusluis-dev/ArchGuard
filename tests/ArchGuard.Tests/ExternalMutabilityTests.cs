@@ -41,7 +41,10 @@ namespace ArchGuard.Filters.Tests
                         .PublicExternalMutableWithSetMethodUpdatingPrivateFieldClass,
                     TypeNames
                         .ExternalMutability
-                        .PublicExternalMutableWithMethodCallingMethodUpdatePublicPropertyPrivateSetClass
+                        .PublicExternalMutableWithMethodCallingMethodUpdatePublicPropertyPrivateSetClass,
+                    TypeNames
+                        .ExternalMutability
+                        .PublicExternalMutableWithMethodCallingGetWithUpdatePublicPropertyPrivateSetClass
                 );
         }
 

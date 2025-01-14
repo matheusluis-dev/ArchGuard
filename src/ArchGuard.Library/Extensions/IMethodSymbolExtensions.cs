@@ -25,7 +25,7 @@ namespace ArchGuard.Library.Extensions
 
             (var methodSyntax, var semanticModel) = methodSymbol.GetSemanticModel(project);
 
-            return CheckAssignments() || CheckMemberAccesses() || CheckCalledMethods();
+            return CheckAssignments() || CheckPropertiesAccessors() || CheckCalledMethods();
 
             // Check for assignment expressions that modify private fields or properties
             bool CheckAssignments()
@@ -47,15 +47,18 @@ namespace ArchGuard.Library.Extensions
             }
 
             // Check for member access expressions that modify private fields and properties
-            bool CheckMemberAccesses()
+            bool CheckPropertiesAccessors()
             {
                 return methodSyntax
                     .DescendantNodes()
-                    .OfType<MemberAccessExpressionSyntax>()
+                    .OfType<IdentifierNameSyntax>()
                     .Select(memberAccess => semanticModel.GetSymbolInfo(memberAccess).Symbol)
-                    .Any(symbol =>
-                        symbol?.IsPrivateOrProtected() == true
-                        && symbol?.Kind is SymbolKind.Field or SymbolKind.Property
+                    .OfType<IPropertySymbol>()
+                    .Any(property =>
+                        property.IsExternallyImmutable(
+                            project,
+                            ignorePrivateOrProtectedVerification: true
+                        )
                     );
             }
 

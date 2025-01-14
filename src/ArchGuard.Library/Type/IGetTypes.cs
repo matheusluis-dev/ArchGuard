@@ -5,7 +5,7 @@ namespace ArchGuard.Library.Type
 
     public interface IGetTypes
     {
-        IEnumerable<Type_> GetTypes();
-        IEnumerable<Type_> GetTypes(StringComparison comparison);
+        IEnumerable<TypeDefinition> GetTypes();
+        IEnumerable<TypeDefinition> GetTypes(StringComparison comparison);
     }
 }

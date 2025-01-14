@@ -37,7 +37,8 @@ namespace ArchGuard.Library.Extensions
 
         public static bool IsExternallyImmutable(
             this IPropertySymbol propertySymbol,
-            Project project
+            Project project,
+            bool ignorePrivateOrProtectedVerification = false
         )
         {
             ArgumentNullException.ThrowIfNull(propertySymbol);
@@ -45,7 +46,7 @@ namespace ArchGuard.Library.Extensions
             if (propertySymbol.IsStatic)
                 return true;
 
-            if (propertySymbol.IsPrivateOrProtected())
+            if (!ignorePrivateOrProtectedVerification && propertySymbol.IsPrivateOrProtected())
                 return true;
 
             if (!propertySymbol.HasCustomBody())

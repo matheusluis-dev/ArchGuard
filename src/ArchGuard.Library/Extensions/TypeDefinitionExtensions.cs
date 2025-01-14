@@ -4,9 +4,9 @@ namespace ArchGuard.Library.Extensions
     using System.Linq;
     using Microsoft.CodeAnalysis;
 
-    public static class Type_Extensions
+    public static class TypeDefinitionExtensions
     {
-        public static bool IsExternallyImmutable(this Type_ type)
+        public static bool IsExternallyImmutable(this TypeDefinition type)
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -25,8 +25,7 @@ namespace ArchGuard.Library.Extensions
                 .OfType<IFieldSymbol>()
                 .All(field =>
                     field.IsStatic
-                    || field.DeclaredAccessibility == Accessibility.Private
-                    || field.DeclaredAccessibility == Accessibility.Protected
+                    || field.IsPrivateOrProtected()
                     || field.IsReadOnly
                     || field.IsConst
                 );
@@ -47,27 +46,22 @@ namespace ArchGuard.Library.Extensions
                 .OfType<IEventSymbol>()
                 .All(@event =>
                     @event.IsStatic
-                    || @event.DeclaredAccessibility == Accessibility.Private
-                    || @event.DeclaredAccessibility == Accessibility.Protected
-                    || @event.AddMethod.IsStatic
-                    || @event.AddMethod.DeclaredAccessibility == Accessibility.Private
-                    || @event.AddMethod.DeclaredAccessibility == Accessibility.Protected
+                    || @event.IsPrivateOrProtected()
+                    || @event.AddMethod?.IsStatic == true
+                    || @event.AddMethod?.IsPrivateOrProtected() == true
                 );
 
             if (!allEventsAreExternallyImmutable)
                 return false;
 
-            var allMethodsAreExternallyImmutable = symbol
+            return symbol
                 .GetMembers()
                 .OfType<IMethodSymbol>()
                 .All(method =>
                     method.IsStatic
-                    || method.DeclaredAccessibility == Accessibility.Private
-                    || method.DeclaredAccessibility == Accessibility.Protected
+                    || method.IsPrivateOrProtected()
                     || !method.ExternallyAltersState(project)
                 );
-
-            return allMethodsAreExternallyImmutable;
         }
     }
 }

@@ -35,7 +35,7 @@ namespace ArchGuard.Library
                     )
                 );
 
-                var types = new List<Type_>();
+                var types = new List<TypeDefinition>();
                 foreach (var project in projects)
                 {
                     var compilation = project.GetCompilationAsync().Result;

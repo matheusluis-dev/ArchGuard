@@ -8,10 +8,11 @@ namespace ArchGuard.Library.Type.Filters
     public sealed class TypesFilterContext
     {
         private readonly SlnCompilation _slnCompilation;
-        private readonly IEnumerable<Type_> _types;
+        private readonly IEnumerable<TypeDefinition> _types;
 
-        private readonly List<List<Func<Type_, StringComparison, bool>>> _groupedFilterPredicates =
-            new();
+        private readonly List<
+            List<Func<TypeDefinition, StringComparison, bool>>
+        > _groupedFilterPredicates = new();
 
         public TypesFilterContext(SlnCompilation slnCompilation)
         {
@@ -26,7 +27,7 @@ namespace ArchGuard.Library.Type.Filters
             _groupedFilterPredicates.Add(new());
         }
 
-        public void AddPredicate(Func<Type_, StringComparison, bool> predicate)
+        public void AddPredicate(Func<TypeDefinition, StringComparison, bool> predicate)
         {
             if (_groupedFilterPredicates.Count == 0)
                 CreateGroupedPredicate();
@@ -39,27 +40,27 @@ namespace ArchGuard.Library.Type.Filters
             CreateGroupedPredicate();
         }
 
-        internal List<List<Func<Type_, StringComparison, bool>>> GetFilters()
+        internal List<List<Func<TypeDefinition, StringComparison, bool>>> GetFilters()
         {
             return _groupedFilterPredicates;
         }
 
-        internal IEnumerable<Type_> GetRawTypes()
+        internal IEnumerable<TypeDefinition> GetRawTypes()
         {
             return _types;
         }
 
-        public IEnumerable<Type_> GetTypes()
+        public IEnumerable<TypeDefinition> GetTypes()
         {
             return GetTypes(StringComparison.CurrentCulture);
         }
 
-        public IEnumerable<Type_> GetTypes(StringComparison comparison)
+        public IEnumerable<TypeDefinition> GetTypes(StringComparison comparison)
         {
             if (_groupedFilterPredicates.Count == 0)
                 return _types;
 
-            var types = new List<Type_>();
+            var types = new List<TypeDefinition>();
 
             foreach (var group in _groupedFilterPredicates)
             {

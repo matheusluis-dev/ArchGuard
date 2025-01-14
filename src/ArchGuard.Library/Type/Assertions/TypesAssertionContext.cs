@@ -7,15 +7,18 @@ namespace ArchGuard.Library.Type.Assertions
 
     public sealed class TypesAssertionContext
     {
-        private readonly IEnumerable<Type_> _types;
-        private readonly IEnumerable<IEnumerable<Func<Type_, StringComparison, bool>>> _filters;
+        private readonly IEnumerable<TypeDefinition> _types;
+        private readonly IEnumerable<
+            IEnumerable<Func<TypeDefinition, StringComparison, bool>>
+        > _filters;
         private readonly List<
-            List<Func<Type_, StringComparison, bool>>
-        > _groupedAssertionPredicates = new List<List<Func<Type_, StringComparison, bool>>>();
+            List<Func<TypeDefinition, StringComparison, bool>>
+        > _groupedAssertionPredicates =
+            new List<List<Func<TypeDefinition, StringComparison, bool>>>();
 
         public TypesAssertionContext(
-            IEnumerable<Type_> types,
-            IEnumerable<IEnumerable<Func<Type_, StringComparison, bool>>> filters
+            IEnumerable<TypeDefinition> types,
+            IEnumerable<IEnumerable<Func<TypeDefinition, StringComparison, bool>>> filters
         )
         {
             _types = types;
@@ -24,10 +27,12 @@ namespace ArchGuard.Library.Type.Assertions
 
         private void CreateGroupedPredicate()
         {
-            _groupedAssertionPredicates.Add(new List<Func<Type_, StringComparison, bool>>());
+            _groupedAssertionPredicates.Add(
+                new List<Func<TypeDefinition, StringComparison, bool>>()
+            );
         }
 
-        public void AddPredicate(Func<Type_, StringComparison, bool> predicate)
+        public void AddPredicate(Func<TypeDefinition, StringComparison, bool> predicate)
         {
             if (_groupedAssertionPredicates.Count == 0)
                 CreateGroupedPredicate();
@@ -40,12 +45,12 @@ namespace ArchGuard.Library.Type.Assertions
             CreateGroupedPredicate();
         }
 
-        private IEnumerable<Type_> ExecuteFilters(StringComparison comparison)
+        private IEnumerable<TypeDefinition> ExecuteFilters(StringComparison comparison)
         {
             if (!_filters.Any())
                 return _types;
 
-            var types = new List<Type_>();
+            var types = new List<TypeDefinition>();
 
             foreach (var group in _filters)
             {
@@ -61,15 +66,15 @@ namespace ArchGuard.Library.Type.Assertions
             return types.Distinct();
         }
 
-        private IEnumerable<Type_> ExecuteAssertions(
-            IEnumerable<Type_> typesParam,
+        private IEnumerable<TypeDefinition> ExecuteAssertions(
+            IEnumerable<TypeDefinition> typesParam,
             StringComparison comparison
         )
         {
             if (_groupedAssertionPredicates.Count == 0)
                 return typesParam;
 
-            var types = new List<Type_>();
+            var types = new List<TypeDefinition>();
 
             foreach (var group in _groupedAssertionPredicates)
             {

@@ -7,7 +7,7 @@ namespace ArchGuard.Library.Type.Predicates
 
     internal static partial class TypePredicate
     {
-        public static Func<Type_, StringComparison, bool> ImplementInterface(Type[] types)
+        public static Func<TypeDefinition, StringComparison, bool> ImplementInterface(Type[] types)
         {
             return (type, _) =>
                 // Interfaces do not implement each other, they inherit
@@ -19,49 +19,51 @@ namespace ArchGuard.Library.Type.Predicates
                 );
         }
 
-        public static Func<Type_, StringComparison, bool> NotImplementInterface(Type[] types)
+        public static Func<TypeDefinition, StringComparison, bool> NotImplementInterface(
+            Type[] types
+        )
         {
             return (type, _) => !ImplementInterface(types)(type, _);
         }
 
-        public static Func<Type_, StringComparison, bool> Inherit(Type[] types)
+        public static Func<TypeDefinition, StringComparison, bool> Inherit(Type[] types)
         {
             return (type, _) => type.Symbol.Inherit(types);
         }
 
-        public static Func<Type_, StringComparison, bool> NotInherit(Type[] types)
+        public static Func<TypeDefinition, StringComparison, bool> NotInherit(Type[] types)
         {
             return (type, _) => !Inherit(types)(type, _);
         }
 
-        public static Func<Type_, StringComparison, bool> Generic =>
+        public static Func<TypeDefinition, StringComparison, bool> Generic =>
             (type, _) => type.Symbol.IsGenericType;
 
-        public static Func<Type_, StringComparison, bool> NotGeneric =>
+        public static Func<TypeDefinition, StringComparison, bool> NotGeneric =>
             (type, _) => !Generic(type, _);
 
-        public static Func<Type_, StringComparison, bool> Immutable =>
+        public static Func<TypeDefinition, StringComparison, bool> Immutable =>
             (type, _) => type.Symbol.IsImmutable();
 
-        public static Func<Type_, StringComparison, bool> Mutable =>
+        public static Func<TypeDefinition, StringComparison, bool> Mutable =>
             (type, _) => !Immutable(type, _);
 
-        public static Func<Type_, StringComparison, bool> Stateless =>
+        public static Func<TypeDefinition, StringComparison, bool> Stateless =>
             (type, _) => type.Symbol.IsStateless();
 
-        public static Func<Type_, StringComparison, bool> NotStateless =>
+        public static Func<TypeDefinition, StringComparison, bool> NotStateless =>
             (type, _) => !Stateless(type, _);
 
-        public static Func<Type_, StringComparison, bool> Staticless =>
+        public static Func<TypeDefinition, StringComparison, bool> Staticless =>
             (type, _) => type.Symbol.IsStaticless();
 
-        public static Func<Type_, StringComparison, bool> NotStaticless =>
+        public static Func<TypeDefinition, StringComparison, bool> NotStaticless =>
             (type, _) => !Staticless(type, _);
 
-        public static Func<Type_, StringComparison, bool> ExternallyImmutable =>
+        public static Func<TypeDefinition, StringComparison, bool> ExternallyImmutable =>
             (type, _) => type.IsExternallyImmutable();
 
-        public static Func<Type_, StringComparison, bool> ExternallyMutable =>
+        public static Func<TypeDefinition, StringComparison, bool> ExternallyMutable =>
             (type, _) => !ExternallyImmutable(type, _);
     }
 }
