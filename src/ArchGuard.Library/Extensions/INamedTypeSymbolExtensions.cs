@@ -7,10 +7,12 @@ namespace ArchGuard.Library.Extensions
 
     public static class INamedTypeSymbolExtensions
     {
-        public static string GetName(this INamedTypeSymbol iNamedTypeSymbol)
+        public static string GetName(this INamedTypeSymbol namedTypeSymbol)
         {
-            var name = iNamedTypeSymbol.Name;
-            var containingType = iNamedTypeSymbol.ContainingType;
+            ArgumentNullException.ThrowIfNull(namedTypeSymbol);
+
+            var name = namedTypeSymbol.Name;
+            var containingType = namedTypeSymbol.ContainingType;
 
             while (containingType != null)
             {
@@ -21,29 +23,33 @@ namespace ArchGuard.Library.Extensions
             return name;
         }
 
-        public static string GetFullName(this INamedTypeSymbol iNamedTypeSymbol)
+        public static string GetFullName(this INamedTypeSymbol namedTypeSymbol)
         {
-            var fullName = iNamedTypeSymbol.GetName();
+            ArgumentNullException.ThrowIfNull(namedTypeSymbol);
 
-            var containingNamespace = iNamedTypeSymbol.ContainingNamespace;
+            var fullName = namedTypeSymbol.GetName();
+
+            var containingNamespace = namedTypeSymbol.ContainingNamespace;
             if (!containingNamespace.IsGlobalNamespace)
                 fullName = $"{containingNamespace}.{fullName}";
 
             return fullName;
         }
 
-        public static bool Inherit(this INamedTypeSymbol iNamedTypeSymbol, params Type[] types)
+        public static bool Inherit(this INamedTypeSymbol namedTypeSymbol, params Type[] types)
         {
-            if (iNamedTypeSymbol.TypeKind == TypeKind.Interface)
+            ArgumentNullException.ThrowIfNull(namedTypeSymbol);
+
+            if (namedTypeSymbol.TypeKind == TypeKind.Interface)
             {
-                return iNamedTypeSymbol.AllInterfaces.Any(i =>
+                return namedTypeSymbol.AllInterfaces.Any(i =>
                     types.Any(t =>
                         t.GetFullName().Contains(i.GetFullName(), StringComparison.Ordinal)
                     )
                 );
             }
 
-            var baseType = iNamedTypeSymbol.BaseType;
+            var baseType = namedTypeSymbol.BaseType;
 
             while (baseType != null)
             {
@@ -61,11 +67,13 @@ namespace ArchGuard.Library.Extensions
             return false;
         }
 
-        public static bool IsImmutable(this INamedTypeSymbol iNamedTypeSymbol)
+        public static bool IsImmutable(this INamedTypeSymbol namedTypeSymbol)
         {
-            var list = new List<INamedTypeSymbol> { iNamedTypeSymbol };
+            ArgumentNullException.ThrowIfNull(namedTypeSymbol);
 
-            var baseType = iNamedTypeSymbol.BaseType;
+            var list = new List<INamedTypeSymbol> { namedTypeSymbol };
+
+            var baseType = namedTypeSymbol.BaseType;
             while (baseType is not null)
             {
                 if (!baseType.Name.Equals("object", StringComparison.OrdinalIgnoreCase))
@@ -84,17 +92,21 @@ namespace ArchGuard.Library.Extensions
 
                 var allPropertiesReadonly = t.GetMembers()
                     .OfType<IPropertySymbol>()
-                    .All(property => property.IsReadOnly || property.SetMethod.IsInitOnly);
+                    .All(property =>
+                        property.IsReadOnly || property?.SetMethod?.IsInitOnly == true
+                    );
 
                 return allFieldsReadonly && allPropertiesReadonly;
             }
         }
 
-        public static bool IsImmutableExternally(this INamedTypeSymbol iNamedTypeSymbol)
+        public static bool IsImmutableExternally(this INamedTypeSymbol namedTypeSymbol)
         {
-            var list = new List<INamedTypeSymbol> { iNamedTypeSymbol };
+            ArgumentNullException.ThrowIfNull(namedTypeSymbol);
 
-            var baseType = iNamedTypeSymbol.BaseType;
+            var list = new List<INamedTypeSymbol> { namedTypeSymbol };
+
+            var baseType = namedTypeSymbol.BaseType;
             while (baseType is not null)
             {
                 list.Add(baseType);
@@ -108,39 +120,39 @@ namespace ArchGuard.Library.Extensions
                 var allFieldsReadonlyOrPrivate = t.GetMembers()
                     .OfType<IFieldSymbol>()
                     .All(field =>
-                        field.IsReadOnly
-                        || field.IsConst
-                        || field.DeclaredAccessibility == Accessibility.Private
+                        field.IsReadOnly || field.IsConst || field.IsPrivateOrProtected()
                     );
 
                 var allPropertiesReadonlyOrPrivate = t.GetMembers()
                     .OfType<IPropertySymbol>()
                     .All(property =>
                         property.IsReadOnly
-                        || property.SetMethod.IsInitOnly
-                        || property.DeclaredAccessibility == Accessibility.Private
+                        || property.SetMethod?.IsInitOnly == true
+                        || property.IsPrivateOrProtected()
                     );
 
                 return allFieldsReadonlyOrPrivate && allPropertiesReadonlyOrPrivate;
             }
         }
 
-        public static bool IsStateless(this INamedTypeSymbol iNamedTypeSymbol)
+        public static bool IsStateless(this INamedTypeSymbol namedTypeSymbol)
         {
+            ArgumentNullException.ThrowIfNull(namedTypeSymbol);
+
             // Check if there are any instance fields
-            var hasInstanceFields = iNamedTypeSymbol
+            var hasInstanceFields = namedTypeSymbol
                 .GetMembers()
                 .OfType<IFieldSymbol>()
                 .Any(field => !field.IsStatic);
 
             // Check if there are any instance properties
-            var hasInstanceProperties = iNamedTypeSymbol
+            var hasInstanceProperties = namedTypeSymbol
                 .GetMembers()
                 .OfType<IPropertySymbol>()
                 .Any(property => !property.IsStatic);
 
             // Check if there are any instance events
-            var hasInstanceEvents = iNamedTypeSymbol
+            var hasInstanceEvents = namedTypeSymbol
                 .GetMembers()
                 .OfType<IEventSymbol>()
                 .Any(@event => !@event.IsStatic);
@@ -148,9 +160,11 @@ namespace ArchGuard.Library.Extensions
             return !hasInstanceFields && !hasInstanceProperties && !hasInstanceEvents;
         }
 
-        public static bool IsStaticless(this INamedTypeSymbol iNamedTypeSymbol)
+        public static bool IsStaticless(this INamedTypeSymbol namedTypeSymbol)
         {
-            return iNamedTypeSymbol.GetMembers().All(m => !m.IsStatic);
+            ArgumentNullException.ThrowIfNull(namedTypeSymbol);
+
+            return namedTypeSymbol.GetMembers().All(m => !m.IsStatic);
         }
     }
 }

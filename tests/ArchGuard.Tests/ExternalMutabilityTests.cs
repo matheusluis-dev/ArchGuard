@@ -24,7 +24,24 @@ namespace ArchGuard.Filters.Tests
             types
                 .Should()
                 .BeEquivalentTo(
-                    TypeNames.ExternalMutability.PublicExternalMutableWithMethodUpdatingPrivateFieldClass.AsStringList()
+                    TypeNames
+                        .ExternalMutability
+                        .PublicExternalMutableWithMethodUpdatingPrivateFieldClass,
+                    TypeNames
+                        .ExternalMutability
+                        .PublicExternalMutableWithMethodUpdatingPrivatePropertyClass,
+                    TypeNames
+                        .ExternalMutability
+                        .PublicExternalMutableWithMethodUpdatingPublicPropertyPrivateSetClass,
+                    TypeNames
+                        .ExternalMutability
+                        .PublicExternalMutableWithGetMethodUpdatingPrivateFieldClass,
+                    TypeNames
+                        .ExternalMutability
+                        .PublicExternalMutableWithSetMethodUpdatingPrivateFieldClass,
+                    TypeNames
+                        .ExternalMutability
+                        .PublicExternalMutableWithMethodCallingMethodUpdatePublicPropertyPrivateSetClass
                 );
         }
 

@@ -36,6 +36,33 @@ namespace ArchGuard.Tests.Common.Types
                 Namespaces.ExternalMutability
                 + "."
                 + nameof(PublicExternalMutableWithMethodUpdatingPrivateFieldClass);
+
+            public const string PublicExternalMutableWithMethodUpdatingPrivatePropertyClass =
+                Namespaces.ExternalMutability
+                + "."
+                + nameof(PublicExternalMutableWithMethodUpdatingPrivatePropertyClass);
+
+            public const string PublicExternalMutableWithMethodUpdatingPublicPropertyPrivateSetClass =
+                Namespaces.ExternalMutability
+                + "."
+                + nameof(PublicExternalMutableWithMethodUpdatingPublicPropertyPrivateSetClass);
+
+            public const string PublicExternalMutableWithGetMethodUpdatingPrivateFieldClass =
+                Namespaces.ExternalMutability
+                + "."
+                + nameof(PublicExternalMutableWithGetMethodUpdatingPrivateFieldClass);
+
+            public const string PublicExternalMutableWithSetMethodUpdatingPrivateFieldClass =
+                Namespaces.ExternalMutability
+                + "."
+                + nameof(PublicExternalMutableWithSetMethodUpdatingPrivateFieldClass);
+
+            public const string PublicExternalMutableWithMethodCallingMethodUpdatePublicPropertyPrivateSetClass =
+                Namespaces.ExternalMutability
+                + "."
+                + nameof(
+                    PublicExternalMutableWithMethodCallingMethodUpdatePublicPropertyPrivateSetClass
+                );
         }
     }
 }

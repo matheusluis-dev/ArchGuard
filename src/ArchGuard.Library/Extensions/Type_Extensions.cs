@@ -38,16 +38,7 @@ namespace ArchGuard.Library.Extensions
             var allPropertiesAreExternallyImmutable = symbol
                 .GetMembers()
                 .OfType<IPropertySymbol>()
-                .All(property =>
-                    property.IsStatic
-                    || property.DeclaredAccessibility == Accessibility.Private
-                    || property.DeclaredAccessibility == Accessibility.Protected
-                    || property.IsReadOnly
-                    // TODO: Verify if SetMethods alters private fields/properties
-                    || property.SetMethod.DeclaredAccessibility == Accessibility.Private
-                    || property.SetMethod.DeclaredAccessibility == Accessibility.Protected
-                    || property.SetMethod.IsInitOnly
-                );
+                .All(property => property.IsExternallyImmutable(project));
 
             if (!allPropertiesAreExternallyImmutable)
                 return false;

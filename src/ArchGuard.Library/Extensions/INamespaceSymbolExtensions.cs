@@ -1,14 +1,17 @@
 namespace ArchGuard.Library.Extensions
 {
+    using System;
     using Microsoft.CodeAnalysis;
 
     public static class INamespaceSymbolExtensions
     {
-        public static string GetFullName(this INamespaceSymbol iNamespaceSymbolExtensions)
+        public static string GetFullName(this INamespaceSymbol namespaceSymbolExtensions)
         {
-            var fullName = iNamespaceSymbolExtensions.Name;
+            ArgumentNullException.ThrowIfNull(namespaceSymbolExtensions);
 
-            var containingNamespace = iNamespaceSymbolExtensions.ContainingNamespace;
+            var fullName = namespaceSymbolExtensions.Name;
+
+            var containingNamespace = namespaceSymbolExtensions.ContainingNamespace;
             while (containingNamespace?.IsGlobalNamespace == false)
             {
                 fullName = $"{containingNamespace.Name}.{fullName}";
