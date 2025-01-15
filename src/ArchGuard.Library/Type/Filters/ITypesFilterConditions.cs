@@ -32,6 +32,9 @@ namespace ArchGuard.Library.Type.Filters
         ITypesFilterPostConditions HaveDependencyOn(params string[] typesNames);
         ITypesFilterPostConditions DoNotHaveDependencyOn(params string[] typesNames);
 
+        ITypesFilterPostConditions HaveParameterlessConstructor();
+        ITypesFilterPostConditions DoNotHaveParameterlessConstructor();
+
         //        ITypesFilterPostConditions AreOfType(params System.Type[] types);
         //        ITypesFilterPostConditions AreOfType<T>();
     }

@@ -82,5 +82,14 @@ namespace ArchGuard.Library.Type.Predicates
         {
             return (type, comparison) => !HaveDependencyOn(types)(type, comparison);
         }
+
+        public static Func<TypeDefinition, StringComparison, bool> HaveParameterlessConstructor =>
+            (type, _) => type.Symbol.Constructors.Any(constructor => !constructor.Parameters.Any());
+
+        public static Func<
+            TypeDefinition,
+            StringComparison,
+            bool
+        > NotHaveParameterlessConstructor => (type, _) => !HaveParameterlessConstructor(type, _);
     }
 }

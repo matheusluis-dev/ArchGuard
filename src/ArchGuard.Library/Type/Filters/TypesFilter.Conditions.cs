@@ -158,6 +158,18 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
+        public ITypesFilterPostConditions HaveParameterlessConstructor()
+        {
+            _context.AddPredicate(TypePredicate.HaveParameterlessConstructor);
+            return this;
+        }
+
+        public ITypesFilterPostConditions DoNotHaveParameterlessConstructor()
+        {
+            _context.AddPredicate(TypePredicate.NotHaveParameterlessConstructor);
+            return this;
+        }
+
         //public ITypesFilterPostConditions AreOfType(params Type[] types)
         //{
         //    _context.AddPredicate(TypePredicate.AreOfType(types));

@@ -25,6 +25,8 @@ namespace ArchGuard.Tests.Common
             "ArchGuard.Tests.MockedAssembly.ExternalMutability";
         public const string Generics = "ArchGuard.Tests.MockedAssembly.Generics";
         public const string HaveDependencyOn = "ArchGuard.Tests.MockedAssembly.HaveDependencyOn";
+        public const string HaveParameterlessConstructor =
+            "ArchGuard.Tests.MockedAssembly.HaveParameterlessConstructor";
         public const string ImplementInterface =
             "ArchGuard.Tests.MockedAssembly.ImplementInterface";
         public const string Inherit = "ArchGuard.Tests.MockedAssembly.Inherit";
