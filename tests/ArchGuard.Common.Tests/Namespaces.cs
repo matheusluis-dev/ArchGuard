@@ -32,6 +32,7 @@ namespace ArchGuard.Tests.Common
         public const string Inherit = "ArchGuard.Tests.MockedAssembly.Inherit";
         public const string Internal = "ArchGuard.Tests.MockedAssembly.Internal";
         public const string Mutability = "ArchGuard.Tests.MockedAssembly.Mutability";
+        public const string Nested = "ArchGuard.Tests.MockedAssembly.Nested";
         public const string Public = "ArchGuard.Tests.MockedAssembly.Public";
         public const string Stateless = "ArchGuard.Tests.MockedAssembly.Stateless";
         public const string Staticless = "ArchGuard.Tests.MockedAssembly.Staticless";

@@ -1,5 +1,6 @@
 namespace ArchGuard.Filters.Tests.Modifiers
 {
+    using System;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;
@@ -12,19 +13,21 @@ namespace ArchGuard.Filters.Tests.Modifiers
         public void Nested_types()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.AreNested();
+            var filters = TypesFromMockedAssembly
+                .All.That.ResideInNamespace(Namespaces.Nested)
+                .And.AreNested();
 
             // Act
-            var types = filters.GetTypes().GetFullNames();
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
             types
                 .Should()
                 .BeEquivalentTo(
-                    TypeNames.PublicParentClass_InternalNestedClass,
-                    TypeNames.PublicParentClass_PrivateNestedClass,
-                    TypeNames.PublicParentClass_PublicNestedClass,
-                    TypeNames.PublicParentClass_PublicNestedPartialClass
+                    TypeNames.Nested.PublicNestedClass,
+                    TypeNames.Nested.InternalNestedClass,
+                    TypeNames.Nested.ProtectedNestedClass,
+                    TypeNames.Nested.PrivateNestedClass
                 );
         }
 
@@ -32,47 +35,19 @@ namespace ArchGuard.Filters.Tests.Modifiers
         public void Non_nested_types()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.AreNotNested();
+            var filters = TypesFromMockedAssembly
+                .All.That.ResideInNamespace(Namespaces.Nested)
+                .And.AreNotNested();
 
             // Act
-            var types = filters.GetTypes().GetFullNames();
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
             types
                 .Should()
                 .BeEquivalentTo(
-#if NET7_0_OR_GREATER
-                    TypeNames.FileClass,
-                    TypeNames.FilePartialClass,
-                    TypeNames.FileSealedClass,
-                    TypeNames.FileStaticClass,
-#endif
-                    TypeNames.InternalClass,
-                    TypeNames.InternalPartialClass,
-                    TypeNames.InternalSealedClass,
-                    TypeNames.InternalStaticClass,
-                    TypeNames.PublicAbstractClass,
-                    TypeNames.PublicClass,
-                    TypeNames.PublicGenericClassWithOneType,
-                    TypeNames.PublicGenericClassWithTwoTypes,
-                    TypeNames.PublicParentClass,
-                    TypeNames.PublicPartialClass,
-                    TypeNames.PublicSealedClass,
-                    TypeNames.PublicStaticClass,
-                    TypeNames.IInternalInterface,
-                    TypeNames.IPublicInterface,
-                    TypeNames.InternalEnum,
-                    TypeNames.PublicEnum,
-#if NET5_0_OR_GREATER
-                    TypeNames.InternalRecord,
-                    TypeNames.InternalPartialRecord,
-                    TypeNames.InternalSealedRecord,
-                    TypeNames.PublicRecord,
-                    TypeNames.PublicPartialRecord,
-                    TypeNames.PublicSealedRecord,
-#endif
-                    TypeNames.InternalStruct,
-                    TypeNames.PublicStruct
+                    TypeNames.Nested.PublicParentClass,
+                    TypeNames.Nested.PublicNonNestedClass
                 );
         }
     }

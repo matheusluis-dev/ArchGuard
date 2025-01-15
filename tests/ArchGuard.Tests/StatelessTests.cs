@@ -21,7 +21,7 @@ namespace ArchGuard.Filters.Tests
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.Stateless.PublicStatelessClass.AsStringList());
+            types.Should().BeEquivalentTo(TypeNames.Stateless.PublicStatelessClass.ToList());
         }
 
         [Fact]
@@ -36,9 +36,7 @@ namespace ArchGuard.Filters.Tests
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
-            types
-                .Should()
-                .BeEquivalentTo(TypeNames.Stateless.PublicNonStatelessClass.AsStringList());
+            types.Should().BeEquivalentTo(TypeNames.Stateless.PublicNonStatelessClass.ToList());
         }
     }
 }

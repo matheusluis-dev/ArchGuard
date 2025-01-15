@@ -48,7 +48,7 @@ namespace ArchGuard.Filters.Tests
             types
                 .Should()
                 .BeEquivalentTo(
-                    TypeNames.HaveParameterlessConstructor.PublicWithoutParameterlessConstructorClass.AsStringList()
+                    TypeNames.HaveParameterlessConstructor.PublicWithoutParameterlessConstructorClass.ToList()
                 );
         }
     }
