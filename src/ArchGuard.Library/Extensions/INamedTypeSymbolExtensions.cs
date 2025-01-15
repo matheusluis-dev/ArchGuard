@@ -12,8 +12,8 @@ namespace ArchGuard.Library.Extensions
             ArgumentNullException.ThrowIfNull(namedTypeSymbol);
 
             var name = namedTypeSymbol.Name;
-            var containingType = namedTypeSymbol.ContainingType;
 
+            var containingType = namedTypeSymbol.ContainingType;
             while (containingType != null)
             {
                 name = $"{containingType.Name}+{name}";
@@ -92,9 +92,7 @@ namespace ArchGuard.Library.Extensions
 
                 var allPropertiesReadonly = t.GetMembers()
                     .OfType<IPropertySymbol>()
-                    .All(property =>
-                        property.IsReadOnly || property?.SetMethod?.IsInitOnly == true
-                    );
+                    .All(property => property.IsReadOnly || property.SetMethod?.IsInitOnly == true);
 
                 return allFieldsReadonly && allPropertiesReadonly;
             }

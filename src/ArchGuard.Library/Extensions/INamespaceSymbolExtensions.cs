@@ -5,13 +5,13 @@ namespace ArchGuard.Library.Extensions
 
     public static class INamespaceSymbolExtensions
     {
-        public static string GetFullName(this INamespaceSymbol namespaceSymbolExtensions)
+        public static string GetFullName(this INamespaceSymbol namespaceSymbol)
         {
-            ArgumentNullException.ThrowIfNull(namespaceSymbolExtensions);
+            ArgumentNullException.ThrowIfNull(namespaceSymbol);
 
-            var fullName = namespaceSymbolExtensions.Name;
+            var fullName = namespaceSymbol.Name;
 
-            var containingNamespace = namespaceSymbolExtensions.ContainingNamespace;
+            var containingNamespace = namespaceSymbol.ContainingNamespace;
             while (containingNamespace?.IsGlobalNamespace == false)
             {
                 fullName = $"{containingNamespace.Name}.{fullName}";
