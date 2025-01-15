@@ -96,33 +96,50 @@ namespace ArchGuard.Library.Extensions
 
             var dependencies = new HashSet<INamedTypeSymbol>();
 
-            dependencies.UnionWith(
-                methodSymbol
-                    .Parameters.Select(parameter => parameter.Type)
-                    .OfType<INamedTypeSymbol>()
-            );
-
-            if (methodSymbol.ReturnType is INamedTypeSymbol methodReturnType)
-                dependencies.Add(methodReturnType);
-
-            dependencies.UnionWith(
-                syntax
-                    .DescendantNodes()
-                    .OfType<IdentifierNameSyntax>()
-                    .Select(identifier => semanticModel.GetSymbolInfo(identifier).Symbol)
-                    .OfType<INamedTypeSymbol>()
-            );
-
-            dependencies.UnionWith(
-                syntax
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Select(invocation => semanticModel.GetSymbolInfo(invocation).Symbol)
-                    .OfType<IMethodSymbol>()
-                    .SelectMany(calledMethod => calledMethod.GetDependencies(project))
-            );
+            CheckParameters();
+            CheckReturnType();
+            CheckBodyTypes();
+            CheckCalledMethods();
 
             return dependencies;
+
+            void CheckParameters()
+            {
+                dependencies.UnionWith(
+                    methodSymbol
+                        .Parameters.Select(parameter => parameter.Type)
+                        .OfType<INamedTypeSymbol>()
+                );
+            }
+
+            void CheckReturnType()
+            {
+                if (methodSymbol.ReturnType is INamedTypeSymbol methodReturnType)
+                    dependencies.Add(methodReturnType);
+            }
+
+            void CheckBodyTypes()
+            {
+                dependencies.UnionWith(
+                    syntax
+                        .DescendantNodes()
+                        .OfType<IdentifierNameSyntax>()
+                        .Select(identifier => semanticModel.GetSymbolInfo(identifier).Symbol)
+                        .OfType<INamedTypeSymbol>()
+                );
+            }
+
+            void CheckCalledMethods()
+            {
+                dependencies.UnionWith(
+                    syntax
+                        .DescendantNodes()
+                        .OfType<InvocationExpressionSyntax>()
+                        .Select(invocation => semanticModel.GetSymbolInfo(invocation).Symbol)
+                        .OfType<IMethodSymbol>()
+                        .SelectMany(calledMethod => calledMethod.GetDependencies(project))
+                );
+            }
         }
     }
 }
