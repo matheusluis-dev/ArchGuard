@@ -10,12 +10,14 @@ namespace ArchGuard.Library.Extensions
         public static bool HasGetMethod(this IPropertySymbol propertySymbol)
         {
             ArgumentNullException.ThrowIfNull(propertySymbol);
+
             return propertySymbol.GetMethod is not null;
         }
 
         public static bool HasSetMethod(this IPropertySymbol propertySymbol)
         {
             ArgumentNullException.ThrowIfNull(propertySymbol);
+
             return propertySymbol.SetMethod is not null;
         }
 

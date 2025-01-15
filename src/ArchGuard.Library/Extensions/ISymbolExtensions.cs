@@ -13,6 +13,13 @@ namespace ArchGuard.Library.Extensions
             return symbol.DeclaredAccessibility is Accessibility.Private or Accessibility.Protected;
         }
 
+        public static bool HasDeclaringSyntaxReferences(this ISymbol symbol)
+        {
+            ArgumentNullException.ThrowIfNull(symbol);
+
+            return symbol.DeclaringSyntaxReferences.Any();
+        }
+
         public static (SyntaxNode, SemanticModel) GetSemanticModel(
             this ISymbol symbol,
             Project project

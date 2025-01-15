@@ -1,6 +1,7 @@
 namespace ArchGuard.Library.Extensions
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
@@ -78,6 +79,50 @@ namespace ArchGuard.Library.Extensions
                         ) == true
                     );
             }
+        }
+
+        public static IEnumerable<INamedTypeSymbol> GetDependencies(
+            this IMethodSymbol methodSymbol,
+            Project project
+        )
+        {
+            ArgumentNullException.ThrowIfNull(methodSymbol);
+            ArgumentNullException.ThrowIfNull(project);
+
+            if (!methodSymbol.HasDeclaringSyntaxReferences())
+                return Enumerable.Empty<INamedTypeSymbol>();
+
+            (var syntax, var semanticModel) = methodSymbol.GetSemanticModel(project);
+
+            var dependencies = new HashSet<INamedTypeSymbol>();
+
+            dependencies.UnionWith(
+                methodSymbol
+                    .Parameters.Select(parameter => parameter.Type)
+                    .OfType<INamedTypeSymbol>()
+            );
+
+            if (methodSymbol.ReturnType is INamedTypeSymbol methodReturnType)
+                dependencies.Add(methodReturnType);
+
+            dependencies.UnionWith(
+                syntax
+                    .DescendantNodes()
+                    .OfType<IdentifierNameSyntax>()
+                    .Select(identifier => semanticModel.GetSymbolInfo(identifier).Symbol)
+                    .OfType<INamedTypeSymbol>()
+            );
+
+            dependencies.UnionWith(
+                syntax
+                    .DescendantNodes()
+                    .OfType<InvocationExpressionSyntax>()
+                    .Select(invocation => semanticModel.GetSymbolInfo(invocation).Symbol)
+                    .OfType<IMethodSymbol>()
+                    .SelectMany(calledMethod => calledMethod.GetDependencies(project))
+            );
+
+            return dependencies;
         }
     }
 }

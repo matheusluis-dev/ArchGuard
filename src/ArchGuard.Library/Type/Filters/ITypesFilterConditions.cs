@@ -29,6 +29,9 @@ namespace ArchGuard.Library.Type.Filters
         ITypesFilterPostConditions AreExternallyImmutable();
         ITypesFilterPostConditions AreExternallyMutable();
 
+        ITypesFilterPostConditions HaveDependencyOn(params string[] typesNames);
+        ITypesFilterPostConditions DoNotHaveDependencyOn(params string[] typesNames);
+
         //        ITypesFilterPostConditions AreOfType(params System.Type[] types);
         //        ITypesFilterPostConditions AreOfType<T>();
     }

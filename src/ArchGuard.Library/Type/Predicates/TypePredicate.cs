@@ -65,5 +65,22 @@ namespace ArchGuard.Library.Type.Predicates
 
         public static Func<TypeDefinition, StringComparison, bool> ExternallyMutable =>
             (type, _) => !ExternallyImmutable(type, _);
+
+        public static Func<TypeDefinition, StringComparison, bool> HaveDependencyOn(string[] types)
+        {
+            return (type, comparison) =>
+                type
+                    .Symbol.GetDependencies(type.Project)
+                    .Any(dependency =>
+                        types.Contains(dependency.GetFullName(), comparison.ToComparer())
+                    );
+        }
+
+        public static Func<TypeDefinition, StringComparison, bool> NotHaveDependencyOn(
+            string[] types
+        )
+        {
+            return (type, comparison) => !HaveDependencyOn(types)(type, comparison);
+        }
     }
 }

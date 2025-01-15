@@ -146,6 +146,18 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
+        public ITypesFilterPostConditions HaveDependencyOn(params string[] typesNames)
+        {
+            _context.AddPredicate(TypePredicate.HaveDependencyOn(typesNames));
+            return this;
+        }
+
+        public ITypesFilterPostConditions DoNotHaveDependencyOn(params string[] typesNames)
+        {
+            _context.AddPredicate(TypePredicate.NotHaveDependencyOn(typesNames));
+            return this;
+        }
+
         //public ITypesFilterPostConditions AreOfType(params Type[] types)
         //{
         //    _context.AddPredicate(TypePredicate.AreOfType(types));
