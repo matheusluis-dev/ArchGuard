@@ -81,20 +81,22 @@ namespace ArchGuard.Library.Extensions
             }
         }
 
-        public static IEnumerable<INamedTypeSymbol> GetDependencies(
+        public static IEnumerable<TypeDefinition> GetDependencies(
             this IMethodSymbol methodSymbol,
-            Project project
+            TypeDefinition typeDefinition
         )
         {
             ArgumentNullException.ThrowIfNull(methodSymbol);
-            ArgumentNullException.ThrowIfNull(project);
+            ArgumentNullException.ThrowIfNull(typeDefinition);
+
+            var project = typeDefinition.Project;
 
             if (!methodSymbol.HasDeclaringSyntaxReferences())
-                return Enumerable.Empty<INamedTypeSymbol>();
+                return Enumerable.Empty<TypeDefinition>();
 
             (var syntax, var semanticModel) = methodSymbol.GetSemanticModel(project);
 
-            var dependencies = new HashSet<INamedTypeSymbol>();
+            var dependencies = new HashSet<TypeDefinition>();
 
             CheckParameters();
             CheckReturnType();
@@ -109,13 +111,36 @@ namespace ArchGuard.Library.Extensions
                     methodSymbol
                         .Parameters.Select(parameter => parameter.Type)
                         .OfType<INamedTypeSymbol>()
+                        .Where(type =>
+                            typeDefinition
+                                .GetAllTypesFromProject()
+                                .Any(typeDefinition =>
+                                    typeDefinition.Symbol.Equals(
+                                        type,
+                                        SymbolEqualityComparer.Default
+                                    )
+                                )
+                        )
+                        .Select(type => new TypeDefinition(project, type))
                 );
             }
 
             void CheckReturnType()
             {
-                if (methodSymbol.ReturnType is INamedTypeSymbol methodReturnType)
-                    dependencies.Add(methodReturnType);
+                if (
+                    methodSymbol.ReturnType is INamedTypeSymbol methodReturnType
+                    && typeDefinition
+                        .GetAllTypesFromProject()
+                        .Any(typeDefinition =>
+                            typeDefinition.Symbol.Equals(
+                                methodReturnType,
+                                SymbolEqualityComparer.Default
+                            )
+                        )
+                )
+                {
+                    dependencies.Add(new(project, methodReturnType));
+                }
             }
 
             void CheckBodyTypes()
@@ -126,6 +151,17 @@ namespace ArchGuard.Library.Extensions
                         .OfType<IdentifierNameSyntax>()
                         .Select(identifier => semanticModel.GetSymbolInfo(identifier).Symbol)
                         .OfType<INamedTypeSymbol>()
+                        .Where(type =>
+                            typeDefinition
+                                .GetAllTypesFromProject()
+                                .Any(typeDefinition =>
+                                    typeDefinition.Symbol.Equals(
+                                        type,
+                                        SymbolEqualityComparer.Default
+                                    )
+                                )
+                        )
+                        .Select(type => new TypeDefinition(project, type))
                 );
             }
 
@@ -137,7 +173,7 @@ namespace ArchGuard.Library.Extensions
                         .OfType<InvocationExpressionSyntax>()
                         .Select(invocation => semanticModel.GetSymbolInfo(invocation).Symbol)
                         .OfType<IMethodSymbol>()
-                        .SelectMany(calledMethod => calledMethod.GetDependencies(project))
+                        .SelectMany(calledMethod => calledMethod.GetDependencies(typeDefinition))
                 );
             }
         }

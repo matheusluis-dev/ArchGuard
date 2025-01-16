@@ -31,6 +31,7 @@ namespace ArchGuard.Tests.Common
             "ArchGuard.Tests.MockedAssembly.ImplementInterface";
         public const string Inherit = "ArchGuard.Tests.MockedAssembly.Inherit";
         public const string Internal = "ArchGuard.Tests.MockedAssembly.Internal";
+        public const string IsUsedBy = "ArchGuard.Tests.MockedAssembly.IsUsedBy";
         public const string Mutability = "ArchGuard.Tests.MockedAssembly.Mutability";
         public const string Nested = "ArchGuard.Tests.MockedAssembly.Nested";
         public const string Public = "ArchGuard.Tests.MockedAssembly.Public";

@@ -1,12 +1,14 @@
 namespace ArchGuard.Library.Extensions
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using ArchGuard.Library.Cached;
     using Microsoft.CodeAnalysis;
 
-    public static class TypeDefinitionExtensions
+    internal static class TypeDefinitionExtensions
     {
-        public static bool IsExternallyImmutable(this TypeDefinition type)
+        internal static bool IsExternallyImmutable(this TypeDefinition type)
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -41,6 +43,7 @@ namespace ArchGuard.Library.Extensions
 
             if (!allPropertiesAreExternallyImmutable)
                 return false;
+
             var allEventsAreExternallyImmutable = symbol
                 .GetMembers()
                 .OfType<IEventSymbol>()
@@ -62,6 +65,31 @@ namespace ArchGuard.Library.Extensions
                     || method.IsPrivateOrProtected()
                     || !method.ExternallyAltersState(project)
                 );
+        }
+
+        public static IEnumerable<TypeDefinition> GetDependencies(
+            this TypeDefinition typeDefinition
+        )
+        {
+            ArgumentNullException.ThrowIfNull(typeDefinition);
+
+            return DependencySearchCached.GetDependencies(typeDefinition);
+        }
+
+        internal static bool IsUsedBy(this TypeDefinition typeDefinition, IEnumerable<string> types)
+        {
+            ArgumentNullException.ThrowIfNull(typeDefinition);
+            ArgumentNullException.ThrowIfNull(types);
+
+            foreach (var type in typeDefinition.GetAllTypesFromProject())
+            {
+                var dependencies = type.GetDependencies().Select(type => type.Symbol.GetFullName());
+
+                if (dependencies.Any(d => types.Contains(d, StringComparer.Ordinal)))
+                    return true;
+            }
+
+            return false;
         }
     }
 }

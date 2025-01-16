@@ -3,6 +3,7 @@ namespace ArchGuard.Library.Extensions
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using ArchGuard.Library.Cached;
     using Microsoft.CodeAnalysis;
 
     public static class INamedTypeSymbolExtensions
@@ -163,40 +164,6 @@ namespace ArchGuard.Library.Extensions
             ArgumentNullException.ThrowIfNull(namedTypeSymbol);
 
             return namedTypeSymbol.GetMembers().All(m => !m.IsStatic);
-        }
-
-        public static IEnumerable<INamedTypeSymbol> GetDependencies(
-            this INamedTypeSymbol namedTypeSymbol,
-            Project project
-        )
-        {
-            ArgumentNullException.ThrowIfNull(namedTypeSymbol);
-            ArgumentNullException.ThrowIfNull(project);
-
-            var fieldDependencies = namedTypeSymbol
-                .GetMembers()
-                .OfType<IFieldSymbol>()
-                .Select(field => field.Type)
-                .OfType<INamedTypeSymbol>();
-
-            var propertyDependencies = namedTypeSymbol
-                .GetMembers()
-                .OfType<IPropertySymbol>()
-                .Select(property => property.Type)
-                .OfType<INamedTypeSymbol>();
-
-            var methods = namedTypeSymbol.GetMembers().OfType<IMethodSymbol>();
-            var methodsDependencies = methods.SelectMany(method => method.GetDependencies(project));
-
-            var dependencies = new HashSet<INamedTypeSymbol>();
-            dependencies.UnionWith(fieldDependencies);
-            dependencies.UnionWith(propertyDependencies);
-            dependencies.UnionWith(methodsDependencies);
-
-            foreach (var dependency in new HashSet<INamedTypeSymbol>(dependencies))
-                dependencies.UnionWith(dependency.GetDependencies(project));
-
-            return dependencies;
         }
     }
 }

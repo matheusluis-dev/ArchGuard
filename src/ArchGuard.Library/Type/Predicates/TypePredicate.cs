@@ -69,10 +69,9 @@ namespace ArchGuard.Library.Type.Predicates
         public static Func<TypeDefinition, StringComparison, bool> HaveDependencyOn(string[] types)
         {
             return (type, comparison) =>
-                type
-                    .Symbol.GetDependencies(type.Project)
+                type.GetDependencies()
                     .Any(dependency =>
-                        types.Contains(dependency.GetFullName(), comparison.ToComparer())
+                        types.Contains(dependency.Symbol.GetFullName(), comparison.ToComparer())
                     );
         }
 
@@ -91,5 +90,15 @@ namespace ArchGuard.Library.Type.Predicates
             StringComparison,
             bool
         > NotHaveParameterlessConstructor => (type, _) => !HaveParameterlessConstructor(type, _);
+
+        public static Func<TypeDefinition, StringComparison, bool> UsedBy(string[] types)
+        {
+            return (type, _) => type.IsUsedBy(types);
+        }
+
+        public static Func<TypeDefinition, StringComparison, bool> NotUsedBy(string[] types)
+        {
+            return (type, _) => !UsedBy(types)(type, _);
+        }
     }
 }

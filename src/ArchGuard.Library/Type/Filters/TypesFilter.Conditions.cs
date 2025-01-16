@@ -170,6 +170,18 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
+        public ITypesFilterPostConditions AreUsedBy(params string[] typesNames)
+        {
+            _context.AddPredicate(TypePredicate.UsedBy(typesNames));
+            return this;
+        }
+
+        public ITypesFilterPostConditions AreNotUsedBy(params string[] typesNames)
+        {
+            _context.AddPredicate(TypePredicate.NotUsedBy(typesNames));
+            return this;
+        }
+
         //public ITypesFilterPostConditions AreOfType(params Type[] types)
         //{
         //    _context.AddPredicate(TypePredicate.AreOfType(types));
