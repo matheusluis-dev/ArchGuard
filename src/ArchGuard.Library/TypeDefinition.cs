@@ -8,19 +8,24 @@ namespace ArchGuard.Library
     using ArchGuard.Library.Extensions;
     using Microsoft.CodeAnalysis;
 
-    [DebuggerDisplay("{SymbolFullName}")]
+    [DebuggerDisplay("{SymbolFullName} | Project: {Project.Name}")]
     public sealed class TypeDefinition : IEquatable<TypeDefinition>
     {
-        internal string SymbolName => Symbol.GetName();
-        internal string SymbolFullName => Symbol.GetFullName();
-
         public Project Project { get; init; }
         public INamedTypeSymbol Symbol { get; init; }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        internal string SymbolName { get; init; }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        internal string SymbolFullName { get; init; }
 
         internal TypeDefinition(Project project, INamedTypeSymbol symbol)
         {
             Project = project;
             Symbol = symbol;
+            SymbolName = Symbol.GetName();
+            SymbolFullName = Symbol.GetFullName();
         }
 
         internal Compilation? GetCompilation()
@@ -37,11 +42,42 @@ namespace ArchGuard.Library
                 .Select(type => new TypeDefinition(Project, type));
         }
 
+        internal IEnumerable<IMethodSymbol> GetConstructors()
+        {
+            return Symbol
+                .GetMembers()
+                .OfType<IMethodSymbol>()
+                .Where(method => method.MethodKind is MethodKind.Constructor);
+        }
+
+        internal IEnumerable<IMethodSymbol> GetMethods()
+        {
+            return Symbol
+                .GetMembers()
+                .OfType<IMethodSymbol>()
+                .Where(method =>
+                    method.MethodKind is MethodKind.Ordinary && !method.IsImplicitlyDeclared
+                );
+        }
+
+        internal IEnumerable<IFieldSymbol> GetFields()
+        {
+            return Symbol.GetMembers().OfType<IFieldSymbol>();
+        }
+
+        internal IEnumerable<IFieldSymbol> GetConstants()
+        {
+            return Symbol.GetMembers().OfType<IFieldSymbol>().Where(field => field.IsConst);
+        }
+
+        internal IEnumerable<IPropertySymbol> GetProperties()
+        {
+            return Symbol.GetMembers().OfType<IPropertySymbol>();
+        }
+
         public override int GetHashCode()
         {
-            var symbolFullName = Symbol.GetFullName();
-
-            return new { Project.Name, symbolFullName }.GetHashCode();
+            return new { Project.Name, SymbolFullName }.GetHashCode();
         }
 
         public override bool Equals(object? obj)

@@ -7,7 +7,7 @@ namespace ArchGuard.Tests.Common.Extensions
     using ArchGuard.Library.Extensions;
     using Microsoft.CodeAnalysis;
 
-    public static class IEnumerableTypeSpecExtensions
+    public static class IEnumerableTypeDefinitionExtensions
     {
         public static IList<string> GetFullNames(this IEnumerable<TypeDefinition> types)
         {

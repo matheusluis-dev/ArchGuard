@@ -4,10 +4,8 @@ namespace ArchGuard.Library.Type
     using ArchGuard.Library.Cached;
     using ArchGuard.Library.Type.Filters;
 
-    public sealed class Types
+    public static class Types
     {
-        private Types() { }
-
         public static ITypesFilterStart FromSln(SlnSearchParameters parameters)
         {
             var sln = SolutionReaderCached.CompileSolution(parameters);
