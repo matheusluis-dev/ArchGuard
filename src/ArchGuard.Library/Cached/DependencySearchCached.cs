@@ -21,9 +21,6 @@ namespace ArchGuard.Library.Cached
         {
             ArgumentNullException.ThrowIfNull(typeDefinition);
 
-            var namedTypeSymbol = typeDefinition.Symbol;
-            var project = typeDefinition.Project;
-
             var semaphore = _locks.GetOrAdd(typeDefinition, _ => new SemaphoreSlim(1, 1));
             semaphore.Wait();
 
@@ -32,48 +29,11 @@ namespace ArchGuard.Library.Cached
                 if (_cache.TryGetValue(typeDefinition, out var result))
                     return result;
 
-                var fieldDependencies = namedTypeSymbol
-                    .GetMembers()
-                    .OfType<IFieldSymbol>()
-                    .Select(field => field.Type)
-                    .OfType<INamedTypeSymbol>()
-                    .Where(type =>
-                        typeDefinition
-                            .GetAllTypesFromProject()
-                            .Any(typeDefinition =>
-                                typeDefinition.Symbol.Equals(type, SymbolEqualityComparer.Default)
-                            )
-                    )
-                    .Where(type => !type.Equals(typeDefinition))
-                    .Select(type => new TypeDefinition(project, type));
-
-                var propertyDependencies = namedTypeSymbol
-                    .GetMembers()
-                    .OfType<IPropertySymbol>()
-                    .Select(property => property.Type)
-                    .OfType<INamedTypeSymbol>()
-                    .Where(type =>
-                        typeDefinition
-                            .GetAllTypesFromProject()
-                            .Any(typeDefinition =>
-                                typeDefinition.Symbol.Equals(type, SymbolEqualityComparer.Default)
-                            )
-                    )
-                    .Where(type => !type.Equals(typeDefinition))
-                    .Select(type => new TypeDefinition(project, type));
-
-                var methods = namedTypeSymbol
-                    .GetMembers()
-                    .OfType<IMethodSymbol>()
-                    .Where(method => !method.IsImplicitlyDeclared);
-                var methodsDependencies = methods.SelectMany(method =>
-                    method.GetDependencies(typeDefinition)
-                );
-
                 var dependencies = new HashSet<TypeDefinition>();
-                dependencies.UnionWith(fieldDependencies);
-                dependencies.UnionWith(propertyDependencies);
-                dependencies.UnionWith(methodsDependencies);
+
+                dependencies.UnionWith(GetFieldsDependencies(typeDefinition));
+                dependencies.UnionWith(GetPropertiesDependencies(typeDefinition));
+                dependencies.UnionWith(GetMethodsDependencies(typeDefinition));
 
                 foreach (var dependency in new HashSet<TypeDefinition>(dependencies))
                     dependencies.UnionWith(GetDependencies(dependency));
@@ -87,6 +47,59 @@ namespace ArchGuard.Library.Cached
                 semaphore.Release();
                 _locks.TryRemove(typeDefinition, out _);
             }
+        }
+
+        private static IEnumerable<TypeDefinition> GetMemberDependencies<TSymbol>(
+            TypeDefinition typeDefinition
+        )
+            where TSymbol : ISymbol
+        {
+            return typeDefinition
+                .Symbol.GetMembers()
+                .OfType<TSymbol>()
+                .Select(member =>
+                    member switch
+                    {
+                        IFieldSymbol field => field.Type,
+                        IPropertySymbol property => property.Type,
+                        _ => throw new InvalidCastException(
+                            $"{nameof(TSymbol)} must be {nameof(IFieldSymbol)} or {nameof(IPropertySymbol)}"
+                        ),
+                    }
+                )
+                .OfType<INamedTypeSymbol>()
+                .Where(type => !type.Equals(typeDefinition))
+                .Where(t1 =>
+                    typeDefinition
+                        .GetAllTypesFromProject()
+                        .Any(t2 => t2.Symbol.Equals(t1, SymbolEqualityComparer.Default))
+                )
+                .Select(type => new TypeDefinition(typeDefinition.Project, type));
+        }
+
+        private static IEnumerable<TypeDefinition> GetFieldsDependencies(
+            TypeDefinition typeDefinition
+        )
+        {
+            return GetMemberDependencies<IFieldSymbol>(typeDefinition);
+        }
+
+        private static IEnumerable<TypeDefinition> GetPropertiesDependencies(
+            TypeDefinition typeDefinition
+        )
+        {
+            return GetMemberDependencies<IPropertySymbol>(typeDefinition);
+        }
+
+        private static IEnumerable<TypeDefinition> GetMethodsDependencies(
+            TypeDefinition typeDefinition
+        )
+        {
+            return typeDefinition
+                .Symbol.GetMembers()
+                .OfType<IMethodSymbol>()
+                .Where(method => !method.IsImplicitlyDeclared)
+                .SelectMany(method => method.GetDependencies(typeDefinition));
         }
     }
 }
