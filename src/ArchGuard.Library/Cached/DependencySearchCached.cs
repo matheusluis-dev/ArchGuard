@@ -44,6 +44,7 @@ namespace ArchGuard.Library.Cached
                                 typeDefinition.Symbol.Equals(type, SymbolEqualityComparer.Default)
                             )
                     )
+                    .Where(type => !type.Equals(typeDefinition))
                     .Select(type => new TypeDefinition(project, type));
 
                 var propertyDependencies = namedTypeSymbol
@@ -58,9 +59,13 @@ namespace ArchGuard.Library.Cached
                                 typeDefinition.Symbol.Equals(type, SymbolEqualityComparer.Default)
                             )
                     )
+                    .Where(type => !type.Equals(typeDefinition))
                     .Select(type => new TypeDefinition(project, type));
 
-                var methods = namedTypeSymbol.GetMembers().OfType<IMethodSymbol>();
+                var methods = namedTypeSymbol
+                    .GetMembers()
+                    .OfType<IMethodSymbol>()
+                    .Where(method => !method.IsImplicitlyDeclared);
                 var methodsDependencies = methods.SelectMany(method =>
                     method.GetDependencies(typeDefinition)
                 );
@@ -71,7 +76,7 @@ namespace ArchGuard.Library.Cached
                 dependencies.UnionWith(methodsDependencies);
 
                 foreach (var dependency in new HashSet<TypeDefinition>(dependencies))
-                    dependencies.UnionWith(GetDependencies(typeDefinition));
+                    dependencies.UnionWith(GetDependencies(dependency));
 
                 _cache.TryAdd(typeDefinition, dependencies);
 

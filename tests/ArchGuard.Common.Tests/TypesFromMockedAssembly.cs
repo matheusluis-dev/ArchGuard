@@ -9,8 +9,7 @@ namespace ArchGuard.Tests.Common
             Library.Type.Types.FromSln(
                 new SlnSearchParameters
                 {
-                    SlnPath =
-                        "C:\\Users\\matheus.oliveira\\source\\repos\\ArchGuard\\ArchGuard.sln",
+                    SlnPath = "C:\\Users\\mathe\\source\\github\\me\\ArchGuard\\ArchGuard.sln",
                     Preprocessor = "net9_0",
                     ProjectName = "ArchGuard.Tests.MockedAssembly",
                 }

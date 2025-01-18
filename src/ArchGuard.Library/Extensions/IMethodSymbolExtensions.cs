@@ -121,6 +121,7 @@ namespace ArchGuard.Library.Extensions
                                     )
                                 )
                         )
+                        .Where(type => !type.Equals(typeDefinition))
                         .Select(type => new TypeDefinition(project, type))
                 );
             }
@@ -131,6 +132,7 @@ namespace ArchGuard.Library.Extensions
                     methodSymbol.ReturnType is INamedTypeSymbol methodReturnType
                     && typeDefinition
                         .GetAllTypesFromProject()
+                        .Where(type => !type.Equals(typeDefinition))
                         .Any(typeDefinition =>
                             typeDefinition.Symbol.Equals(
                                 methodReturnType,
@@ -161,6 +163,7 @@ namespace ArchGuard.Library.Extensions
                                     )
                                 )
                         )
+                        .Where(type => !type.Equals(typeDefinition))
                         .Select(type => new TypeDefinition(project, type))
                 );
             }

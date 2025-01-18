@@ -2,6 +2,7 @@ namespace ArchGuard.Library.Cached
 {
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading;
     using Microsoft.CodeAnalysis;
 
@@ -25,14 +26,19 @@ namespace ArchGuard.Library.Cached
                     return result;
 
                 var typeMembers = new List<INamedTypeSymbol>();
-
-                foreach (var typeMember in namespaceSymbol.GetTypeMembers())
+                foreach (
+                    var typeMember in namespaceSymbol
+                        .GetTypeMembers()
+                        .Where(typeMember =>
+                            typeMember.ContainingAssembly.Equals(
+                                assemblySymbol,
+                                SymbolEqualityComparer.Default
+                            )
+                        )
+                )
                 {
-                    if (typeMember.ContainingAssembly.Equals(assemblySymbol))
-                    {
-                        typeMembers.Add(typeMember);
-                        typeMembers.AddRange(GetAllTypeMembers(typeMember, assemblySymbol));
-                    }
+                    typeMembers.Add(typeMember);
+                    typeMembers.AddRange(GetAllTypeMembers(typeMember, assemblySymbol));
                 }
 
                 foreach (var nestedNamespace in namespaceSymbol.GetNamespaceMembers())
@@ -52,14 +58,19 @@ namespace ArchGuard.Library.Cached
         )
         {
             var typeMembers = new List<INamedTypeSymbol>();
-
-            foreach (var nestedType in typeSymbol.GetTypeMembers())
+            foreach (
+                var nestedType in typeSymbol
+                    .GetTypeMembers()
+                    .Where(nestedType =>
+                        nestedType.ContainingAssembly.Equals(
+                            assemblySymbol,
+                            SymbolEqualityComparer.Default
+                        )
+                    )
+            )
             {
-                if (nestedType.ContainingAssembly.Equals(assemblySymbol))
-                {
-                    typeMembers.Add(nestedType);
-                    typeMembers.AddRange(GetAllTypeMembers(nestedType, assemblySymbol));
-                }
+                typeMembers.Add(nestedType);
+                typeMembers.AddRange(GetAllTypeMembers(nestedType, assemblySymbol));
             }
 
             return typeMembers;

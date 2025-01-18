@@ -6,6 +6,9 @@ namespace ArchGuard.Tests.Common.Types
         {
             public const string PublicClass = Namespaces.IsUsedBy + "." + nameof(PublicClass);
 
+            public const string PublicDependsOnFieldClass =
+                Namespaces.IsUsedBy + "." + nameof(PublicDependsOnFieldClass);
+
             public const string PublicDependsOnPropertyClass =
                 Namespaces.IsUsedBy + "." + nameof(PublicDependsOnPropertyClass);
         }

@@ -21,6 +21,9 @@ namespace ArchGuard.Library.Extensions
                 containingType = containingType.ContainingType;
             }
 
+            if (name.EndsWith('?'))
+                name = name[..^1];
+
             return name;
         }
 

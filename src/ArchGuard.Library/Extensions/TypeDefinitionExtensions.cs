@@ -81,12 +81,20 @@ namespace ArchGuard.Library.Extensions
             ArgumentNullException.ThrowIfNull(typeDefinition);
             ArgumentNullException.ThrowIfNull(types);
 
-            foreach (var type in typeDefinition.GetAllTypesFromProject())
-            {
-                var dependencies = type.GetDependencies().Select(type => type.Symbol.GetFullName());
+            var allTypes = typeDefinition.GetAllTypesFromProject();
 
-                if (dependencies.Any(d => types.Contains(d, StringComparer.Ordinal)))
+            var typesToCheck = allTypes.Where(type =>
+                types.Contains(type.SymbolFullName, StringComparer.Ordinal)
+            );
+
+            foreach (var type in typesToCheck)
+            {
+                var dependencies = type.GetDependencies();
+
+                if (dependencies.Any(dependency => dependency.Equals(typeDefinition)))
+                {
                     return true;
+                }
             }
 
             return false;
