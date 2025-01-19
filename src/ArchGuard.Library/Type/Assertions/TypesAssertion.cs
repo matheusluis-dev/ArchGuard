@@ -1,6 +1,6 @@
 namespace ArchGuard.Library.Type.Assertions
 {
-    using ArchGuard.Library.Type.Assertions;
+    using ArchGuard.Library.Type.Contexts;
 
     public sealed partial class TypesAssertion
         : ITypesAssertionCondition,
@@ -16,11 +16,6 @@ namespace ArchGuard.Library.Type.Assertions
         internal ITypesAssertionCondition Start()
         {
             return this;
-        }
-
-        public static ITypesAssertionCondition Create(TypesAssertionContext context)
-        {
-            return new TypesAssertion(context);
         }
 
         public ITypesAssertionCondition And => this;

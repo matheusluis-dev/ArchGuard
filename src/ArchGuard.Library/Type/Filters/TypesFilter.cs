@@ -1,7 +1,7 @@
 namespace ArchGuard.Library.Type.Filters
 {
-    using ArchGuard.Library.Type.Filters;
-    using static ArchGuard.Library.Type.RulesContext;
+    using ArchGuard.Library.Type.Contexts;
+    using static ArchGuard.Library.Type.Contexts.RulesContext;
 
     public sealed partial class TypesFilter
         : ITypesFilterStart,
@@ -26,11 +26,6 @@ namespace ArchGuard.Library.Type.Filters
         internal ITypesFilterStart Start()
         {
             return this;
-        }
-
-        public static ITypesFilterStart Create(TypesFilterContext context)
-        {
-            return new TypesFilter(context);
         }
     }
 }

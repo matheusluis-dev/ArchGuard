@@ -1,4 +1,4 @@
-namespace ArchGuard.Library.Type
+namespace ArchGuard.Library.Type.Contexts
 {
     using ArchGuard.Library.Cached;
     using ArchGuard.Library.Type.Assertions;

@@ -1,6 +1,7 @@
 namespace ArchGuard.Library.Type
 {
     using ArchGuard.Library;
+    using ArchGuard.Library.Type.Contexts;
     using ArchGuard.Library.Type.Filters;
 
     public static class Types
