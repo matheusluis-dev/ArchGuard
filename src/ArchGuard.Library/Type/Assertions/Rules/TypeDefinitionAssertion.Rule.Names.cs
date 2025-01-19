@@ -1,28 +1,29 @@
 namespace ArchGuard.Library.Type.Assertions
 {
+    using ArchGuard.Library.Type.Assertions.Sequences;
     using ArchGuard.Library.Type.Predicates;
 
-    public sealed partial class TypesAssertion
+    public sealed partial class TypeDefinitionAssertion
     {
-        public ITypesAssertionPostCondition HaveName(params string[] names)
+        public ITypeDefinitionAssertionSequence HaveName(params string[] names)
         {
             _context.AddPredicate(TypeDefinitionPredicate.HaveName(names));
             return this;
         }
 
-        public ITypesAssertionPostCondition HaveFullName(params string[] names)
+        public ITypeDefinitionAssertionSequence HaveFullName(params string[] names)
         {
             _context.AddPredicate(TypeDefinitionPredicate.HaveFullName(names));
             return this;
         }
 
-        public ITypesAssertionPostCondition HaveNameStartingWith(params string[] names)
+        public ITypeDefinitionAssertionSequence HaveNameStartingWith(params string[] names)
         {
             _context.AddPredicate(TypeDefinitionPredicate.HaveNameStartingWith(names));
             return this;
         }
 
-        public ITypesAssertionPostCondition HaveNameEndingWith(params string[] names)
+        public ITypeDefinitionAssertionSequence HaveNameEndingWith(params string[] names)
         {
             _context.AddPredicate(TypeDefinitionPredicate.HaveNameEndingWith(names));
             return this;

@@ -1,64 +1,65 @@
 namespace ArchGuard.Library.Type.Assertions
 {
+    using ArchGuard.Library.Type.Assertions.Sequences;
     using ArchGuard.Library.Type.Predicates;
 
-    public sealed partial class TypesAssertion
+    public sealed partial class TypeDefinitionAssertion
     {
-        public ITypesAssertionPostCondition BePublic()
+        public ITypeDefinitionAssertionSequence BePublic()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Public);
             return this;
         }
 
-        public ITypesAssertionPostCondition NotBePublic()
+        public ITypeDefinitionAssertionSequence NotBePublic()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotPublic);
             return this;
         }
 
-        public ITypesAssertionPostCondition BeInternal()
+        public ITypeDefinitionAssertionSequence BeInternal()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Internal);
             return this;
         }
 
-        public ITypesAssertionPostCondition NotBeInternal()
+        public ITypeDefinitionAssertionSequence NotBeInternal()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotInternal);
             return this;
         }
 
-        public ITypesAssertionPostCondition BePrivate()
+        public ITypeDefinitionAssertionSequence BePrivate()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Private);
             return this;
         }
 
-        public ITypesAssertionPostCondition NotBePrivate()
+        public ITypeDefinitionAssertionSequence NotBePrivate()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotPrivate);
             return this;
         }
 
-        public ITypesAssertionPostCondition BeProtected()
+        public ITypeDefinitionAssertionSequence BeProtected()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Protected);
             return this;
         }
 
-        public ITypesAssertionPostCondition NotBeProtected()
+        public ITypeDefinitionAssertionSequence NotBeProtected()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotProtected);
             return this;
         }
 
-        public ITypesAssertionPostCondition BeFileScoped()
+        public ITypeDefinitionAssertionSequence BeFileScoped()
         {
             _context.AddPredicate(TypeDefinitionPredicate.FileScoped);
             return this;
         }
 
-        public ITypesAssertionPostCondition NotBeFileScoped()
+        public ITypeDefinitionAssertionSequence NotBeFileScoped()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotFileScoped);
             return this;

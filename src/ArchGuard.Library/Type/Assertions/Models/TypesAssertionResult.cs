@@ -1,4 +1,4 @@
-namespace ArchGuard.Library.Type.Assertions
+namespace ArchGuard.Library.Type.Assertions.Models
 {
     using System.Collections.Generic;
     using System.Linq;

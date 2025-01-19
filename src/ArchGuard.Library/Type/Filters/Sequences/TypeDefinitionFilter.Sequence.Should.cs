@@ -4,6 +4,6 @@ namespace ArchGuard.Library.Type.Filters
 
     public sealed partial class TypeDefinitionFilter
     {
-        public ITypesAssertionCondition Should => _startAssertionCallback.Invoke();
+        public ITypeDefinitionAssertionRule Should => _startAssertionCallback.Invoke();
     }
 }

@@ -1,9 +1,9 @@
 namespace ArchGuard.Library.Type.Assertions
 {
     using System;
-    using ArchGuard.Library.Type.Assertions;
+    using ArchGuard.Library.Type.Assertions.Models;
 
-    public sealed partial class TypesAssertion
+    public sealed partial class TypeDefinitionAssertion
     {
         public TypesAssertionResult GetResult()
         {

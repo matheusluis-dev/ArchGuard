@@ -10,9 +10,9 @@ namespace ArchGuard.Library.Type.Contexts
         private readonly TypeDefinitionAssertionContext _typesAssertionContext;
 
         private readonly TypeDefinitionFilter _typesFilter;
-        private readonly TypesAssertion _typesAssertion;
+        private readonly TypeDefinitionAssertion _typesAssertion;
 
-        public delegate ITypesAssertionCondition StartTypeAssertionCallback();
+        public delegate ITypeDefinitionAssertionRule StartTypeAssertionCallback();
 
         internal RulesContext(SlnSearchParameters parameters)
         {
@@ -22,7 +22,7 @@ namespace ArchGuard.Library.Type.Contexts
             _typesAssertionContext = new TypeDefinitionAssertionContext(_typesFilterContext);
 
             _typesFilter = new TypeDefinitionFilter(_typesFilterContext, StartTypeAssertion);
-            _typesAssertion = new TypesAssertion(_typesAssertionContext);
+            _typesAssertion = new TypeDefinitionAssertion(_typesAssertionContext);
         }
 
         internal ITypeDefinitionFilterEntryPoint StartTypeFilter()
@@ -30,7 +30,7 @@ namespace ArchGuard.Library.Type.Contexts
             return _typesFilter.Start();
         }
 
-        private ITypesAssertionCondition StartTypeAssertion()
+        private ITypeDefinitionAssertionRule StartTypeAssertion()
         {
             return _typesAssertion.Start();
         }

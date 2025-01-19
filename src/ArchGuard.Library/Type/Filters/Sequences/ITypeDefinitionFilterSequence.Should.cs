@@ -4,6 +4,6 @@ namespace ArchGuard.Library.Type.Filters
 
     public partial interface ITypeDefinitionFilterSequence
     {
-        ITypesAssertionCondition Should { get; }
+        ITypeDefinitionAssertionRule Should { get; }
     }
 }
