@@ -12,7 +12,7 @@ namespace ArchGuard.Library.Type.Filters
 
         public IEnumerable<TypeDefinition> GetTypes()
         {
-            return _context.GetTypes(StringComparison.CurrentCulture);
+            return _context.GetTypes(Default.StringComparison);
         }
 
         public IEnumerable<TypeDefinition> GetTypes(StringComparison comparison)

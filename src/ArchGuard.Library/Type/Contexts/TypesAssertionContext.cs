@@ -10,7 +10,7 @@ namespace ArchGuard.Library.Type.Contexts
 
         internal TypesAssertionResult GetResult()
         {
-            return GetResult(StringComparison.CurrentCulture);
+            return GetResult(Default.StringComparison);
         }
 
         internal TypesAssertionResult GetResult(StringComparison comparison)

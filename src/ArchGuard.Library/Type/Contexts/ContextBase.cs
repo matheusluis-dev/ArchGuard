@@ -65,7 +65,7 @@ namespace ArchGuard.Library.Type.Contexts
 
         protected IEnumerable<T> GetElementsWithoutFilter()
         {
-            return GetElementsWithoutFilter(StringComparison.CurrentCulture);
+            return GetElementsWithoutFilter(Default.StringComparison);
         }
 
         protected IEnumerable<T> GetElementsWithoutFilter(StringComparison comparison)

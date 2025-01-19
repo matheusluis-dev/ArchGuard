@@ -4,6 +4,6 @@ namespace ArchGuard.Library
 
     internal static class Default
     {
-        public static StringComparison StringComparison => StringComparison.CurrentCulture;
+        public static StringComparison StringComparison => Default.StringComparison;
     }
 }
