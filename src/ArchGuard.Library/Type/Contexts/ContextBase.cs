@@ -55,7 +55,7 @@ namespace ArchGuard.Library.Type.Contexts
             if (_groupedPredicates.Count == 0)
                 CreateGroupedPredicate();
 
-            _groupedPredicates[_groupedPredicates.Count - 1].Add(predicate);
+            _groupedPredicates[^1].Add(predicate);
         }
 
         protected internal void Or()
