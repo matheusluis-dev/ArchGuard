@@ -9,7 +9,7 @@ namespace ArchGuard.Library.Type.Contexts
         private readonly TypesFilterContext _typesFilterContext;
         private readonly TypesAssertionContext _typesAssertionContext;
 
-        private readonly TypesFilter _typesFilter;
+        private readonly TypeDefinitionFilters _typesFilter;
         private readonly TypesAssertion _typesAssertion;
 
         public delegate ITypesAssertionCondition StartTypeAssertionCallback();
@@ -21,7 +21,7 @@ namespace ArchGuard.Library.Type.Contexts
             _typesFilterContext = new TypesFilterContext(sln.Types);
             _typesAssertionContext = new TypesAssertionContext(_typesFilterContext);
 
-            _typesFilter = new TypesFilter(_typesFilterContext, StartTypeAssertion);
+            _typesFilter = new TypeDefinitionFilters(_typesFilterContext, StartTypeAssertion);
             _typesAssertion = new TypesAssertion(_typesAssertionContext);
         }
 

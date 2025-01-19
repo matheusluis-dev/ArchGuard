@@ -1,6 +1,6 @@
 namespace ArchGuard.Library.Type.Filters
 {
-    public sealed partial class TypesFilter
+    public sealed partial class TypeDefinitionFilters
     {
         public ITypesFilterConditions And => this;
 

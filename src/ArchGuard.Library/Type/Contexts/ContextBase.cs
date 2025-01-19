@@ -33,16 +33,12 @@ namespace ArchGuard.Library.Type.Contexts
 
         private IEnumerable<T> GetElementsFromEnumerable(StringComparison comparison)
         {
-            ArgumentNullException.ThrowIfNull(_elements);
-
-            return _elements;
+            return _elements!;
         }
 
         private IEnumerable<T> GetElementsFromAnotherContext(StringComparison comparison)
         {
-            ArgumentNullException.ThrowIfNull(_anotherContext);
-
-            return _anotherContext.GetElements(comparison);
+            return _anotherContext!.GetElements(comparison);
         }
 
         private void CreateGroupedPredicate()

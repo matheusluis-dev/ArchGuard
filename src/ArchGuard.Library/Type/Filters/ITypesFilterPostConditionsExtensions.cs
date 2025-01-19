@@ -11,10 +11,10 @@ namespace ArchGuard.Library.Type.Filters
             Func<ITypesFilterConditions, ITypesFilterPostConditions> filter
         )
         {
-            if (!(iTypesFilterPostConditions is TypesFilter typesFilter))
+            if (!(iTypesFilterPostConditions is TypeDefinitionFilters typesFilter))
             {
                 throw new ArgumentException(
-                    $"{nameof(iTypesFilterPostConditions)} must be of type {nameof(TypesFilter)}"
+                    $"{nameof(iTypesFilterPostConditions)} must be of type {nameof(TypeDefinitionFilters)}"
                 );
             }
 
@@ -31,10 +31,10 @@ namespace ArchGuard.Library.Type.Filters
             Func<ITypesFilterConditions, ITypesFilterPostConditions> filter
         )
         {
-            if (!(iTypesFilterPostConditions is TypesFilter typesFilter))
+            if (!(iTypesFilterPostConditions is TypeDefinitionFilters typesFilter))
             {
                 throw new ArgumentException(
-                    $"{nameof(iTypesFilterPostConditions)} must be of type {nameof(TypesFilter)}"
+                    $"{nameof(iTypesFilterPostConditions)} must be of type {nameof(TypeDefinitionFilters)}"
                 );
             }
 

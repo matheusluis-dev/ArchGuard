@@ -6,7 +6,7 @@ namespace ArchGuard.Library.Type.Filters
     using ArchGuard.Library.Type.Predicates;
     using Microsoft.CodeAnalysis;
 
-    public sealed partial class TypesFilter
+    public sealed partial class TypeDefinitionFilters
     {
         public ITypesFilterConditions That => this;
 
