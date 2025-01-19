@@ -17,9 +17,9 @@ namespace ArchGuard.Library.Contexts
 
         internal RulesContext(SolutionSearchParameters parameters)
         {
-            var sln = SolutionReaderCached.CompileSolution(parameters);
+            var solutionCompiled = SolutionReaderCached.CompileSolution(parameters);
 
-            _typesFilterContext = new TypeDefinitionFilterContext(sln.Types);
+            _typesFilterContext = new TypeDefinitionFilterContext(solutionCompiled.Types);
             _typesAssertionContext = new TypeDefinitionAssertionContext(_typesFilterContext);
 
             _typesFilter = new TypeDefinitionFilter(_typesFilterContext, StartTypeAssertion);

@@ -21,11 +21,15 @@ namespace ArchGuard.Library.Solution
 
         public override readonly int GetHashCode()
         {
+            var slnPath = SlnPath.ToUpperInvariant();
+            var projectName = ProjectName.ToUpperInvariant();
+            var preprocessor = Preprocessor.ToUpperInvariant();
+
             return new
             {
-                SlnPath,
-                ProjectName,
-                Preprocessor,
+                slnPath,
+                projectName,
+                preprocessor,
             }.GetHashCode();
         }
     }
