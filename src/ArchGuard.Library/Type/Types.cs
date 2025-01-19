@@ -6,7 +6,7 @@ namespace ArchGuard.Library.Type
 
     public static class Types
     {
-        public static ITypesFilterStart FromSln(SlnSearchParameters parameters)
+        public static ITypeDefinitionFilterEntryPoint FromSln(SlnSearchParameters parameters)
         {
             var rulesContext = new RulesContext(parameters);
 

@@ -2,51 +2,51 @@ namespace ArchGuard.Library.Type.Filters
 {
     using ArchGuard.Library.Type.Predicates;
 
-    public sealed partial class TypeDefinitionFilters
+    public sealed partial class TypeDefinitionFilter
     {
-        public ITypesFilterPostConditions ArePartial()
+        public ITypeDefinitionFilterSequence ArePartial()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Partial);
             return this;
         }
 
-        public ITypesFilterPostConditions AreNotPartial()
+        public ITypeDefinitionFilterSequence AreNotPartial()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotPartial);
             return this;
         }
 
-        public ITypesFilterPostConditions AreSealed()
+        public ITypeDefinitionFilterSequence AreSealed()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Sealed);
             return this;
         }
 
-        public ITypesFilterPostConditions AreNotSealed()
+        public ITypeDefinitionFilterSequence AreNotSealed()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotSealed);
             return this;
         }
 
-        public ITypesFilterPostConditions AreNested()
+        public ITypeDefinitionFilterSequence AreNested()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Nested);
             return this;
         }
 
-        public ITypesFilterPostConditions AreNotNested()
+        public ITypeDefinitionFilterSequence AreNotNested()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotNested);
             return this;
         }
 
-        public ITypesFilterPostConditions AreStatic()
+        public ITypeDefinitionFilterSequence AreStatic()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Static);
             return this;
         }
 
-        public ITypesFilterPostConditions AreNotStatic()
+        public ITypeDefinitionFilterSequence AreNotStatic()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotStatic);
             return this;

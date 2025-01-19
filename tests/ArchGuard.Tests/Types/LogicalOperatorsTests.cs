@@ -2,6 +2,7 @@ namespace ArchGuard.Filters.Tests.Types
 {
     using System.Collections.Generic;
     using ArchGuard.Library.Type.Filters;
+    using ArchGuard.Library.Type.Filters.Sequences;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;

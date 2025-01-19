@@ -6,9 +6,9 @@ namespace ArchGuard.Library.Type.Filters
     using ArchGuard.Library.Type.Predicates;
     using Microsoft.CodeAnalysis;
 
-    public sealed partial class TypeDefinitionFilters
+    public sealed partial class TypeDefinitionFilter
     {
-        public ITypesFilterConditions That => this;
+        public ITypeDefinitionFilterRule That => this;
 
         public IEnumerable<TypeDefinition> GetTypes()
         {
@@ -20,7 +20,7 @@ namespace ArchGuard.Library.Type.Filters
             return _context.GetTypes(comparison);
         }
 
-        public ITypesFilterPostConditions ImplementInterface(params Type[] types)
+        public ITypeDefinitionFilterSequence ImplementInterface(params Type[] types)
         {
             if (types is null)
                 throw new ArgumentNullException(nameof(types));
@@ -33,12 +33,12 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
-        public ITypesFilterPostConditions ImplementInterface<T>()
+        public ITypeDefinitionFilterSequence ImplementInterface<T>()
         {
             return ImplementInterface(typeof(T));
         }
 
-        public ITypesFilterPostConditions DoNotImplementInterface(params Type[] types)
+        public ITypeDefinitionFilterSequence DoNotImplementInterface(params Type[] types)
         {
             if (types is null)
                 throw new ArgumentNullException(nameof(types));
@@ -51,12 +51,12 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
-        public ITypesFilterPostConditions DoNotImplementInterface<T>()
+        public ITypeDefinitionFilterSequence DoNotImplementInterface<T>()
         {
             return DoNotImplementInterface(typeof(T));
         }
 
-        public ITypesFilterPostConditions Inherit(params Type[] types)
+        public ITypeDefinitionFilterSequence Inherit(params Type[] types)
         {
             if (types is null)
                 throw new ArgumentNullException(nameof(types));
@@ -66,12 +66,12 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
-        public ITypesFilterPostConditions Inherit<T>()
+        public ITypeDefinitionFilterSequence Inherit<T>()
         {
             return Inherit(typeof(T));
         }
 
-        public ITypesFilterPostConditions DoNotInherit(params Type[] types)
+        public ITypeDefinitionFilterSequence DoNotInherit(params Type[] types)
         {
             if (types is null)
                 throw new ArgumentNullException(nameof(types));
@@ -81,102 +81,102 @@ namespace ArchGuard.Library.Type.Filters
             return this;
         }
 
-        public ITypesFilterPostConditions DoNotInherit<T>()
+        public ITypeDefinitionFilterSequence DoNotInherit<T>()
         {
             return DoNotInherit(typeof(T));
         }
 
-        public ITypesFilterPostConditions AreGeneric()
+        public ITypeDefinitionFilterSequence AreGeneric()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Generic);
             return this;
         }
 
-        public ITypesFilterPostConditions AreNotGeneric()
+        public ITypeDefinitionFilterSequence AreNotGeneric()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotGeneric);
             return this;
         }
 
-        public ITypesFilterPostConditions AreImmutable()
+        public ITypeDefinitionFilterSequence AreImmutable()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Immutable);
             return this;
         }
 
-        public ITypesFilterPostConditions AreMutable()
+        public ITypeDefinitionFilterSequence AreMutable()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Mutable);
             return this;
         }
 
-        public ITypesFilterPostConditions AreStateless()
+        public ITypeDefinitionFilterSequence AreStateless()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Stateless);
             return this;
         }
 
-        public ITypesFilterPostConditions AreNotStateless()
+        public ITypeDefinitionFilterSequence AreNotStateless()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotStateless);
             return this;
         }
 
-        public ITypesFilterPostConditions AreStaticless()
+        public ITypeDefinitionFilterSequence AreStaticless()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Staticless);
             return this;
         }
 
-        public ITypesFilterPostConditions AreNotStaticless()
+        public ITypeDefinitionFilterSequence AreNotStaticless()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotStaticless);
             return this;
         }
 
-        public ITypesFilterPostConditions AreExternallyImmutable()
+        public ITypeDefinitionFilterSequence AreExternallyImmutable()
         {
             _context.AddPredicate(TypeDefinitionPredicate.ExternallyImmutable);
             return this;
         }
 
-        public ITypesFilterPostConditions AreExternallyMutable()
+        public ITypeDefinitionFilterSequence AreExternallyMutable()
         {
             _context.AddPredicate(TypeDefinitionPredicate.ExternallyMutable);
             return this;
         }
 
-        public ITypesFilterPostConditions HaveDependencyOn(params string[] typesNames)
+        public ITypeDefinitionFilterSequence HaveDependencyOn(params string[] typesNames)
         {
             _context.AddPredicate(TypeDefinitionPredicate.HaveDependencyOn(typesNames));
             return this;
         }
 
-        public ITypesFilterPostConditions DoNotHaveDependencyOn(params string[] typesNames)
+        public ITypeDefinitionFilterSequence DoNotHaveDependencyOn(params string[] typesNames)
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotHaveDependencyOn(typesNames));
             return this;
         }
 
-        public ITypesFilterPostConditions HaveParameterlessConstructor()
+        public ITypeDefinitionFilterSequence HaveParameterlessConstructor()
         {
             _context.AddPredicate(TypeDefinitionPredicate.HaveParameterlessConstructor);
             return this;
         }
 
-        public ITypesFilterPostConditions DoNotHaveParameterlessConstructor()
+        public ITypeDefinitionFilterSequence DoNotHaveParameterlessConstructor()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotHaveParameterlessConstructor);
             return this;
         }
 
-        public ITypesFilterPostConditions AreUsedBy(params string[] typesNames)
+        public ITypeDefinitionFilterSequence AreUsedBy(params string[] typesNames)
         {
             _context.AddPredicate(TypeDefinitionPredicate.UsedBy(typesNames));
             return this;
         }
 
-        public ITypesFilterPostConditions AreNotUsedBy(params string[] typesNames)
+        public ITypeDefinitionFilterSequence AreNotUsedBy(params string[] typesNames)
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotUsedBy(typesNames));
             return this;

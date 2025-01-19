@@ -5,7 +5,7 @@ namespace ArchGuard.Tests.Common
 
     public static class TypesFromMockedAssembly
     {
-        public static ITypesFilterStart All =>
+        public static ITypeDefinitionFilterEntryPoint All =>
             Library.Type.Types.FromSln(
                 new SlnSearchParameters
                 {

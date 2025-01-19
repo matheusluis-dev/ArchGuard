@@ -1,6 +1,7 @@
 namespace ArchGuard.PublicApi.Tests
 {
     using ArchGuard.Library.Type.Filters;
+    using ArchGuard.Library.Type.Filters.Sequences;
     using ArchGuard.Tests.Common;
     using FluentAssertions;
     using Xunit;
@@ -17,7 +18,7 @@ namespace ArchGuard.PublicApi.Tests
             var conditions = filters.That.AreClasses().And;
 
             // Assert
-            conditions.Should().BeAssignableTo<ITypesFilterConditions>();
+            conditions.Should().BeAssignableTo<ITypeDefinitionFilterRule>();
         }
 
         [Fact]
@@ -30,7 +31,7 @@ namespace ArchGuard.PublicApi.Tests
             var conditions = filters.That.AreClasses().And(a => a.ArePublic());
 
             // Assert
-            conditions.Should().BeAssignableTo<ITypesFilterPostConditions>();
+            conditions.Should().BeAssignableTo<ITypeDefinitionFilterSequence>();
         }
 
         [Fact]
@@ -43,7 +44,7 @@ namespace ArchGuard.PublicApi.Tests
             var conditions = filters.That.AreClasses().Or;
 
             // Assert
-            conditions.Should().BeAssignableTo<ITypesFilterConditions>();
+            conditions.Should().BeAssignableTo<ITypeDefinitionFilterRule>();
         }
 
         [Fact]
@@ -56,7 +57,7 @@ namespace ArchGuard.PublicApi.Tests
             var conditions = filters.That.AreClasses().Or(a => a.AreInterfaces());
 
             // Assert
-            conditions.Should().BeAssignableTo<ITypesFilterPostConditions>();
+            conditions.Should().BeAssignableTo<ITypeDefinitionFilterSequence>();
         }
     }
 }

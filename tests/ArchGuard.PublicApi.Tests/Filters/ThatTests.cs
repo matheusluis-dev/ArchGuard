@@ -20,7 +20,7 @@ namespace ArchGuard.PublicApi.Tests.Filters
             var types = typeof(Types);
             var typesMethodsName = new[] { "FromAssembly" };
 
-            var iTypesFilterStart = typeof(ITypesFilterStart);
+            var iTypesFilterStart = typeof(ITypeDefinitionFilterEntryPoint);
             var iTypesFilterStartMembersName = new[] { "That" };
 
             // Act
@@ -41,7 +41,7 @@ namespace ArchGuard.PublicApi.Tests.Filters
                 .Should()
                 .ContainSingle()
                 .Which.ReturnType.Should()
-                .BeAssignableTo<ITypesFilterStart>();
+                .BeAssignableTo<ITypeDefinitionFilterEntryPoint>();
 
             iTypesFilterStartMethods.Should().HaveCount(2);
         }

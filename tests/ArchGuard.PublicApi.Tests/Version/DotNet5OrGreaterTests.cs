@@ -16,8 +16,8 @@ namespace ArchGuard.PublicApi.Tests.Version
 
 #if NET5_0_OR_GREATER
         [Theory]
-        [InlineData(typeof(ITypesFilterConditions))]
-        [InlineData(typeof(TypeDefinitionFilters))]
+        [InlineData(typeof(ITypeDefinitionFilterRule))]
+        [InlineData(typeof(TypeDefinitionFilter))]
         public void Record_related_filters_should_be_visible_when_DotNet_version_5_0_or_greater(
             Type type
         )
@@ -33,7 +33,7 @@ namespace ArchGuard.PublicApi.Tests.Version
         public void Record_extensions_should_be_visible_when_DotNet_version_5_0_or_greater()
         {
             // Arrange
-            var assembly = typeof(TypeDefinitionFilters).Assembly;
+            var assembly = typeof(TypeDefinitionFilter).Assembly;
             var type = typeof(Type);
 
             // Act

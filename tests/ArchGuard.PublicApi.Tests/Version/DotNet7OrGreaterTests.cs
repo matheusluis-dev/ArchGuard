@@ -15,8 +15,8 @@ namespace ArchGuard.PublicApi.Tests.Version
 
 #if NET7_0_OR_GREATER
         [Theory]
-        [InlineData(typeof(ITypesFilterConditions))]
-        [InlineData(typeof(TypeDefinitionFilters))]
+        [InlineData(typeof(ITypeDefinitionFilterRule))]
+        [InlineData(typeof(TypeDefinitionFilter))]
         public void File_scoped_related_filters_should_be_visible_when_DotNet_version_7_0_or_greater(
             Type type
         )
@@ -32,7 +32,7 @@ namespace ArchGuard.PublicApi.Tests.Version
         public void File_scoped_extensions_should_be_visible_when_DotNet_version_7_0_or_greater()
         {
             // Arrange
-            var assembly = typeof(TypeDefinitionFilters).Assembly;
+            var assembly = typeof(TypeDefinitionFilter).Assembly;
             var type = typeof(Type);
 
             // Act

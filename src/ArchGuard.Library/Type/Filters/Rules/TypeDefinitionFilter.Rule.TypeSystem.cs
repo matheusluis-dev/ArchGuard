@@ -2,63 +2,63 @@ namespace ArchGuard.Library.Type.Filters
 {
     using ArchGuard.Library.Type.Predicates;
 
-    public sealed partial class TypeDefinitionFilters
+    public sealed partial class TypeDefinitionFilter
     {
-        public ITypesFilterPostConditions AreClasses()
+        public ITypeDefinitionFilterSequence AreClasses()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Class);
             return this;
         }
 
-        public ITypesFilterPostConditions AreNotClasses()
+        public ITypeDefinitionFilterSequence AreNotClasses()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotClass);
             return this;
         }
 
-        public ITypesFilterPostConditions AreInterfaces()
+        public ITypeDefinitionFilterSequence AreInterfaces()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Interface);
             return this;
         }
 
-        public ITypesFilterPostConditions AreNotInterfaces()
+        public ITypeDefinitionFilterSequence AreNotInterfaces()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotInterface);
             return this;
         }
 
-        public ITypesFilterPostConditions AreStructs()
+        public ITypeDefinitionFilterSequence AreStructs()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Struct);
             return this;
         }
 
-        public ITypesFilterPostConditions AreNotStructs()
+        public ITypeDefinitionFilterSequence AreNotStructs()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotStruct);
             return this;
         }
 
-        public ITypesFilterPostConditions AreEnums()
+        public ITypeDefinitionFilterSequence AreEnums()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Enum);
             return this;
         }
 
-        public ITypesFilterPostConditions AreNotEnums()
+        public ITypeDefinitionFilterSequence AreNotEnums()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotEnum);
             return this;
         }
 
-        public ITypesFilterPostConditions AreRecords()
+        public ITypeDefinitionFilterSequence AreRecords()
         {
             _context.AddPredicate(TypeDefinitionPredicate.Record);
             return this;
         }
 
-        public ITypesFilterPostConditions AreNotRecords()
+        public ITypeDefinitionFilterSequence AreNotRecords()
         {
             _context.AddPredicate(TypeDefinitionPredicate.NotRecord);
             return this;

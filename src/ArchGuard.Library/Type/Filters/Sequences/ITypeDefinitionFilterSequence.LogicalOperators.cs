@@ -1,10 +1,10 @@
 namespace ArchGuard.Library.Type.Filters
 {
 #pragma warning disable CA1716 // Identifiers should not match keywords
-    public partial interface ITypesFilterPostConditions
+    public partial interface ITypeDefinitionFilterSequence
     {
-        ITypesFilterConditions And { get; }
-        ITypesFilterConditions Or { get; }
+        ITypeDefinitionFilterRule And { get; }
+        ITypeDefinitionFilterRule Or { get; }
     }
 #pragma warning restore CA1716 // Identifiers should not match keywords
 }
