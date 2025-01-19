@@ -13,9 +13,9 @@ namespace ArchGuard.Assertions.Tests.Modifiers
         public void Nested_types()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.HaveNameStartingWith(
-                $"{TypeNames.PublicParentClass}+"
-            );
+            var filters = TypesFromMockedAssembly
+                .All.That.ResideInNamespace(Namespaces.Nested)
+                .And.HaveFullNameMatching(@"\+");
 
             var filtersTypes = filters.GetTypes(StringComparison.Ordinal);
 
@@ -33,7 +33,7 @@ namespace ArchGuard.Assertions.Tests.Modifiers
         public void Nested_types_non_successful()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.ResideInNamespace(Namespaces.Classes);
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespace(Namespaces.Nested);
 
             var filtersTypes = filters.GetTypes(StringComparison.Ordinal);
 
@@ -47,31 +47,17 @@ namespace ArchGuard.Assertions.Tests.Modifiers
                 .CompliantTypes.GetFullNames()
                 .Should()
                 .BeEquivalentTo(
-                    TypeNames.PublicParentClass_InternalNestedClass,
-                    TypeNames.PublicParentClass_PrivateNestedClass,
-                    TypeNames.PublicParentClass_PublicNestedClass,
-                    TypeNames.PublicParentClass_PublicNestedPartialClass
+                    TypeNames.Nested.InternalNestedClass,
+                    TypeNames.Nested.PrivateNestedClass,
+                    TypeNames.Nested.ProtectedNestedClass,
+                    TypeNames.Nested.PublicNestedClass
                 );
             assertion
                 .NonCompliantTypes.GetFullNames()
                 .Should()
                 .BeEquivalentTo(
-                    TypeNames.FileClass,
-                    TypeNames.FilePartialClass,
-                    TypeNames.FileSealedClass,
-                    TypeNames.FileStaticClass,
-                    TypeNames.InternalClass,
-                    TypeNames.InternalPartialClass,
-                    TypeNames.InternalSealedClass,
-                    TypeNames.InternalStaticClass,
-                    TypeNames.PublicAbstractClass,
-                    TypeNames.PublicClass,
-                    TypeNames.PublicGenericClassWithOneType,
-                    TypeNames.PublicGenericClassWithTwoTypes,
-                    TypeNames.PublicParentClass,
-                    TypeNames.PublicPartialClass,
-                    TypeNames.PublicSealedClass,
-                    TypeNames.PublicStaticClass
+                    TypeNames.Nested.PublicNonNestedClass,
+                    TypeNames.Nested.PublicParentClass
                 );
         }
     }

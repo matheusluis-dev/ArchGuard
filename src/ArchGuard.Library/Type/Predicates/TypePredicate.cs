@@ -14,7 +14,7 @@ namespace ArchGuard.Library.Type.Predicates
                 type.Symbol.TypeKind != TypeKind.Interface
                 && type.Symbol.AllInterfaces.Any(@interface =>
                     types
-                        .Select(t => t.GetFullName())
+                        .Select(t => t.GetFullNameClean())
                         .Contains(@interface.GetFullName(), StringComparer.CurrentCulture)
                 );
         }

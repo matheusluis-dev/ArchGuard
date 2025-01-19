@@ -22,7 +22,7 @@ namespace ArchGuard.Filters.Tests
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.IsUsedBy.PublicClass.ToList());
+            types.Should().BeEquivalentTo(TypeNames.IsUsedBy.PublicClass.ToListString());
         }
 
         [Fact]
@@ -37,7 +37,7 @@ namespace ArchGuard.Filters.Tests
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(TypeNames.IsUsedBy.PublicClass.ToList());
+            types.Should().BeEquivalentTo(TypeNames.IsUsedBy.PublicClass.ToListString());
         }
     }
 }

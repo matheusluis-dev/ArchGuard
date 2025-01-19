@@ -7,19 +7,17 @@ namespace ArchGuard.Library.Type.Filters
 
     public sealed class TypesFilterContext
     {
-        private readonly SlnCompilation _slnCompilation;
         private readonly IEnumerable<TypeDefinition> _types;
 
         private readonly List<
             List<Func<TypeDefinition, StringComparison, bool>>
         > _groupedFilterPredicates = new();
 
-        public TypesFilterContext(SlnCompilation slnCompilation)
+        public TypesFilterContext(IEnumerable<TypeDefinition> types)
         {
-            ArgumentNullException.ThrowIfNull(slnCompilation);
+            ArgumentNullException.ThrowIfNull(types);
 
-            _slnCompilation = slnCompilation;
-            _types = slnCompilation.Types;
+            _types = types;
         }
 
         private void CreateGroupedPredicate()

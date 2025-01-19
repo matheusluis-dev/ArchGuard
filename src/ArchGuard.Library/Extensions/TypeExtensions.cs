@@ -1,40 +1,14 @@
 namespace ArchGuard.Library.Extensions
 {
-    using System;
-    using System.Text;
+    using System.Text.RegularExpressions;
 
-    public static class TypeExtensions
+    internal static partial class TypeExtensions
     {
-        public static string GetFullName(this Type type)
+        internal static string GetFullNameClean(this System.Type type)
         {
-            if (type == null)
-                throw new ArgumentNullException(nameof(type));
+            var match = Regex.Match(type.FullName, @"<[^>]+>[^_]+__(.+)$");
 
-            var sb = new StringBuilder();
-            AppendNamespaceAndName(type, sb);
-            return sb.ToString();
-        }
-
-        private static void AppendNamespaceAndName(Type type, StringBuilder sb)
-        {
-            if (type.IsNested)
-            {
-                AppendNamespaceAndName(type.DeclaringType, sb);
-                sb.Append('+');
-            }
-            else if (!string.IsNullOrEmpty(type.Namespace))
-            {
-                sb.Append(type.Namespace).Append('.');
-            }
-
-            var name = type.Name;
-            var genericIndex = name.IndexOf('`');
-            if (genericIndex > 0)
-            {
-                name = name.Substring(0, genericIndex);
-            }
-
-            sb.Append(name);
+            return match.Success ? type.Namespace + "." + match.Groups[1].Value : type.FullName;
         }
     }
 }

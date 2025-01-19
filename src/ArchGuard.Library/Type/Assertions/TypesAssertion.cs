@@ -8,9 +8,14 @@ namespace ArchGuard.Library.Type.Assertions
     {
         private readonly TypesAssertionContext _context;
 
-        private TypesAssertion(TypesAssertionContext context)
+        internal TypesAssertion(TypesAssertionContext context)
         {
             _context = context;
+        }
+
+        internal ITypesAssertionCondition Start()
+        {
+            return this;
         }
 
         public static ITypesAssertionCondition Create(TypesAssertionContext context)

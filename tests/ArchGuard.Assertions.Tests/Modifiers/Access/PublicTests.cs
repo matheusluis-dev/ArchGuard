@@ -44,11 +44,11 @@ namespace ArchGuard.Assertions.Tests.Modifiers.Access
             assertion
                 .CompliantTypes.GetFullNames()
                 .Should()
-                .BeEquivalentTo(TypeNames.IPublicInterface.ToList());
+                .BeEquivalentTo(TypeNames.IPublicInterface.ToListString());
             assertion
                 .NonCompliantTypes.GetFullNames()
                 .Should()
-                .BeEquivalentTo(TypeNames.IInternalInterface.ToList());
+                .BeEquivalentTo(TypeNames.IInternalInterface.ToListString());
         }
     }
 }

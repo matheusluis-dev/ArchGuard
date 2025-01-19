@@ -4,6 +4,7 @@ namespace ArchGuard.Library.Extensions
     using System.Collections.Generic;
     using System.Linq;
     using ArchGuard.Library.Cached;
+    using ArchGuard.Library.Extensions;
     using Microsoft.CodeAnalysis;
 
     public static class INamedTypeSymbolExtensions
@@ -48,7 +49,7 @@ namespace ArchGuard.Library.Extensions
             {
                 return namedTypeSymbol.AllInterfaces.Any(i =>
                     types.Any(t =>
-                        t.GetFullName().Contains(i.GetFullName(), StringComparison.Ordinal)
+                        t.GetFullNameClean().Contains(i.GetFullName(), StringComparison.Ordinal)
                     )
                 );
             }
@@ -59,7 +60,7 @@ namespace ArchGuard.Library.Extensions
             {
                 if (
                     types
-                        .Select(t => t.GetFullName())
+                        .Select(t => t.GetFullNameClean())
                         .Contains(baseType.GetFullName(), StringComparer.CurrentCulture)
                 )
                 {

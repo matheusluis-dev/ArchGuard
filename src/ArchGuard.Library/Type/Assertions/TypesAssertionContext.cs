@@ -3,26 +3,20 @@ namespace ArchGuard.Library.Type.Assertions
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using ArchGuard.Library.Type.Filters;
     using Microsoft.CodeAnalysis;
 
     public sealed class TypesAssertionContext
     {
-        private readonly IEnumerable<TypeDefinition> _types;
-        private readonly IEnumerable<
-            IEnumerable<Func<TypeDefinition, StringComparison, bool>>
-        > _filters;
         private readonly List<
             List<Func<TypeDefinition, StringComparison, bool>>
-        > _groupedAssertionPredicates =
-            new List<List<Func<TypeDefinition, StringComparison, bool>>>();
+        > _groupedAssertionPredicates = new();
 
-        public TypesAssertionContext(
-            IEnumerable<TypeDefinition> types,
-            IEnumerable<IEnumerable<Func<TypeDefinition, StringComparison, bool>>> filters
-        )
+        private readonly TypesFilterContext _filterContext;
+
+        public TypesAssertionContext(TypesFilterContext filterContext)
         {
-            _types = types;
-            _filters = filters;
+            _filterContext = filterContext;
         }
 
         private void CreateGroupedPredicate()
@@ -37,33 +31,12 @@ namespace ArchGuard.Library.Type.Assertions
             if (_groupedAssertionPredicates.Count == 0)
                 CreateGroupedPredicate();
 
-            _groupedAssertionPredicates[_groupedAssertionPredicates.Count - 1].Add(predicate);
+            _groupedAssertionPredicates[^1].Add(predicate);
         }
 
         public void Or()
         {
             CreateGroupedPredicate();
-        }
-
-        private IEnumerable<TypeDefinition> ExecuteFilters(StringComparison comparison)
-        {
-            if (!_filters.Any())
-                return _types;
-
-            var types = new List<TypeDefinition>();
-
-            foreach (var group in _filters)
-            {
-                var typesGrouped = _types;
-                foreach (var predicate in group)
-                {
-                    typesGrouped = typesGrouped.Where(type => predicate(type, comparison));
-                }
-
-                types.AddRange(typesGrouped);
-            }
-
-            return types.Distinct();
         }
 
         private IEnumerable<TypeDefinition> ExecuteAssertions(
@@ -97,7 +70,7 @@ namespace ArchGuard.Library.Type.Assertions
 
         public TypesAssertionResult GetResult(StringComparison comparison)
         {
-            var typesToAssert = ExecuteFilters(comparison);
+            var typesToAssert = _filterContext.GetTypes(comparison);
             var typesAsserted = ExecuteAssertions(typesToAssert, comparison);
 
             return new TypesAssertionResult(typesToAssert, typesAsserted);
