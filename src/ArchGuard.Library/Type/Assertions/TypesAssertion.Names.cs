@@ -6,25 +6,25 @@ namespace ArchGuard.Library.Type.Assertions
     {
         public ITypesAssertionPostCondition HaveName(params string[] names)
         {
-            _context.AddPredicate(TypePredicate.HaveName(names));
+            _context.AddPredicate(TypeDefinitionPredicate.HaveName(names));
             return this;
         }
 
         public ITypesAssertionPostCondition HaveFullName(params string[] names)
         {
-            _context.AddPredicate(TypePredicate.HaveFullName(names));
+            _context.AddPredicate(TypeDefinitionPredicate.HaveFullName(names));
             return this;
         }
 
         public ITypesAssertionPostCondition HaveNameStartingWith(params string[] names)
         {
-            _context.AddPredicate(TypePredicate.HaveNameStartingWith(names));
+            _context.AddPredicate(TypeDefinitionPredicate.HaveNameStartingWith(names));
             return this;
         }
 
         public ITypesAssertionPostCondition HaveNameEndingWith(params string[] names)
         {
-            _context.AddPredicate(TypePredicate.HaveNameEndingWith(names));
+            _context.AddPredicate(TypeDefinitionPredicate.HaveNameEndingWith(names));
             return this;
         }
     }

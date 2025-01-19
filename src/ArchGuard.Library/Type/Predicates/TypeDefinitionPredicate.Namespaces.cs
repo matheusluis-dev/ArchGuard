@@ -6,7 +6,7 @@ namespace ArchGuard.Library.Type.Predicates
     using ArchGuard.Library.Extensions;
     using Microsoft.CodeAnalysis;
 
-    internal static partial class TypePredicate
+    internal static partial class TypeDefinitionPredicate
     {
         private static bool NamespaceDefaultPredicate(TypeDefinition type, string name)
         {

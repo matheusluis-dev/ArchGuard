@@ -3,7 +3,7 @@ namespace ArchGuard.Library.Type.Predicates
     using System;
     using Microsoft.CodeAnalysis;
 
-    internal static partial class TypePredicate
+    internal static partial class TypeDefinitionPredicate
     {
         internal static Func<TypeDefinition, StringComparison, bool> Public =>
             (type, _) => type.Symbol.DeclaredAccessibility == Accessibility.Public;

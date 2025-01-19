@@ -6,7 +6,7 @@ namespace ArchGuard.Library.Type.Predicates
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-    internal static partial class TypePredicate
+    internal static partial class TypeDefinitionPredicate
     {
         internal static Func<TypeDefinition, StringComparison, bool> Partial =>
             (type, _) =>

@@ -6,49 +6,49 @@ namespace ArchGuard.Library.Type.Filters
     {
         public ITypesFilterPostConditions HaveName(params string[] name)
         {
-            _context.AddPredicate(TypePredicate.HaveName(name));
+            _context.AddPredicate(TypeDefinitionPredicate.HaveName(name));
             return this;
         }
 
         public ITypesFilterPostConditions HaveNameMatching(params string[] regexes)
         {
-            _context.AddPredicate(TypePredicate.HaveNameMatching(regexes));
+            _context.AddPredicate(TypeDefinitionPredicate.HaveNameMatching(regexes));
             return this;
         }
 
         public ITypesFilterPostConditions HaveNameNotMatching(params string[] regexes)
         {
-            _context.AddPredicate(TypePredicate.HaveNameNotMatching(regexes));
+            _context.AddPredicate(TypeDefinitionPredicate.HaveNameNotMatching(regexes));
             return this;
         }
 
         public ITypesFilterPostConditions HaveFullName(params string[] name)
         {
-            _context.AddPredicate(TypePredicate.HaveFullName(name));
+            _context.AddPredicate(TypeDefinitionPredicate.HaveFullName(name));
             return this;
         }
 
         public ITypesFilterPostConditions HaveFullNameMatching(params string[] regexes)
         {
-            _context.AddPredicate(TypePredicate.HaveFullNameMatching(regexes));
+            _context.AddPredicate(TypeDefinitionPredicate.HaveFullNameMatching(regexes));
             return this;
         }
 
         public ITypesFilterPostConditions HaveFullNameNotMatching(params string[] regexes)
         {
-            _context.AddPredicate(TypePredicate.HaveFullNameNotMatching(regexes));
+            _context.AddPredicate(TypeDefinitionPredicate.HaveFullNameNotMatching(regexes));
             return this;
         }
 
         public ITypesFilterPostConditions HaveNameStartingWith(params string[] name)
         {
-            _context.AddPredicate(TypePredicate.HaveNameStartingWith(name));
+            _context.AddPredicate(TypeDefinitionPredicate.HaveNameStartingWith(name));
             return this;
         }
 
         public ITypesFilterPostConditions HaveNameEndingWith(params string[] name)
         {
-            _context.AddPredicate(TypePredicate.HaveNameEndingWith(name));
+            _context.AddPredicate(TypeDefinitionPredicate.HaveNameEndingWith(name));
             return this;
         }
     }
