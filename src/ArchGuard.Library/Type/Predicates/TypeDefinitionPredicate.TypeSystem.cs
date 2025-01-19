@@ -1,6 +1,7 @@
 namespace ArchGuard.Library.Type.Predicates
 {
     using System;
+    using ArchGuard.Library.Type;
     using Microsoft.CodeAnalysis;
 
     internal static partial class TypeDefinitionPredicate

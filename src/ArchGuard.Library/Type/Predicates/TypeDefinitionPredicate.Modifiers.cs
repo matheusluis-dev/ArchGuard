@@ -2,6 +2,7 @@ namespace ArchGuard.Library.Type.Predicates
 {
     using System;
     using System.Linq;
+    using ArchGuard.Library.Type;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;

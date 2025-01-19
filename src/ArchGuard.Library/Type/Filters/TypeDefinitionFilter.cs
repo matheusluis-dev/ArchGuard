@@ -1,7 +1,7 @@
 namespace ArchGuard.Library.Type.Filters
 {
-    using ArchGuard.Library.Type.Contexts;
-    using static ArchGuard.Library.Type.Contexts.RulesContext;
+    using ArchGuard.Library.Contexts;
+    using static ArchGuard.Library.Contexts.RulesContext;
 
     public sealed partial class TypeDefinitionFilter
         : ITypeDefinitionFilterEntryPoint,

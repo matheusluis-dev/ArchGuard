@@ -6,6 +6,7 @@ namespace ArchGuard.Library.Cached
     using System.Linq;
     using System.Threading;
     using ArchGuard.Library.Extensions;
+    using ArchGuard.Library.Type;
     using Microsoft.CodeAnalysis;
 
     internal static class DependencySearchCached

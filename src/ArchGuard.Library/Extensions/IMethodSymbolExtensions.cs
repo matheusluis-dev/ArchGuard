@@ -3,6 +3,7 @@ namespace ArchGuard.Library.Extensions
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using ArchGuard.Library.Type;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;

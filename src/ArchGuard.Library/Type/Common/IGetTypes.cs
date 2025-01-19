@@ -1,7 +1,8 @@
-namespace ArchGuard.Library.Type
+namespace ArchGuard.Library.Type.Common
 {
     using System;
     using System.Collections.Generic;
+    using ArchGuard.Library.Type;
 
     public interface IGetTypes
     {

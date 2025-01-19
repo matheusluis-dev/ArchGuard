@@ -1,9 +1,9 @@
-namespace ArchGuard.Library
+namespace ArchGuard.Library.Solution
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    public struct SlnSearchParameters
+    public struct SolutionSearchParameters
     {
         public required string SlnPath { get; set; }
         public required string ProjectName { get; set; }
@@ -11,7 +11,7 @@ namespace ArchGuard.Library
 
         public override readonly bool Equals([NotNullWhen(true)] object obj)
         {
-            if (obj is not SlnSearchParameters other)
+            if (obj is not SolutionSearchParameters other)
                 return false;
 
             return SlnPath.Equals(other.SlnPath, StringComparison.OrdinalIgnoreCase)

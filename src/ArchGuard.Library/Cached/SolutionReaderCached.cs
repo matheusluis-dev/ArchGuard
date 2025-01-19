@@ -5,6 +5,8 @@ namespace ArchGuard.Library.Cached
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
+    using ArchGuard.Library.Solution;
+    using ArchGuard.Library.Type;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.MSBuild;
 
@@ -12,10 +14,12 @@ namespace ArchGuard.Library.Cached
     {
         private static readonly Lock _lock = new Lock();
 
-        private static readonly ConcurrentDictionary<SlnSearchParameters, SlnCompilation> _cache =
-            new();
+        private static readonly ConcurrentDictionary<
+            SolutionSearchParameters,
+            SolutionCompilation
+        > _cache = new();
 
-        public static SlnCompilation CompileSolution(SlnSearchParameters parameters)
+        public static SolutionCompilation CompileSolution(SolutionSearchParameters parameters)
         {
             lock (_lock)
             {
@@ -49,7 +53,7 @@ namespace ArchGuard.Library.Cached
                         types.Add(new(project, type));
                 }
 
-                var slnCompilation = new SlnCompilation { Solution = solution, Types = types };
+                var slnCompilation = new SolutionCompilation { Solution = solution, Types = types };
 
                 _cache.TryAdd(parameters, slnCompilation);
 

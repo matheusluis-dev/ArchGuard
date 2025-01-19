@@ -2,6 +2,7 @@ namespace ArchGuard.Library.Type.Assertions.Models
 {
     using System.Collections.Generic;
     using System.Linq;
+    using ArchGuard.Library.Type;
     using Microsoft.CodeAnalysis;
 
     public sealed class TypesAssertionResult

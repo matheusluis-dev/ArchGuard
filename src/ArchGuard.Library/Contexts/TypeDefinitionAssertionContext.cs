@@ -1,6 +1,7 @@
-namespace ArchGuard.Library.Type.Contexts
+namespace ArchGuard.Library.Contexts
 {
     using System;
+    using ArchGuard.Library.Type;
     using ArchGuard.Library.Type.Assertions.Models;
 
     internal sealed class TypeDefinitionAssertionContext : ContextBase<TypeDefinition>

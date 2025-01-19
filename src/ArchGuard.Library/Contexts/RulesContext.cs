@@ -1,6 +1,7 @@
-namespace ArchGuard.Library.Type.Contexts
+namespace ArchGuard.Library.Contexts
 {
     using ArchGuard.Library.Cached;
+    using ArchGuard.Library.Solution;
     using ArchGuard.Library.Type.Assertions;
     using ArchGuard.Library.Type.Filters;
 
@@ -14,7 +15,7 @@ namespace ArchGuard.Library.Type.Contexts
 
         public delegate ITypeDefinitionAssertionRule StartTypeAssertionCallback();
 
-        internal RulesContext(SlnSearchParameters parameters)
+        internal RulesContext(SolutionSearchParameters parameters)
         {
             var sln = SolutionReaderCached.CompileSolution(parameters);
 

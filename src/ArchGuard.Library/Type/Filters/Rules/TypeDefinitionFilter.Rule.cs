@@ -3,6 +3,7 @@ namespace ArchGuard.Library.Type.Filters
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using ArchGuard.Library.Type;
     using ArchGuard.Library.Type.Predicates;
     using Microsoft.CodeAnalysis;
 

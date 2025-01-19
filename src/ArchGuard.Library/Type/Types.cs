@@ -1,24 +1,18 @@
 namespace ArchGuard.Library.Type
 {
-    using ArchGuard.Library;
-    using ArchGuard.Library.Type.Contexts;
+    using ArchGuard.Library.Contexts;
+    using ArchGuard.Library.Solution;
     using ArchGuard.Library.Type.Filters;
 
     public static class Types
     {
-        public static ITypeDefinitionFilterEntryPoint FromSln(SlnSearchParameters parameters)
+        public static ITypeDefinitionFilterEntryPoint InSolution(
+            SolutionSearchParameters parameters
+        )
         {
             var rulesContext = new RulesContext(parameters);
 
             return rulesContext.StartTypeFilter();
         }
-
-        //public static ITypesFilterStart FromSln(SlnSearchParameters parameters)
-        //{
-        //    var sln = SolutionReaderCached.CompileSolution(parameters);
-        //    var context = new TypesFilterContext(sln);
-
-        //    return TypesFilter.Create(context);
-        //}
     }
 }

@@ -1,8 +1,9 @@
-namespace ArchGuard.Library.Type.Contexts
+namespace ArchGuard.Library.Contexts
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using ArchGuard.Library;
 
     internal abstract class ContextBase<T>
         where T : class

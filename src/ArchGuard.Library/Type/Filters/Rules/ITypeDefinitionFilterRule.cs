@@ -1,5 +1,7 @@
 namespace ArchGuard.Library.Type.Filters
 {
+    using ArchGuard.Library.Type.Common;
+
     public partial interface ITypeDefinitionFilterRule : IGetTypes
     {
         ITypeDefinitionFilterSequence ImplementInterface(params System.Type[] types);

@@ -1,6 +1,6 @@
 namespace ArchGuard.Library.Type.Filters
 {
-    using ArchGuard.Library.Type;
+    using ArchGuard.Library.Type.Common;
 
     public interface ITypeDefinitionFilterEntryPoint : IGetTypes
     {

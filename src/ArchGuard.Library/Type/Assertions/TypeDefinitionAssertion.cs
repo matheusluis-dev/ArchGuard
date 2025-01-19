@@ -1,7 +1,7 @@
 namespace ArchGuard.Library.Type.Assertions
 {
+    using ArchGuard.Library.Contexts;
     using ArchGuard.Library.Type.Assertions.Sequences;
-    using ArchGuard.Library.Type.Contexts;
 
     public sealed partial class TypeDefinitionAssertion
         : ITypeDefinitionAssertionRule,
