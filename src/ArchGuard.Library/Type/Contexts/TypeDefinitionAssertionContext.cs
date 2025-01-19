@@ -3,9 +3,9 @@ namespace ArchGuard.Library.Type.Contexts
     using System;
     using ArchGuard.Library.Type.Assertions;
 
-    internal sealed class TypesAssertionContext : ContextBase<TypeDefinition>
+    internal sealed class TypeDefinitionAssertionContext : ContextBase<TypeDefinition>
     {
-        public TypesAssertionContext(ContextBase<TypeDefinition> filterContext)
+        public TypeDefinitionAssertionContext(ContextBase<TypeDefinition> filterContext)
             : base(filterContext) { }
 
         internal TypesAssertionResult GetResult()

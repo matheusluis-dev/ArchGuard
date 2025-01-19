@@ -3,9 +3,9 @@ namespace ArchGuard.Library.Type.Contexts
     using System;
     using System.Collections.Generic;
 
-    internal sealed class TypesFilterContext : ContextBase<TypeDefinition>
+    internal sealed class TypeDefinitionFilterContext : ContextBase<TypeDefinition>
     {
-        internal TypesFilterContext(IEnumerable<TypeDefinition> types)
+        internal TypeDefinitionFilterContext(IEnumerable<TypeDefinition> types)
             : base(types) { }
 
         internal IEnumerable<TypeDefinition> GetTypes()

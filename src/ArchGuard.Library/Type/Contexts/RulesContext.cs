@@ -6,8 +6,8 @@ namespace ArchGuard.Library.Type.Contexts
 
     internal sealed class RulesContext
     {
-        private readonly TypesFilterContext _typesFilterContext;
-        private readonly TypesAssertionContext _typesAssertionContext;
+        private readonly TypeDefinitionFilterContext _typesFilterContext;
+        private readonly TypeDefinitionAssertionContext _typesAssertionContext;
 
         private readonly TypeDefinitionFilter _typesFilter;
         private readonly TypesAssertion _typesAssertion;
@@ -18,8 +18,8 @@ namespace ArchGuard.Library.Type.Contexts
         {
             var sln = SolutionReaderCached.CompileSolution(parameters);
 
-            _typesFilterContext = new TypesFilterContext(sln.Types);
-            _typesAssertionContext = new TypesAssertionContext(_typesFilterContext);
+            _typesFilterContext = new TypeDefinitionFilterContext(sln.Types);
+            _typesAssertionContext = new TypeDefinitionAssertionContext(_typesFilterContext);
 
             _typesFilter = new TypeDefinitionFilter(_typesFilterContext, StartTypeAssertion);
             _typesAssertion = new TypesAssertion(_typesAssertionContext);

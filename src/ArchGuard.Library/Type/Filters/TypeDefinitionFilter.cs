@@ -8,11 +8,11 @@ namespace ArchGuard.Library.Type.Filters
             ITypeDefinitionFilterRule,
             ITypeDefinitionFilterSequence
     {
-        private readonly TypesFilterContext _context;
+        private readonly TypeDefinitionFilterContext _context;
         private readonly StartTypeAssertionCallback _startAssertionCallback;
 
         internal TypeDefinitionFilter(
-            TypesFilterContext context,
+            TypeDefinitionFilterContext context,
             StartTypeAssertionCallback startAssertionCallback
         )
         {

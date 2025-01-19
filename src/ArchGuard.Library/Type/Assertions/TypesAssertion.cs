@@ -6,9 +6,9 @@ namespace ArchGuard.Library.Type.Assertions
         : ITypesAssertionCondition,
             ITypesAssertionPostCondition
     {
-        private readonly TypesAssertionContext _context;
+        private readonly TypeDefinitionAssertionContext _context;
 
-        internal TypesAssertion(TypesAssertionContext context)
+        internal TypesAssertion(TypeDefinitionAssertionContext context)
         {
             _context = context;
         }
