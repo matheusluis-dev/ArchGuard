@@ -51,5 +51,17 @@ namespace ArchGuardType.Filters
             _context.AddPredicate(TypeDefinitionPredicate.NotStatic);
             return this;
         }
+
+        public ITypeDefinitionFilterSequence AreAbstract()
+        {
+            _context.AddPredicate(TypeDefinitionPredicate.Abstract);
+            return this;
+        }
+
+        public ITypeDefinitionFilterSequence AreNotAbstract()
+        {
+            _context.AddPredicate(TypeDefinitionPredicate.NotAbstract);
+            return this;
+        }
     }
 }

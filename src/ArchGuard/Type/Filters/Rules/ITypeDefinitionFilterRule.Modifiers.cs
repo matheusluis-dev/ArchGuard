@@ -13,5 +13,8 @@ namespace ArchGuardType.Filters
 
         ITypeDefinitionFilterSequence AreStatic();
         ITypeDefinitionFilterSequence AreNotStatic();
+
+        ITypeDefinitionFilterSequence AreAbstract();
+        ITypeDefinitionFilterSequence AreNotAbstract();
     }
 }

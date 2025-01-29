@@ -32,5 +32,9 @@ namespace ArchGuardType.Predicates
             (type, _) => type.Symbol.IsStatic;
         internal static Func<TypeDefinition, StringComparison, bool> NotStatic =>
             (type, _) => !Static(type, _);
+        internal static Func<TypeDefinition, StringComparison, bool> Abstract =>
+            (type, _) => type.Symbol.IsAbstract;
+        internal static Func<TypeDefinition, StringComparison, bool> NotAbstract =>
+            (type, _) => !Abstract(type, _);
     }
 }
