@@ -1,10 +1,10 @@
-namespace ArchGuard.Library.Extensions
+namespace ArchGuard.Extensions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ArchGuard.Library.Cached;
-    using ArchGuard.Library.Type;
+    using ArchGuard.Cached;
+    using ArchGuard.Type;
     using Microsoft.CodeAnalysis;
 
     internal static class TypeDefinitionExtensions
@@ -93,9 +93,7 @@ namespace ArchGuard.Library.Extensions
                 var dependencies = type.GetDependencies();
 
                 if (dependencies.Any(dependency => dependency.Equals(typeDefinition)))
-                {
                     return true;
-                }
             }
 
             return false;

@@ -1,4 +1,4 @@
-namespace ArchGuard.Library.Cached
+namespace ArchGuard.Cached
 {
     using System.Collections.Concurrent;
     using System.Collections.Generic;

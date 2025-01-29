@@ -3,10 +3,10 @@ namespace ArchGuard.PublicApi.Tests.Filters
     using System;
     using System.Linq;
     using System.Reflection;
-    using ArchGuard.Library.Type;
-    using ArchGuard.Library.Type.Filters;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.MockedAssembly.Classes.Public;
+    using ArchGuard.Type;
+    using ArchGuard.Type.Filters.EntryPoint;
     using FluentAssertions;
     using Xunit;
 

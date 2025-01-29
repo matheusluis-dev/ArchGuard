@@ -1,4 +1,4 @@
-namespace ArchGuard.Library
+namespace ArchGuard
 {
     using System;
 

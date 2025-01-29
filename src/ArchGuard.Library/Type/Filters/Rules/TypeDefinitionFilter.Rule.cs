@@ -3,8 +3,9 @@ namespace ArchGuard.Library.Type.Filters
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ArchGuard.Library.Type;
+    using ArchGuard;
     using ArchGuard.Library.Type.Predicates;
+    using ArchGuard.Type;
     using Microsoft.CodeAnalysis;
 
     public sealed partial class TypeDefinitionFilter

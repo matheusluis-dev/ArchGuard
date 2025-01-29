@@ -1,10 +1,8 @@
-namespace ArchGuard.Library.Extensions
+namespace ArchGuard.Extensions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ArchGuard.Library.Cached;
-    using ArchGuard.Library.Extensions;
     using Microsoft.CodeAnalysis;
 
     public static class INamedTypeSymbolExtensions

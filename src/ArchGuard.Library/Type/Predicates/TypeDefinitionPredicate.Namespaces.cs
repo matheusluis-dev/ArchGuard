@@ -3,8 +3,8 @@ namespace ArchGuard.Library.Type.Predicates
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ArchGuard.Library.Extensions;
-    using ArchGuard.Library.Type;
+    using ArchGuard.Extensions;
+    using ArchGuard.Type;
     using Microsoft.CodeAnalysis;
 
     internal static partial class TypeDefinitionPredicate

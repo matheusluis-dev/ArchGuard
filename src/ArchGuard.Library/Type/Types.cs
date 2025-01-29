@@ -1,8 +1,8 @@
-namespace ArchGuard.Library.Type
+namespace ArchGuard.Type
 {
     using ArchGuard.Library.Contexts;
-    using ArchGuard.Library.Solution;
-    using ArchGuard.Library.Type.Filters;
+    using ArchGuard.Solution;
+    using ArchGuard.Type.Filters.EntryPoint;
 
     public static class Types
     {

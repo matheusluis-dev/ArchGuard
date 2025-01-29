@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.PublicApi.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Assertions.Tests", "tests\ArchGuard.Assertions.Tests\ArchGuard.Assertions.Tests.csproj", "{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Library", "src\ArchGuard.Library\ArchGuard.Library.csproj", "{157725C7-2850-458C-A1C3-60BC87DBD8E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard", "src\ArchGuard.Library\ArchGuard.csproj", "{157725C7-2850-458C-A1C3-60BC87DBD8E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,8 +59,8 @@ Global
 		{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{157725C7-2850-458C-A1C3-60BC87DBD8E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{157725C7-2850-458C-A1C3-60BC87DBD8E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{157725C7-2850-458C-A1C3-60BC87DBD8E3}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{157725C7-2850-458C-A1C3-60BC87DBD8E3}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{157725C7-2850-458C-A1C3-60BC87DBD8E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{157725C7-2850-458C-A1C3-60BC87DBD8E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

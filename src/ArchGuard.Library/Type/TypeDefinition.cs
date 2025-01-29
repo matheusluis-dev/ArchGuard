@@ -1,11 +1,11 @@
-namespace ArchGuard.Library.Type
+namespace ArchGuard.Type
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
-    using ArchGuard.Library.Cached;
-    using ArchGuard.Library.Extensions;
+    using ArchGuard.Cached;
+    using ArchGuard.Extensions;
     using Microsoft.CodeAnalysis;
 
     [DebuggerDisplay("{SymbolFullName} | Project: {Project.Name}")]

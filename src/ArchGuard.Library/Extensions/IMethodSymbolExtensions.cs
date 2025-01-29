@@ -1,9 +1,9 @@
-namespace ArchGuard.Library.Extensions
+namespace ArchGuard.Extensions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ArchGuard.Library.Type;
+    using ArchGuard.Type;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -40,10 +40,10 @@ namespace ArchGuard.Library.Extensions
                         symbol?.Kind is SymbolKind.Field or SymbolKind.Property
                         && (
                             symbol?.IsPrivateOrProtected() == true
-                            || (
+                            ||
                                 symbol is IPropertySymbol propertySymbol
                                 && propertySymbol?.SetMethod?.IsPrivateOrProtected() == true
-                            )
+
                         )
                     );
             }

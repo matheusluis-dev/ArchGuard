@@ -1,4 +1,4 @@
-namespace ArchGuard.Library.Extensions
+namespace ArchGuard.Extensions
 {
     using System;
     using System.Linq;
@@ -67,10 +67,10 @@ namespace ArchGuard.Library.Extensions
             {
                 setImmutable =
                     propertySymbol!.SetMethod!.IsInitOnly
-                    || (
+                    ||
                         propertySymbol.SetMethod.IsPrivateOrProtected()
                         && !propertySymbol.SetMethod.ExternallyAltersState(project)
-                    );
+                    ;
             }
 
             return getImmutable && setImmutable;

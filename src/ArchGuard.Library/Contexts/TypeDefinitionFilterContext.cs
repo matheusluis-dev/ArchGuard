@@ -1,8 +1,8 @@
-namespace ArchGuard.Library.Contexts
+namespace ArchGuard.Contexts
 {
     using System;
     using System.Collections.Generic;
-    using ArchGuard.Library.Type;
+    using ArchGuard.Type;
 
     internal sealed class TypeDefinitionFilterContext : ContextBase<TypeDefinition>
     {

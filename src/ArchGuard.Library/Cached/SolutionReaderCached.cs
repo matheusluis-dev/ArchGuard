@@ -1,12 +1,12 @@
-namespace ArchGuard.Library.Cached
+namespace ArchGuard.Cached
 {
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
-    using ArchGuard.Library.Solution;
-    using ArchGuard.Library.Type;
+    using ArchGuard.Solution;
+    using ArchGuard.Type;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.MSBuild;
 

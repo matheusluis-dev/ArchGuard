@@ -1,7 +1,7 @@
 namespace ArchGuard.Library.Type.Assertions.Sequences
 {
     using System;
-    using ArchGuard.Library.Type.Assertions.Models;
+    using ArchGuard.Type.Assertions.Models;
 
     public partial interface ITypeDefinitionAssertionSequence
     {

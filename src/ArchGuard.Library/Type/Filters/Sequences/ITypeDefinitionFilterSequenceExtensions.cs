@@ -1,4 +1,6 @@
-namespace ArchGuard.Library.Type.Filters.Sequences
+using ArchGuard.Library.Type.Filters;
+
+namespace ArchGuard.Type.Filters.Sequences
 {
     using System;
 

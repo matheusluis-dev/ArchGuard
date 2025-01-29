@@ -1,6 +1,6 @@
 using ArchGuard.Library.Type.Filters;
 
-namespace ArchGuard.Library.Type.Filters
+namespace ArchGuard.Type.Filters.EntryPoint
 {
     using System;
 
