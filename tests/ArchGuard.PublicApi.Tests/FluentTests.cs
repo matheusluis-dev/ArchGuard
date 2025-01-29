@@ -1,8 +1,8 @@
 namespace ArchGuard.PublicApi.Tests
 {
-    using ArchGuard.Library.Type.Filters;
     using ArchGuard.Tests.Common;
     using ArchGuard.Type.Filters.Sequences;
+    using ArchGuardType.Filters;
     using FluentAssertions;
     using Xunit;
 

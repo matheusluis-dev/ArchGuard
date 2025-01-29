@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.PublicApi.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Assertions.Tests", "tests\ArchGuard.Assertions.Tests\ArchGuard.Assertions.Tests.csproj", "{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard", "src\ArchGuard.Library\ArchGuard.csproj", "{157725C7-2850-458C-A1C3-60BC87DBD8E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard", "src\ArchGuard\ArchGuard.csproj", "{A87584A2-F75B-4F5F-B78E-E69828F56430}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,10 +59,10 @@ Global
 		{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{157725C7-2850-458C-A1C3-60BC87DBD8E3}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{157725C7-2850-458C-A1C3-60BC87DBD8E3}.Debug|Any CPU.Build.0 = Release|Any CPU
-		{157725C7-2850-458C-A1C3-60BC87DBD8E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{157725C7-2850-458C-A1C3-60BC87DBD8E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A87584A2-F75B-4F5F-B78E-E69828F56430}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{A87584A2-F75B-4F5F-B78E-E69828F56430}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{A87584A2-F75B-4F5F-B78E-E69828F56430}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A87584A2-F75B-4F5F-B78E-E69828F56430}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,7 +74,7 @@ Global
 		{F7F837BB-CA2A-4CC9-AACB-AFAE5C5E34D0} = {F676C254-5A24-48D0-8452-557E35A97DCA}
 		{2F891FB1-94A2-4335-8675-7324645F5CEA} = {F676C254-5A24-48D0-8452-557E35A97DCA}
 		{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C} = {F676C254-5A24-48D0-8452-557E35A97DCA}
-		{157725C7-2850-458C-A1C3-60BC87DBD8E3} = {5024B8E1-3A74-4072-8FCF-9AB3D0A5E5E2}
+		{A87584A2-F75B-4F5F-B78E-E69828F56430} = {5024B8E1-3A74-4072-8FCF-9AB3D0A5E5E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		FileExplorer = 

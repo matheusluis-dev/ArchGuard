@@ -3,8 +3,8 @@ namespace ArchGuard.PublicApi.Tests.Version
     using System;
     using System.Linq;
     using System.Reflection;
-    using ArchGuard.Library.Type.Filters;
     using ArchGuard.Tests.Common.Extensions;
+    using ArchGuardType.Filters;
     using FluentAssertions;
     using Xunit;
 

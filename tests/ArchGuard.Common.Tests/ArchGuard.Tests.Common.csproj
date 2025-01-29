@@ -7,7 +7,7 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ArchGuard.Library\ArchGuard.csproj" />
+    <ProjectReference Include="..\..\src\ArchGuard\ArchGuard.csproj" />
     <ProjectReference Include="..\ArchGuard.Tests.MockedAssembly\ArchGuard.Tests.MockedAssembly.csproj" />
   </ItemGroup>
   <ItemGroup>

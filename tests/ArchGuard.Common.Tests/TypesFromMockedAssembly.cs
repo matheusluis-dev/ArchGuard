@@ -1,6 +1,6 @@
 namespace ArchGuard.Tests.Common
 {
-    using ArchGuard.Library.Solution;
+    using ArchGuard.Solution;
     using ArchGuard.Type.Filters.EntryPoint;
 
     public static class TypesFromMockedAssembly
