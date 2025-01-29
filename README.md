@@ -42,7 +42,7 @@ public void Classes_and_interfaces_that_reside_on_namespace_Public_should_be_pub
         .BePublic();
 
     // Act
-    var result = test.GetResult();
+    var result = test.GetResult(StringComparison.OrdinalIgnoreCase);
 
     // Assert
     Assert.True(result.IsSuccessful);
