@@ -2,7 +2,7 @@
 
 `ArchGuard` is a powerful and flexible architecture validation library for .NET projects, inspired by [NetArchTest.eNhancedEdition](https://github.com/NeVeSpl/NetArchTest.eNhancedEdition). 
 
-Unlike traditional approaches that rely on [Mono.Cecil](https://www.mono-project.com/docs/tools+libraries/libraries/Mono.Cecil/) to provide Types filters and assertions, `ArchGuard` leverages Roslyn for analysis, making it more efficient and better suited for modern .NET development.
+Unlike traditional approaches that rely on [Mono.Cecil](https://www.mono-project.com/docs/tools+libraries/libraries/Mono.Cecil/) to provide Types filters and assertions, `ArchGuard` leverages [Roslyn](https://github.com/dotnet/roslyn) for analysis, making it more efficient and better suited for modern .NET development.
 
 [Mono.Cecil](https://www.mono-project.com/docs/tools+libraries/libraries/Mono.Cecil/) has certain limitations when providing accurate information for Architecture Tests. For example, it cannot reliably determine whether a `Type` is defined as a [record](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record) or whether it has the [file](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/file) access modifier.
 
