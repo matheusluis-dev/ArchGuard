@@ -19,7 +19,7 @@ public void Classes_that_interit_PublicClass_should_be_immutable()
         .That
         .Inherit<PublicClass>()
         .Should
-        .BePublic();
+        .BeImmutable();
 
     // Act
     var result = test.GetResult();
