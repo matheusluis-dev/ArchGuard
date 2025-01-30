@@ -1,9 +1,5 @@
 namespace ArchGuard.PublicApi.Tests
 {
-    using System;
-    using NFluent;
-    using Xunit;
-
     public sealed class Load_types_from_sln
     {
         [Fact]
@@ -12,7 +8,7 @@ namespace ArchGuard.PublicApi.Tests
             // Arrange
             var searchParameters = new SolutionSearchParameters
             {
-                SlnPath = "C:/Users/matheus.oliveira/source/repos/ArchGuard/ArchGuard.sln",
+                SlnPath = "ArchGuard.sln",
                 Preprocessor = "net9_0",
                 ProjectName = "ArchGuard.MockedAssembly.Classes",
             };
@@ -32,7 +28,7 @@ namespace ArchGuard.PublicApi.Tests
             // Arrange
             var searchParameters = new SolutionSearchParameters
             {
-                SlnPath = $"C:/{Guid.NewGuid}",
+                SlnPath = $"C:/{Guid.NewGuid()}",
                 Preprocessor = "net9_0",
                 ProjectName = "It.Does.Not.Exists",
             };
@@ -52,7 +48,7 @@ namespace ArchGuard.PublicApi.Tests
             // Arrange
             var searchParameters = new SolutionSearchParameters
             {
-                SlnPath = "C:/Users/matheus.oliveira/source/repos/ArchGuard/ArchGuard.sln",
+                SlnPath = "ArchGuard.sln",
                 Preprocessor = "net9_0",
                 ProjectName = "It.Does.Not.Exists",
             };

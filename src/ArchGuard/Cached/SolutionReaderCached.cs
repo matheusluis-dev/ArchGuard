@@ -3,6 +3,7 @@ namespace ArchGuard.Cached
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading;
     using Microsoft.CodeAnalysis;
@@ -17,6 +18,14 @@ namespace ArchGuard.Cached
             SolutionCompilation
         > _cache = new();
 
+        private static string ResolveSlnPath(string path)
+        {
+            if (File.Exists(path))
+                return path;
+
+            return FindFileHelper.GetFileInSolution(path).FullName;
+        }
+
         public static SolutionCompilation CompileSolution(SolutionSearchParameters parameters)
         {
             lock (_lock)
@@ -25,7 +34,9 @@ namespace ArchGuard.Cached
                     return sln;
 
                 using var workspace = MSBuildWorkspace.Create();
-                var solution = workspace.OpenSolutionAsync(parameters.SlnPath).Result;
+
+                var slnPath = ResolveSlnPath(parameters.SlnPath);
+                var solution = workspace.OpenSolutionAsync(slnPath).Result;
 
                 var projects = solution.Projects.Where(p =>
                     p.Name.Equals(parameters.ProjectName, StringComparison.Ordinal)
