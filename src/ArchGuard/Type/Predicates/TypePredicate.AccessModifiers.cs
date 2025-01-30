@@ -1,15 +1,16 @@
 namespace ArchGuard
 {
     using System;
+    using ArchGuard.Extensions;
     using ArchGuard.Kernel.Models;
     using Microsoft.CodeAnalysis;
 
     internal static partial class TypePredicate
     {
         internal static Func<TypeDefinition, StringComparison, bool> Public =>
-            (type, _) => type.Symbol.DeclaredAccessibility == Accessibility.Public;
+            (type, _) => type.IsPublic();
         internal static Func<TypeDefinition, StringComparison, bool> NotPublic =>
-            (type, _) => !Public(type, _);
+            (type, _) => !type.IsPublic();
 
         internal static Func<TypeDefinition, StringComparison, bool> Internal =>
             (type, _) =>

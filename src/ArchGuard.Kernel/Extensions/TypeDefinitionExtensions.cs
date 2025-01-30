@@ -9,6 +9,31 @@ namespace ArchGuard.Extensions
 
     public static class TypeDefinitionExtensions
     {
+        public static IEnumerable<INamedTypeSymbol> GetContainingTypesAndSelf(
+            this TypeDefinition type
+        )
+        {
+            ArgumentNullException.ThrowIfNull(type);
+
+            var symbols = new List<INamedTypeSymbol>();
+            var current = type.Symbol;
+            while (current != null)
+            {
+                symbols.Add(current);
+                current = current.ContainingType;
+            }
+
+            return symbols;
+        }
+
+        public static bool IsPublic(this TypeDefinition type)
+        {
+            ArgumentNullException.ThrowIfNull(type);
+
+            return type.GetContainingTypesAndSelf()
+                .All(symbol => symbol.DeclaredAccessibility is Accessibility.Public);
+        }
+
         public static bool IsExternallyImmutable(this TypeDefinition type)
         {
             ArgumentNullException.ThrowIfNull(type);

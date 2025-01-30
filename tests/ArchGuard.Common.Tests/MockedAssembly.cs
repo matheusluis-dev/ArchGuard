@@ -2,6 +2,22 @@ namespace ArchGuard.Tests.Common
 {
     public static class MockedAssembly
     {
+        public static class AccessModifiers
+        {
+            public static class Public
+            {
+                public static ITypeFilterEntryPoint Types =>
+                    ArchGuard.Types.InSolution(
+                        new SolutionSearchParameters
+                        {
+                            SolutionPath = "ArchGuard.sln",
+                            Preprocessor = "net9_0",
+                            ProjectName = "ArchGuard.MockedAssembly.AccessModifiers.Public",
+                        }
+                    );
+            }
+        }
+
         public static class Methods
         {
             public static class Asynchronous
