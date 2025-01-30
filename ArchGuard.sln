@@ -33,7 +33,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Assertions.Tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard", "src\ArchGuard\ArchGuard.csproj", "{A87584A2-F75B-4F5F-B78E-E69828F56430}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MockedAssemblies", "MockedAssemblies", "{A8A0C942-8206-4588-953C-33C8896FA821}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mocked-assemblies", "mocked-assemblies", "{A8A0C942-8206-4588-953C-33C8896FA821}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.Classes", "tests\mocked-assemblies\ArchGuard.MockedAssembly.Classes\ArchGuard.MockedAssembly.Classes.csproj", "{19E44CD7-1F41-4B06-8F56-D058A48961E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.Enums", "tests\mocked-assemblies\ArchGuard.MockedAssembly.Enums\ArchGuard.MockedAssembly.Enums.csproj", "{8C08BC0E-ECF5-4D6D-A639-D3EAE1D90DA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +69,14 @@ Global
 		{A87584A2-F75B-4F5F-B78E-E69828F56430}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A87584A2-F75B-4F5F-B78E-E69828F56430}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A87584A2-F75B-4F5F-B78E-E69828F56430}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19E44CD7-1F41-4B06-8F56-D058A48961E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19E44CD7-1F41-4B06-8F56-D058A48961E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19E44CD7-1F41-4B06-8F56-D058A48961E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19E44CD7-1F41-4B06-8F56-D058A48961E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C08BC0E-ECF5-4D6D-A639-D3EAE1D90DA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C08BC0E-ECF5-4D6D-A639-D3EAE1D90DA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C08BC0E-ECF5-4D6D-A639-D3EAE1D90DA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C08BC0E-ECF5-4D6D-A639-D3EAE1D90DA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +90,8 @@ Global
 		{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C} = {F676C254-5A24-48D0-8452-557E35A97DCA}
 		{A87584A2-F75B-4F5F-B78E-E69828F56430} = {5024B8E1-3A74-4072-8FCF-9AB3D0A5E5E2}
 		{A8A0C942-8206-4588-953C-33C8896FA821} = {F676C254-5A24-48D0-8452-557E35A97DCA}
+		{19E44CD7-1F41-4B06-8F56-D058A48961E5} = {A8A0C942-8206-4588-953C-33C8896FA821}
+		{8C08BC0E-ECF5-4D6D-A639-D3EAE1D90DA0} = {A8A0C942-8206-4588-953C-33C8896FA821}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		FileExplorer = 
