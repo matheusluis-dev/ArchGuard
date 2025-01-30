@@ -31,8 +31,4 @@
   <ItemGroup>
     <ProjectReference Include="..\..\ArchGuard.Kernel\ArchGuard.Kernel.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Type\Assertions\Models\" />
-  </ItemGroup>
 </Project>

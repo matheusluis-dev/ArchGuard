@@ -51,5 +51,17 @@ namespace ArchGuard
             _context.AddPredicate(TypeDefinitionPredicate.NotStatic);
             return this;
         }
+
+        public ITypeDefinitionAssertionSequence BeAbstract()
+        {
+            _context.AddPredicate(TypeDefinitionPredicate.Abstract);
+            return this;
+        }
+
+        public ITypeDefinitionAssertionSequence NotBeAbstract()
+        {
+            _context.AddPredicate(TypeDefinitionPredicate.NotAbstract);
+            return this;
+        }
     }
 }

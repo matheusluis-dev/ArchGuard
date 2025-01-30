@@ -13,5 +13,8 @@ namespace ArchGuard
 
         ITypeDefinitionAssertionSequence BeStatic();
         ITypeDefinitionAssertionSequence NotBeStatic();
+
+        ITypeDefinitionAssertionSequence BeAbstract();
+        ITypeDefinitionAssertionSequence NotBeAbstract();
     }
 }
