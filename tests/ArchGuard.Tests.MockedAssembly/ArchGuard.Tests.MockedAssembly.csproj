@@ -4,7 +4,9 @@
     <NoWarn>*</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="FluentAssertions" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+    <PackageReference Include="System.Text.Json" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="CSharpier.MsBuild">
