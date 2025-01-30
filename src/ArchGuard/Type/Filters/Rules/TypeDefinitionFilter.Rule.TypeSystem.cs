@@ -63,5 +63,17 @@ namespace ArchGuard
             _context.AddPredicate(TypeDefinitionPredicate.NotRecord);
             return this;
         }
+
+        public ITypeDefinitionFilterSequence AreRecordStructs()
+        {
+            _context.AddPredicate(TypeDefinitionPredicate.RecordStruct);
+            return this;
+        }
+
+        public ITypeDefinitionFilterSequence AreNotRecordStructs()
+        {
+            _context.AddPredicate(TypeDefinitionPredicate.NotRecordStruct);
+            return this;
+        }
     }
 }

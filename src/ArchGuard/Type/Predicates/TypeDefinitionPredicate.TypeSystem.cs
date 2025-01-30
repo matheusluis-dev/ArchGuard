@@ -29,5 +29,10 @@ namespace ArchGuardType.Predicates
             (type, _) => type.Symbol.IsRecord && type.Symbol.TypeKind is not TypeKind.Struct;
         internal static Func<TypeDefinition, StringComparison, bool> NotRecord =>
             (type, _) => !type.Symbol.IsRecord || type.Symbol.TypeKind is TypeKind.Struct;
+
+        internal static Func<TypeDefinition, StringComparison, bool> RecordStruct =>
+            (type, _) => type.Symbol.IsRecord && type.Symbol.TypeKind is TypeKind.Struct;
+        internal static Func<TypeDefinition, StringComparison, bool> NotRecordStruct =>
+            (type, _) => !type.Symbol.IsRecord || type.Symbol.TypeKind is not TypeKind.Struct;
     }
 }

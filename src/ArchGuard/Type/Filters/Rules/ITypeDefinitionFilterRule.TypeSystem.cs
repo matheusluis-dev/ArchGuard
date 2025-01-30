@@ -16,5 +16,8 @@ namespace ArchGuard
 
         ITypeDefinitionFilterSequence AreRecords();
         ITypeDefinitionFilterSequence AreNotRecords();
+
+        ITypeDefinitionFilterSequence AreRecordStructs();
+        ITypeDefinitionFilterSequence AreNotRecordStructs();
     }
 }

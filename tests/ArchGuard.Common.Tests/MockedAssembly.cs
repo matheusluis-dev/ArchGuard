@@ -54,6 +54,19 @@ namespace ArchGuard.Tests.Common
                 );
         }
 
+        public static class RecordStructs
+        {
+            public static ITypeDefinitionFilterEntryPoint Types =>
+                ArchGuard.Types.InSolution(
+                    new SolutionSearchParameters
+                    {
+                        SolutionPath = "ArchGuard.sln",
+                        Preprocessor = "net9_0",
+                        ProjectName = "ArchGuard.MockedAssembly.RecordStructs",
+                    }
+                );
+        }
+
         public static class Structs
         {
             public static ITypeDefinitionFilterEntryPoint Types =>
