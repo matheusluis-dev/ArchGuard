@@ -6,13 +6,13 @@ namespace ArchGuard.Filters.Tests.Methods
     using Xunit;
     using static ArchGuard.Tests.Common.MockedAssembly.Methods;
 
-    public sealed class AsynchronousTests
+    public sealed class StaticTests
     {
         [Fact]
-        public void AreAsynchronous()
+        public void AreStatic()
         {
             // Arrange
-            var filters = Asynchronous.Types.Verify().Methods.That.AreAsynchronous();
+            var filters = Static.Types.Verify().Methods.That.AreStatic();
 
             // Act
             var methods = filters
@@ -21,14 +21,14 @@ namespace ArchGuard.Filters.Tests.Methods
                 .Order(StringComparer.Ordinal);
 
             // Assert
-            Check.That(methods).IsEquivalentTo("AsyncMethod");
+            Check.That(methods).IsEquivalentTo("Static");
         }
 
         [Fact]
-        public void AreNotAsynchronous()
+        public void AreNotStatic()
         {
             // Arrange
-            var filters = Asynchronous.Types.Verify().Methods.That.AreNotAsynchronous();
+            var filters = Static.Types.Verify().Methods.That.AreNotStatic();
 
             // Act
             var methods = filters
@@ -37,7 +37,7 @@ namespace ArchGuard.Filters.Tests.Methods
                 .Order(StringComparer.Ordinal);
 
             // Assert
-            Check.That(methods).IsEquivalentTo("SyncMethod");
+            Check.That(methods).IsEquivalentTo("NonStatic");
         }
     }
 }

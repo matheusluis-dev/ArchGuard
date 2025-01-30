@@ -6,7 +6,8 @@ namespace ArchGuard
     public sealed partial class TypeFilter
         : ITypeFilterEntryPoint,
             ITypeFilterRule,
-            ITypeFilterSequence
+            ITypeFilterSequence,
+            IVerify
     {
         private readonly TypeFilterContext _context;
 
@@ -26,6 +27,11 @@ namespace ArchGuard
         }
 
         internal ITypeFilterEntryPoint Start()
+        {
+            return this;
+        }
+
+        public IVerify Verify()
         {
             return this;
         }

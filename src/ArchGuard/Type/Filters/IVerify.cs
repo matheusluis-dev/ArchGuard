@@ -1,6 +1,6 @@
 namespace ArchGuard
 {
-    public interface ISwitchToMethodFilter
+    public interface IVerify
     {
         IMethodFilterEntryPoint Methods { get; }
     }

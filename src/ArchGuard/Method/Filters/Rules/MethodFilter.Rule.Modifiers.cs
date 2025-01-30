@@ -13,5 +13,17 @@ namespace ArchGuard
             _context.AddPredicate(MethodPredicate.NotAsynchronous);
             return this;
         }
+
+        public IMethodFilterSequence AreStatic()
+        {
+            _context.AddPredicate(MethodPredicate.Static);
+            return this;
+        }
+
+        public IMethodFilterSequence AreNotStatic()
+        {
+            _context.AddPredicate(MethodPredicate.NotStatic);
+            return this;
+        }
     }
 }

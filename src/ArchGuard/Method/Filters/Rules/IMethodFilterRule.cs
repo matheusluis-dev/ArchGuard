@@ -4,5 +4,8 @@ namespace ArchGuard
     {
         IMethodFilterSequence AreAsynchronous();
         IMethodFilterSequence AreNotAsynchronous();
+
+        IMethodFilterSequence AreStatic();
+        IMethodFilterSequence AreNotStatic();
     }
 }

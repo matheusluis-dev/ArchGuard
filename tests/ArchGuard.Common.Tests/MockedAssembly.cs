@@ -16,6 +16,19 @@ namespace ArchGuard.Tests.Common
                         }
                     );
             }
+
+            public static class Static
+            {
+                public static ITypeFilterEntryPoint Types =>
+                    ArchGuard.Types.InSolution(
+                        new SolutionSearchParameters
+                        {
+                            SolutionPath = "ArchGuard.sln",
+                            Preprocessor = "net9_0",
+                            ProjectName = "ArchGuard.MockedAssembly.Methods.Static",
+                        }
+                    );
+            }
         }
 
         public static class Classes

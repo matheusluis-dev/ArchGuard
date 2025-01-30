@@ -9,5 +9,11 @@ namespace ArchGuard
 
         internal static Func<MethodDefinition, StringComparison, bool> NotAsynchronous =>
             (method, _) => !method.Symbol.IsAsync;
+
+        internal static Func<MethodDefinition, StringComparison, bool> Static =>
+            (method, _) => method.Symbol.IsStatic;
+
+        internal static Func<MethodDefinition, StringComparison, bool> NotStatic =>
+            (method, _) => !method.Symbol.IsStatic;
     }
 }
