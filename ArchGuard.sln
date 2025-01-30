@@ -61,6 +61,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "access-modifiers", "access-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.AccessModifiers.Public", "tests\mocked-assemblies\types\access-modifiers\ArchGuard.MockedAssembly.AccessModifiers.Public\ArchGuard.MockedAssembly.AccessModifiers.Public.csproj", "{7454A70E-61B1-4DDD-A6AA-B2DA43B0FED5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.AccessModifiers.Internal", "tests\mocked-assemblies\types\access-modifiers\ArchGuard.MockedAssembly.AccessModifiers.Internal\ArchGuard.MockedAssembly.AccessModifiers.Internal.csproj", "{FF438561-6F1F-4253-BCF1-80D1B0AB2C1B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +133,10 @@ Global
 		{7454A70E-61B1-4DDD-A6AA-B2DA43B0FED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7454A70E-61B1-4DDD-A6AA-B2DA43B0FED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7454A70E-61B1-4DDD-A6AA-B2DA43B0FED5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF438561-6F1F-4253-BCF1-80D1B0AB2C1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF438561-6F1F-4253-BCF1-80D1B0AB2C1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF438561-6F1F-4253-BCF1-80D1B0AB2C1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF438561-6F1F-4253-BCF1-80D1B0AB2C1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,6 +163,7 @@ Global
 		{F33CBF64-6680-4927-BBD1-E2CC5287EE6E} = {DA576B88-DDE4-43D3-8586-579B218A5C4C}
 		{D967CA5C-0BBD-4892-873A-910BA4127EBF} = {9B90D0C4-6877-4065-984A-D9B5EC197F7A}
 		{7454A70E-61B1-4DDD-A6AA-B2DA43B0FED5} = {D967CA5C-0BBD-4892-873A-910BA4127EBF}
+		{FF438561-6F1F-4253-BCF1-80D1B0AB2C1B} = {D967CA5C-0BBD-4892-873A-910BA4127EBF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		FileExplorer = 

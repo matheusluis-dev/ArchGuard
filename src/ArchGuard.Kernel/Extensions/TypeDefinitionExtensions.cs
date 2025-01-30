@@ -9,19 +9,30 @@ namespace ArchGuard.Extensions
 
     public static class TypeDefinitionExtensions
     {
+        public static IEnumerable<INamedTypeSymbol> GetContainingTypes(this TypeDefinition type)
+        {
+            ArgumentNullException.ThrowIfNull(type);
+
+            var symbols = new List<INamedTypeSymbol>();
+            var current = type.Symbol.ContainingType;
+            while (current != null)
+            {
+                symbols.Add(current);
+                current = current.ContainingType;
+            }
+
+            return symbols;
+        }
+
         public static IEnumerable<INamedTypeSymbol> GetContainingTypesAndSelf(
             this TypeDefinition type
         )
         {
             ArgumentNullException.ThrowIfNull(type);
 
-            var symbols = new List<INamedTypeSymbol>();
-            var current = type.Symbol;
-            while (current != null)
-            {
-                symbols.Add(current);
-                current = current.ContainingType;
-            }
+            var symbols = new List<INamedTypeSymbol> { type.Symbol };
+
+            symbols.AddRange(type.GetContainingTypes());
 
             return symbols;
         }
@@ -32,6 +43,37 @@ namespace ArchGuard.Extensions
 
             return type.GetContainingTypesAndSelf()
                 .All(symbol => symbol.DeclaredAccessibility is Accessibility.Public);
+        }
+
+        public static bool IsInternal(this TypeDefinition type)
+        {
+            ArgumentNullException.ThrowIfNull(type);
+
+            var typeIsInternal =
+                !type.Symbol.IsFileLocal
+                && type.Symbol.DeclaredAccessibility
+                    is Accessibility.Internal
+                        or Accessibility.Friend
+                        or Accessibility.ProtectedOrFriend
+                        or Accessibility.ProtectedOrInternal;
+
+            if (!typeIsInternal)
+                return false;
+
+            foreach (var symbol in type.GetContainingTypes())
+            {
+                var containingTypeIsCompliant =
+                    !symbol.IsFileLocal
+                    && symbol.DeclaredAccessibility
+                        is not Accessibility.NotApplicable
+                            and not Accessibility.Protected
+                            and not Accessibility.Private;
+
+                if (!containingTypeIsCompliant)
+                    return false;
+            }
+
+            return true;
         }
 
         public static bool IsExternallyImmutable(this TypeDefinition type)

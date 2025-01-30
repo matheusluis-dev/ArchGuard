@@ -13,14 +13,9 @@ namespace ArchGuard
             (type, _) => !type.IsPublic();
 
         internal static Func<TypeDefinition, StringComparison, bool> Internal =>
-            (type, _) =>
-                NotFileScoped(type, _)
-                && (
-                    type.Symbol.DeclaredAccessibility == Accessibility.Internal
-                    || type.Symbol.DeclaredAccessibility == Accessibility.Friend
-                );
+            (type, _) => type.IsInternal();
         internal static Func<TypeDefinition, StringComparison, bool> NotInternal =>
-            (type, _) => !Internal(type, _);
+            (type, _) => !type.IsInternal();
 
         internal static Func<TypeDefinition, StringComparison, bool> Private =>
             (type, _) => type.Symbol.DeclaredAccessibility == Accessibility.Private;

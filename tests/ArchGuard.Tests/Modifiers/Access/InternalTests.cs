@@ -1,55 +1,57 @@
 namespace ArchGuard.Filters.Tests.Modifiers.Access
 {
     using System;
-    using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
-    using ArchGuard.Tests.Common.Types;
-    using FluentAssertions;
+    using NFluent;
     using Xunit;
+    using static ArchGuard.Tests.Common.MockedAssembly.AccessModifiers;
 
     public sealed class InternalTests
     {
         [Fact]
-        public void Internal_types()
+        public void AreInternal()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly
-                .All.That.ResideInNamespace(Namespaces.Internal)
-                .And.AreInternal();
+            var filters = Internal.Types.That.AreInternal();
 
             // Act
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
-            types
-                .Should()
-                .BeEquivalentTo(
-                    TypeNames.Internal.IInternalInterface,
-                    TypeNames.Internal.InternalEnum,
-                    TypeNames.Internal.InternalClass
+            Check
+                .That(types)
+                .IsEquivalentTo(
+                    "ArchGuard.MockedAssembly.AccessModifiers.Internal.InternalClass",
+                    "ArchGuard.MockedAssembly.AccessModifiers.Internal.InternalParentClass",
+                    "ArchGuard.MockedAssembly.AccessModifiers.Internal.InternalParentClass+InternalNestedClass",
+                    "ArchGuard.MockedAssembly.AccessModifiers.Internal.InternalParentClass+ProtectedInternalNestedClass",
+                    "ArchGuard.MockedAssembly.AccessModifiers.Internal.PublicParentClass+InternalNestedClass",
+                    "ArchGuard.MockedAssembly.AccessModifiers.Internal.PublicParentClass+ProtectedInternalNestedClass"
                 );
         }
 
         [Fact]
-        public void Non_public_types()
+        public void AreNotInternal()
         {
-            var filters = TypesFromMockedAssembly
-                .All.That.ResideInNamespace(Namespaces.Internal)
-                .And.AreNotInternal();
+            // Arrange
+            var filters = Internal.Types.That.AreNotInternal();
 
             // Act
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
-            types
-                .Should()
-                .BeEquivalentTo(
-                    TypeNames.Internal.IFileInterface,
-                    TypeNames.Internal.FileClass,
-                    TypeNames.Internal.FileEnum,
-                    TypeNames.Internal.IPublicInterface,
-                    TypeNames.Internal.PublicClass,
-                    TypeNames.Internal.PublicEnum
+            Check
+                .That(types)
+                .IsEquivalentTo(
+                    "ArchGuard.MockedAssembly.AccessModifiers.Internal.PublicClass",
+                    "ArchGuard.MockedAssembly.AccessModifiers.Internal.FileClass",
+                    "ArchGuard.MockedAssembly.AccessModifiers.Internal.PublicParentClass",
+                    "ArchGuard.MockedAssembly.AccessModifiers.Internal.PublicParentClass+PublicNestedClass",
+                    "ArchGuard.MockedAssembly.AccessModifiers.Internal.PublicParentClass+ProtectedNestedClass",
+                    "ArchGuard.MockedAssembly.AccessModifiers.Internal.PublicParentClass+PrivateNestedClass",
+                    "ArchGuard.MockedAssembly.AccessModifiers.Internal.InternalParentClass+PublicNestedClass",
+                    "ArchGuard.MockedAssembly.AccessModifiers.Internal.InternalParentClass+ProtectedNestedClass",
+                    "ArchGuard.MockedAssembly.AccessModifiers.Internal.InternalParentClass+PrivateNestedClass"
                 );
         }
     }
