@@ -4,7 +4,6 @@ namespace ArchGuard.Extensions
     using System.Collections.Generic;
     using System.Linq;
     using ArchGuard.Cached;
-    using ArchGuard.Type;
     using Microsoft.CodeAnalysis;
 
     internal static class TypeDefinitionExtensions

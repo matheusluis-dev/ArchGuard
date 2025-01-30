@@ -1,4 +1,4 @@
-namespace ArchGuardType.Filters
+namespace ArchGuard
 {
 #pragma warning disable CA1716 // Identifiers should not match keywords
     public partial interface ITypeDefinitionFilterSequence

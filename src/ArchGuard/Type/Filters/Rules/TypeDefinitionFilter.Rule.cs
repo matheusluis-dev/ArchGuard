@@ -1,10 +1,8 @@
-namespace ArchGuardType.Filters
+namespace ArchGuard
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ArchGuard;
-    using ArchGuard.Type;
     using ArchGuardType.Predicates;
     using Microsoft.CodeAnalysis;
 

@@ -1,6 +1,5 @@
-namespace ArchGuardType.Assertions
+namespace ArchGuard
 {
-    using ArchGuardType.Assertions.Sequences;
     using ArchGuardType.Predicates;
 
     public sealed partial class TypeDefinitionAssertion

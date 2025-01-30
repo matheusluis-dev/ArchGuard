@@ -4,7 +4,6 @@ namespace ArchGuard.Tests.Common.Extensions
     using System.Collections.Generic;
     using System.Linq;
     using ArchGuard.Extensions;
-    using ArchGuard.Type;
     using Microsoft.CodeAnalysis;
 
     public static class IEnumerableTypeDefinitionExtensions

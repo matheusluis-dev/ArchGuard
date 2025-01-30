@@ -1,8 +1,7 @@
-namespace ArchGuard.Type.Assertions.Models
+namespace ArchGuard
 {
     using System.Collections.Generic;
     using System.Linq;
-    using ArchGuard.Type;
     using Microsoft.CodeAnalysis;
 
     public sealed class TypesAssertionResult

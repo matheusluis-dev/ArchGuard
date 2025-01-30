@@ -1,7 +1,6 @@
-namespace ArchGuardType.Assertions.Sequences
+namespace ArchGuard
 {
     using System;
-    using ArchGuard.Type.Assertions.Models;
 
     public partial interface ITypeDefinitionAssertionSequence
     {

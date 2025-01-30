@@ -1,10 +1,6 @@
 namespace ArchGuard.Contexts
 {
     using ArchGuard.Cached;
-    using ArchGuard.Solution;
-    using ArchGuard.Type.Filters.EntryPoint;
-    using ArchGuardType.Assertions;
-    using ArchGuardType.Filters;
 
     internal sealed class RulesContext
     {

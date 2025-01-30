@@ -1,4 +1,4 @@
-namespace ArchGuard.Solution
+namespace ArchGuard
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

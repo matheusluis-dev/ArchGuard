@@ -1,7 +1,6 @@
-namespace ArchGuard.Solution
+namespace ArchGuard
 {
     using System.Collections.Generic;
-    using ArchGuard.Type;
     using Microsoft.CodeAnalysis;
 
     public sealed class SolutionCompilation

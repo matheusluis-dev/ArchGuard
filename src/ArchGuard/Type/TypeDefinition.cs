@@ -1,4 +1,4 @@
-namespace ArchGuard.Type
+namespace ArchGuard
 {
     using System;
     using System.Collections.Generic;

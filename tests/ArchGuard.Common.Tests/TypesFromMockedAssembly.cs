@@ -1,15 +1,12 @@
 namespace ArchGuard.Tests.Common
 {
-    using ArchGuard.Solution;
-    using ArchGuard.Type.Filters.EntryPoint;
-
     public static class TypesFromMockedAssembly
     {
         public static ITypeDefinitionFilterEntryPoint All =>
-            Type.Types.InSolution(
+            ArchGuard.Types.InSolution(
                 new SolutionSearchParameters
                 {
-                    SlnPath = "C:\\Users\\mathe\\source\\github\\me\\ArchGuard\\ArchGuard.sln",
+                    SlnPath = "C:/Users/mathe/source/github/me/ArchGuard/ArchGuard.sln",
                     Preprocessor = "net9_0",
                     ProjectName = "ArchGuard.Tests.MockedAssembly",
                 }

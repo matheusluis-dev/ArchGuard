@@ -1,9 +1,5 @@
-using ArchGuardType.Filters;
-
-namespace ArchGuard.Type.Filters.EntryPoint
+namespace ArchGuard
 {
-    using ArchGuard.Type.Common;
-
     public interface ITypeDefinitionFilterEntryPoint : IGetTypes
     {
         ITypeDefinitionFilterRule That { get; }

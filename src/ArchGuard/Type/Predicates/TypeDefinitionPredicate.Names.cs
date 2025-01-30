@@ -5,7 +5,6 @@ namespace ArchGuardType.Predicates
     using System.Linq;
     using System.Text.RegularExpressions;
     using ArchGuard.Extensions;
-    using ArchGuard.Type;
     using Microsoft.CodeAnalysis;
 
     internal static partial class TypeDefinitionPredicate

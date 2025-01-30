@@ -1,7 +1,5 @@
-namespace ArchGuardType.Filters
+namespace ArchGuard
 {
-    using ArchGuardType.Assertions;
-
     public partial interface ITypeDefinitionFilterSequence
     {
         ITypeDefinitionAssertionRule Should { get; }

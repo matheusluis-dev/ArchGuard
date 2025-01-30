@@ -1,7 +1,6 @@
-namespace ArchGuardType.Assertions
+namespace ArchGuard
 {
     using System;
-    using ArchGuard.Type.Assertions.Models;
 
     public sealed partial class TypeDefinitionAssertion
     {

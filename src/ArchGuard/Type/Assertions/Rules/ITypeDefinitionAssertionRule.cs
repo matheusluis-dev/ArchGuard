@@ -1,4 +1,4 @@
-namespace ArchGuardType.Assertions
+namespace ArchGuard
 {
-    public partial interface ITypeDefinitionAssertionRule { }
+    public partial interface ITypeDefinitionAssertionRule;
 }

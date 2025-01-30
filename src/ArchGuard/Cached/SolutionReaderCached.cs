@@ -5,8 +5,6 @@ namespace ArchGuard.Cached
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
-    using ArchGuard.Solution;
-    using ArchGuard.Type;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.MSBuild;
 

@@ -1,7 +1,4 @@
-using ArchGuardType.Assertions;
-using ArchGuardType.Assertions.Sequences;
-
-namespace ArchGuard.Type.Assertions.Sequences
+namespace ArchGuard
 {
     using System;
 

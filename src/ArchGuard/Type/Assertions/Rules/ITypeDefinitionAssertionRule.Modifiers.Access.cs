@@ -1,7 +1,5 @@
-namespace ArchGuardType.Assertions
+namespace ArchGuard
 {
-    using ArchGuardType.Assertions.Sequences;
-
     public partial interface ITypeDefinitionAssertionRule
     {
         ITypeDefinitionAssertionSequence BePublic();

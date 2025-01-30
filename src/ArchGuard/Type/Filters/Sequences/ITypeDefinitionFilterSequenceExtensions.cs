@@ -1,6 +1,4 @@
-using ArchGuardType.Filters;
-
-namespace ArchGuard.Type.Filters.Sequences
+namespace ArchGuard
 {
     using System;
 

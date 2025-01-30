@@ -5,8 +5,6 @@ namespace ArchGuard.PublicApi.Tests.Filters
     using System.Reflection;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.MockedAssembly.Classes.Public;
-    using ArchGuard.Type;
-    using ArchGuard.Type.Filters.EntryPoint;
     using FluentAssertions;
     using Xunit;
 

@@ -1,6 +1,4 @@
-using ArchGuardType.Filters;
-
-namespace ArchGuard.Type.Filters.EntryPoint
+namespace ArchGuard
 {
     using System;
 

@@ -1,4 +1,4 @@
-namespace ArchGuardType.Filters
+namespace ArchGuard
 {
     public partial interface ITypeDefinitionFilterRule
     {

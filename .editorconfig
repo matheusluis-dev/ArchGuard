@@ -230,7 +230,7 @@ dotnet_sort_system_directives_first = true
 dotnet_separate_import_directive_groups = false
 
 # Dotnet namespace options
-dotnet_style_namespace_match_folder = true:warning
+dotnet_style_namespace_match_folder = false:warning
 
 # C# formatting rules
 # https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#c-formatting-rules

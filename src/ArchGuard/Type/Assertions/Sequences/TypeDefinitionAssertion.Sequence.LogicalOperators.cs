@@ -1,4 +1,4 @@
-namespace ArchGuardType.Assertions
+namespace ArchGuard
 {
     public sealed partial class TypeDefinitionAssertion
     {

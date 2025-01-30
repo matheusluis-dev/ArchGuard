@@ -4,8 +4,6 @@ namespace ArchGuard.Filters.Tests.Types
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;
-    using ArchGuard.Type.Filters.EntryPoint;
-    using ArchGuard.Type.Filters.Sequences;
     using FluentAssertions;
     using Xunit;
 
