@@ -13,8 +13,15 @@ namespace ArchGuard
         internal string Code { get; init; } = string.Empty;
         internal string Description { get; init; } = string.Empty;
 
-        internal static Error Sln01SolutionNotFound => new("SLN01", "Solution not found");
-        internal static Error Prj01ProjectNotFound => new("PRJ01", "Project not found");
+        internal static Error Sln01SolutionNotFound(string solutionPath)
+        {
+            return new("SLN01", $"Solution `{solutionPath}` not found");
+        }
+
+        internal static Error Prj01ProjectNotFound(string projectName)
+        {
+            return new("PRJ01", $"Project `{projectName}` not found");
+        }
 
         public override string ToString()
         {

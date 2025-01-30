@@ -27,7 +27,7 @@ namespace ArchGuard.Cached
                 directory = directory.Parent;
             }
 
-            return Result<FileInfo>.Failure(Error.Prj01ProjectNotFound);
+            return Result<FileInfo>.Failure(Error.Prj01ProjectNotFound(fileSubPath));
         }
     }
 }

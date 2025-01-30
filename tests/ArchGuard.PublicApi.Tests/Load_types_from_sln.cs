@@ -25,41 +25,47 @@ namespace ArchGuard.PublicApi.Tests
         [Fact]
         public void Error_when_sln_does_not_exists()
         {
-            // TODO: create specific exception
-
             // Arrange
+            var slnPath = $"C:/{Guid.NewGuid()}";
             var searchParameters = new SolutionSearchParameters
             {
-                SolutionPath = $"C:/{Guid.NewGuid()}",
+                SolutionPath = slnPath,
                 Preprocessor = "net9_0",
-                ProjectName = "It.Does.Not.Exists",
+                ProjectName = "ArchGuard.MockedAssembly.Classes",
             };
 
             // Act
             Action @action = () => Types.InSolution(searchParameters).GetTypes();
 
             // Assert
-            Check.ThatCode(@action).Throws<SolutionNotFoundException>();
+            Check
+                .ThatCode(@action)
+                .Throws<SolutionNotFoundException>()
+                .WhichMember(x => x.Message)
+                .MatchesWildcards($"*{slnPath}*");
         }
 
         [Fact]
         public void Error_when_project_name_is_invalid()
         {
-            // TODO: create specific exception
-
             // Arrange
+            var projectName = "It.Does.Not.Exists";
             var searchParameters = new SolutionSearchParameters
             {
                 SolutionPath = "ArchGuard.sln",
                 Preprocessor = "net9_0",
-                ProjectName = "It.Does.Not.Exists",
+                ProjectName = projectName,
             };
 
             // Act
             Action @action = () => Types.InSolution(searchParameters).GetTypes();
 
             // Assert
-            Check.ThatCode(@action).Throws<ProjectNotFoundException>();
+            Check
+                .ThatCode(@action)
+                .Throws<ProjectNotFoundException>()
+                .WhichMember(x => x.Message)
+                .MatchesWildcards($"*{projectName}*");
         }
     }
 }

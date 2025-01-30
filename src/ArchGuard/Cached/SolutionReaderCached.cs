@@ -55,7 +55,11 @@ namespace ArchGuard.Cached
                 );
 
                 if (projects?.Any() != true)
-                    throw new ProjectNotFoundException(Error.Prj01ProjectNotFound);
+                {
+                    throw new ProjectNotFoundException(
+                        Error.Prj01ProjectNotFound(parameters.ProjectName)
+                    );
+                }
 
                 var types = new List<TypeDefinition>();
                 foreach (var project in projects)
