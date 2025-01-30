@@ -1,4 +1,4 @@
 namespace ArchGuard
 {
-    public partial interface ITypeFilterSequence : IGetTypes;
+    public partial interface ITypeFilterSequence : IGetTypes, ISwitchToMethodFilter;
 }

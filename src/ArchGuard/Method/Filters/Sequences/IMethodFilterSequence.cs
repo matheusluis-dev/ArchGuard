@@ -1,4 +1,8 @@
 namespace ArchGuard
 {
-    public interface IMethodFilterSequence { }
+    public interface IMethodFilterSequence : IGetMethods
+    {
+        IMethodFilterRule And { get; }
+        IMethodFilterRule Or { get; }
+    }
 }

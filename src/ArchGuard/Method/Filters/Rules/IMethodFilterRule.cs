@@ -1,4 +1,8 @@
 namespace ArchGuard
 {
-    public interface IMethodFilterRule { }
+    public partial interface IMethodFilterRule
+    {
+        IMethodFilterSequence AreAsynchronous();
+        IMethodFilterSequence AreNotAsynchronous();
+    }
 }

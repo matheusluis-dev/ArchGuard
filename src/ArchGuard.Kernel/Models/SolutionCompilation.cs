@@ -5,7 +5,9 @@ namespace ArchGuard
 
     public sealed class SolutionCompilation
     {
-        public Solution Solution { get; set; }
-        public IEnumerable<TypeDefinition> Types { get; set; }
+        public required Solution Solution { get; set; }
+        public required IEnumerable<TypeDefinition> Types { get; set; }
+
+        public IEnumerable<MethodDefinition> Methods => Types.SelectMany(type => type.GetMethods());
     }
 }

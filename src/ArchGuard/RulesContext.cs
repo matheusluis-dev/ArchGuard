@@ -19,8 +19,8 @@ namespace ArchGuard
         private readonly MethodAssertionContext _methodAssertionContext;
         private readonly MethodAssertion _methodAssertion;
 
-        public delegate IMethodFilterEntryPoint StartMethodFilterCallback();
         public delegate IMethodAssertionRule StartMethodAssertionCallback();
+        public delegate IMethodFilterEntryPoint StartMethodFilterCallback();
 
         internal RulesContext(SolutionSearchParameters parameters)
         {
@@ -28,9 +28,11 @@ namespace ArchGuard
 
             _typeFilterContext = new TypeFilterContext(solutionCompiled.Types);
             _typeAssertionContext = new TypeAssertionContext(_typeFilterContext);
+            _methodFilterContext = new MethodFilterContext(_typeFilterContext);
 
-            _typeFilter = new TypeFilter(_typeFilterContext, StartTypeAssertion);
+            _typeFilter = new TypeFilter(_typeFilterContext, StartTypeAssertion, StartMethodFilter);
             _typeAssertion = new TypeAssertion(_typeAssertionContext);
+            _methodFilter = new MethodFilter(_methodFilterContext);
         }
 
         internal ITypeFilterEntryPoint StartTypeFilter()
@@ -41,6 +43,11 @@ namespace ArchGuard
         private ITypeAssertionRule StartTypeAssertion()
         {
             return _typeAssertion.Start();
+        }
+
+        private IMethodFilterEntryPoint StartMethodFilter()
+        {
+            return _methodFilter.Start();
         }
     }
 }

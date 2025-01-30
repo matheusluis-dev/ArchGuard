@@ -1,1 +1,1 @@
-global using ArchGuard.Kernel;
+global using System;

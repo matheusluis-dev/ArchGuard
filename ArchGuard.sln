@@ -51,6 +51,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Kernel", "src\ArchGuard.Kernel\ArchGuard.Kernel.csproj", "{92B0BCAD-7BE8-47CB-808B-732AB0E0C625}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "methods", "methods", "{DA576B88-DDE4-43D3-8586-579B218A5C4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.Methods.Asynchronous", "tests\mocked-assemblies\methods\ArchGuard.MockedAssembly.Methods.Asynchronous\ArchGuard.MockedAssembly.Methods.Asynchronous.csproj", "{20A05DE9-165A-48BE-96F3-7E65855D87F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +113,10 @@ Global
 		{92B0BCAD-7BE8-47CB-808B-732AB0E0C625}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92B0BCAD-7BE8-47CB-808B-732AB0E0C625}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92B0BCAD-7BE8-47CB-808B-732AB0E0C625}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20A05DE9-165A-48BE-96F3-7E65855D87F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20A05DE9-165A-48BE-96F3-7E65855D87F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20A05DE9-165A-48BE-96F3-7E65855D87F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20A05DE9-165A-48BE-96F3-7E65855D87F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +138,8 @@ Global
 		{062DFDB1-098C-4175-8581-14968CC5C68B} = {9B90D0C4-6877-4065-984A-D9B5EC197F7A}
 		{3825DE49-C756-49D9-B27C-4B17A6B55414} = {9B90D0C4-6877-4065-984A-D9B5EC197F7A}
 		{92B0BCAD-7BE8-47CB-808B-732AB0E0C625} = {5024B8E1-3A74-4072-8FCF-9AB3D0A5E5E2}
+		{DA576B88-DDE4-43D3-8586-579B218A5C4C} = {A8A0C942-8206-4588-953C-33C8896FA821}
+		{20A05DE9-165A-48BE-96F3-7E65855D87F1} = {DA576B88-DDE4-43D3-8586-579B218A5C4C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		FileExplorer = 

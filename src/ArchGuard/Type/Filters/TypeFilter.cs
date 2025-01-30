@@ -9,20 +9,27 @@ namespace ArchGuard
             ITypeFilterSequence
     {
         private readonly TypeFilterContext _context;
+
         private readonly StartTypeAssertionCallback _startAssertionCallback;
+        private readonly StartMethodFilterCallback _startMethodFilterCallback;
 
         internal TypeFilter(
             TypeFilterContext context,
-            StartTypeAssertionCallback startAssertionCallback
+            StartTypeAssertionCallback startAssertionCallback,
+            StartMethodFilterCallback startMethodFilterCallback
         )
         {
             _context = context;
+
             _startAssertionCallback = startAssertionCallback;
+            _startMethodFilterCallback = startMethodFilterCallback;
         }
 
         internal ITypeFilterEntryPoint Start()
         {
             return this;
         }
+
+        public IMethodFilterEntryPoint Methods => _startMethodFilterCallback.Invoke();
     }
 }

@@ -52,14 +52,15 @@ namespace ArchGuard.Kernel.Models
                 .Where(method => method.MethodKind is MethodKind.Constructor);
         }
 
-        internal IEnumerable<IMethodSymbol> GetMethods()
+        internal IEnumerable<MethodDefinition> GetMethods()
         {
             return Symbol
                 .GetMembers()
                 .OfType<IMethodSymbol>()
                 .Where(method =>
                     method.MethodKind is MethodKind.Ordinary && !method.IsImplicitlyDeclared
-                );
+                )
+                .Select(method => new MethodDefinition(this, method));
         }
 
         internal IEnumerable<IFieldSymbol> GetFields()

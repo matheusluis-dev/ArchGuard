@@ -2,7 +2,7 @@ namespace ArchGuard
 {
     using System;
 
-    public static class ITypeDefinitionFilterEntryPointExtensions
+    public static class ITypeFilterEntryPointExtensions
     {
         public static ITypeFilterSequence That(
             this ITypeFilterEntryPoint iTypesFilterStart,
