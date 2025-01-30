@@ -1,4 +1,4 @@
-namespace ArchGuard
+namespace ArchGuard.Kernel.Results
 {
     public record Error
     {
@@ -13,12 +13,12 @@ namespace ArchGuard
         internal string Code { get; init; } = string.Empty;
         internal string Description { get; init; } = string.Empty;
 
-        internal static Error Sln01SolutionNotFound(string solutionPath)
+        public static Error Sln01SolutionNotFound(string solutionPath)
         {
             return new("SLN01", $"Solution `{solutionPath}` not found");
         }
 
-        internal static Error Prj01ProjectNotFound(string projectName)
+        public static Error Prj01ProjectNotFound(string projectName)
         {
             return new("PRJ01", $"Project `{projectName}` not found");
         }

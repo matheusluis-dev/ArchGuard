@@ -2,9 +2,9 @@ namespace ArchGuard.Extensions
 {
     using System;
 
-    internal static class StringComparisonExtensions
+    public static class StringComparisonExtensions
     {
-        internal static StringComparer ToComparer(this StringComparison comparison)
+        public static StringComparer ToComparer(this StringComparison comparison)
         {
             switch (comparison)
             {

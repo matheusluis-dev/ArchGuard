@@ -2,8 +2,9 @@ namespace ArchGuard.Cached
 {
     using System.Collections.Generic;
     using System.IO;
+    using ArchGuard.Kernel.Results;
 
-    internal static class FindFileHelper
+    public static class FindFileHelper
     {
         private static readonly Dictionary<string, FileInfo> _cache = [];
 

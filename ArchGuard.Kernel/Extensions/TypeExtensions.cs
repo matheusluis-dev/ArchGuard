@@ -2,9 +2,9 @@ namespace ArchGuard.Extensions
 {
     using System.Text.RegularExpressions;
 
-    internal static partial class TypeExtensions
+    public static class TypeExtensions
     {
-        internal static string GetFullNameClean(this System.Type type)
+        public static string GetFullNameClean(this System.Type type)
         {
             var match = Regex.Match(type.FullName, @"<[^>]+>[^_]+__(.+)$");
 

@@ -2,18 +2,19 @@ namespace ArchGuard.Contexts
 {
     using System;
     using ArchGuard;
+    using ArchGuard.Kernel.Models;
 
-    internal sealed class TypeDefinitionAssertionContext : ContextBase<TypeDefinition>
+    public sealed class TypeDefinitionAssertionContext : ContextBase<TypeDefinition>
     {
         public TypeDefinitionAssertionContext(ContextBase<TypeDefinition> filterContext)
             : base(filterContext) { }
 
-        internal TypesAssertionResult GetResult()
+        public TypesAssertionResult GetResult()
         {
             return GetResult(Default.StringComparison);
         }
 
-        internal TypesAssertionResult GetResult(StringComparison comparison)
+        public TypesAssertionResult GetResult(StringComparison comparison)
         {
             var typesFiltered = GetElementsWithoutFilter(comparison);
             var typesAsserted = GetElements(comparison);

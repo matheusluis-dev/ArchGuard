@@ -5,7 +5,7 @@ namespace ArchGuard.Contexts
     using System.Linq;
     using ArchGuard;
 
-    internal abstract class ContextBase<T>
+    public abstract class ContextBase<T>
         where T : class
     {
         private readonly List<List<Func<T, StringComparison, bool>>> _groupedPredicates = new();
@@ -47,7 +47,7 @@ namespace ArchGuard.Contexts
             _groupedPredicates.Add(new());
         }
 
-        protected internal void AddPredicate(Func<T, StringComparison, bool> predicate)
+        public void AddPredicate(Func<T, StringComparison, bool> predicate)
         {
             if (_groupedPredicates.Count == 0)
                 CreateGroupedPredicate();
@@ -55,7 +55,7 @@ namespace ArchGuard.Contexts
             _groupedPredicates[^1].Add(predicate);
         }
 
-        protected internal void Or()
+        public void Or()
         {
             CreateGroupedPredicate();
         }

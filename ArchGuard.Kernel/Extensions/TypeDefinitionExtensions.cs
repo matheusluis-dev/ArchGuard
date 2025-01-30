@@ -4,11 +4,12 @@ namespace ArchGuard.Extensions
     using System.Collections.Generic;
     using System.Linq;
     using ArchGuard.Cached;
+    using ArchGuard.Kernel.Models;
     using Microsoft.CodeAnalysis;
 
-    internal static class TypeDefinitionExtensions
+    public static class TypeDefinitionExtensions
     {
-        internal static bool IsExternallyImmutable(this TypeDefinition type)
+        public static bool IsExternallyImmutable(this TypeDefinition type)
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -76,7 +77,7 @@ namespace ArchGuard.Extensions
             return DependencySearchCached.GetDependencies(typeDefinition);
         }
 
-        internal static bool IsUsedBy(this TypeDefinition typeDefinition, IEnumerable<string> types)
+        public static bool IsUsedBy(this TypeDefinition typeDefinition, IEnumerable<string> types)
         {
             ArgumentNullException.ThrowIfNull(typeDefinition);
             ArgumentNullException.ThrowIfNull(types);

@@ -8,12 +8,12 @@ namespace ArchGuard
     {
         private readonly TypeDefinitionAssertionContext _context;
 
-        internal TypeDefinitionAssertion(TypeDefinitionAssertionContext context)
+        public TypeDefinitionAssertion(TypeDefinitionAssertionContext context)
         {
             _context = context;
         }
 
-        internal ITypeDefinitionAssertionRule Start()
+        public ITypeDefinitionAssertionRule Start()
         {
             return this;
         }

@@ -1,4 +1,4 @@
-namespace ArchGuard
+namespace ArchGuard.Kernel.Models
 {
     using System;
     using System.Collections.Generic;

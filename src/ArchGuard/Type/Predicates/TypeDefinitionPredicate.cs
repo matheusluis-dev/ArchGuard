@@ -4,6 +4,7 @@ namespace ArchGuardType.Predicates
     using System.Linq;
     using ArchGuard;
     using ArchGuard.Extensions;
+    using ArchGuard.Kernel.Models;
     using Microsoft.CodeAnalysis;
 
     internal static partial class TypeDefinitionPredicate

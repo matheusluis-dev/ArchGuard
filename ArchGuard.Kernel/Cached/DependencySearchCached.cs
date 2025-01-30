@@ -6,9 +6,10 @@ namespace ArchGuard.Cached
     using System.Linq;
     using System.Threading;
     using ArchGuard.Extensions;
+    using ArchGuard.Kernel.Models;
     using Microsoft.CodeAnalysis;
 
-    internal static class DependencySearchCached
+    public static class DependencySearchCached
     {
         private static readonly ConcurrentDictionary<
             TypeDefinition,
@@ -17,7 +18,7 @@ namespace ArchGuard.Cached
 
         private static readonly ConcurrentDictionary<TypeDefinition, SemaphoreSlim> _locks = new();
 
-        internal static IEnumerable<TypeDefinition> GetDependencies(TypeDefinition typeDefinition)
+        public static IEnumerable<TypeDefinition> GetDependencies(TypeDefinition typeDefinition)
         {
             ArgumentNullException.ThrowIfNull(typeDefinition);
 
