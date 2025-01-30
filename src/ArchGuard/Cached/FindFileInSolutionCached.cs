@@ -7,10 +7,10 @@ namespace ArchGuard.Cached
     {
         private static readonly Dictionary<string, FileInfo> _cache = [];
 
-        public static FileInfo GetFileInSolution(string fileSubPath)
+        public static Result<FileInfo> GetFileInSolution(string fileSubPath)
         {
             if (_cache.TryGetValue(fileSubPath, out var cacheDirectoryInfo))
-                return cacheDirectoryInfo;
+                return Result<FileInfo>.Success(cacheDirectoryInfo);
 
             var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
             while (directory is not null)
@@ -20,13 +20,14 @@ namespace ArchGuard.Cached
                 if (fileInfo.Exists)
                 {
                     _cache.Add(fileSubPath, fileInfo);
-                    return fileInfo;
+
+                    return Result<FileInfo>.Success(fileInfo);
                 }
 
                 directory = directory.Parent;
             }
 
-            throw new DirectoryNotFoundException($"File '{fileSubPath}' not found");
+            return Result<FileInfo>.Failure(Error.Prj01ProjectNotFound);
         }
     }
 }

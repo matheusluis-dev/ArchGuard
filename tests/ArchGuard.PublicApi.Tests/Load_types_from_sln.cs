@@ -1,5 +1,7 @@
 namespace ArchGuard.PublicApi.Tests
 {
+    using ArchGuard.Exceptions;
+
     public sealed class Load_types_from_sln
     {
         [Fact]
@@ -8,7 +10,7 @@ namespace ArchGuard.PublicApi.Tests
             // Arrange
             var searchParameters = new SolutionSearchParameters
             {
-                SlnPath = "ArchGuard.sln",
+                SolutionPath = "ArchGuard.sln",
                 Preprocessor = "net9_0",
                 ProjectName = "ArchGuard.MockedAssembly.Classes",
             };
@@ -28,7 +30,7 @@ namespace ArchGuard.PublicApi.Tests
             // Arrange
             var searchParameters = new SolutionSearchParameters
             {
-                SlnPath = $"C:/{Guid.NewGuid()}",
+                SolutionPath = $"C:/{Guid.NewGuid()}",
                 Preprocessor = "net9_0",
                 ProjectName = "It.Does.Not.Exists",
             };
@@ -37,7 +39,7 @@ namespace ArchGuard.PublicApi.Tests
             Action @action = () => Types.InSolution(searchParameters).GetTypes();
 
             // Assert
-            Check.ThatCode(@action).ThrowsAny();
+            Check.ThatCode(@action).Throws<SolutionNotFoundException>();
         }
 
         [Fact]
@@ -48,7 +50,7 @@ namespace ArchGuard.PublicApi.Tests
             // Arrange
             var searchParameters = new SolutionSearchParameters
             {
-                SlnPath = "ArchGuard.sln",
+                SolutionPath = "ArchGuard.sln",
                 Preprocessor = "net9_0",
                 ProjectName = "It.Does.Not.Exists",
             };
@@ -57,7 +59,7 @@ namespace ArchGuard.PublicApi.Tests
             Action @action = () => Types.InSolution(searchParameters).GetTypes();
 
             // Assert
-            Check.ThatCode(@action).ThrowsAny();
+            Check.ThatCode(@action).Throws<ProjectNotFoundException>();
         }
     }
 }

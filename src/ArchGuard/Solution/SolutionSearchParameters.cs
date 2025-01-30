@@ -5,7 +5,7 @@ namespace ArchGuard
 
     public struct SolutionSearchParameters
     {
-        public required string SlnPath { get; set; }
+        public required string SolutionPath { get; set; }
         public required string ProjectName { get; set; }
         public string Preprocessor { get; set; }
 
@@ -14,14 +14,14 @@ namespace ArchGuard
             if (obj is not SolutionSearchParameters other)
                 return false;
 
-            return SlnPath.Equals(other.SlnPath, StringComparison.OrdinalIgnoreCase)
+            return SolutionPath.Equals(other.SolutionPath, StringComparison.OrdinalIgnoreCase)
                 && ProjectName.Equals(other.ProjectName, StringComparison.OrdinalIgnoreCase)
                 && Preprocessor.Equals(other.Preprocessor, StringComparison.OrdinalIgnoreCase);
         }
 
         public override readonly int GetHashCode()
         {
-            var slnPath = SlnPath.ToUpperInvariant();
+            var slnPath = SolutionPath.ToUpperInvariant();
             var projectName = ProjectName.ToUpperInvariant();
             var preprocessor = Preprocessor.ToUpperInvariant();
 

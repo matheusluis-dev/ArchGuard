@@ -6,7 +6,7 @@ namespace ArchGuard.Tests.Common
             ArchGuard.Types.InSolution(
                 new SolutionSearchParameters
                 {
-                    SlnPath = "C:/Users/mathe/source/github/me/ArchGuard/ArchGuard.sln",
+                    SolutionPath = "C:/Users/mathe/source/github/me/ArchGuard/ArchGuard.sln",
                     Preprocessor = "net9_0",
                     ProjectName = "ArchGuard.Tests.MockedAssembly",
                 }

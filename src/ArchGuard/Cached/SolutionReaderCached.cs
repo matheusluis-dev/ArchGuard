@@ -6,6 +6,7 @@ namespace ArchGuard.Cached
     using System.IO;
     using System.Linq;
     using System.Threading;
+    using ArchGuard.Exceptions;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.MSBuild;
 
@@ -18,12 +19,12 @@ namespace ArchGuard.Cached
             SolutionCompilation
         > _cache = new();
 
-        private static string ResolveSlnPath(string path)
+        private static Result<FileInfo> ResolveSlnPath(string path)
         {
             if (File.Exists(path))
-                return path;
+                return Result<FileInfo>.Success(new FileInfo(path));
 
-            return FindFileHelper.GetFileInSolution(path).FullName;
+            return FindFileHelper.GetFileInSolution(path);
         }
 
         public static SolutionCompilation CompileSolution(SolutionSearchParameters parameters)
@@ -35,8 +36,12 @@ namespace ArchGuard.Cached
 
                 using var workspace = MSBuildWorkspace.Create();
 
-                var slnPath = ResolveSlnPath(parameters.SlnPath);
-                var solution = workspace.OpenSolutionAsync(slnPath).Result;
+                var resultSlnPath = ResolveSlnPath(parameters.SolutionPath);
+
+                if (!resultSlnPath.IsSuccess)
+                    throw new SolutionNotFoundException(resultSlnPath.Error!);
+
+                var solution = workspace.OpenSolutionAsync(resultSlnPath.Value.FullName).Result;
 
                 var projects = solution.Projects.Where(p =>
                     p.Name.Equals(parameters.ProjectName, StringComparison.Ordinal)
@@ -49,9 +54,8 @@ namespace ArchGuard.Cached
                     )
                 );
 
-                // TODO: create a proper exception for this case
                 if (projects?.Any() != true)
-                    throw new Exception("Project not found.");
+                    throw new ProjectNotFoundException(Error.Prj01ProjectNotFound);
 
                 var types = new List<TypeDefinition>();
                 foreach (var project in projects)
