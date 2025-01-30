@@ -16,14 +16,6 @@ namespace ArchGuard.Filters.Tests.Types
             // Act
             var types = filters.GetTypes().GetFullNames();
 
-            // Assert
-            //Check
-            //    .That(types)
-            //    .Contains(
-            //        "ArchGuard.MockedAssembly.Records.Record1",
-            //        "ArchGuard.MockedAssembly.Records.Record2",
-            //        "ArchGuard.MockedAssembly.Records.Record3"
-            //    );
             Check
                 .That(types)
                 .IsEquivalentTo(

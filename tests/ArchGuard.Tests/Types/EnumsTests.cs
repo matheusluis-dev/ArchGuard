@@ -19,7 +19,7 @@ namespace ArchGuard.Filters.Tests.Types
             // Assert
             Check
                 .That(types)
-                .Contains(
+                .IsEquivalentTo(
                     "ArchGuard.MockedAssembly.Enums.Enum1",
                     "ArchGuard.MockedAssembly.Enums.Enum2",
                     "ArchGuard.MockedAssembly.Enums.Enum3"
@@ -38,7 +38,7 @@ namespace ArchGuard.Filters.Tests.Types
             // Assert
             Check
                 .That(types)
-                .Contains(
+                .IsEquivalentTo(
                     "ArchGuard.MockedAssembly.Enums.Class",
                     "ArchGuard.MockedAssembly.Enums.IInterface",
                     "ArchGuard.MockedAssembly.Enums.Record",

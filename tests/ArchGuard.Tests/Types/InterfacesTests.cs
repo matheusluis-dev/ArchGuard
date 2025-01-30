@@ -19,7 +19,7 @@ namespace ArchGuard.Filters.Tests.Types
             // Assert
             Check
                 .That(types)
-                .Contains(
+                .IsEquivalentTo(
                     "ArchGuard.MockedAssembly.Interfaces.IInterface1",
                     "ArchGuard.MockedAssembly.Interfaces.IInterface2",
                     "ArchGuard.MockedAssembly.Interfaces.IInterface3"
@@ -38,7 +38,7 @@ namespace ArchGuard.Filters.Tests.Types
             // Assert
             Check
                 .That(types)
-                .Contains(
+                .IsEquivalentTo(
                     "ArchGuard.MockedAssembly.Interfaces.Class",
                     "ArchGuard.MockedAssembly.Interfaces.Enum",
                     "ArchGuard.MockedAssembly.Interfaces.Record",

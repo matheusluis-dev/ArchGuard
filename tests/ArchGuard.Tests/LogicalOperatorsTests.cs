@@ -1,4 +1,4 @@
-namespace ArchGuard.Filters.Tests.Types
+namespace ArchGuard.Filters.Tests
 {
     using System.Collections.Generic;
     using ArchGuard.Tests.Common;
