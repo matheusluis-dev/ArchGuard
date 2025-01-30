@@ -29,6 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ArchGuard.Kernel\ArchGuard.Kernel.csproj" />
+    <ProjectReference Include="..\ArchGuard.Kernel\ArchGuard.Kernel.csproj" />
   </ItemGroup>
 </Project>

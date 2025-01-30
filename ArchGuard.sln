@@ -49,7 +49,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.RecordStructs", "tests\mocked-assemblies\types\ArchGuard.MockedAssembly.RecordStructs\ArchGuard.MockedAssembly.RecordStructs.csproj", "{3825DE49-C756-49D9-B27C-4B17A6B55414}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Kernel", "ArchGuard.Kernel\ArchGuard.Kernel.csproj", "{F4AC8B2C-F042-45EE-AD38-B542FA34BD9B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Kernel", "src\ArchGuard.Kernel\ArchGuard.Kernel.csproj", "{92B0BCAD-7BE8-47CB-808B-732AB0E0C625}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,10 +105,10 @@ Global
 		{3825DE49-C756-49D9-B27C-4B17A6B55414}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3825DE49-C756-49D9-B27C-4B17A6B55414}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3825DE49-C756-49D9-B27C-4B17A6B55414}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F4AC8B2C-F042-45EE-AD38-B542FA34BD9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F4AC8B2C-F042-45EE-AD38-B542FA34BD9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F4AC8B2C-F042-45EE-AD38-B542FA34BD9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F4AC8B2C-F042-45EE-AD38-B542FA34BD9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92B0BCAD-7BE8-47CB-808B-732AB0E0C625}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92B0BCAD-7BE8-47CB-808B-732AB0E0C625}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92B0BCAD-7BE8-47CB-808B-732AB0E0C625}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92B0BCAD-7BE8-47CB-808B-732AB0E0C625}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,7 +129,7 @@ Global
 		{BC706C6C-4DDA-455C-9BAA-B51EFDB1454D} = {9B90D0C4-6877-4065-984A-D9B5EC197F7A}
 		{062DFDB1-098C-4175-8581-14968CC5C68B} = {9B90D0C4-6877-4065-984A-D9B5EC197F7A}
 		{3825DE49-C756-49D9-B27C-4B17A6B55414} = {9B90D0C4-6877-4065-984A-D9B5EC197F7A}
-		{F4AC8B2C-F042-45EE-AD38-B542FA34BD9B} = {5024B8E1-3A74-4072-8FCF-9AB3D0A5E5E2}
+		{92B0BCAD-7BE8-47CB-808B-732AB0E0C625} = {5024B8E1-3A74-4072-8FCF-9AB3D0A5E5E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		FileExplorer = 
