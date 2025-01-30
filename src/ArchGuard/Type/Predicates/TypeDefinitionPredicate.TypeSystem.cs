@@ -16,9 +16,9 @@ namespace ArchGuardType.Predicates
             (type, _) => !Interface(type, _);
 
         internal static Func<TypeDefinition, StringComparison, bool> Struct =>
-            (type, _) => type.Symbol.TypeKind == TypeKind.Struct;
+            (type, _) => type.Symbol.TypeKind == TypeKind.Struct && !type.Symbol.IsRecord;
         internal static Func<TypeDefinition, StringComparison, bool> NotStruct =>
-            (type, _) => !Struct(type, _);
+            (type, _) => type.Symbol.TypeKind is not TypeKind.Struct || type.Symbol.IsRecord;
 
         internal static Func<TypeDefinition, StringComparison, bool> Enum =>
             (type, _) => type.Symbol.TypeKind == TypeKind.Enum;
