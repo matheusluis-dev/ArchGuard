@@ -2,7 +2,7 @@ namespace ArchGuard.Tests.Common
 {
     public static class TypesFromMockedAssembly
     {
-        public static ITypeDefinitionFilterEntryPoint All =>
+        public static ITypeFilterEntryPoint All =>
             ArchGuard.Types.InSolution(
                 new SolutionSearchParameters
                 {

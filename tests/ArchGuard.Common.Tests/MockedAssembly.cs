@@ -4,7 +4,7 @@ namespace ArchGuard.Tests.Common
     {
         public static class Classes
         {
-            public static ITypeDefinitionFilterEntryPoint Types =>
+            public static ITypeFilterEntryPoint Types =>
                 ArchGuard.Types.InSolution(
                     new SolutionSearchParameters
                     {
@@ -17,7 +17,7 @@ namespace ArchGuard.Tests.Common
 
         public static class Enums
         {
-            public static ITypeDefinitionFilterEntryPoint Types =>
+            public static ITypeFilterEntryPoint Types =>
                 ArchGuard.Types.InSolution(
                     new SolutionSearchParameters
                     {
@@ -30,7 +30,7 @@ namespace ArchGuard.Tests.Common
 
         public static class Interfaces
         {
-            public static ITypeDefinitionFilterEntryPoint Types =>
+            public static ITypeFilterEntryPoint Types =>
                 ArchGuard.Types.InSolution(
                     new SolutionSearchParameters
                     {
@@ -43,7 +43,7 @@ namespace ArchGuard.Tests.Common
 
         public static class Records
         {
-            public static ITypeDefinitionFilterEntryPoint Types =>
+            public static ITypeFilterEntryPoint Types =>
                 ArchGuard.Types.InSolution(
                     new SolutionSearchParameters
                     {
@@ -56,7 +56,7 @@ namespace ArchGuard.Tests.Common
 
         public static class RecordStructs
         {
-            public static ITypeDefinitionFilterEntryPoint Types =>
+            public static ITypeFilterEntryPoint Types =>
                 ArchGuard.Types.InSolution(
                     new SolutionSearchParameters
                     {
@@ -69,7 +69,7 @@ namespace ArchGuard.Tests.Common
 
         public static class Structs
         {
-            public static ITypeDefinitionFilterEntryPoint Types =>
+            public static ITypeFilterEntryPoint Types =>
                 ArchGuard.Types.InSolution(
                     new SolutionSearchParameters
                     {

@@ -4,15 +4,15 @@ namespace ArchGuard
 
     public static class ITypeDefinitionFilterEntryPointExtensions
     {
-        public static ITypeDefinitionFilterSequence That(
-            this ITypeDefinitionFilterEntryPoint iTypesFilterStart,
-            Func<ITypeDefinitionFilterRule, ITypeDefinitionFilterSequence> filter
+        public static ITypeFilterSequence That(
+            this ITypeFilterEntryPoint iTypesFilterStart,
+            Func<ITypeFilterRule, ITypeFilterSequence> filter
         )
         {
-            if (!(iTypesFilterStart is TypeDefinitionFilter typesFilter))
+            if (!(iTypesFilterStart is TypeFilter typesFilter))
             {
                 throw new ArgumentException(
-                    $"{nameof(iTypesFilterStart)} must be of type {nameof(TypeDefinitionFilter)}"
+                    $"{nameof(iTypesFilterStart)} must be of type {nameof(TypeFilter)}"
                 );
             }
 

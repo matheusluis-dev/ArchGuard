@@ -7,10 +7,10 @@ namespace ArchGuard.Contexts
         private readonly TypeDefinitionFilterContext _typesFilterContext;
         private readonly TypeDefinitionAssertionContext _typesAssertionContext;
 
-        private readonly TypeDefinitionFilter _typesFilter;
-        private readonly TypeDefinitionAssertion _typesAssertion;
+        private readonly TypeFilter _typesFilter;
+        private readonly TypeAssertion _typesAssertion;
 
-        public delegate ITypeDefinitionAssertionRule StartTypeAssertionCallback();
+        public delegate ITypeAssertionRule StartTypeAssertionCallback();
 
         internal RulesContext(SolutionSearchParameters parameters)
         {
@@ -19,16 +19,16 @@ namespace ArchGuard.Contexts
             _typesFilterContext = new TypeDefinitionFilterContext(solutionCompiled.Types);
             _typesAssertionContext = new TypeDefinitionAssertionContext(_typesFilterContext);
 
-            _typesFilter = new TypeDefinitionFilter(_typesFilterContext, StartTypeAssertion);
-            _typesAssertion = new TypeDefinitionAssertion(_typesAssertionContext);
+            _typesFilter = new TypeFilter(_typesFilterContext, StartTypeAssertion);
+            _typesAssertion = new TypeAssertion(_typesAssertionContext);
         }
 
-        internal ITypeDefinitionFilterEntryPoint StartTypeFilter()
+        internal ITypeFilterEntryPoint StartTypeFilter()
         {
             return _typesFilter.Start();
         }
 
-        private ITypeDefinitionAssertionRule StartTypeAssertion()
+        private ITypeAssertionRule StartTypeAssertion()
         {
             return _typesAssertion.Start();
         }

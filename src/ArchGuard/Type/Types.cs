@@ -4,7 +4,7 @@ namespace ArchGuard
 
     public static class Types
     {
-        public static ITypeDefinitionFilterEntryPoint InSolution(
+        public static ITypeFilterEntryPoint InSolution(
             SolutionSearchParameters parameters
         )
         {

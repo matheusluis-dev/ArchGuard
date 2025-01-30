@@ -8,8 +8,8 @@ namespace ArchGuard.PublicApi.Tests
         public void All_filters_must_have_a_correspondent_assertion()
         {
             // Arrange
-            var filterMethods = typeof(ITypeDefinitionFilterRule).GetMethods();
-            var assertionMethods = typeof(ITypeDefinitionAssertionRule).GetMethods();
+            var filterMethods = typeof(ITypeFilterRule).GetMethods();
+            var assertionMethods = typeof(ITypeAssertionRule).GetMethods();
 
             // Act
             var normalizedFilterMethods = filterMethods
