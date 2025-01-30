@@ -1,4 +1,4 @@
-namespace ArchGuardType.Predicates
+namespace ArchGuard
 {
     using System;
     using System.Linq;

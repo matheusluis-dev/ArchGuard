@@ -4,12 +4,12 @@ namespace ArchGuard
 
     public sealed partial class TypeAssertion
     {
-        public TypesAssertionResult GetResult()
+        public TypeAssertionResult GetResult()
         {
             return _context.GetResult();
         }
 
-        public TypesAssertionResult GetResult(StringComparison comparison)
+        public TypeAssertionResult GetResult(StringComparison comparison)
         {
             return _context.GetResult(comparison);
         }

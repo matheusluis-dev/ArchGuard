@@ -62,10 +62,10 @@ namespace ArchGuard.Contexts
 
         protected IEnumerable<T> GetElementsWithoutFilter()
         {
-            return GetElementsWithoutFilter(Default.StringComparison);
+            return GetElementsWithoutApplyPredicates(Default.StringComparison);
         }
 
-        protected IEnumerable<T> GetElementsWithoutFilter(StringComparison comparison)
+        protected IEnumerable<T> GetElementsWithoutApplyPredicates(StringComparison comparison)
         {
             return _getElements(comparison);
         }

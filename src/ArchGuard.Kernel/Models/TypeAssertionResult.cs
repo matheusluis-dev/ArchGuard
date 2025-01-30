@@ -5,7 +5,7 @@ namespace ArchGuard
     using ArchGuard.Kernel.Models;
     using Microsoft.CodeAnalysis;
 
-    public sealed class TypesAssertionResult
+    public sealed class TypeAssertionResult
     {
         public bool IsSuccessful => !NonCompliantTypes.Any();
         public IEnumerable<TypeDefinition> TypesFiltered { get; }
@@ -13,7 +13,7 @@ namespace ArchGuard
         public IEnumerable<TypeDefinition> NonCompliantTypes =>
             TypesFiltered.Except(CompliantTypes);
 
-        internal TypesAssertionResult(
+        internal TypeAssertionResult(
             IEnumerable<TypeDefinition> typesFiltered,
             IEnumerable<TypeDefinition> typesAsserted
         )

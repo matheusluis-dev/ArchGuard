@@ -32,4 +32,8 @@
   <ItemGroup>
     <ProjectReference Include="..\ArchGuard.Kernel\ArchGuard.Kernel.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Method\Predicates\" />
+  </ItemGroup>
 </Project>

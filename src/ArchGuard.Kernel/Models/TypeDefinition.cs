@@ -11,7 +11,9 @@ namespace ArchGuard.Kernel.Models
     [DebuggerDisplay("{SymbolFullName} | Project: {Project.Name}")]
     public sealed class TypeDefinition : IEquatable<TypeDefinition>
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public Project Project { get; init; }
+
         public INamedTypeSymbol Symbol { get; init; }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

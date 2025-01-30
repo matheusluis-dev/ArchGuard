@@ -4,7 +4,7 @@ namespace ArchGuard
 
     public partial interface ITypeAssertionSequence
     {
-        TypesAssertionResult GetResult();
-        TypesAssertionResult GetResult(StringComparison comparison);
+        TypeAssertionResult GetResult();
+        TypeAssertionResult GetResult(StringComparison comparison);
     }
 }

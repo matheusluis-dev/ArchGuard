@@ -1,7 +1,5 @@
 namespace ArchGuard
 {
-    using ArchGuardType.Predicates;
-
     public sealed partial class TypeAssertion
     {
         public ITypeAssertionSequence HaveName(params string[] name)

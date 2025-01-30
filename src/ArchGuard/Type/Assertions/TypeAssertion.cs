@@ -4,9 +4,9 @@ namespace ArchGuard
 
     public sealed partial class TypeAssertion : ITypeAssertionRule, ITypeAssertionSequence
     {
-        private readonly TypeDefinitionAssertionContext _context;
+        private readonly TypeAssertionContext _context;
 
-        public TypeAssertion(TypeDefinitionAssertionContext context)
+        public TypeAssertion(TypeAssertionContext context)
         {
             _context = context;
         }

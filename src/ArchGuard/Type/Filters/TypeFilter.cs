@@ -1,18 +1,18 @@
 namespace ArchGuard
 {
     using ArchGuard.Contexts;
-    using static ArchGuard.Contexts.RulesContext;
+    using static ArchGuard.RulesContext;
 
     public sealed partial class TypeFilter
         : ITypeFilterEntryPoint,
             ITypeFilterRule,
             ITypeFilterSequence
     {
-        private readonly TypeDefinitionFilterContext _context;
+        private readonly TypeFilterContext _context;
         private readonly StartTypeAssertionCallback _startAssertionCallback;
 
         internal TypeFilter(
-            TypeDefinitionFilterContext context,
+            TypeFilterContext context,
             StartTypeAssertionCallback startAssertionCallback
         )
         {

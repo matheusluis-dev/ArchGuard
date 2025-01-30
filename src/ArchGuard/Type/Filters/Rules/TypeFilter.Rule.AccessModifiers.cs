@@ -1,6 +1,6 @@
 namespace ArchGuard
 {
-    using ArchGuardType.Predicates;
+    using ArchGuard;
 
     public sealed partial class TypeFilter
     {

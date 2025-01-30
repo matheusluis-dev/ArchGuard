@@ -2,7 +2,6 @@ namespace ArchGuard
 {
     using System;
     using System.Linq;
-    using ArchGuardType.Predicates;
 
     public sealed partial class TypeAssertion
     {
