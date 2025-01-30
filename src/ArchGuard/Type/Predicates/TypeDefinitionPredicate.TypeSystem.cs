@@ -26,8 +26,8 @@ namespace ArchGuardType.Predicates
             (type, _) => !Enum(type, _);
 
         internal static Func<TypeDefinition, StringComparison, bool> Record =>
-            (type, _) => type.Symbol.IsRecord;
+            (type, _) => type.Symbol.IsRecord && type.Symbol.TypeKind is not TypeKind.Struct;
         internal static Func<TypeDefinition, StringComparison, bool> NotRecord =>
-            (type, _) => !Record(type, _);
+            (type, _) => !type.Symbol.IsRecord || type.Symbol.TypeKind is TypeKind.Struct;
     }
 }
