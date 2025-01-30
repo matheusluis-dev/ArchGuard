@@ -8,8 +8,7 @@ namespace ArchGuard.Tests.Common
                 ArchGuard.Types.InSolution(
                     new SolutionSearchParameters
                     {
-                        SolutionPath =
-                            "C:/Users/matheus.oliveira/source/repos/ArchGuard/ArchGuard.sln",
+                        SolutionPath = "ArchGuard.sln",
                         Preprocessor = "net9_0",
                         ProjectName = "ArchGuard.MockedAssembly.Classes",
                     }
@@ -22,10 +21,22 @@ namespace ArchGuard.Tests.Common
                 ArchGuard.Types.InSolution(
                     new SolutionSearchParameters
                     {
-                        SolutionPath =
-                            "C:/Users/matheus.oliveira/source/repos/ArchGuard/ArchGuard.sln",
+                        SolutionPath = "ArchGuard.sln",
                         Preprocessor = "net9_0",
                         ProjectName = "ArchGuard.MockedAssembly.Enums",
+                    }
+                );
+        }
+
+        public static class Interfaces
+        {
+            public static ITypeDefinitionFilterEntryPoint Types =>
+                ArchGuard.Types.InSolution(
+                    new SolutionSearchParameters
+                    {
+                        SolutionPath = "ArchGuard.sln",
+                        Preprocessor = "net9_0",
+                        ProjectName = "ArchGuard.MockedAssembly.Interfaces",
                     }
                 );
         }

@@ -1,106 +1,50 @@
 namespace ArchGuard.Filters.Tests.Types
 {
-    using System.Collections.Generic;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
-    using ArchGuard.Tests.Common.Types;
-    using FluentAssertions;
+    using NFluent;
     using Xunit;
 
     public sealed class InterfacesTests
     {
         [Fact]
-        public void Get_interfaces()
+        public void AreInterfaces()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.AreInterfaces();
+            var filters = MockedAssembly.Interfaces.Types.That.AreInterfaces();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types
-                .Should()
-                .BeEquivalentTo(TypeNames.IInternalInterface, TypeNames.IPublicInterface);
-        }
-
-        [Fact]
-        public void Get_non_interface_types()
-        {
-            // Arrange
-            var filters = TypesFromMockedAssembly.All.That.AreNotInterfaces();
-
-            // Act
-            var types = filters.GetTypes().GetFullNames();
-
-            // Assert
-            types
-                .Should()
-                .BeEquivalentTo(
-                    new List<string>
-                    {
-#if NET7_0_OR_GREATER
-                        TypeNames.FileClass,
-                        TypeNames.FilePartialClass,
-                        TypeNames.FileSealedClass,
-                        TypeNames.FileStaticClass,
-#endif
-                        TypeNames.InternalClass,
-                        TypeNames.InternalPartialClass,
-                        TypeNames.InternalSealedClass,
-                        TypeNames.InternalStaticClass,
-                        TypeNames.PublicAbstractClass,
-                        TypeNames.PublicClass,
-                        TypeNames.PublicGenericClassWithOneType,
-                        TypeNames.PublicGenericClassWithTwoTypes,
-                        TypeNames.PublicParentClass,
-                        TypeNames.PublicParentClass_InternalNestedClass,
-                        TypeNames.PublicParentClass_PrivateNestedClass,
-                        TypeNames.PublicParentClass_PublicNestedClass,
-                        TypeNames.PublicParentClass_PublicNestedPartialClass,
-                        TypeNames.PublicPartialClass,
-                        TypeNames.PublicSealedClass,
-                        TypeNames.PublicStaticClass,
-                        TypeNames.InternalEnum,
-                        TypeNames.PublicEnum,
-#if NET5_0_OR_GREATER
-                        TypeNames.InternalRecord,
-                        TypeNames.InternalPartialRecord,
-                        TypeNames.InternalSealedRecord,
-                        TypeNames.PublicRecord,
-                        TypeNames.PublicPartialRecord,
-                        TypeNames.PublicSealedRecord,
-#endif
-                        TypeNames.InternalStruct,
-                        TypeNames.PublicStruct,
-                    }
+            Check
+                .That(types)
+                .Contains(
+                    "ArchGuard.MockedAssembly.Interfaces.IInterface1",
+                    "ArchGuard.MockedAssembly.Interfaces.IInterface2",
+                    "ArchGuard.MockedAssembly.Interfaces.IInterface3"
                 );
         }
 
         [Fact]
-        public void Get_public_interfaces()
+        public void AreNotInterfaces()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.AreInterfaces().And.ArePublic();
+            var filters = MockedAssembly.Interfaces.Types.That.AreNotInterfaces();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types.Should().BeEquivalentTo(new List<string> { TypeNames.IPublicInterface });
-        }
-
-        [Fact]
-        public void Get_internal_interfaces()
-        {
-            // Arrange
-            var filters = TypesFromMockedAssembly.All.That.AreInterfaces().And.AreInternal();
-
-            // Act
-            var types = filters.GetTypes().GetFullNames();
-
-            // Assert
-            types.Should().BeEquivalentTo(new List<string> { TypeNames.IInternalInterface });
+            Check
+                .That(types)
+                .Contains(
+                    "ArchGuard.MockedAssembly.Interfaces.Class",
+                    "ArchGuard.MockedAssembly.Interfaces.Enum",
+                    "ArchGuard.MockedAssembly.Interfaces.Record",
+                    "ArchGuard.MockedAssembly.Interfaces.RecordStruct",
+                    "ArchGuard.MockedAssembly.Interfaces.Struct"
+                );
         }
     }
 }

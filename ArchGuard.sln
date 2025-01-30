@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.Enums", "tests\mocked-assemblies\ArchGuard.MockedAssembly.Enums\ArchGuard.MockedAssembly.Enums.csproj", "{8C08BC0E-ECF5-4D6D-A639-D3EAE1D90DA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.Interfaces", "tests\mocked-assemblies\ArchGuard.MockedAssembly.Interfaces\ArchGuard.MockedAssembly.Interfaces.csproj", "{B1554D64-F6A3-49FC-924C-9012ECA4C89C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{8C08BC0E-ECF5-4D6D-A639-D3EAE1D90DA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C08BC0E-ECF5-4D6D-A639-D3EAE1D90DA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C08BC0E-ECF5-4D6D-A639-D3EAE1D90DA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1554D64-F6A3-49FC-924C-9012ECA4C89C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1554D64-F6A3-49FC-924C-9012ECA4C89C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1554D64-F6A3-49FC-924C-9012ECA4C89C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1554D64-F6A3-49FC-924C-9012ECA4C89C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +98,7 @@ Global
 		{A8A0C942-8206-4588-953C-33C8896FA821} = {F676C254-5A24-48D0-8452-557E35A97DCA}
 		{19E44CD7-1F41-4B06-8F56-D058A48961E5} = {A8A0C942-8206-4588-953C-33C8896FA821}
 		{8C08BC0E-ECF5-4D6D-A639-D3EAE1D90DA0} = {A8A0C942-8206-4588-953C-33C8896FA821}
+		{B1554D64-F6A3-49FC-924C-9012ECA4C89C} = {A8A0C942-8206-4588-953C-33C8896FA821}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		FileExplorer = 
