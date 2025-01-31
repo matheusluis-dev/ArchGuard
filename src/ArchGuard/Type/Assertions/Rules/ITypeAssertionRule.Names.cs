@@ -17,5 +17,7 @@ namespace ArchGuard
 
         ITypeAssertionSequence HaveNameEndingWith(params string[] name);
         ITypeAssertionSequence NotHaveNameEndingWith(params string[] names);
+
+        ITypeAssertionSequence HaveNamePascalCased();
     }
 }

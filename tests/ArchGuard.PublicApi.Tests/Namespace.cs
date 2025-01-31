@@ -14,6 +14,7 @@ namespace ArchGuard.PublicApi.Tests
             var namespaces = assembly
                 .GetTypes()
                 .Select(type => type.Namespace)
+                .Where(@namespace => @namespace is not null)
                 .Distinct(StringComparer.OrdinalIgnoreCase);
 
             // Assert

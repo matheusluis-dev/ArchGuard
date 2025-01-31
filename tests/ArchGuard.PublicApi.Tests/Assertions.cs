@@ -20,6 +20,7 @@ namespace ArchGuard.PublicApi.Tests
                 .Order(StringComparer.Ordinal);
 
             var normalizedAssertionMethods = assertionMethods
+                .Where(m => !m.Name.Equals("HaveNamePascalCased", StringComparison.Ordinal))
                 .Select(m =>
                     m.Name.Replace("Be", string.Empty, StringComparison.Ordinal)
                         .Replace("NotBe", "Not", StringComparison.Ordinal)

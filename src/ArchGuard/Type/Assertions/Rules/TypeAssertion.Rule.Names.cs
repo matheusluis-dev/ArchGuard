@@ -61,5 +61,11 @@ namespace ArchGuard
             _context.AddPredicate(TypePredicate.NotHaveNameEndingWith(names));
             return this;
         }
+
+        public ITypeAssertionSequence HaveNamePascalCased()
+        {
+            _context.AddPredicate(TypePredicate.HaveNamePascalCased);
+            return this;
+        }
     }
 }

@@ -5,7 +5,7 @@ namespace ArchGuard
     using System.Linq;
     using System.Text.RegularExpressions;
     using ArchGuard.Extensions;
-    using ArchGuard.Kernel.Models;
+    using ArchGuard.Kernel;
     using Microsoft.CodeAnalysis;
 
     internal static partial class TypePredicate
@@ -86,5 +86,8 @@ namespace ArchGuard
             return (type, comparison) =>
                 name.Any(n => !type.Symbol.GetName().EndsWith(n, comparison));
         }
+
+        internal static Func<TypeDefinition, StringComparison, bool> HaveNamePascalCased =>
+            (type, _) => Regex.IsMatch(type.Symbol.GetName(), RegularExpressions.PascalCase);
     }
 }
