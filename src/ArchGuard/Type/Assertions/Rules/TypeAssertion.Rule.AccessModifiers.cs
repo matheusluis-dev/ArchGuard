@@ -50,15 +50,15 @@ namespace ArchGuard
             return this;
         }
 
-        public ITypeAssertionSequence BeFileScoped()
+        public ITypeAssertionSequence BeFileLocal()
         {
-            _context.AddPredicate(TypePredicate.FileScoped);
+            _context.AddPredicate(TypePredicate.FileLocal);
             return this;
         }
 
-        public ITypeAssertionSequence NotBeFileScoped()
+        public ITypeAssertionSequence NotBeFileLocal()
         {
-            _context.AddPredicate(TypePredicate.NotFileScoped);
+            _context.AddPredicate(TypePredicate.NotFileLocal);
             return this;
         }
     }

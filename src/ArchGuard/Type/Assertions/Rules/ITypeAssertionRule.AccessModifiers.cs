@@ -14,7 +14,7 @@ namespace ArchGuard
         ITypeAssertionSequence BeProtected();
         ITypeAssertionSequence NotBeProtected();
 
-        ITypeAssertionSequence BeFileScoped();
-        ITypeAssertionSequence NotBeFileScoped();
+        ITypeAssertionSequence BeFileLocal();
+        ITypeAssertionSequence NotBeFileLocal();
     }
 }

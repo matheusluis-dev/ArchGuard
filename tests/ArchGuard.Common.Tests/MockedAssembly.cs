@@ -4,6 +4,19 @@ namespace ArchGuard.Tests.Common
     {
         public static class AccessModifiers
         {
+            public static class File
+            {
+                public static ITypeFilterEntryPoint Types =>
+                    ArchGuard.Types.InSolution(
+                        new SolutionSearchParameters
+                        {
+                            SolutionPath = "ArchGuard.sln",
+                            Preprocessor = "net9_0",
+                            ProjectName = "ArchGuard.MockedAssembly.AccessModifiers.File",
+                        }
+                    );
+            }
+
             public static class Internal
             {
                 public static ITypeFilterEntryPoint Types =>

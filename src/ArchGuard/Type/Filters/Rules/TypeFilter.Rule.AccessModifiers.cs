@@ -52,15 +52,15 @@ namespace ArchGuard
             return this;
         }
 
-        public ITypeFilterSequence AreFileScoped()
+        public ITypeFilterSequence AreFileLocal()
         {
-            _context.AddPredicate(TypePredicate.FileScoped);
+            _context.AddPredicate(TypePredicate.FileLocal);
             return this;
         }
 
-        public ITypeFilterSequence AreNotFileScoped()
+        public ITypeFilterSequence AreNotFileLocal()
         {
-            _context.AddPredicate(TypePredicate.NotFileScoped);
+            _context.AddPredicate(TypePredicate.NotFileLocal);
             return this;
         }
     }

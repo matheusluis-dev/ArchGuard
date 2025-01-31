@@ -76,6 +76,23 @@ namespace ArchGuard.Extensions
             return true;
         }
 
+        public static bool IsFileLocal(this TypeDefinition type)
+        {
+            ArgumentNullException.ThrowIfNull(type);
+
+            if (type.Symbol.IsFileLocal)
+                return true;
+
+            var containingTypes = type.GetContainingTypes().ToList();
+            if (containingTypes.Count == 0)
+                return false;
+
+            // File types can't be nested inside any type, even if they are file too
+            // But, types of any access modifiers can be nested inside a file type
+            // Checks if the first containing type is file scoped
+            return containingTypes[^1].IsFileLocal;
+        }
+
         public static bool IsExternallyImmutable(this TypeDefinition type)
         {
             ArgumentNullException.ThrowIfNull(type);

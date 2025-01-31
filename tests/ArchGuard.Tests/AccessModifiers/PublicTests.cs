@@ -1,10 +1,10 @@
-namespace ArchGuard.Filters.Tests.Modifiers.Access
+namespace ArchGuard.Filters.Tests.AccessModifiers
 {
     using System;
     using ArchGuard.Tests.Common.Extensions;
     using NFluent;
     using Xunit;
-    using static ArchGuard.Tests.Common.MockedAssembly.AccessModifiers;
+    using static ArchGuard.Tests.Common.MockedAssembly.AccessModifiers.Public;
 
     public sealed class PublicTests
     {
@@ -12,7 +12,7 @@ namespace ArchGuard.Filters.Tests.Modifiers.Access
         public void ArePublic()
         {
             // Arrange
-            var filters = Public.Types.That.ArePublic();
+            var filters = Types.That.ArePublic();
 
             // Act
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
@@ -31,7 +31,7 @@ namespace ArchGuard.Filters.Tests.Modifiers.Access
         public void AreNotPublic()
         {
             // Arrange
-            var filters = Public.Types.That.AreNotPublic();
+            var filters = Types.That.AreNotPublic();
 
             // Act
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();

@@ -1,10 +1,10 @@
-namespace ArchGuard.Filters.Tests.Modifiers.Access
+namespace ArchGuard.Filters.Tests.AccessModifiers
 {
     using System;
     using ArchGuard.Tests.Common.Extensions;
     using NFluent;
     using Xunit;
-    using static ArchGuard.Tests.Common.MockedAssembly.AccessModifiers;
+    using static ArchGuard.Tests.Common.MockedAssembly.AccessModifiers.Internal;
 
     public sealed class InternalTests
     {
@@ -12,7 +12,7 @@ namespace ArchGuard.Filters.Tests.Modifiers.Access
         public void AreInternal()
         {
             // Arrange
-            var filters = Internal.Types.That.AreInternal();
+            var filters = Types.That.AreInternal();
 
             // Act
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
@@ -34,7 +34,7 @@ namespace ArchGuard.Filters.Tests.Modifiers.Access
         public void AreNotInternal()
         {
             // Arrange
-            var filters = Internal.Types.That.AreNotInternal();
+            var filters = Types.That.AreNotInternal();
 
             // Act
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();

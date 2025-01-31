@@ -27,9 +27,9 @@ namespace ArchGuard
         internal static Func<TypeDefinition, StringComparison, bool> NotProtected =>
             (type, _) => !Protected(type, _);
 
-        internal static Func<TypeDefinition, StringComparison, bool> FileScoped =>
-            (type, _) => type.Symbol.IsFileLocal;
-        internal static Func<TypeDefinition, StringComparison, bool> NotFileScoped =>
-            (type, _) => !FileScoped(type, _);
+        internal static Func<TypeDefinition, StringComparison, bool> FileLocal =>
+            (type, _) => type.IsFileLocal();
+        internal static Func<TypeDefinition, StringComparison, bool> NotFileLocal =>
+            (type, _) => !type.IsFileLocal();
     }
 }

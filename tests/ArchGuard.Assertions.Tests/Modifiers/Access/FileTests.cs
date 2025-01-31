@@ -19,7 +19,7 @@ namespace ArchGuard.Assertions.Tests.Modifiers.Access
             var filtersTypes = filters.GetTypes(StringComparison.Ordinal);
 
             // Act
-            var assertion = filters.Should.BeFileScoped().GetResult(StringComparison.Ordinal);
+            var assertion = filters.Should.BeFileLocal().GetResult(StringComparison.Ordinal);
 
             // Assert
             assertion.IsSuccessful.Should().BeTrue();
@@ -37,7 +37,7 @@ namespace ArchGuard.Assertions.Tests.Modifiers.Access
             var filtersTypes = filters.GetTypes(StringComparison.Ordinal);
 
             // Act
-            var assertion = filters.Should.BeFileScoped().GetResult(StringComparison.Ordinal);
+            var assertion = filters.Should.BeFileLocal().GetResult(StringComparison.Ordinal);
 
             // Assert
             assertion.IsSuccessful.Should().BeFalse();

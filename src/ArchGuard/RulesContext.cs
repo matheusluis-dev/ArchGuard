@@ -24,6 +24,7 @@ namespace ArchGuard
 
         internal RulesContext(SolutionSearchParameters parameters)
         {
+            // TODO: technical debt, fix it lol
             var solutionCompiled = SolutionReaderCached.CompileSolution(
                 new Kernel.Models.SolutionSearchParameters
                 {

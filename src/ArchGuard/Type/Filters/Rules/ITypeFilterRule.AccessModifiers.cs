@@ -14,7 +14,7 @@ namespace ArchGuard
         ITypeFilterSequence AreProtected();
         ITypeFilterSequence AreNotProtected();
 
-        ITypeFilterSequence AreFileScoped();
-        ITypeFilterSequence AreNotFileScoped();
+        ITypeFilterSequence AreFileLocal();
+        ITypeFilterSequence AreNotFileLocal();
     }
 }
