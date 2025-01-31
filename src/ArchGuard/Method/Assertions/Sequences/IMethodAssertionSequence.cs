@@ -1,4 +1,9 @@
 namespace ArchGuard
 {
-    public interface IMethodAssertionSequence { }
+    public partial interface IMethodAssertionSequence
+    {
+
+        IMethodAssertionRule And { get; }
+        IMethodAssertionRule Or { get; }
+    }
 }

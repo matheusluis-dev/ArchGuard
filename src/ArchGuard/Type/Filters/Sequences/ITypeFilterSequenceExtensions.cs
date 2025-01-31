@@ -5,14 +5,14 @@ namespace ArchGuard
     public static class ITypeFilterSequenceExtensions
     {
         public static ITypeFilterSequence And(
-            this ITypeFilterSequence iTypesFilterPostConditions,
+            this ITypeFilterSequence typesFilterPostConditions,
             Func<ITypeFilterRule, ITypeFilterSequence> filter
         )
         {
-            if (!(iTypesFilterPostConditions is TypeFilter typesFilter))
+            if (!(typesFilterPostConditions is TypeFilter typesFilter))
             {
                 throw new ArgumentException(
-                    $"{nameof(iTypesFilterPostConditions)} must be of type {nameof(TypeFilter)}"
+                    $"{nameof(typesFilterPostConditions)} must be of type {nameof(TypeFilter)}"
                 );
             }
 

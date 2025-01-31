@@ -1,25 +1,64 @@
 namespace ArchGuard.Contexts
 {
     using System;
-    using ArchGuard;
+    using System.Collections.Generic;
     using ArchGuard.Kernel.Models;
 
-    public sealed class MethodAssertionContext : ContextBase<MethodDefinition>
+    public sealed class MethodAssertionContext
     {
-        public MethodAssertionContext(ContextBase<MethodDefinition> filterContext)
-            : base(filterContext) { }
+        private readonly List<
+            List<Func<MethodDefinition, StringComparison, bool>>
+        > _groupedPredicates = new();
 
-        public MethodAssertionResult GetResult()
+        private readonly MethodFilterContext _methodFilterContext;
+
+        public MethodAssertionContext(MethodFilterContext methodFilterContext)
         {
-            return GetResult(Default.StringComparison);
+            _methodFilterContext = methodFilterContext;
         }
 
-        public MethodAssertionResult GetResult(StringComparison comparison)
+        private void CreateGroupedPredicate()
         {
-            var methodsFiltered = GetElementsWithoutApplyPredicates(comparison);
-            var methodsAsserted = GetElements(comparison);
+            _groupedPredicates.Add(new());
+        }
 
-            return new MethodAssertionResult(methodsFiltered, methodsAsserted);
+        public void AddPredicate(Func<MethodDefinition, StringComparison, bool> predicate)
+        {
+            if (_groupedPredicates.Count == 0)
+                CreateGroupedPredicate();
+
+            _groupedPredicates[^1].Add(predicate);
+        }
+
+        public void Or()
+        {
+            CreateGroupedPredicate();
+        }
+
+        public IEnumerable<MethodDefinition> GetMethods()
+        {
+            return GetMethods(Default.StringComparison);
+        }
+
+        public IEnumerable<MethodDefinition> GetMethods(StringComparison comparison)
+        {
+            var methods = _methodFilterContext.GetMethods(comparison);
+
+            if (_groupedPredicates.Count == 0)
+                return methods;
+
+            var elements = new HashSet<MethodDefinition>();
+            foreach (var group in _groupedPredicates)
+            {
+                var elementsGrouped = methods.ToList().AsEnumerable();
+
+                foreach (var predicate in group)
+                    elementsGrouped = elementsGrouped.Where(type => predicate(type, comparison));
+
+                elements.UnionWith(elementsGrouped);
+            }
+
+            return elements;
         }
     }
 }
