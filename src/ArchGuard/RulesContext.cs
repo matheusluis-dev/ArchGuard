@@ -24,7 +24,14 @@ namespace ArchGuard
 
         internal RulesContext(SolutionSearchParameters parameters)
         {
-            var solutionCompiled = SolutionReaderCached.CompileSolution(parameters);
+            var solutionCompiled = SolutionReaderCached.CompileSolution(
+                new Kernel.Models.SolutionSearchParameters
+                {
+                    SolutionPath = parameters.SolutionPath,
+                    ProjectName = parameters.ProjectName,
+                    Preprocessor = parameters.Preprocessor,
+                }
+            );
 
             _typeFilterContext = new TypeFilterContext(solutionCompiled.Types);
             _typeAssertionContext = new TypeAssertionContext(_typeFilterContext);
