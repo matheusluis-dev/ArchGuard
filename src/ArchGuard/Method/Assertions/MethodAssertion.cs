@@ -15,5 +15,15 @@ namespace ArchGuard
         {
             return this;
         }
+
+        public MethodAssertionResult GetResult()
+        {
+            return GetResult(Default.StringComparison);
+        }
+
+        public MethodAssertionResult GetResult(StringComparison comparison)
+        {
+            return _context.GetResult(comparison);
+        }
     }
 }

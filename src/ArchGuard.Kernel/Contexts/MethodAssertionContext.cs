@@ -35,12 +35,7 @@ namespace ArchGuard.Contexts
             CreateGroupedPredicate();
         }
 
-        public IEnumerable<MethodDefinition> GetMethods()
-        {
-            return GetMethods(Default.StringComparison);
-        }
-
-        public IEnumerable<MethodDefinition> GetMethods(StringComparison comparison)
+        private IEnumerable<MethodDefinition> GetMethods(StringComparison comparison)
         {
             var methods = _methodFilterContext.GetMethods(comparison);
 
@@ -59,6 +54,19 @@ namespace ArchGuard.Contexts
             }
 
             return elements;
+        }
+
+        public MethodAssertionResult GetResult()
+        {
+            return GetResult(Default.StringComparison);
+        }
+
+        public MethodAssertionResult GetResult(StringComparison comparison)
+        {
+            var methodsFiltered = _methodFilterContext.GetMethods(comparison);
+            var methodsAsserted = GetMethods(comparison);
+
+            return new MethodAssertionResult(methodsFiltered, methodsAsserted);
         }
     }
 }
