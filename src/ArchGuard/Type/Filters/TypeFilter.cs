@@ -37,5 +37,7 @@ namespace ArchGuard
         }
 
         public IMethodFilterEntryPoint Methods => _startMethodFilterCallback.Invoke();
+
+        public ITypeAssertionRule Should => _startAssertionCallback.Invoke();
     }
 }

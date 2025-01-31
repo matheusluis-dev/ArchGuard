@@ -1,6 +1,6 @@
 namespace ArchGuard
 {
-    public partial interface ITypeFilterSequence
+    public interface IShould
     {
         ITypeAssertionRule Should { get; }
     }

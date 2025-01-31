@@ -1,6 +1,6 @@
 namespace ArchGuard
 {
-    public interface ITypeFilterEntryPoint : IGetTypes, ISwitchToVerify
+    public interface ITypeFilterEntryPoint : IGetTypes, ISwitchToVerify, IShould
     {
         ITypeFilterRule That { get; }
     }
