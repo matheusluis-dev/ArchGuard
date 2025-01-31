@@ -2,17 +2,20 @@ namespace ArchGuard
 {
     public partial interface ITypeFilterRule
     {
-        ITypeFilterSequence HaveName(params string[] name);
+        ITypeFilterSequence HaveName(params string[] names);
 
         ITypeFilterSequence HaveNameMatching(params string[] regexes);
-        ITypeFilterSequence HaveNameNotMatching(params string[] regexes);
+        ITypeFilterSequence NotHaveNameMatching(params string[] regexes);
 
-        ITypeFilterSequence HaveFullName(params string[] name);
+        ITypeFilterSequence HaveFullName(params string[] names);
 
         ITypeFilterSequence HaveFullNameMatching(params string[] regexes);
-        ITypeFilterSequence HaveFullNameNotMatching(params string[] regexes);
+        ITypeFilterSequence NotHaveFullNameMatching(params string[] regexes);
 
-        ITypeFilterSequence HaveNameStartingWith(params string[] name);
-        ITypeFilterSequence HaveNameEndingWith(params string[] name);
+        ITypeFilterSequence HaveNameStartingWith(params string[] names);
+        ITypeFilterSequence NotHaveNameStartingWith(params string[] names);
+
+        ITypeFilterSequence HaveNameEndingWith(params string[] names);
+        ITypeFilterSequence NotHaveNameEndingWith(params string[] names);
     }
 }

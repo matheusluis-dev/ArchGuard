@@ -14,7 +14,7 @@ namespace ArchGuard
             return this;
         }
 
-        public ITypeAssertionSequence HaveNameNotMatching(params string[] regexes)
+        public ITypeAssertionSequence NotHaveNameMatching(params string[] regexes)
         {
             _context.AddPredicate(TypePredicate.HaveNameNotMatching(regexes));
             return this;
@@ -32,7 +32,7 @@ namespace ArchGuard
             return this;
         }
 
-        public ITypeAssertionSequence HaveFullNameNotMatching(params string[] regexes)
+        public ITypeAssertionSequence NotHaveFullNameMatching(params string[] regexes)
         {
             _context.AddPredicate(TypePredicate.HaveFullNameNotMatching(regexes));
             return this;
@@ -44,9 +44,21 @@ namespace ArchGuard
             return this;
         }
 
+        public ITypeAssertionSequence NotHaveNameStartingWith(params string[] names)
+        {
+            _context.AddPredicate(TypePredicate.NotHaveNameStartingWith(names));
+            return this;
+        }
+
         public ITypeAssertionSequence HaveNameEndingWith(params string[] name)
         {
             _context.AddPredicate(TypePredicate.HaveNameEndingWith(name));
+            return this;
+        }
+
+        public ITypeAssertionSequence NotHaveNameEndingWith(params string[] names)
+        {
+            _context.AddPredicate(TypePredicate.NotHaveNameEndingWith(names));
             return this;
         }
     }

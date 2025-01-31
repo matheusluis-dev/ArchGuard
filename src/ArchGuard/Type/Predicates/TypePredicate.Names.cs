@@ -63,12 +63,28 @@ namespace ArchGuard
                 name.Any(n => type.Symbol.GetName().StartsWith(n, comparison));
         }
 
+        internal static Func<TypeDefinition, StringComparison, bool> NotHaveNameStartingWith(
+            IEnumerable<string> name
+        )
+        {
+            return (type, comparison) =>
+                !name.Any(n => type.Symbol.GetName().StartsWith(n, comparison));
+        }
+
         internal static Func<TypeDefinition, StringComparison, bool> HaveNameEndingWith(
             IEnumerable<string> name
         )
         {
             return (type, comparison) =>
                 name.Any(n => type.Symbol.GetName().EndsWith(n, comparison));
+        }
+
+        internal static Func<TypeDefinition, StringComparison, bool> NotHaveNameEndingWith(
+            IEnumerable<string> name
+        )
+        {
+            return (type, comparison) =>
+                name.Any(n => !type.Symbol.GetName().EndsWith(n, comparison));
         }
     }
 }

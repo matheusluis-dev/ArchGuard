@@ -1,12 +1,10 @@
 namespace ArchGuard
 {
-    using ArchGuard;
-
     public sealed partial class TypeFilter
     {
-        public ITypeFilterSequence HaveName(params string[] name)
+        public ITypeFilterSequence HaveName(params string[] names)
         {
-            _context.AddPredicate(TypePredicate.HaveName(name));
+            _context.AddPredicate(TypePredicate.HaveName(names));
             return this;
         }
 
@@ -16,15 +14,15 @@ namespace ArchGuard
             return this;
         }
 
-        public ITypeFilterSequence HaveNameNotMatching(params string[] regexes)
+        public ITypeFilterSequence NotHaveNameMatching(params string[] regexes)
         {
             _context.AddPredicate(TypePredicate.HaveNameNotMatching(regexes));
             return this;
         }
 
-        public ITypeFilterSequence HaveFullName(params string[] name)
+        public ITypeFilterSequence HaveFullName(params string[] names)
         {
-            _context.AddPredicate(TypePredicate.HaveFullName(name));
+            _context.AddPredicate(TypePredicate.HaveFullName(names));
             return this;
         }
 
@@ -34,21 +32,33 @@ namespace ArchGuard
             return this;
         }
 
-        public ITypeFilterSequence HaveFullNameNotMatching(params string[] regexes)
+        public ITypeFilterSequence NotHaveFullNameMatching(params string[] regexes)
         {
             _context.AddPredicate(TypePredicate.HaveFullNameNotMatching(regexes));
             return this;
         }
 
-        public ITypeFilterSequence HaveNameStartingWith(params string[] name)
+        public ITypeFilterSequence HaveNameStartingWith(params string[] names)
         {
-            _context.AddPredicate(TypePredicate.HaveNameStartingWith(name));
+            _context.AddPredicate(TypePredicate.HaveNameStartingWith(names));
             return this;
         }
 
-        public ITypeFilterSequence HaveNameEndingWith(params string[] name)
+        public ITypeFilterSequence NotHaveNameStartingWith(params string[] names)
         {
-            _context.AddPredicate(TypePredicate.HaveNameEndingWith(name));
+            _context.AddPredicate(TypePredicate.NotHaveNameStartingWith(names));
+            return this;
+        }
+
+        public ITypeFilterSequence HaveNameEndingWith(params string[] names)
+        {
+            _context.AddPredicate(TypePredicate.HaveNameEndingWith(names));
+            return this;
+        }
+
+        public ITypeFilterSequence NotHaveNameEndingWith(params string[] names)
+        {
+            _context.AddPredicate(TypePredicate.NotHaveNameEndingWith(names));
             return this;
         }
     }
