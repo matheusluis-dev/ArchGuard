@@ -2,16 +2,16 @@ namespace ArchGuard
 {
     public partial interface ITypeFilterRule : IGetTypes
     {
-        ITypeFilterSequence ImplementInterface(params System.Type[] types);
+        ITypeFilterSequence ImplementInterface(params Type[] types);
         ITypeFilterSequence ImplementInterface<T>();
 
-        ITypeFilterSequence DoNotImplementInterface(params System.Type[] types);
+        ITypeFilterSequence DoNotImplementInterface(params Type[] types);
         ITypeFilterSequence DoNotImplementInterface<T>();
 
-        ITypeFilterSequence Inherit(params System.Type[] type);
+        ITypeFilterSequence Inherit(params Type[] type);
         ITypeFilterSequence Inherit<T>();
 
-        ITypeFilterSequence DoNotInherit(params System.Type[] types);
+        ITypeFilterSequence DoNotInherit(params Type[] types);
         ITypeFilterSequence DoNotInherit<T>();
 
         ITypeFilterSequence AreGeneric();
@@ -38,7 +38,7 @@ namespace ArchGuard
         ITypeFilterSequence HaveParameterlessConstructor();
         ITypeFilterSequence DoNotHaveParameterlessConstructor();
 
-        //        ITypesFilterPostConditions AreOfType(params System.Type[] types);
+        //        ITypesFilterPostConditions AreOfType(params Type[] types);
         //        ITypesFilterPostConditions AreOfType<T>();
     }
 }

@@ -4,7 +4,7 @@ namespace ArchGuard.Extensions
 
     public static class TypeExtensions
     {
-        public static string GetFullNameClean(this System.Type type)
+        public static string GetFullNameClean(this Type type)
         {
             var match = Regex.Match(type.FullName, @"<[^>]+>[^_]+__(.+)$");
 

@@ -2,16 +2,16 @@ namespace ArchGuard
 {
     public partial interface ITypeAssertionRule
     {
-        ITypeAssertionSequence ImplementInterface(params System.Type[] types);
+        ITypeAssertionSequence ImplementInterface(params Type[] types);
         ITypeAssertionSequence ImplementInterface<T>();
 
-        ITypeAssertionSequence NotImplementInterface(params System.Type[] types);
+        ITypeAssertionSequence NotImplementInterface(params Type[] types);
         ITypeAssertionSequence NotImplementInterface<T>();
 
-        ITypeAssertionSequence Inherit(params System.Type[] type);
+        ITypeAssertionSequence Inherit(params Type[] type);
         ITypeAssertionSequence Inherit<T>();
 
-        ITypeAssertionSequence NotInherit(params System.Type[] types);
+        ITypeAssertionSequence NotInherit(params Type[] types);
         ITypeAssertionSequence NotInherit<T>();
 
         ITypeAssertionSequence BeGeneric();
