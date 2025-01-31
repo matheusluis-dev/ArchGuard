@@ -1,7 +1,6 @@
 namespace ArchGuard
 {
     using System;
-    using ArchGuard.Kernel.Models;
     using Microsoft.CodeAnalysis;
 
     internal static partial class TypePredicate

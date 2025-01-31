@@ -1,4 +1,4 @@
-namespace ArchGuard.Kernel.Results
+namespace ArchGuard.Core.Results
 {
     using System;
 

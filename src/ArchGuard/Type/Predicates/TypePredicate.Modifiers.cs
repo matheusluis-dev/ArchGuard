@@ -2,7 +2,6 @@ namespace ArchGuard
 {
     using System;
     using System.Linq;
-    using ArchGuard.Kernel.Models;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;

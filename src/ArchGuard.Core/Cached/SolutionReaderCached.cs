@@ -6,9 +6,9 @@ namespace ArchGuard.Cached
     using System.IO;
     using System.Linq;
     using System.Threading;
+    using ArchGuard.Core.Models;
+    using ArchGuard.Core.Results;
     using ArchGuard.Exceptions;
-    using ArchGuard.Kernel.Models;
-    using ArchGuard.Kernel.Results;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.MSBuild;
 

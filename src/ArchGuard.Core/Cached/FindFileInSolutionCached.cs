@@ -2,7 +2,7 @@ namespace ArchGuard.Cached
 {
     using System.Collections.Generic;
     using System.IO;
-    using ArchGuard.Kernel.Results;
+    using ArchGuard.Core.Results;
 
     public static class FindFileHelper
     {

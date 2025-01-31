@@ -1,7 +1,7 @@
 namespace ArchGuard.Exceptions
 {
     using System;
-    using ArchGuard.Kernel.Results;
+    using ArchGuard.Core.Results;
 
     public sealed class ProjectNotFoundException : Exception
     {

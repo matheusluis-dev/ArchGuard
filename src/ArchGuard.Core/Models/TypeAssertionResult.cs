@@ -2,7 +2,7 @@ namespace ArchGuard
 {
     using System.Collections.Generic;
     using System.Linq;
-    using ArchGuard.Kernel.Models;
+    using ArchGuard.Core.Models;
     using Microsoft.CodeAnalysis;
 
     public sealed class TypeAssertionResult

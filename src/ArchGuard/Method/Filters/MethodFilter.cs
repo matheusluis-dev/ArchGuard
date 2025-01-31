@@ -2,7 +2,6 @@ namespace ArchGuard
 {
     using System.Collections.Generic;
     using ArchGuard.Contexts;
-    using ArchGuard.Kernel.Models;
     using static ArchGuard.RulesContext;
 
     public sealed partial class MethodFilter

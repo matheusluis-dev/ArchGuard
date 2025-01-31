@@ -1,2 +1,3 @@
 global using System;
-global using ArchGuard.Kernel.Models;
+global using ArchGuard.Core;
+global using ArchGuard.Core.Models;

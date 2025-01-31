@@ -26,7 +26,7 @@ namespace ArchGuard
         {
             // TODO: technical debt, fix it lol
             var solutionCompiled = SolutionReaderCached.CompileSolution(
-                new Kernel.Models.SolutionSearchParameters
+                new Core.Models.SolutionSearchParameters
                 {
                     SolutionPath = parameters.SolutionPath,
                     ProjectName = parameters.ProjectName,

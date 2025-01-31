@@ -5,8 +5,8 @@ namespace ArchGuard.Cached
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
+    using ArchGuard.Core.Models;
     using ArchGuard.Extensions;
-    using ArchGuard.Kernel.Models;
     using Microsoft.CodeAnalysis;
 
     public static class DependencySearchCached

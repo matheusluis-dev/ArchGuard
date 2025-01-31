@@ -3,8 +3,8 @@ namespace ArchGuard.Tests.Common.Extensions
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using ArchGuard.Core.Models;
     using ArchGuard.Extensions;
-    using ArchGuard.Kernel.Models;
     using Microsoft.CodeAnalysis;
 
     public static class IEnumerableTypeDefinitionExtensions

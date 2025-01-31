@@ -2,7 +2,7 @@ namespace ArchGuard.Contexts
 {
     using System;
     using System.Collections.Generic;
-    using ArchGuard.Kernel.Models;
+    using ArchGuard.Core.Models;
 
     public sealed class TypeFilterContext : ContextBase<TypeDefinition>
     {

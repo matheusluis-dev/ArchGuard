@@ -1,4 +1,4 @@
-namespace ArchGuard.Kernel
+namespace ArchGuard.Core
 {
     public static class RegularExpressions
     {

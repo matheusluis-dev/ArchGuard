@@ -49,8 +49,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.RecordStructs", "tests\mocked-assemblies\types\ArchGuard.MockedAssembly.RecordStructs\ArchGuard.MockedAssembly.RecordStructs.csproj", "{3825DE49-C756-49D9-B27C-4B17A6B55414}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Kernel", "src\ArchGuard.Kernel\ArchGuard.Kernel.csproj", "{92B0BCAD-7BE8-47CB-808B-732AB0E0C625}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "methods", "methods", "{DA576B88-DDE4-43D3-8586-579B218A5C4C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.Methods.Asynchronous", "tests\mocked-assemblies\methods\ArchGuard.MockedAssembly.Methods.Asynchronous\ArchGuard.MockedAssembly.Methods.Asynchronous.csproj", "{20A05DE9-165A-48BE-96F3-7E65855D87F1}"
@@ -64,6 +62,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.AccessModifiers.Internal", "tests\mocked-assemblies\types\access-modifiers\ArchGuard.MockedAssembly.AccessModifiers.Internal\ArchGuard.MockedAssembly.AccessModifiers.Internal.csproj", "{FF438561-6F1F-4253-BCF1-80D1B0AB2C1B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.AccessModifiers.File", "tests\mocked-assemblies\types\access-modifiers\ArchGuard.MockedAssembly.AccessModifiers.File\ArchGuard.MockedAssembly.AccessModifiers.File.csproj", "{1A3F962D-4E49-4461-A072-03624788E9B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Core", "src\ArchGuard.Core\ArchGuard.Core.csproj", "{C686B416-A080-4478-BF44-83959121B53A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,8 +91,8 @@ Global
 		{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1DC8F37-E324-429A-B1C5-ADE8562F1D1C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A87584A2-F75B-4F5F-B78E-E69828F56430}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{A87584A2-F75B-4F5F-B78E-E69828F56430}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{A87584A2-F75B-4F5F-B78E-E69828F56430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A87584A2-F75B-4F5F-B78E-E69828F56430}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A87584A2-F75B-4F5F-B78E-E69828F56430}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A87584A2-F75B-4F5F-B78E-E69828F56430}.Release|Any CPU.Build.0 = Release|Any CPU
 		{034EEA0D-0357-4D65-B37A-235D88705B58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -119,10 +119,6 @@ Global
 		{3825DE49-C756-49D9-B27C-4B17A6B55414}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3825DE49-C756-49D9-B27C-4B17A6B55414}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3825DE49-C756-49D9-B27C-4B17A6B55414}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92B0BCAD-7BE8-47CB-808B-732AB0E0C625}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{92B0BCAD-7BE8-47CB-808B-732AB0E0C625}.Debug|Any CPU.Build.0 = Release|Any CPU
-		{92B0BCAD-7BE8-47CB-808B-732AB0E0C625}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92B0BCAD-7BE8-47CB-808B-732AB0E0C625}.Release|Any CPU.Build.0 = Release|Any CPU
 		{20A05DE9-165A-48BE-96F3-7E65855D87F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{20A05DE9-165A-48BE-96F3-7E65855D87F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20A05DE9-165A-48BE-96F3-7E65855D87F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -143,6 +139,10 @@ Global
 		{1A3F962D-4E49-4461-A072-03624788E9B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A3F962D-4E49-4461-A072-03624788E9B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A3F962D-4E49-4461-A072-03624788E9B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C686B416-A080-4478-BF44-83959121B53A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C686B416-A080-4478-BF44-83959121B53A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C686B416-A080-4478-BF44-83959121B53A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C686B416-A080-4478-BF44-83959121B53A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -163,7 +163,6 @@ Global
 		{BC706C6C-4DDA-455C-9BAA-B51EFDB1454D} = {9B90D0C4-6877-4065-984A-D9B5EC197F7A}
 		{062DFDB1-098C-4175-8581-14968CC5C68B} = {9B90D0C4-6877-4065-984A-D9B5EC197F7A}
 		{3825DE49-C756-49D9-B27C-4B17A6B55414} = {9B90D0C4-6877-4065-984A-D9B5EC197F7A}
-		{92B0BCAD-7BE8-47CB-808B-732AB0E0C625} = {5024B8E1-3A74-4072-8FCF-9AB3D0A5E5E2}
 		{DA576B88-DDE4-43D3-8586-579B218A5C4C} = {A8A0C942-8206-4588-953C-33C8896FA821}
 		{20A05DE9-165A-48BE-96F3-7E65855D87F1} = {DA576B88-DDE4-43D3-8586-579B218A5C4C}
 		{F33CBF64-6680-4927-BBD1-E2CC5287EE6E} = {DA576B88-DDE4-43D3-8586-579B218A5C4C}
@@ -171,6 +170,7 @@ Global
 		{7454A70E-61B1-4DDD-A6AA-B2DA43B0FED5} = {D967CA5C-0BBD-4892-873A-910BA4127EBF}
 		{FF438561-6F1F-4253-BCF1-80D1B0AB2C1B} = {D967CA5C-0BBD-4892-873A-910BA4127EBF}
 		{1A3F962D-4E49-4461-A072-03624788E9B6} = {D967CA5C-0BBD-4892-873A-910BA4127EBF}
+		{C686B416-A080-4478-BF44-83959121B53A} = {5024B8E1-3A74-4072-8FCF-9AB3D0A5E5E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		FileExplorer = 

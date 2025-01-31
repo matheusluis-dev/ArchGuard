@@ -2,19 +2,19 @@ namespace ArchGuard.Contexts
 {
     using System;
     using System.Collections.Generic;
-    using ArchGuard.Kernel.Models;
+    using ArchGuard.Core.Models;
 
-    public sealed class MethodAssertionContext
+    public sealed class MethodFilterContext
     {
         private readonly List<
             List<Func<MethodDefinition, StringComparison, bool>>
         > _groupedPredicates = new();
 
-        private readonly MethodFilterContext _methodFilterContext;
+        private readonly TypeFilterContext _typeFilterContext;
 
-        public MethodAssertionContext(MethodFilterContext methodFilterContext)
+        public MethodFilterContext(TypeFilterContext typeFilterContext)
         {
-            _methodFilterContext = methodFilterContext;
+            _typeFilterContext = typeFilterContext;
         }
 
         private void CreateGroupedPredicate()
@@ -35,9 +35,16 @@ namespace ArchGuard.Contexts
             CreateGroupedPredicate();
         }
 
-        private IEnumerable<MethodDefinition> GetMethods(StringComparison comparison)
+        public IEnumerable<MethodDefinition> GetMethods()
         {
-            var methods = _methodFilterContext.GetMethods(comparison);
+            return GetMethods(Default.StringComparison);
+        }
+
+        public IEnumerable<MethodDefinition> GetMethods(StringComparison comparison)
+        {
+            var methods = _typeFilterContext
+                .GetTypes(comparison)
+                .SelectMany(type => type.GetMethods());
 
             if (_groupedPredicates.Count == 0)
                 return methods;
@@ -54,19 +61,6 @@ namespace ArchGuard.Contexts
             }
 
             return elements;
-        }
-
-        public MethodAssertionResult GetResult()
-        {
-            return GetResult(Default.StringComparison);
-        }
-
-        public MethodAssertionResult GetResult(StringComparison comparison)
-        {
-            var methodsFiltered = _methodFilterContext.GetMethods(comparison);
-            var methodsAsserted = GetMethods(comparison);
-
-            return new MethodAssertionResult(methodsFiltered, methodsAsserted);
         }
     }
 }

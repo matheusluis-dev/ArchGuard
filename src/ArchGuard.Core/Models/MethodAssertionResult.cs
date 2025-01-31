@@ -1,7 +1,7 @@
 namespace ArchGuard
 {
     using System.Collections.Generic;
-    using ArchGuard.Kernel.Models;
+    using ArchGuard.Core.Models;
 
     public sealed class MethodAssertionResult
     {

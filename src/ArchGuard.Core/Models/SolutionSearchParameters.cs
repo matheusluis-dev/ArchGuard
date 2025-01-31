@@ -1,4 +1,4 @@
-namespace ArchGuard.Kernel.Models
+namespace ArchGuard.Core.Models
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

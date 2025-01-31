@@ -2,7 +2,7 @@ namespace ArchGuard.Contexts
 {
     using System;
     using ArchGuard;
-    using ArchGuard.Kernel.Models;
+    using ArchGuard.Core.Models;
 
     public sealed class TypeAssertionContext : ContextBase<TypeDefinition>
     {
