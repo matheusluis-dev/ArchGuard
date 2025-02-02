@@ -45,11 +45,17 @@ namespace ArchGuard.Extensions
 
             if (namedTypeSymbol.TypeKind == TypeKind.Interface)
             {
-                return namedTypeSymbol.AllInterfaces.Any(i =>
-                    types.Any(t =>
-                        t.GetFullNameClean().Contains(i.GetFullName(), StringComparison.Ordinal)
+                return namedTypeSymbol
+                    .AllInterfaces.Where(@interface =>
+                        !@interface
+                            .GetFullName()
+                            .Equals(namedTypeSymbol.GetFullName(), StringComparison.Ordinal)
                     )
-                );
+                    .Any(i =>
+                        types.Any(t =>
+                            t.GetFullNameClean().Equals(i.GetFullName(), StringComparison.Ordinal)
+                        )
+                    );
             }
 
             var baseType = namedTypeSymbol.BaseType;
@@ -64,6 +70,7 @@ namespace ArchGuard.Extensions
                 {
                     return true;
                 }
+
                 baseType = baseType.BaseType;
             }
 

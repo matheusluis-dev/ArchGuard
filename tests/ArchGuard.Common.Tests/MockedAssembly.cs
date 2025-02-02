@@ -2,6 +2,19 @@ namespace ArchGuard.Tests.Common
 {
     public static class MockedAssembly
     {
+        public static class Inherit
+        {
+            public static ITypeFilterEntryPoint Types =>
+                ArchGuard.Types.InSolution(
+                    new SolutionSearchParameters
+                    {
+                        SolutionPath = "ArchGuard.sln",
+                        Preprocessor = "net9_0",
+                        ProjectName = "ArchGuard.MockedAssembly.Inherit",
+                    }
+                );
+        }
+
         public static class AccessModifiers
         {
             public static class File

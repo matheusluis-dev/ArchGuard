@@ -30,6 +30,7 @@
     <ProjectReference Include="..\..\src\ArchGuard\ArchGuard.csproj" />
     <ProjectReference Include="..\ArchGuard.Common.Tests\ArchGuard.Tests.Common.csproj" />
     <ProjectReference Include="..\ArchGuard.Tests.MockedAssembly\ArchGuard.Tests.MockedAssembly.csproj" />
+    <ProjectReference Include="..\mocked-assemblies\types\ArchGuard.MockedAssembly.Inherit\ArchGuard.MockedAssembly.Inherit.csproj" />
   </ItemGroup>
 
   <ItemGroup>
