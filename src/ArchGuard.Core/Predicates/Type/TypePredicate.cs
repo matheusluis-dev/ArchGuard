@@ -93,7 +93,7 @@ namespace ArchGuard.Core.Predicates.Type
                 var dependenciesNamespaces = type.GetDependencies()
                     .Select(t => t.Symbol.ContainingNamespace.GetFullName())
                     // a type can't depend on its own namespace
-                    .Where(@namespace => !@namespace.Equals(typeNamespace, comparison));
+                    .Where(@namespace => !typeNamespace.StartsWith(@namespace, comparison));
 
                 return namespaces.Intersect(dependenciesNamespaces, comparison.ToComparer()).Any();
             };
@@ -110,7 +110,7 @@ namespace ArchGuard.Core.Predicates.Type
                 var dependenciesNamespaces = type.GetDependencies()
                     .Select(t => t.Symbol.ContainingNamespace.GetFullName())
                     // a type can't depend on its own namespace
-                    .Where(@namespace => !@namespace.Equals(typeNamespace, comparison));
+                    .Where(@namespace => !typeNamespace.StartsWith(@namespace, comparison));
 
                 return !namespaces.Intersect(dependenciesNamespaces, comparison.ToComparer()).Any();
             };
@@ -127,7 +127,7 @@ namespace ArchGuard.Core.Predicates.Type
                 var dependenciesNamespaces = type.GetDependencies()
                     .Select(t => t.Symbol.ContainingNamespace.GetFullName())
                     // a type can't depend on its own namespace
-                    .Where(@namespace => !@namespace.Equals(typeNamespace, comparison))
+                    .Where(@namespace => !@namespace.StartsWith(typeNamespace, comparison))
                     .ToList();
 
                 var intersect = namespaces

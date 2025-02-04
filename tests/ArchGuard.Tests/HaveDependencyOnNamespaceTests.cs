@@ -63,7 +63,7 @@ namespace ArchGuard.Filters.Tests
         }
 
         [Fact]
-        public void HaveDependencyOn_should_not_treat_sub_namespaces_as_same_namespace()
+        public void HaveDependencyOn_should_treat_sub_namespaces_as_same_namespace()
         {
             // Arrange
             var filters = HaveDependencyOnNamespace.Types.That.HaveDependencyOnNamespace(
@@ -76,7 +76,7 @@ namespace ArchGuard.Filters.Tests
             // Assert
             Check
                 .That(types)
-                .Contains(
+                .Not.Contains(
                     "ArchGuard.MockedAssembly.HaveDependencyOnNamespace.NamespaceB.SubNamespace.SubClass"
                 );
         }
@@ -102,7 +102,7 @@ namespace ArchGuard.Filters.Tests
         }
 
         [Fact]
-        public void DoNotHaveDependencyOn_should_not_treat_sub_namespaces_as_same_namespace()
+        public void DoNotHaveDependencyOn_should_treat_sub_namespaces_as_same_namespace()
         {
             // Arrange
             var filters = HaveDependencyOnNamespace.Types.That.DoNotHaveDependencyOnNamespace(
@@ -115,7 +115,7 @@ namespace ArchGuard.Filters.Tests
             // Assert
             Check
                 .That(types)
-                .Not.Contains(
+                .Contains(
                     "ArchGuard.MockedAssembly.HaveDependencyOnNamespace.NamespaceB.SubNamespace.SubClass"
                 );
         }
