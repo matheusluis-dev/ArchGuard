@@ -157,6 +157,18 @@ namespace ArchGuard
             return this;
         }
 
+        public ITypeFilterSequence HaveDependencyOnNamespace(params string[] namespaces)
+        {
+            _context.AddPredicate(TypePredicate.HaveDependencyOnNamespace(namespaces));
+            return this;
+        }
+
+        public ITypeFilterSequence DoNotHaveDependencyOnNamespace(params string[] namespaces)
+        {
+            _context.AddPredicate(TypePredicate.NotHaveDependencyOnNamespace(namespaces));
+            return this;
+        }
+
         public ITypeFilterSequence HaveParameterlessConstructor()
         {
             _context.AddPredicate(TypePredicate.HaveParameterlessConstructor);

@@ -32,6 +32,9 @@ namespace ArchGuard
         ITypeFilterSequence HaveDependencyOn(params string[] typesNames);
         ITypeFilterSequence DoNotHaveDependencyOn(params string[] typesNames);
 
+        ITypeFilterSequence HaveDependencyOnNamespace(params string[] namespaces);
+        ITypeFilterSequence DoNotHaveDependencyOnNamespace(params string[] namespaces);
+
         ITypeFilterSequence AreUsedBy(params string[] typesNames);
         ITypeFilterSequence AreNotUsedBy(params string[] typesNames);
 

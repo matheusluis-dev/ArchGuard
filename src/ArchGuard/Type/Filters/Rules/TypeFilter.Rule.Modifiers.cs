@@ -1,7 +1,5 @@
 namespace ArchGuard
 {
-    using ArchGuard;
-
     public sealed partial class TypeFilter
     {
         public ITypeFilterSequence ArePartial()
