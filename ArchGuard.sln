@@ -69,6 +69,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Extensions.NFluen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.Inherit", "tests\mocked-assemblies\types\ArchGuard.MockedAssembly.Inherit\ArchGuard.MockedAssembly.Inherit.csproj", "{D45AB9BE-A3F9-4E59-94BD-8D99C6470D19}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Extensions.Shouldly", "src\ArchGuard.Extensions.Shouldly\ArchGuard.Extensions.Shouldly.csproj", "{DE82037D-0F6A-4C8A-AC90-6209C6E53117}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -155,6 +157,10 @@ Global
 		{D45AB9BE-A3F9-4E59-94BD-8D99C6470D19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D45AB9BE-A3F9-4E59-94BD-8D99C6470D19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D45AB9BE-A3F9-4E59-94BD-8D99C6470D19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE82037D-0F6A-4C8A-AC90-6209C6E53117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE82037D-0F6A-4C8A-AC90-6209C6E53117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE82037D-0F6A-4C8A-AC90-6209C6E53117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE82037D-0F6A-4C8A-AC90-6209C6E53117}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -185,6 +191,7 @@ Global
 		{C686B416-A080-4478-BF44-83959121B53A} = {5024B8E1-3A74-4072-8FCF-9AB3D0A5E5E2}
 		{24800D1B-C08E-4596-91F0-E4995E369FB4} = {5024B8E1-3A74-4072-8FCF-9AB3D0A5E5E2}
 		{D45AB9BE-A3F9-4E59-94BD-8D99C6470D19} = {9B90D0C4-6877-4065-984A-D9B5EC197F7A}
+		{DE82037D-0F6A-4C8A-AC90-6209C6E53117} = {5024B8E1-3A74-4072-8FCF-9AB3D0A5E5E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		FileExplorer = 
