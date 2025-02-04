@@ -1,10 +1,10 @@
-namespace ArchGuard
+namespace ArchGuard.Core.Predicates.Method
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
 
-    internal static partial class MethodPredicate
+    public static partial class MethodPredicate
     {
         public static Func<MethodDefinition, StringComparison, bool> HaveNamePascalCased =>
             (method, _) => Regex.IsMatch(method.Symbol.Name, RegularExpressions.PascalCase);
