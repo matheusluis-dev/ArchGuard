@@ -6,5 +6,10 @@ namespace ArchGuard.Extensions.NFluent
         {
             result.WhichMember(member => member.IsSuccessful);
         }
+
+        public static void IsSuccess(this ICheck<MethodAssertionResult> result)
+        {
+            result.WhichMember(member => member.IsSuccessful);
+        }
     }
 }

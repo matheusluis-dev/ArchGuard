@@ -87,20 +87,33 @@ namespace ArchGuard.Core.Predicates.Type
         )
         {
             return (type, comparison) =>
-                type.GetDependencies()
-                    .Any(dependency =>
-                        namespaces.Contains(
-                            dependency.Symbol.ContainingNamespace.GetFullName(),
-                            comparison.ToComparer()
-                        )
-                    );
+            {
+                var typeNamespace = type.Symbol.ContainingNamespace.GetFullName();
+
+                var dependenciesNamespaces = type.GetDependencies()
+                    .Select(t => t.Symbol.ContainingNamespace.GetFullName())
+                    // a type can't depend on its own namespace
+                    .Where(@namespace => !@namespace.Equals(typeNamespace, comparison));
+
+                return namespaces.Intersect(dependenciesNamespaces, comparison.ToComparer()).Any();
+            };
         }
 
         public static Func<TypeDefinition, StringComparison, bool> NotHaveDependencyOnNamespace(
             string[] namespaces
         )
         {
-            return (type, comparison) => !HaveDependencyOnNamespace(namespaces)(type, comparison);
+            return (type, comparison) =>
+            {
+                var typeNamespace = type.Symbol.ContainingNamespace.GetFullName();
+
+                var dependenciesNamespaces = type.GetDependencies()
+                    .Select(t => t.Symbol.ContainingNamespace.GetFullName())
+                    // a type can't depend on its own namespace
+                    .Where(@namespace => !@namespace.Equals(typeNamespace, comparison));
+
+                return !namespaces.Intersect(dependenciesNamespaces, comparison.ToComparer()).Any();
+            };
         }
 
         public static Func<TypeDefinition, StringComparison, bool> HaveDependencyOnlyOnNamespace(
@@ -108,10 +121,21 @@ namespace ArchGuard.Core.Predicates.Type
         )
         {
             return (type, comparison) =>
-                type.GetDependencies()
-                    .Select(dependency => dependency.Symbol.ContainingNamespace.GetFullName())
-                    .Intersect(namespaces, comparison.ToComparer())
-                    .Any();
+            {
+                var typeNamespace = type.Symbol.ContainingNamespace.GetFullName();
+
+                var dependenciesNamespaces = type.GetDependencies()
+                    .Select(t => t.Symbol.ContainingNamespace.GetFullName())
+                    // a type can't depend on its own namespace
+                    .Where(@namespace => !@namespace.Equals(typeNamespace, comparison))
+                    .ToList();
+
+                var intersect = namespaces
+                    .Intersect(dependenciesNamespaces, comparison.ToComparer())
+                    .ToList();
+
+                return dependenciesNamespaces.Count == intersect.Count;
+            };
         }
 
         public static Func<TypeDefinition, StringComparison, bool> HaveParameterlessConstructor =>

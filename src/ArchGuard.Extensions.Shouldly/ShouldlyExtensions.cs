@@ -7,5 +7,11 @@ namespace ArchGuard.Extensions.Shouldly
             typeAssertionResult.ShouldNotBeNull();
             typeAssertionResult.IsSuccessful.ShouldBeTrue();
         }
+
+        public static void ShouldBeSuccess(this MethodAssertionResult methodAssertionResult)
+        {
+            methodAssertionResult.ShouldNotBeNull();
+            methodAssertionResult.IsSuccessful.ShouldBeTrue();
+        }
     }
 }
