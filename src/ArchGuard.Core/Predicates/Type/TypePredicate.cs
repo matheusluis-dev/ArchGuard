@@ -1,11 +1,11 @@
-namespace ArchGuard
+namespace ArchGuard.Core.Predicates.Type
 {
     using System;
     using System.Linq;
     using ArchGuard.Extensions;
     using Microsoft.CodeAnalysis;
 
-    internal static partial class TypePredicate
+    public static partial class TypePredicate
     {
         public static Func<TypeDefinition, StringComparison, bool> ImplementInterface(Type[] types)
         {

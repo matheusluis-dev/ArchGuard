@@ -1,4 +1,4 @@
-namespace ArchGuard
+namespace ArchGuard.Core.Predicates.Type
 {
     using System;
     using System.Collections.Generic;
@@ -7,9 +7,9 @@ namespace ArchGuard
     using ArchGuard.Extensions;
     using Microsoft.CodeAnalysis;
 
-    internal static partial class TypePredicate
+    public static partial class TypePredicate
     {
-        internal static Func<TypeDefinition, StringComparison, bool> HaveName(
+        public static Func<TypeDefinition, StringComparison, bool> HaveName(
             IEnumerable<string> names
         )
         {
@@ -17,21 +17,21 @@ namespace ArchGuard
                 names.Contains(type.Symbol.GetName(), comparison.ToComparer());
         }
 
-        internal static Func<TypeDefinition, StringComparison, bool> HaveNameMatching(
+        public static Func<TypeDefinition, StringComparison, bool> HaveNameMatching(
             IEnumerable<string> regexes
         )
         {
             return (type, _) => regexes.Any(regex => Regex.IsMatch(type.Symbol.GetName(), regex));
         }
 
-        internal static Func<TypeDefinition, StringComparison, bool> HaveNameNotMatching(
+        public static Func<TypeDefinition, StringComparison, bool> HaveNameNotMatching(
             IEnumerable<string> regex
         )
         {
             return (type, _) => !HaveNameMatching(regex)(type, _);
         }
 
-        internal static Func<TypeDefinition, StringComparison, bool> HaveFullName(
+        public static Func<TypeDefinition, StringComparison, bool> HaveFullName(
             IEnumerable<string> name
         )
         {
@@ -39,7 +39,7 @@ namespace ArchGuard
                 name.Contains(type.Symbol.GetFullName(), comparison.ToComparer());
         }
 
-        internal static Func<TypeDefinition, StringComparison, bool> HaveFullNameMatching(
+        public static Func<TypeDefinition, StringComparison, bool> HaveFullNameMatching(
             IEnumerable<string> regexes
         )
         {
@@ -47,14 +47,14 @@ namespace ArchGuard
                 regexes.Any(regex => Regex.IsMatch(type.Symbol.GetFullName(), regex));
         }
 
-        internal static Func<TypeDefinition, StringComparison, bool> HaveFullNameNotMatching(
+        public static Func<TypeDefinition, StringComparison, bool> HaveFullNameNotMatching(
             IEnumerable<string> regexes
         )
         {
             return (type, _) => !HaveFullNameMatching(regexes)(type, _);
         }
 
-        internal static Func<TypeDefinition, StringComparison, bool> HaveNameStartingWith(
+        public static Func<TypeDefinition, StringComparison, bool> HaveNameStartingWith(
             IEnumerable<string> name
         )
         {
@@ -62,7 +62,7 @@ namespace ArchGuard
                 name.Any(n => type.Symbol.GetName().StartsWith(n, comparison));
         }
 
-        internal static Func<TypeDefinition, StringComparison, bool> NotHaveNameStartingWith(
+        public static Func<TypeDefinition, StringComparison, bool> NotHaveNameStartingWith(
             IEnumerable<string> name
         )
         {
@@ -70,7 +70,7 @@ namespace ArchGuard
                 !name.Any(n => type.Symbol.GetName().StartsWith(n, comparison));
         }
 
-        internal static Func<TypeDefinition, StringComparison, bool> HaveNameEndingWith(
+        public static Func<TypeDefinition, StringComparison, bool> HaveNameEndingWith(
             IEnumerable<string> name
         )
         {
@@ -78,7 +78,7 @@ namespace ArchGuard
                 name.Any(n => type.Symbol.GetName().EndsWith(n, comparison));
         }
 
-        internal static Func<TypeDefinition, StringComparison, bool> NotHaveNameEndingWith(
+        public static Func<TypeDefinition, StringComparison, bool> NotHaveNameEndingWith(
             IEnumerable<string> name
         )
         {
@@ -86,7 +86,7 @@ namespace ArchGuard
                 name.Any(n => !type.Symbol.GetName().EndsWith(n, comparison));
         }
 
-        internal static Func<TypeDefinition, StringComparison, bool> HaveNamePascalCased =>
+        public static Func<TypeDefinition, StringComparison, bool> HaveNamePascalCased =>
             (type, _) => Regex.IsMatch(type.Symbol.GetName(), RegularExpressions.PascalCase);
     }
 }

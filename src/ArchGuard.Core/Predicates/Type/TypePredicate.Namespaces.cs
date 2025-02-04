@@ -1,4 +1,4 @@
-namespace ArchGuard
+namespace ArchGuard.Core.Predicates.Type
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,7 @@ namespace ArchGuard
     using ArchGuard.Extensions;
     using Microsoft.CodeAnalysis;
 
-    internal static partial class TypePredicate
+    public static partial class TypePredicate
     {
         private static bool NamespaceDefaultPredicate(TypeDefinition type, string name)
         {
@@ -17,7 +17,7 @@ namespace ArchGuard
                 && !type.Symbol.ContainingNamespace.IsGlobalNamespace;
         }
 
-        internal static Func<TypeDefinition, StringComparison, bool> ResideInNamespace(
+        public static Func<TypeDefinition, StringComparison, bool> ResideInNamespace(
             IEnumerable<string> names
         )
         {
@@ -40,14 +40,14 @@ namespace ArchGuard
             };
         }
 
-        internal static Func<TypeDefinition, StringComparison, bool> DoNotResideInNamespace(
+        public static Func<TypeDefinition, StringComparison, bool> DoNotResideInNamespace(
             IEnumerable<string> name
         )
         {
             return (type, comparison) => !ResideInNamespace(name)(type, comparison);
         }
 
-        internal static Func<TypeDefinition, StringComparison, bool> ResideInNamespaceContaining(
+        public static Func<TypeDefinition, StringComparison, bool> ResideInNamespaceContaining(
             IEnumerable<string> names
         )
         {
@@ -58,16 +58,14 @@ namespace ArchGuard
                 );
         }
 
-        internal static Func<
-            TypeDefinition,
-            StringComparison,
-            bool
-        > DoNotResideInNamespaceContaining(IEnumerable<string> name)
+        public static Func<TypeDefinition, StringComparison, bool> DoNotResideInNamespaceContaining(
+            IEnumerable<string> name
+        )
         {
             return (type, comparison) => !ResideInNamespaceContaining(name)(type, comparison);
         }
 
-        internal static Func<TypeDefinition, StringComparison, bool> ResideInNamespaceEndingWith(
+        public static Func<TypeDefinition, StringComparison, bool> ResideInNamespaceEndingWith(
             IEnumerable<string> names
         )
         {
@@ -78,11 +76,9 @@ namespace ArchGuard
                 );
         }
 
-        internal static Func<
-            TypeDefinition,
-            StringComparison,
-            bool
-        > DoNotResideInNamespaceEndingWith(IEnumerable<string> name)
+        public static Func<TypeDefinition, StringComparison, bool> DoNotResideInNamespaceEndingWith(
+            IEnumerable<string> name
+        )
         {
             return (type, comparison) => !ResideInNamespaceEndingWith(name)(type, comparison);
         }

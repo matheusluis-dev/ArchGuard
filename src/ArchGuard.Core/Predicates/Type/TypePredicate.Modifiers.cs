@@ -1,4 +1,4 @@
-namespace ArchGuard
+namespace ArchGuard.Core.Predicates.Type
 {
     using System;
     using System.Linq;
@@ -6,34 +6,34 @@ namespace ArchGuard
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-    internal static partial class TypePredicate
+    public static partial class TypePredicate
     {
-        internal static Func<TypeDefinition, StringComparison, bool> Partial =>
+        public static Func<TypeDefinition, StringComparison, bool> Partial =>
             (type, _) =>
                 type
                     .Symbol.DeclaringSyntaxReferences.Select(reference => reference.GetSyntax())
                     .OfType<TypeDeclarationSyntax>()
                     .Any(syntax => syntax.Modifiers.Any(SyntaxKind.PartialKeyword));
-        internal static Func<TypeDefinition, StringComparison, bool> NotPartial =>
+        public static Func<TypeDefinition, StringComparison, bool> NotPartial =>
             (type, _) => !Partial(type, _);
 
-        internal static Func<TypeDefinition, StringComparison, bool> Sealed =>
+        public static Func<TypeDefinition, StringComparison, bool> Sealed =>
             (type, _) => type.Symbol.IsSealed;
-        internal static Func<TypeDefinition, StringComparison, bool> NotSealed =>
+        public static Func<TypeDefinition, StringComparison, bool> NotSealed =>
             (type, _) => !Sealed(type, _);
 
-        internal static Func<TypeDefinition, StringComparison, bool> Nested =>
+        public static Func<TypeDefinition, StringComparison, bool> Nested =>
             (type, _) => type.Symbol.ContainingType != null;
-        internal static Func<TypeDefinition, StringComparison, bool> NotNested =>
+        public static Func<TypeDefinition, StringComparison, bool> NotNested =>
             (type, _) => !Nested(type, _);
 
-        internal static Func<TypeDefinition, StringComparison, bool> Static =>
+        public static Func<TypeDefinition, StringComparison, bool> Static =>
             (type, _) => type.Symbol.IsStatic;
-        internal static Func<TypeDefinition, StringComparison, bool> NotStatic =>
+        public static Func<TypeDefinition, StringComparison, bool> NotStatic =>
             (type, _) => !Static(type, _);
-        internal static Func<TypeDefinition, StringComparison, bool> Abstract =>
+        public static Func<TypeDefinition, StringComparison, bool> Abstract =>
             (type, _) => type.Symbol.IsAbstract;
-        internal static Func<TypeDefinition, StringComparison, bool> NotAbstract =>
+        public static Func<TypeDefinition, StringComparison, bool> NotAbstract =>
             (type, _) => !Abstract(type, _);
     }
 }
