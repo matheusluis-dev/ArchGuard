@@ -184,5 +184,11 @@ namespace ArchGuard
             _context.AddPredicate(TypePredicate.NotUsedBy(typesNames));
             return this;
         }
+
+        public ITypeAssertionSequence HaveSourceFilePathMatchingNamespace()
+        {
+            _context.AddPredicate(TypePredicate.HaveSourceFilePathMatchingNamespace);
+            return this;
+        }
     }
 }

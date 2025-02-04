@@ -42,5 +42,7 @@ namespace ArchGuard
 
         ITypeAssertionSequence HaveParameterlessConstructor();
         ITypeAssertionSequence NotHaveParameterlessConstructor();
+
+        ITypeAssertionSequence HaveSourceFilePathMatchingNamespace();
     }
 }

@@ -156,5 +156,42 @@ namespace ArchGuard.Core.Predicates.Type
         {
             return (type, _) => !UsedBy(types)(type, _);
         }
+
+        public static Func<
+            TypeDefinition,
+            StringComparison,
+            bool
+        > HaveSourceFilePathMatchingNamespace =>
+            (type, comparison) =>
+            {
+                var projectDefaultNamespace = type.Project.DefaultNamespace;
+
+                var compliant = false;
+                foreach (var location in type.Symbol.Locations)
+                {
+                    var directory = Directory.GetParent(location.SourceTree.FilePath).FullName;
+                    var lastIndex = directory.LastIndexOf(
+                        Path.DirectorySeparatorChar + projectDefaultNamespace
+                    );
+
+                    if (lastIndex == -1)
+                    {
+                        compliant = false;
+                        break;
+                    }
+
+                    var index = lastIndex + 1;
+
+                    var path = directory[index..].Replace(Path.DirectorySeparatorChar, '.');
+
+                    var @namespace = type.Symbol.ContainingNamespace.GetFullName();
+
+                    compliant = @namespace.Equals(path, comparison);
+                    if (!compliant)
+                        break;
+                }
+
+                return compliant;
+            };
     }
 }
