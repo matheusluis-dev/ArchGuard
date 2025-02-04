@@ -190,5 +190,11 @@ namespace ArchGuard
             _context.AddPredicate(TypePredicate.HaveSourceFilePathMatchingNamespace);
             return this;
         }
+
+        public ITypeAssertionSequence HaveSourceFileNameMatchingTypeName()
+        {
+            _context.AddPredicate(TypePredicate.HaveSourceFileNameMatchingTypeName);
+            return this;
+        }
     }
 }

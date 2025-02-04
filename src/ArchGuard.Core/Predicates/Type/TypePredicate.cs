@@ -193,5 +193,16 @@ namespace ArchGuard.Core.Predicates.Type
 
                 return compliant;
             };
+
+        public static Func<
+            TypeDefinition,
+            StringComparison,
+            bool
+        > HaveSourceFileNameMatchingTypeName =>
+            (type, comparison) =>
+                type.Symbol.Locations.Any(location =>
+                    Path.GetFileNameWithoutExtension(location.SourceTree.FilePath)
+                        .Equals(type.SymbolName, comparison)
+                );
     }
 }
