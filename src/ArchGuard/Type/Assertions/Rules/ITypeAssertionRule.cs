@@ -32,6 +32,11 @@ namespace ArchGuard
         ITypeAssertionSequence HaveDependencyOn(params string[] typesNames);
         ITypeAssertionSequence NotHaveDependencyOn(params string[] typesNames);
 
+        ITypeAssertionSequence HaveDependencyOnNamespace(params string[] namespaces);
+        ITypeAssertionSequence NotHaveDependencyOnNamespace(params string[] namespaces);
+
+        ITypeAssertionSequence HaveDependencyOnlyOnNamespace(params string[] namespaces);
+
         ITypeAssertionSequence BeUsedBy(params string[] typesNames);
         ITypeAssertionSequence NotBeUsedBy(params string[] typesNames);
 

@@ -143,6 +143,24 @@ namespace ArchGuard
             return this;
         }
 
+        public ITypeAssertionSequence HaveDependencyOnNamespace(params string[] namespaces)
+        {
+            _context.AddPredicate(TypePredicate.HaveDependencyOnNamespace(namespaces));
+            return this;
+        }
+
+        public ITypeAssertionSequence NotHaveDependencyOnNamespace(params string[] namespaces)
+        {
+            _context.AddPredicate(TypePredicate.NotHaveDependencyOnNamespace(namespaces));
+            return this;
+        }
+
+        public ITypeAssertionSequence HaveDependencyOnlyOnNamespace(params string[] namespaces)
+        {
+            _context.AddPredicate(TypePredicate.HaveDependencyOnlyOnNamespace(namespaces));
+            return this;
+        }
+
         public ITypeAssertionSequence HaveParameterlessConstructor()
         {
             _context.AddPredicate(TypePredicate.HaveParameterlessConstructor);

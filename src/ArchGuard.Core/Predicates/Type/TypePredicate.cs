@@ -103,6 +103,17 @@ namespace ArchGuard.Core.Predicates.Type
             return (type, comparison) => !HaveDependencyOnNamespace(namespaces)(type, comparison);
         }
 
+        public static Func<TypeDefinition, StringComparison, bool> HaveDependencyOnlyOnNamespace(
+            string[] namespaces
+        )
+        {
+            return (type, comparison) =>
+                type.GetDependencies()
+                    .Select(dependency => dependency.Symbol.ContainingNamespace.GetFullName())
+                    .Intersect(namespaces, comparison.ToComparer())
+                    .Any();
+        }
+
         public static Func<TypeDefinition, StringComparison, bool> HaveParameterlessConstructor =>
             (type, _) => type.Symbol.Constructors.Any(constructor => !constructor.Parameters.Any());
 
