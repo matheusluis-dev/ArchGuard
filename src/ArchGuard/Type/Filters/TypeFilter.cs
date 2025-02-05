@@ -1,7 +1,6 @@
 namespace ArchGuard
 {
-    using ArchGuard.Contexts;
-    using static ArchGuard.RulesContext;
+    using ArchGuard.Core.Type.Contexts;
 
     public sealed partial class TypeFilter
         : ITypeFilterEntryPoint,
@@ -13,17 +12,20 @@ namespace ArchGuard
 
         private readonly StartTypeAssertionCallback _startAssertionCallback;
         private readonly StartMethodFilterCallback _startMethodFilterCallback;
+        private readonly StartFieldFilterCallback _startFieldFilterCallback;
 
         internal TypeFilter(
             TypeFilterContext context,
             StartTypeAssertionCallback startAssertionCallback,
-            StartMethodFilterCallback startMethodFilterCallback
+            StartMethodFilterCallback startMethodFilterCallback,
+            StartFieldFilterCallback startFieldFilterCallback
         )
         {
             _context = context;
 
             _startAssertionCallback = startAssertionCallback;
             _startMethodFilterCallback = startMethodFilterCallback;
+            _startFieldFilterCallback = startFieldFilterCallback;
         }
 
         internal ITypeFilterEntryPoint Start()
@@ -39,5 +41,7 @@ namespace ArchGuard
         public IMethodFilterEntryPoint Methods => _startMethodFilterCallback.Invoke();
 
         public ITypeAssertionRule Should => _startAssertionCallback.Invoke();
+
+        public IFieldFilterEntryPoint Fields => _startFieldFilterCallback.Invoke();
     }
 }

@@ -4,7 +4,7 @@ namespace ArchGuard.Extensions
     using System.Collections.Generic;
     using System.Linq;
     using ArchGuard.Cached;
-    using ArchGuard.Core.Models;
+    using ArchGuard.Core.Type.Models;
     using Microsoft.CodeAnalysis;
 
     public static class TypeDefinitionExtensions
@@ -15,7 +15,7 @@ namespace ArchGuard.Extensions
 
             var symbols = new List<INamedTypeSymbol>();
             var current = type.Symbol.ContainingType;
-            while (current != null)
+            while (current is not null)
             {
                 symbols.Add(current);
                 current = current.ContainingType;
@@ -41,21 +41,14 @@ namespace ArchGuard.Extensions
         {
             ArgumentNullException.ThrowIfNull(type);
 
-            return type.GetContainingTypesAndSelf()
-                .All(symbol => symbol.DeclaredAccessibility is Accessibility.Public);
+            return type.GetContainingTypesAndSelf().All(symbol => symbol.IsPublic());
         }
 
         public static bool IsInternal(this TypeDefinition type)
         {
             ArgumentNullException.ThrowIfNull(type);
 
-            var typeIsInternal =
-                !type.Symbol.IsFileLocal
-                && type.Symbol.DeclaredAccessibility
-                    is Accessibility.Internal
-                        or Accessibility.Friend
-                        or Accessibility.ProtectedOrFriend
-                        or Accessibility.ProtectedOrInternal;
+            var typeIsInternal = !type.Symbol.IsFileLocal && type.Symbol.IsInternal();
 
             if (!typeIsInternal)
                 return false;

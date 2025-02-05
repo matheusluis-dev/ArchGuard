@@ -1,6 +1,7 @@
 namespace ArchGuard
 {
-    using ArchGuard.Contexts;
+    using ArchGuard.Core.Method.Contexts;
+    using ArchGuard.Core.Method.Models;
 
     public sealed partial class MethodAssertion : IMethodAssertionRule, IMethodAssertionSequence
     {

@@ -1,6 +1,7 @@
 namespace ArchGuard
 {
     using System;
+    using ArchGuard.Core.Type.Models;
 
     public partial interface ITypeAssertionSequence
     {

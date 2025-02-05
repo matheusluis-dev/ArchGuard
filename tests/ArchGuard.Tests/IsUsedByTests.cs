@@ -1,7 +1,6 @@
 namespace ArchGuard.Filters.Tests
 {
     using System;
-    using System.Linq;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using ArchGuard.Tests.Common.Types;

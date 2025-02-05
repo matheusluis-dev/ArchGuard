@@ -8,6 +8,7 @@ namespace ArchGuard.Cached
     using System.Threading;
     using ArchGuard.Core.Models;
     using ArchGuard.Core.Results;
+    using ArchGuard.Core.Type.Models;
     using ArchGuard.Exceptions;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.MSBuild;

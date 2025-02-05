@@ -3,7 +3,7 @@ namespace ArchGuard.Tests.Common.Extensions
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ArchGuard.Core.Models;
+    using ArchGuard.Core.Type.Models;
     using ArchGuard.Extensions;
     using Microsoft.CodeAnalysis;
 

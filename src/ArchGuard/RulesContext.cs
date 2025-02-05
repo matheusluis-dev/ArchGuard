@@ -1,7 +1,17 @@
 namespace ArchGuard
 {
     using ArchGuard.Cached;
-    using ArchGuard.Contexts;
+    using ArchGuard.Core.Field.Contexts;
+    using ArchGuard.Core.Method.Contexts;
+    using ArchGuard.Core.Type.Contexts;
+
+    internal delegate ITypeAssertionRule StartTypeAssertionCallback();
+
+    internal delegate IMethodFilterEntryPoint StartMethodFilterCallback();
+    internal delegate IMethodAssertionRule StartMethodAssertionCallback();
+
+    internal delegate IFieldFilterEntryPoint StartFieldFilterCallback();
+    internal delegate IFieldAssertionRule StartFieldAssertionCallback();
 
     internal sealed class RulesContext
     {
@@ -11,16 +21,17 @@ namespace ArchGuard
         private readonly TypeFilter _typeFilter;
         private readonly TypeAssertion _typeAssertion;
 
-        public delegate ITypeAssertionRule StartTypeAssertionCallback();
-
         private readonly MethodFilterContext _methodFilterContext;
         private readonly MethodFilter _methodFilter;
 
         private readonly MethodAssertionContext _methodAssertionContext;
         private readonly MethodAssertion _methodAssertion;
 
-        public delegate IMethodFilterEntryPoint StartMethodFilterCallback();
-        public delegate IMethodAssertionRule StartMethodAssertionCallback();
+        private readonly FieldFilterContext _fieldFilterContext;
+        private readonly FieldFilter _fieldFilter;
+
+        private readonly FieldAssertionContext _fieldAssertionContext;
+        private readonly FieldAssertion _fieldAssertion;
 
         internal RulesContext(SolutionSearchParameters parameters)
         {
@@ -40,11 +51,22 @@ namespace ArchGuard
             _methodFilterContext = new MethodFilterContext(_typeFilterContext);
             _methodAssertionContext = new MethodAssertionContext(_methodFilterContext);
 
-            _typeFilter = new TypeFilter(_typeFilterContext, StartTypeAssertion, StartMethodFilter);
+            _fieldFilterContext = new FieldFilterContext(_typeFilterContext);
+            _fieldAssertionContext = new FieldAssertionContext(_fieldFilterContext);
+
+            _typeFilter = new TypeFilter(
+                _typeFilterContext,
+                StartTypeAssertion,
+                StartMethodFilter,
+                StartFieldFilter
+            );
             _typeAssertion = new TypeAssertion(_typeAssertionContext);
 
             _methodFilter = new MethodFilter(_methodFilterContext, StartMethodAssertion);
             _methodAssertion = new MethodAssertion(_methodAssertionContext);
+
+            _fieldFilter = new FieldFilter(_fieldFilterContext, StartFieldAssertion);
+            _fieldAssertion = new FieldAssertion(_fieldAssertionContext);
         }
 
         internal ITypeFilterEntryPoint StartTypeFilter()
@@ -65,6 +87,16 @@ namespace ArchGuard
         private IMethodAssertionRule StartMethodAssertion()
         {
             return _methodAssertion.Start();
+        }
+
+        private IFieldFilterEntryPoint StartFieldFilter()
+        {
+            return _fieldFilter.Start();
+        }
+
+        private IFieldAssertionRule StartFieldAssertion()
+        {
+            return _fieldAssertion.Start();
         }
     }
 }

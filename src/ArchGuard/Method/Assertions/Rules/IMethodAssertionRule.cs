@@ -1,4 +1,4 @@
 namespace ArchGuard
 {
-    public partial interface IMethodAssertionRule { }
+    public partial interface IMethodAssertionRule;
 }
