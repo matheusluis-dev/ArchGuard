@@ -2,13 +2,19 @@ namespace ArchGuard.Extensions
 {
     using System.Text.RegularExpressions;
 
-    public static class TypeExtensions
+    public static partial class TypeExtensions
     {
+        [GeneratedRegex("<[^>]+>[^_]+__(.+)$", RegexOptions.Compiled, 1000)]
+        private static partial Regex RemoveGenericSuffixRegex();
+
         public static string GetFullNameClean(this Type type)
         {
-            var match = Regex.Match(type.FullName, @"<[^>]+>[^_]+__(.+)$");
+            ArgumentNullException.ThrowIfNull(type);
 
-            return match.Success ? type.Namespace + "." + match.Groups[1].Value : type.FullName;
+            var match = RemoveGenericSuffixRegex().Match(type.Name);
+            var @namespace = type.Namespace is not null ? $"{type.Namespace}." : string.Empty;
+
+            return match.Success ? @namespace + match.Groups[1].Value : @namespace + type.Name;
         }
     }
 }

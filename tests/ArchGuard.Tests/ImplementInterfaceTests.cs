@@ -221,9 +221,10 @@ namespace ArchGuard.Filters.Tests
         public void DoNotImplementInterface_should_not_treat_interface_inheritance_as_interface_implementation()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly
-                .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.ImplementInterface)
-                .And.DoNotImplementInterface(typeof(IPublicInterface1));
+            var filters =
+                ArchGuard.Tests.Common.MockedAssembly.Inherit.Types.That.DoNotImplementInterface(
+                    typeof(IPublicInterface1)
+                );
 
             // Act
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();

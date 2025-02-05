@@ -7,75 +7,7 @@ namespace ArchGuard.Extensions
 
     public static class INamedTypeSymbolExtensions
     {
-        public static string GetName(this INamedTypeSymbol namedTypeSymbol)
-        {
-            ArgumentNullException.ThrowIfNull(namedTypeSymbol);
-
-            var name = namedTypeSymbol.Name;
-
-            var containingType = namedTypeSymbol.ContainingType;
-            while (containingType != null)
-            {
-                name = $"{containingType.Name}+{name}";
-                containingType = containingType.ContainingType;
-            }
-
-            if (name.EndsWith('?'))
-                name = name[..^1];
-
-            return name;
-        }
-
-        public static string GetFullName(this INamedTypeSymbol namedTypeSymbol)
-        {
-            ArgumentNullException.ThrowIfNull(namedTypeSymbol);
-
-            var fullName = namedTypeSymbol.GetName();
-
-            var containingNamespace = namedTypeSymbol.ContainingNamespace;
-            if (!containingNamespace.IsGlobalNamespace)
-                fullName = $"{containingNamespace}.{fullName}";
-
-            return fullName;
-        }
-
-        public static bool Inherit(this INamedTypeSymbol namedTypeSymbol, params Type[] types)
-        {
-            ArgumentNullException.ThrowIfNull(namedTypeSymbol);
-
-            if (namedTypeSymbol.TypeKind == TypeKind.Interface)
-            {
-                return namedTypeSymbol
-                    .AllInterfaces.Where(@interface =>
-                        !@interface
-                            .GetFullName()
-                            .Equals(namedTypeSymbol.GetFullName(), StringComparison.Ordinal)
-                    )
-                    .Any(i =>
-                        types.Any(t =>
-                            t.GetFullNameClean().Equals(i.GetFullName(), StringComparison.Ordinal)
-                        )
-                    );
-            }
-
-            var baseType = namedTypeSymbol.BaseType;
-
-            while (baseType != null)
-            {
-                if (
-                    types
-                        .Select(t => t.GetFullNameClean())
-                        .Contains(baseType.GetFullName(), StringComparer.CurrentCulture)
-                )
-                {
-                    return true;
-                }
-
-                baseType = baseType.BaseType;
-            }
-
-            return false;
-        }
+        
 
         public static bool IsImmutable(this INamedTypeSymbol namedTypeSymbol)
         {

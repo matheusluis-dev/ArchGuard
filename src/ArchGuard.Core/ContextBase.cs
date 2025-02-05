@@ -1,4 +1,5 @@
-namespace ArchGuard.Contexts
+// TODO: purge it
+namespace ArchGuard.Core
 {
     using System;
     using System.Collections.Generic;

@@ -3,6 +3,7 @@ namespace ArchGuard.Extensions
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using ArchGuard.Core.Helpers;
     using ArchGuard.Core.Type.Models;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
@@ -22,8 +23,13 @@ namespace ArchGuard.Extensions
             if (methodSymbol.MethodKind is not MethodKind.Ordinary)
                 return false;
 
-            if (!ignorePrivateOrProtectedVerification && methodSymbol.IsPrivateOrProtected())
+            if (
+                !ignorePrivateOrProtectedVerification
+                && SymbolHelper.IsPrivateOrProtected(methodSymbol)
+            )
+            {
                 return false;
+            }
 
             (var methodSyntax, var semanticModel) = methodSymbol.GetSemanticModel(project);
 

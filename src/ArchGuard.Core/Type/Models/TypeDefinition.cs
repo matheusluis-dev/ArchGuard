@@ -6,11 +6,11 @@ namespace ArchGuard.Core.Type.Models
     using System.Linq;
     using ArchGuard.Cached;
     using ArchGuard.Core.Field.Models;
+    using ArchGuard.Core.Helpers;
     using ArchGuard.Core.Method.Models;
-    using ArchGuard.Extensions;
     using Microsoft.CodeAnalysis;
 
-    [DebuggerDisplay("{SymbolFullName} | Project: {Project.Name}")]
+    [DebuggerDisplay("{FullName} | Project: {Project.Name}")]
     public sealed class TypeDefinition : IEquatable<TypeDefinition>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -19,17 +19,68 @@ namespace ArchGuard.Core.Type.Models
         public INamedTypeSymbol Symbol { get; init; }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal string SymbolName { get; init; }
+        internal string Name => TypeSymbolHelper.GetName(Symbol);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal string SymbolFullName { get; init; }
+        internal string FullName => TypeSymbolHelper.GetFullName(Symbol);
+
+        internal bool IsPublic => TypeSymbolHelper.IsPublic(Symbol);
+
+        internal bool IsInternal => TypeSymbolHelper.IsInternal(Symbol);
+
+        internal bool IsProtected => SymbolHelper.IsProtected(Symbol);
+
+        internal bool IsPrivate => SymbolHelper.IsPrivate(Symbol);
+
+        internal bool IsPrivateOrProtected => SymbolHelper.IsPrivateOrProtected(Symbol);
+
+        internal bool IsFileLocal => TypeSymbolHelper.IsFileLocal(Symbol);
+
+        internal bool IsInterface => Symbol.TypeKind is TypeKind.Interface;
 
         internal TypeDefinition(Project project, INamedTypeSymbol symbol)
         {
             Project = project;
             Symbol = symbol;
-            SymbolName = Symbol.GetName();
-            SymbolFullName = Symbol.GetFullName();
+        }
+
+        private IEnumerable<TypeDefinition> GetInterfaces()
+        {
+            if (!Symbol.AllInterfaces.Any())
+                return [];
+
+            return GetAllTypesFromProject()
+                .Where(type =>
+                    Symbol.AllInterfaces.Any(@interface =>
+                        TypeSymbolHelper
+                            .GetFullName(@interface)
+                            .Equals(type.FullName, StringComparison.Ordinal)
+                    )
+                );
+        }
+
+        internal IEnumerable<TypeDefinition> GetImplementedInterfaces()
+        {
+            // Interface do not implement another interface
+            // Interface inherit another interface
+            if (IsInterface)
+                return [];
+
+            return GetInterfaces();
+        }
+
+        internal IEnumerable<TypeDefinition> GetInheritances()
+        {
+            return GetAllTypesFromProject()
+                .Where(type =>
+                    TypeSymbolHelper
+                        .Inheritances(Symbol)
+                        .Any(symbol =>
+                            TypeSymbolHelper
+                                .GetFullName(symbol)
+                                .Equals(type.FullName, StringComparison.Ordinal)
+                        )
+                );
         }
 
         internal Compilation? GetCompilation()
@@ -85,7 +136,7 @@ namespace ArchGuard.Core.Type.Models
 
         public override int GetHashCode()
         {
-            return new { Project.Name, SymbolFullName }.GetHashCode();
+            return new { Project.Name, FullName }.GetHashCode();
         }
 
         public override bool Equals(object? obj)
@@ -99,9 +150,7 @@ namespace ArchGuard.Core.Type.Models
         public bool Equals(TypeDefinition? other)
         {
             return Project.Name.Equals(other?.Project.Name, StringComparison.Ordinal)
-                && Symbol
-                    .GetFullName()
-                    .Equals(other?.Symbol.GetFullName(), StringComparison.Ordinal);
+                && FullName.Equals(other?.FullName, StringComparison.Ordinal);
         }
     }
 }

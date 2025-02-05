@@ -12,12 +12,12 @@ namespace ArchGuard.Core.Predicates.Type
         {
             return (type, _) =>
                 // Interfaces do not implement each other, they inherit
-                type.Symbol.TypeKind != TypeKind.Interface
-                && type.Symbol.AllInterfaces.Any(@interface =>
-                    types
-                        .Select(t => t.GetFullNameClean())
-                        .Contains(@interface.GetFullName(), StringComparer.CurrentCulture)
-                );
+                type.GetImplementedInterfaces()
+                    .Any(@interface =>
+                        types
+                            .Select(t => t.GetFullNameClean())
+                            .Contains(@interface.FullName, StringComparer.Ordinal)
+                    );
         }
 
         public static Func<TypeDefinition, StringComparison, bool> NotImplementInterface(
@@ -29,7 +29,13 @@ namespace ArchGuard.Core.Predicates.Type
 
         public static Func<TypeDefinition, StringComparison, bool> Inherit(Type[] types)
         {
-            return (type, _) => type.Symbol.Inherit(types);
+            return (type, _) =>
+                type.GetInheritances()
+                    .Any(type =>
+                        types
+                            .Select(type => type.GetFullNameClean())
+                            .Contains(type.FullName, StringComparer.Ordinal)
+                    );
         }
 
         public static Func<TypeDefinition, StringComparison, bool> NotInherit(Type[] types)
@@ -72,7 +78,7 @@ namespace ArchGuard.Core.Predicates.Type
             return (type, comparison) =>
                 type.GetDependencies()
                     .Any(dependency =>
-                        types.Contains(dependency.Symbol.GetFullName(), comparison.ToComparer())
+                        types.Contains(dependency.FullName, comparison.ToComparer())
                     );
         }
 
@@ -172,7 +178,8 @@ namespace ArchGuard.Core.Predicates.Type
                 {
                     var directory = Directory.GetParent(location.SourceTree.FilePath).FullName;
                     var lastIndex = directory.LastIndexOf(
-                        Path.DirectorySeparatorChar + projectDefaultNamespace
+                        Path.DirectorySeparatorChar + projectDefaultNamespace,
+                        comparison
                     );
 
                     if (lastIndex == -1)
@@ -203,7 +210,7 @@ namespace ArchGuard.Core.Predicates.Type
             (type, comparison) =>
                 type.Symbol.Locations.Any(location =>
                     Path.GetFileNameWithoutExtension(location.SourceTree.FilePath)
-                        .Equals(type.SymbolName, comparison)
+                        .Equals(type.Name, comparison)
                 );
     }
 }

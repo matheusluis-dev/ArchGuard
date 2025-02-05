@@ -4,88 +4,12 @@ namespace ArchGuard.Extensions
     using System.Collections.Generic;
     using System.Linq;
     using ArchGuard.Cached;
+    using ArchGuard.Core.Helpers;
     using ArchGuard.Core.Type.Models;
     using Microsoft.CodeAnalysis;
 
     public static class TypeDefinitionExtensions
     {
-        public static IEnumerable<INamedTypeSymbol> GetContainingTypes(this TypeDefinition type)
-        {
-            ArgumentNullException.ThrowIfNull(type);
-
-            var symbols = new List<INamedTypeSymbol>();
-            var current = type.Symbol.ContainingType;
-            while (current is not null)
-            {
-                symbols.Add(current);
-                current = current.ContainingType;
-            }
-
-            return symbols;
-        }
-
-        public static IEnumerable<INamedTypeSymbol> GetContainingTypesAndSelf(
-            this TypeDefinition type
-        )
-        {
-            ArgumentNullException.ThrowIfNull(type);
-
-            var symbols = new List<INamedTypeSymbol> { type.Symbol };
-
-            symbols.AddRange(type.GetContainingTypes());
-
-            return symbols;
-        }
-
-        public static bool IsPublic(this TypeDefinition type)
-        {
-            ArgumentNullException.ThrowIfNull(type);
-
-            return type.GetContainingTypesAndSelf().All(symbol => symbol.IsPublic());
-        }
-
-        public static bool IsInternal(this TypeDefinition type)
-        {
-            ArgumentNullException.ThrowIfNull(type);
-
-            var typeIsInternal = !type.Symbol.IsFileLocal && type.Symbol.IsInternal();
-
-            if (!typeIsInternal)
-                return false;
-
-            foreach (var symbol in type.GetContainingTypes())
-            {
-                var containingTypeIsCompliant =
-                    !symbol.IsFileLocal
-                    && symbol.DeclaredAccessibility
-                        is not Accessibility.NotApplicable
-                            and not Accessibility.Protected
-                            and not Accessibility.Private;
-
-                if (!containingTypeIsCompliant)
-                    return false;
-            }
-
-            return true;
-        }
-
-        public static bool IsFileLocal(this TypeDefinition type)
-        {
-            ArgumentNullException.ThrowIfNull(type);
-
-            if (type.Symbol.IsFileLocal)
-                return true;
-
-            var containingTypes = type.GetContainingTypes().ToList();
-            if (containingTypes.Count == 0)
-                return false;
-
-            // File types can't be nested inside any type, even if they are file too
-            // But, types of any access modifiers can be nested inside a file type
-            // Checks if the first containing type is file scoped
-            return containingTypes[^1].IsFileLocal;
-        }
-
         public static bool IsExternallyImmutable(this TypeDefinition type)
         {
             ArgumentNullException.ThrowIfNull(type);
@@ -105,7 +29,7 @@ namespace ArchGuard.Extensions
                 .OfType<IFieldSymbol>()
                 .All(field =>
                     field.IsStatic
-                    || field.IsPrivateOrProtected()
+                    || SymbolHelper.IsPrivateOrProtected(field)
                     || field.IsReadOnly
                     || field.IsConst
                 );
@@ -127,9 +51,12 @@ namespace ArchGuard.Extensions
                 .OfType<IEventSymbol>()
                 .All(@event =>
                     @event.IsStatic
-                    || @event.IsPrivateOrProtected()
+                    || SymbolHelper.IsPrivateOrProtected(@event)
                     || @event.AddMethod?.IsStatic == true
-                    || @event.AddMethod?.IsPrivateOrProtected() == true
+                    || (
+                        @event.AddMethod is not null
+                        && SymbolHelper.IsPrivateOrProtected(@event.AddMethod)
+                    )
                 );
 
             if (!allEventsAreExternallyImmutable)
@@ -140,7 +67,7 @@ namespace ArchGuard.Extensions
                 .OfType<IMethodSymbol>()
                 .All(method =>
                     method.IsStatic
-                    || method.IsPrivateOrProtected()
+                    || SymbolHelper.IsPrivateOrProtected(method)
                     || !method.ExternallyAltersState(project)
                 );
         }
@@ -162,7 +89,7 @@ namespace ArchGuard.Extensions
             var allTypes = typeDefinition.GetAllTypesFromProject();
 
             var typesToCheck = allTypes.Where(type =>
-                types.Contains(type.SymbolFullName, StringComparer.Ordinal)
+                types.Contains(type.FullName, StringComparer.Ordinal)
             );
 
             foreach (var type in typesToCheck)

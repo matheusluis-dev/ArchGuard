@@ -6,57 +6,6 @@ namespace ArchGuard.Extensions
 
     public static class ISymbolExtensions
     {
-        public static bool IsPublic(this ISymbol symbol)
-        {
-            ArgumentNullException.ThrowIfNull(symbol);
-
-            return symbol.DeclaredAccessibility is Accessibility.Public;
-        }
-
-        public static bool IsInternal(this ISymbol symbol)
-        {
-            ArgumentNullException.ThrowIfNull(symbol);
-
-            return symbol.DeclaredAccessibility
-                is Accessibility.Internal
-                    or Accessibility.Friend
-                    or Accessibility.ProtectedOrFriend
-                    or Accessibility.ProtectedOrInternal;
-        }
-
-        public static bool IsProtected(this ISymbol symbol)
-        {
-            ArgumentNullException.ThrowIfNull(symbol);
-
-            return symbol.DeclaredAccessibility
-                is Accessibility.Protected
-                    or Accessibility.ProtectedOrInternal
-                    or Accessibility.ProtectedOrFriend
-                    or Accessibility.ProtectedAndInternal
-                    or Accessibility.ProtectedAndFriend;
-        }
-
-        public static bool IsPrivate(this ISymbol symbol)
-        {
-            ArgumentNullException.ThrowIfNull(symbol);
-
-            return symbol.DeclaredAccessibility is Accessibility.Private;
-        }
-
-        public static bool IsPrivateOrProtected(this ISymbol symbol)
-        {
-            ArgumentNullException.ThrowIfNull(symbol);
-
-            return symbol.DeclaredAccessibility is Accessibility.Private or Accessibility.Protected;
-        }
-
-        public static bool HasDeclaringSyntaxReferences(this ISymbol symbol)
-        {
-            ArgumentNullException.ThrowIfNull(symbol);
-
-            return symbol.DeclaringSyntaxReferences.Any();
-        }
-
         public static (SyntaxNode, SemanticModel) GetSemanticModel(
             this ISymbol symbol,
             Project project

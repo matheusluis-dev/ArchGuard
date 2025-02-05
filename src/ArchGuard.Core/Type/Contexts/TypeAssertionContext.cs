@@ -1,9 +1,8 @@
-using ArchGuard.Contexts;
-
 namespace ArchGuard.Core.Type.Contexts
 {
     using System;
     using ArchGuard;
+    using ArchGuard.Core;
     using ArchGuard.Core.Type.Models;
 
     public sealed class TypeAssertionContext : ContextBase<TypeDefinition>

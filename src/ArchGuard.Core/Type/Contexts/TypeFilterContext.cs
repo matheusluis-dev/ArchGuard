@@ -1,9 +1,8 @@
-using ArchGuard.Contexts;
-
 namespace ArchGuard.Core.Type.Contexts
 {
     using System;
     using System.Collections.Generic;
+    using ArchGuard.Core;
     using ArchGuard.Core.Type.Models;
 
     public sealed class TypeFilterContext : ContextBase<TypeDefinition>
