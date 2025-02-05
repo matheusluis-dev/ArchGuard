@@ -2,6 +2,7 @@ namespace ArchGuard.Extensions
 {
     using System;
     using System.Linq;
+    using ArchGuard.Core.Helpers;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -21,21 +22,7 @@ namespace ArchGuard.Extensions
             return propertySymbol.SetMethod is not null;
         }
 
-        public static bool HasCustomBody(this IPropertySymbol propertySymbol)
-        {
-            ArgumentNullException.ThrowIfNull(propertySymbol);
-
-            var syntaxReference = propertySymbol.DeclaringSyntaxReferences.FirstOrDefault();
-            if (syntaxReference is null)
-                return false;
-
-            if (syntaxReference.GetSyntax() is not PropertyDeclarationSyntax propertySyntax)
-                return false;
-
-            var accessors = propertySyntax.AccessorList?.Accessors;
-
-            return accessors?.Any(a => a.Body is not null || a.ExpressionBody is not null) == true;
-        }
+       
 
         public static bool IsExternallyImmutable(
             this IPropertySymbol propertySymbol,
@@ -48,8 +35,13 @@ namespace ArchGuard.Extensions
             if (propertySymbol.IsStatic)
                 return true;
 
-            if (!ignorePrivateOrProtectedVerification && propertySymbol.IsPrivateOrProtected())
+            if (
+                !ignorePrivateOrProtectedVerification
+                && SymbolHelper.IsPrivateOrProtected(propertySymbol)
+            )
+            {
                 return true;
+            }
 
             if (!propertySymbol.HasCustomBody())
                 return true;
@@ -58,7 +50,7 @@ namespace ArchGuard.Extensions
             if (propertySymbol.HasGetMethod())
             {
                 getImmutable =
-                    propertySymbol!.GetMethod!.IsPrivateOrProtected()
+                    SymbolHelper.IsPrivateOrProtected(propertySymbol!.GetMethod!)
                     && !propertySymbol!.GetMethod!.ExternallyAltersState(project);
             }
 
@@ -67,8 +59,10 @@ namespace ArchGuard.Extensions
             {
                 setImmutable =
                     propertySymbol!.SetMethod!.IsInitOnly
-                    || propertySymbol.SetMethod.IsPrivateOrProtected()
-                        && !propertySymbol.SetMethod.ExternallyAltersState(project);
+                    || (
+                        SymbolHelper.IsPrivateOrProtected(propertySymbol.SetMethod)
+                        && !propertySymbol.SetMethod.ExternallyAltersState(project)
+                    );
             }
 
             return getImmutable && setImmutable;

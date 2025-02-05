@@ -1,32 +1,31 @@
 namespace ArchGuard.Core.Field.Predicates
 {
     using ArchGuard.Core.Field.Models;
-    using Microsoft.CodeAnalysis;
 
     public static partial class FieldPredicate
     {
         public static Func<FieldDefinition, StringComparison, bool> Public =>
-            (type, _) => type.Symbol.DeclaredAccessibility is Accessibility.Public;
+            (field, _) => field.IsPublic;
 
         public static Func<FieldDefinition, StringComparison, bool> NotPublic =>
-            (type, _) => !Public(type, _);
+            (field, _) => !Public(field, _);
 
         public static Func<FieldDefinition, StringComparison, bool> Internal =>
-            (type, _) => type.Symbol.IsInternal();
+            (field, _) => field.IsInternal;
 
         public static Func<FieldDefinition, StringComparison, bool> NotInternal =>
-            (type, _) => !Internal(type, _);
+            (field, _) => !Internal(field, _);
 
         public static Func<FieldDefinition, StringComparison, bool> Protected =>
-            (type, _) => type.Symbol.IsProtected();
+            (field, _) => field.IsProtected;
 
         public static Func<FieldDefinition, StringComparison, bool> NotProtected =>
-            (type, _) => !Protected(type, _);
+            (field, _) => !Protected(field, _);
 
         public static Func<FieldDefinition, StringComparison, bool> Private =>
-            (type, _) => type.Symbol.IsPrivate();
+            (field, _) => field.IsPrivate;
 
         public static Func<FieldDefinition, StringComparison, bool> NotPrivate =>
-            (type, _) => !Private(type, _);
+            (field, _) => !Private(field, _);
     }
 }

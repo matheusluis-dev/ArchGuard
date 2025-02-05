@@ -2,10 +2,11 @@ namespace ArchGuard.Core.Method.Models
 {
     using System;
     using System.Diagnostics;
+    using ArchGuard.Core.Helpers;
     using ArchGuard.Core.Type.Models;
     using Microsoft.CodeAnalysis;
 
-    [DebuggerDisplay("{SymbolName} | Type: {Type.SymbolFullName}")]
+    [DebuggerDisplay("{Name} | Type: {Type.SymbolFullName}")]
     public sealed class MethodDefinition : IEquatable<MethodDefinition>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -13,18 +14,40 @@ namespace ArchGuard.Core.Method.Models
 
         public TypeDefinition Type { get; init; }
 
-        public IMethodSymbol Symbol { get; init; }
+        private readonly IMethodSymbol _method;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal string SymbolName { get; init; }
+        internal string Name => _method.Name;
+
+        internal bool IsPublic => SymbolHelper.IsPublic(_method);
+
+        internal bool IsInternal => SymbolHelper.IsInternal(_method);
+
+        internal bool IsProtected => SymbolHelper.IsProtected(_method);
+
+        internal bool IsPrivate => SymbolHelper.IsPrivate(_method);
+
+        internal bool IsPrivateOrProtected => SymbolHelper.IsPrivateOrProtected(_method);
 
         internal MethodDefinition(TypeDefinition type, IMethodSymbol symbol)
         {
             Project = type.Project;
             Type = type;
+            _method = symbol;
+        }
 
-            Symbol = symbol;
-            SymbolName = Symbol.Name;
+        internal IEnumerable<TypeDefinition> GetTypesAssignedInBody()
+        {
+            return Type.GetAllTypesFromProject(
+                MethodSymbolHelper.GetAssignmentsTypes(Project, _method)
+            );
+        }
+
+        internal IEnumerable<TypeDefinition> GetPropertiesAccessorsTypes()
+        {
+            return Type.GetAllTypesFromProject(
+                MethodSymbolHelper.GetPropertiesAccessorsTypes(Project, _method)
+            );
         }
 
         internal Compilation? GetCompilation()
@@ -34,7 +57,7 @@ namespace ArchGuard.Core.Method.Models
 
         public override int GetHashCode()
         {
-            return new { Project.Name, SymbolName }.GetHashCode();
+            return new { ProjectName = Project.Name, Name }.GetHashCode();
         }
 
         public override bool Equals(object? obj)
@@ -48,7 +71,7 @@ namespace ArchGuard.Core.Method.Models
         public bool Equals(MethodDefinition? other)
         {
             return Project.Name.Equals(other?.Project.Name, StringComparison.Ordinal)
-                && SymbolName.Equals(other?.SymbolName, StringComparison.Ordinal);
+                && Name.Equals(other?.Name, StringComparison.Ordinal);
         }
     }
 }

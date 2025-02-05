@@ -15,4 +15,8 @@
     <PackageReference Include="System.Formats.Asn1" />
     <PackageReference Include="System.Text.Json" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Property\Contexts\" />
+    <Folder Include="Property\Predicates\" />
+  </ItemGroup>
 </Project>

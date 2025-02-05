@@ -11,7 +11,6 @@ namespace ArchGuard.Core.Predicates.Type
         public static Func<TypeDefinition, StringComparison, bool> ImplementInterface(Type[] types)
         {
             return (type, _) =>
-                // Interfaces do not implement each other, they inherit
                 type.GetImplementedInterfaces()
                     .Any(@interface =>
                         types
@@ -44,13 +43,13 @@ namespace ArchGuard.Core.Predicates.Type
         }
 
         public static Func<TypeDefinition, StringComparison, bool> Generic =>
-            (type, _) => type.Symbol.IsGenericType;
+            (type, _) => type.IsGenericType;
 
         public static Func<TypeDefinition, StringComparison, bool> NotGeneric =>
             (type, _) => !Generic(type, _);
 
         public static Func<TypeDefinition, StringComparison, bool> Immutable =>
-            (type, _) => type.Symbol.IsImmutable();
+            (type, _) => type.IsImmutable;
 
         public static Func<TypeDefinition, StringComparison, bool> Mutable =>
             (type, _) => !Immutable(type, _);
@@ -174,9 +173,9 @@ namespace ArchGuard.Core.Predicates.Type
                 var projectDefaultNamespace = type.Project.DefaultNamespace;
 
                 var compliant = false;
-                foreach (var location in type.Symbol.Locations)
+                foreach (var filePath in type.SourceFiles)
                 {
-                    var directory = Directory.GetParent(location.SourceTree.FilePath).FullName;
+                    var directory = Directory.GetParent(filePath).FullName;
                     var lastIndex = directory.LastIndexOf(
                         Path.DirectorySeparatorChar + projectDefaultNamespace,
                         comparison
@@ -192,9 +191,7 @@ namespace ArchGuard.Core.Predicates.Type
 
                     var path = directory[index..].Replace(Path.DirectorySeparatorChar, '.');
 
-                    var @namespace = type.Symbol.ContainingNamespace.GetFullName();
-
-                    compliant = @namespace.Equals(path, comparison);
+                    compliant = type.Namespace.Equals(path, comparison);
                     if (!compliant)
                         break;
                 }
@@ -208,9 +205,8 @@ namespace ArchGuard.Core.Predicates.Type
             bool
         > HaveSourceFileNameMatchingTypeName =>
             (type, comparison) =>
-                type.Symbol.Locations.Any(location =>
-                    Path.GetFileNameWithoutExtension(location.SourceTree.FilePath)
-                        .Equals(type.Name, comparison)
+                type.SourceFiles.Any(filePath =>
+                    Path.GetFileNameWithoutExtension(filePath).Equals(type.Name, comparison)
                 );
     }
 }

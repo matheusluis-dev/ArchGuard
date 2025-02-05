@@ -14,15 +14,14 @@ namespace ArchGuard.Core.Predicates.Type
             IEnumerable<string> names
         )
         {
-            return (type, comparison) =>
-                names.Contains(type.Symbol.GetName(), comparison.ToComparer());
+            return (type, comparison) => names.Contains(type.Name, comparison.ToComparer());
         }
 
         public static Func<TypeDefinition, StringComparison, bool> HaveNameMatching(
             IEnumerable<string> regexes
         )
         {
-            return (type, _) => regexes.Any(regex => Regex.IsMatch(type.Symbol.GetName(), regex));
+            return (type, _) => regexes.Any(regex => Regex.IsMatch(type.Name, regex));
         }
 
         public static Func<TypeDefinition, StringComparison, bool> HaveNameNotMatching(
@@ -36,16 +35,14 @@ namespace ArchGuard.Core.Predicates.Type
             IEnumerable<string> name
         )
         {
-            return (type, comparison) =>
-                name.Contains(type.Symbol.GetFullName(), comparison.ToComparer());
+            return (type, comparison) => name.Contains(type.FullName, comparison.ToComparer());
         }
 
         public static Func<TypeDefinition, StringComparison, bool> HaveFullNameMatching(
             IEnumerable<string> regexes
         )
         {
-            return (type, _) =>
-                regexes.Any(regex => Regex.IsMatch(type.Symbol.GetFullName(), regex));
+            return (type, _) => regexes.Any(regex => Regex.IsMatch(type.FullName, regex));
         }
 
         public static Func<TypeDefinition, StringComparison, bool> HaveFullNameNotMatching(
@@ -59,35 +56,31 @@ namespace ArchGuard.Core.Predicates.Type
             IEnumerable<string> name
         )
         {
-            return (type, comparison) =>
-                name.Any(n => type.Symbol.GetName().StartsWith(n, comparison));
+            return (type, comparison) => name.Any(n => type.Name.StartsWith(n, comparison));
         }
 
         public static Func<TypeDefinition, StringComparison, bool> NotHaveNameStartingWith(
             IEnumerable<string> name
         )
         {
-            return (type, comparison) =>
-                !name.Any(n => type.Symbol.GetName().StartsWith(n, comparison));
+            return (type, comparison) => !name.Any(n => type.Name.StartsWith(n, comparison));
         }
 
         public static Func<TypeDefinition, StringComparison, bool> HaveNameEndingWith(
             IEnumerable<string> name
         )
         {
-            return (type, comparison) =>
-                name.Any(n => type.Symbol.GetName().EndsWith(n, comparison));
+            return (type, comparison) => name.Any(n => type.Name.EndsWith(n, comparison));
         }
 
         public static Func<TypeDefinition, StringComparison, bool> NotHaveNameEndingWith(
             IEnumerable<string> name
         )
         {
-            return (type, comparison) =>
-                name.Any(n => !type.Symbol.GetName().EndsWith(n, comparison));
+            return (type, comparison) => name.Any(n => !type.Name.EndsWith(n, comparison));
         }
 
         public static Func<TypeDefinition, StringComparison, bool> HaveNamePascalCased =>
-            (type, _) => Regex.IsMatch(type.Symbol.GetName(), RegularExpressions.PascalCase);
+            (type, _) => Regex.IsMatch(type.Name, RegularExpressions.PascalCase);
     }
 }

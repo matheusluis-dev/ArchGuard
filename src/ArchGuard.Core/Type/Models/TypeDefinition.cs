@@ -16,42 +16,53 @@ namespace ArchGuard.Core.Type.Models
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public Project Project { get; init; }
 
-        public INamedTypeSymbol Symbol { get; init; }
+        private readonly INamedTypeSymbol _symbol;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal string Name => TypeSymbolHelper.GetName(Symbol);
+        internal string Name => TypeSymbolHelper.GetName(_symbol);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal string FullName => TypeSymbolHelper.GetFullName(Symbol);
+        public string FullName => TypeSymbolHelper.GetFullName(_symbol);
 
-        internal bool IsPublic => TypeSymbolHelper.IsPublic(Symbol);
+        internal string Namespace => _symbol.ContainingNamespace.GetFullName();
 
-        internal bool IsInternal => TypeSymbolHelper.IsInternal(Symbol);
+        internal bool IsPublic => TypeSymbolHelper.IsPublic(_symbol);
 
-        internal bool IsProtected => SymbolHelper.IsProtected(Symbol);
+        internal bool IsInternal => TypeSymbolHelper.IsInternal(_symbol);
 
-        internal bool IsPrivate => SymbolHelper.IsPrivate(Symbol);
+        internal bool IsProtected => SymbolHelper.IsProtected(_symbol);
 
-        internal bool IsPrivateOrProtected => SymbolHelper.IsPrivateOrProtected(Symbol);
+        internal bool IsPrivate => SymbolHelper.IsPrivate(_symbol);
 
-        internal bool IsFileLocal => TypeSymbolHelper.IsFileLocal(Symbol);
+        internal bool IsPrivateOrProtected => SymbolHelper.IsPrivateOrProtected(_symbol);
 
-        internal bool IsInterface => Symbol.TypeKind is TypeKind.Interface;
+        internal bool IsFileLocal => TypeSymbolHelper.IsFileLocal(_symbol);
+
+        internal bool IsInterface => _symbol.TypeKind is TypeKind.Interface;
+
+        internal bool IsGenericType => _symbol.IsGenericType;
+
+        internal bool IsImmutable => TypeSymbolHelper.IsImmutable(_symbol);
+
+        internal bool IsStateless => TypeSymbolHelper.IsStateless(_symbol);
+
+        internal IEnumerable<string> SourceFiles =>
+            _symbol.Locations.Select(l => l.SourceTree!.FilePath)!;
 
         internal TypeDefinition(Project project, INamedTypeSymbol symbol)
         {
             Project = project;
-            Symbol = symbol;
+            _symbol = symbol;
         }
 
         private IEnumerable<TypeDefinition> GetInterfaces()
         {
-            if (!Symbol.AllInterfaces.Any())
+            if (!_symbol.AllInterfaces.Any())
                 return [];
 
             return GetAllTypesFromProject()
                 .Where(type =>
-                    Symbol.AllInterfaces.Any(@interface =>
+                    _symbol.AllInterfaces.Any(@interface =>
                         TypeSymbolHelper
                             .GetFullName(@interface)
                             .Equals(type.FullName, StringComparison.Ordinal)
@@ -74,7 +85,7 @@ namespace ArchGuard.Core.Type.Models
             return GetAllTypesFromProject()
                 .Where(type =>
                     TypeSymbolHelper
-                        .Inheritances(Symbol)
+                        .Inheritances(_symbol)
                         .Any(symbol =>
                             TypeSymbolHelper
                                 .GetFullName(symbol)
@@ -97,9 +108,23 @@ namespace ArchGuard.Core.Type.Models
                 .Select(type => new TypeDefinition(Project, type));
         }
 
+        internal IEnumerable<TypeDefinition> GetAllTypesFromProject(
+            IEnumerable<INamedTypeSymbol> filter
+        )
+        {
+            return GetAllTypesFromProject()
+                .Where(type =>
+                    filter.Any(a =>
+                        TypeSymbolHelper
+                            .GetFullName(a)
+                            .Equals(type.FullName, StringComparison.Ordinal)
+                    )
+                );
+        }
+
         internal IEnumerable<IMethodSymbol> GetConstructors()
         {
-            return Symbol
+            return _symbol
                 .GetMembers()
                 .OfType<IMethodSymbol>()
                 .Where(method => method.MethodKind is MethodKind.Constructor);
@@ -107,7 +132,7 @@ namespace ArchGuard.Core.Type.Models
 
         internal IEnumerable<MethodDefinition> GetMethods()
         {
-            return Symbol
+            return _symbol
                 .GetMembers()
                 .OfType<IMethodSymbol>()
                 .Where(method =>
@@ -118,7 +143,7 @@ namespace ArchGuard.Core.Type.Models
 
         internal IEnumerable<FieldDefinition> GetFields()
         {
-            return Symbol
+            return _symbol
                 .GetMembers()
                 .OfType<IFieldSymbol>()
                 .Select(field => new FieldDefinition(this, field));
@@ -126,12 +151,12 @@ namespace ArchGuard.Core.Type.Models
 
         internal IEnumerable<IFieldSymbol> GetConstants()
         {
-            return Symbol.GetMembers().OfType<IFieldSymbol>().Where(field => field.IsConst);
+            return _symbol.GetMembers().OfType<IFieldSymbol>().Where(field => field.IsConst);
         }
 
         internal IEnumerable<IPropertySymbol> GetProperties()
         {
-            return Symbol.GetMembers().OfType<IPropertySymbol>();
+            return _symbol.GetMembers().OfType<IPropertySymbol>();
         }
 
         public override int GetHashCode()

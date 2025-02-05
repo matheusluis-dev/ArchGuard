@@ -17,7 +17,7 @@ namespace ArchGuard.Filters.Tests.Methods
             // Act
             var methods = filters
                 .GetMethods()
-                .Select(m => m.Symbol.Name)
+                .Select(m => m._method.Name)
                 .Order(StringComparer.Ordinal);
 
             // Assert
@@ -33,7 +33,7 @@ namespace ArchGuard.Filters.Tests.Methods
             // Act
             var methods = filters
                 .GetMethods()
-                .Select(m => m.Symbol.Name)
+                .Select(m => m._method.Name)
                 .Order(StringComparer.Ordinal);
 
             // Assert

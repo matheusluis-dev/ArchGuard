@@ -6,14 +6,14 @@ namespace ArchGuard.Core.Field.Predicates
     public static partial class FieldPredicate
     {
         public static Func<FieldDefinition, StringComparison, bool> HaveNamePascalCased =>
-            (type, _) => Regex.IsMatch(type.Symbol.Name, RegularExpressions.PascalCase);
+            (type, _) => Regex.IsMatch(type.Field.Name, RegularExpressions.PascalCase);
 
         public static Func<FieldDefinition, StringComparison, bool> HaveNameCamelCased(
             string prefix
         )
         {
             return (type, _) =>
-                Regex.IsMatch(type.Symbol.Name, RegularExpressions.CamelCase(prefix));
+                Regex.IsMatch(type.Field.Name, RegularExpressions.CamelCase(prefix));
         }
 
         public static Func<FieldDefinition, StringComparison, bool> HaveNameCamelCased(char prefix)

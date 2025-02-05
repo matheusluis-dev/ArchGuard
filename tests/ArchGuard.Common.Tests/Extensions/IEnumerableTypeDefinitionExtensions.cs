@@ -4,7 +4,6 @@ namespace ArchGuard.Tests.Common.Extensions
     using System.Collections.Generic;
     using System.Linq;
     using ArchGuard.Core.Type.Models;
-    using ArchGuard.Extensions;
     using Microsoft.CodeAnalysis;
 
     public static class IEnumerableTypeDefinitionExtensions
@@ -12,7 +11,7 @@ namespace ArchGuard.Tests.Common.Extensions
         public static IList<string> GetFullNames(this IEnumerable<TypeDefinition> types)
         {
             return types
-                .Select(type => type.Symbol.GetFullName())
+                .Select(type => type.FullName)
                 .OrderBy(fullName => fullName, StringComparer.Ordinal)
                 .ToList();
         }
