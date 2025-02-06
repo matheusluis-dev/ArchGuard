@@ -8,14 +8,14 @@ namespace ArchGuard.Core.Predicates.Method
     public static partial class MethodPredicate
     {
         public static Func<MethodDefinition, StringComparison, bool> HaveNamePascalCased =>
-            (method, _) => Regex.IsMatch(method._method.Name, RegularExpressions.PascalCase);
+            (method, _) => Regex.IsMatch(method.Name, RegularExpressions.PascalCase);
 
         public static Func<MethodDefinition, StringComparison, bool> HaveNameEndingWith(
             IEnumerable<string> names
         )
         {
             return (method, comparison) =>
-                names.Any(name => method._method.Name.EndsWith(name, comparison));
+                names.Any(name => method.Name.EndsWith(name, comparison));
         }
 
         public static Func<MethodDefinition, StringComparison, bool> NotHaveNameEndingWith(
@@ -23,7 +23,7 @@ namespace ArchGuard.Core.Predicates.Method
         )
         {
             return (method, comparison) =>
-                !names.Any(name => method._method.Name.EndsWith(name, comparison));
+                !names.Any(name => method.Name.EndsWith(name, comparison));
         }
     }
 }

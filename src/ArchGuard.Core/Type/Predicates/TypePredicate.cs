@@ -2,6 +2,7 @@ namespace ArchGuard.Core.Predicates.Type
 {
     using System;
     using System.Linq;
+    using ArchGuard.Core.Extensions;
     using ArchGuard.Core.Type.Models;
     using ArchGuard.Extensions;
     using Microsoft.CodeAnalysis;
@@ -55,13 +56,13 @@ namespace ArchGuard.Core.Predicates.Type
             (type, _) => !Immutable(type, _);
 
         public static Func<TypeDefinition, StringComparison, bool> Stateless =>
-            (type, _) => type.Symbol.IsStateless();
+            (type, _) => type.IsStateless;
 
         public static Func<TypeDefinition, StringComparison, bool> NotStateless =>
             (type, _) => !Stateless(type, _);
 
         public static Func<TypeDefinition, StringComparison, bool> Staticless =>
-            (type, _) => type.Symbol.IsStaticless();
+            (type, _) => type.IsStaticless;
 
         public static Func<TypeDefinition, StringComparison, bool> NotStaticless =>
             (type, _) => !Staticless(type, _);
@@ -94,12 +95,10 @@ namespace ArchGuard.Core.Predicates.Type
         {
             return (type, comparison) =>
             {
-                var typeNamespace = type.Symbol.ContainingNamespace.GetFullName();
-
                 var dependenciesNamespaces = type.GetDependencies()
-                    .Select(t => t.Symbol.ContainingNamespace.GetFullName())
+                    .Select(type => type.Namespace)
                     // a type can't depend on its own namespace
-                    .Where(@namespace => !typeNamespace.StartsWith(@namespace, comparison));
+                    .Where(@namespace => !type.Namespace.StartsWith(@namespace, comparison));
 
                 return namespaces.Intersect(dependenciesNamespaces, comparison.ToComparer()).Any();
             };
@@ -109,17 +108,7 @@ namespace ArchGuard.Core.Predicates.Type
             string[] namespaces
         )
         {
-            return (type, comparison) =>
-            {
-                var typeNamespace = type.Symbol.ContainingNamespace.GetFullName();
-
-                var dependenciesNamespaces = type.GetDependencies()
-                    .Select(t => t.Symbol.ContainingNamespace.GetFullName())
-                    // a type can't depend on its own namespace
-                    .Where(@namespace => !typeNamespace.StartsWith(@namespace, comparison));
-
-                return !namespaces.Intersect(dependenciesNamespaces, comparison.ToComparer()).Any();
-            };
+            return (type, comparison) => !HaveDependencyOnNamespace(namespaces)(type, comparison);
         }
 
         public static Func<TypeDefinition, StringComparison, bool> HaveDependencyOnlyOnNamespace(
@@ -128,12 +117,10 @@ namespace ArchGuard.Core.Predicates.Type
         {
             return (type, comparison) =>
             {
-                var typeNamespace = type.Symbol.ContainingNamespace.GetFullName();
-
                 var dependenciesNamespaces = type.GetDependencies()
-                    .Select(t => t.Symbol.ContainingNamespace.GetFullName())
+                    .Select(type => type.Namespace)
                     // a type can't depend on its own namespace
-                    .Where(@namespace => !@namespace.StartsWith(typeNamespace, comparison))
+                    .Where(@namespace => !@namespace.StartsWith(type.Namespace, comparison))
                     .ToList();
 
                 var intersect = namespaces
@@ -145,7 +132,7 @@ namespace ArchGuard.Core.Predicates.Type
         }
 
         public static Func<TypeDefinition, StringComparison, bool> HaveParameterlessConstructor =>
-            (type, _) => type.Symbol.Constructors.Any(constructor => !constructor.Parameters.Any());
+            (type, _) => type.GetConstructors().Any(constructor => !constructor.HasParameters);
 
         public static Func<
             TypeDefinition,
@@ -168,45 +155,13 @@ namespace ArchGuard.Core.Predicates.Type
             StringComparison,
             bool
         > HaveSourceFilePathMatchingNamespace =>
-            (type, comparison) =>
-            {
-                var projectDefaultNamespace = type.Project.DefaultNamespace;
-
-                var compliant = false;
-                foreach (var filePath in type.SourceFiles)
-                {
-                    var directory = Directory.GetParent(filePath).FullName;
-                    var lastIndex = directory.LastIndexOf(
-                        Path.DirectorySeparatorChar + projectDefaultNamespace,
-                        comparison
-                    );
-
-                    if (lastIndex == -1)
-                    {
-                        compliant = false;
-                        break;
-                    }
-
-                    var index = lastIndex + 1;
-
-                    var path = directory[index..].Replace(Path.DirectorySeparatorChar, '.');
-
-                    compliant = type.Namespace.Equals(path, comparison);
-                    if (!compliant)
-                        break;
-                }
-
-                return compliant;
-            };
+            (type, comparison) => type.SourceFilePathMatchesNamespace(comparison);
 
         public static Func<
             TypeDefinition,
             StringComparison,
             bool
         > HaveSourceFileNameMatchingTypeName =>
-            (type, comparison) =>
-                type.SourceFiles.Any(filePath =>
-                    Path.GetFileNameWithoutExtension(filePath).Equals(type.Name, comparison)
-                );
+            (type, comparison) => type.SourceFileNameMatchesTypeName(comparison);
     }
 }

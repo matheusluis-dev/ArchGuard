@@ -10,32 +10,45 @@ namespace ArchGuard.Core.Field.Models
     public sealed class FieldDefinition : IEquatable<FieldDefinition>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        public Project Project { get; init; }
+        public ProjectDefinition Project { get; init; }
 
-        public TypeDefinition Type { get; init; }
+        public TypeDefinition ContainingType { get; init; }
 
-        public IFieldSymbol Field { get; init; }
+        public TypeDefinition Type => throw new NotImplementedException();
+
+        private readonly IFieldSymbol _field;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal string Name => Field.Name;
+        internal string Name => _field.Name;
 
-        internal bool IsPublic => SymbolHelper.IsPublic(Field);
+        internal bool IsPublic => SymbolHelper.IsPublic(_field);
 
-        internal bool IsInternal => SymbolHelper.IsInternal(Field);
+        internal bool IsInternal => SymbolHelper.IsInternal(_field);
 
-        internal bool IsProtected => SymbolHelper.IsProtected(Field);
-        internal bool IsPrivate => SymbolHelper.IsPrivate(Field);
+        internal bool IsProtected => SymbolHelper.IsProtected(_field);
 
-        internal FieldDefinition(TypeDefinition type, IFieldSymbol symbol)
+        internal bool IsPrivate => SymbolHelper.IsPrivate(_field);
+
+        internal bool IsPrivateOrProtected => SymbolHelper.IsPrivateOrProtected(_field);
+
+        internal bool IsReadOnly => _field.IsReadOnly;
+
+        internal bool IsConst => _field.IsConst;
+
+        internal bool IsStatic => _field.IsStatic;
+
+        internal bool IsExternallyImmutable =>
+            IsStatic || IsPrivateOrProtected || IsReadOnly || IsConst;
+
+        internal FieldDefinition(
+            ProjectDefinition project,
+            TypeDefinition containingType,
+            IFieldSymbol field
+        )
         {
-            Project = type.Project;
-            Type = type;
-            Field = symbol;
-        }
-
-        internal Compilation? GetCompilation()
-        {
-            return Project?.GetCompilationAsync().Result;
+            Project = project;
+            ContainingType = containingType;
+            _field = field;
         }
 
         public override int GetHashCode()

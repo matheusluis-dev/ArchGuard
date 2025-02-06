@@ -1,4 +1,4 @@
-namespace ArchGuard.Extensions
+namespace ArchGuard.Core.Extensions
 {
     using System;
     using System.Collections.Generic;
@@ -43,13 +43,6 @@ namespace ArchGuard.Extensions
 
                 return allFieldsReadonlyOrPrivate && allPropertiesReadonlyOrPrivate;
             }
-        }
-
-        public static bool IsStaticless(this INamedTypeSymbol namedTypeSymbol)
-        {
-            ArgumentNullException.ThrowIfNull(namedTypeSymbol);
-
-            return namedTypeSymbol.GetMembers().All(m => !m.IsStatic);
         }
     }
 }

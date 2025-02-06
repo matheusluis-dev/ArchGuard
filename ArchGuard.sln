@@ -73,6 +73,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Extensions.Should
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.MockedAssembly.HaveDependencyOnNamespace", "tests\mocked-assemblies\types\ArchGuard.MockedAssembly.HaveDependencyOnNamespace\ArchGuard.MockedAssembly.HaveDependencyOnNamespace.csproj", "{57666F9D-C31D-495E-990A-B0FF8784EBCA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchGuard.Core.Roslyn", "src\ArchGuard.Core.Roslyn\ArchGuard.Core.Roslyn.csproj", "{7EE104BF-F7F5-4AF1-9607-8F58BF46AA9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -167,6 +169,10 @@ Global
 		{57666F9D-C31D-495E-990A-B0FF8784EBCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57666F9D-C31D-495E-990A-B0FF8784EBCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57666F9D-C31D-495E-990A-B0FF8784EBCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EE104BF-F7F5-4AF1-9607-8F58BF46AA9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EE104BF-F7F5-4AF1-9607-8F58BF46AA9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EE104BF-F7F5-4AF1-9607-8F58BF46AA9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EE104BF-F7F5-4AF1-9607-8F58BF46AA9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -199,6 +205,7 @@ Global
 		{D45AB9BE-A3F9-4E59-94BD-8D99C6470D19} = {9B90D0C4-6877-4065-984A-D9B5EC197F7A}
 		{DE82037D-0F6A-4C8A-AC90-6209C6E53117} = {5024B8E1-3A74-4072-8FCF-9AB3D0A5E5E2}
 		{57666F9D-C31D-495E-990A-B0FF8784EBCA} = {9B90D0C4-6877-4065-984A-D9B5EC197F7A}
+		{7EE104BF-F7F5-4AF1-9607-8F58BF46AA9D} = {5024B8E1-3A74-4072-8FCF-9AB3D0A5E5E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		FileExplorer = 

@@ -1,32 +1,15 @@
-namespace ArchGuard.Extensions
+namespace ArchGuard.Core.Extensions
 {
     using System;
-    using System.Linq;
+    using ArchGuard.Core;
     using ArchGuard.Core.Helpers;
     using Microsoft.CodeAnalysis;
-    using Microsoft.CodeAnalysis.CSharp.Syntax;
 
     public static class IPropertySymbolExtensions
     {
-        public static bool HasGetMethod(this IPropertySymbol propertySymbol)
-        {
-            ArgumentNullException.ThrowIfNull(propertySymbol);
-
-            return propertySymbol.GetMethod is not null;
-        }
-
-        public static bool HasSetMethod(this IPropertySymbol propertySymbol)
-        {
-            ArgumentNullException.ThrowIfNull(propertySymbol);
-
-            return propertySymbol.SetMethod is not null;
-        }
-
-       
-
         public static bool IsExternallyImmutable(
             this IPropertySymbol propertySymbol,
-            Project project,
+            ProjectDefinition project,
             bool ignorePrivateOrProtectedVerification = false
         )
         {
@@ -59,10 +42,8 @@ namespace ArchGuard.Extensions
             {
                 setImmutable =
                     propertySymbol!.SetMethod!.IsInitOnly
-                    || (
-                        SymbolHelper.IsPrivateOrProtected(propertySymbol.SetMethod)
-                        && !propertySymbol.SetMethod.ExternallyAltersState(project)
-                    );
+                    || SymbolHelper.IsPrivateOrProtected(propertySymbol.SetMethod)
+                        && !propertySymbol.SetMethod.ExternallyAltersState(project);
             }
 
             return getImmutable && setImmutable;

@@ -6,7 +6,7 @@ namespace ArchGuard.Cached
     using System.Threading;
     using Microsoft.CodeAnalysis;
 
-    public static class TypesSearchCached
+    public sealed class TypesLoader
     {
         private static readonly Lock _lock = new Lock();
 
@@ -15,7 +15,7 @@ namespace ArchGuard.Cached
             IEnumerable<INamedTypeSymbol>
         > _cache = new();
 
-        public static IEnumerable<INamedTypeSymbol> GetAllTypeMembers(
+        public IEnumerable<INamedTypeSymbol> GetAllTypeMembers(
             INamespaceSymbol namespaceSymbol,
             IAssemblySymbol assemblySymbol
         )
@@ -52,7 +52,7 @@ namespace ArchGuard.Cached
             }
         }
 
-        private static IEnumerable<INamedTypeSymbol> GetAllTypeMembers(
+        private IEnumerable<INamedTypeSymbol> GetAllTypeMembers(
             INamedTypeSymbol typeSymbol,
             IAssemblySymbol assemblySymbol
         )

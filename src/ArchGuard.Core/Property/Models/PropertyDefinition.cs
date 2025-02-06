@@ -3,6 +3,7 @@ namespace ArchGuard.Core.Property.Models
     using System;
     using System.Diagnostics;
     using ArchGuard.Core.Helpers;
+    using ArchGuard.Core.Method.Models;
     using ArchGuard.Core.Type.Models;
     using Microsoft.CodeAnalysis;
 
@@ -10,9 +11,10 @@ namespace ArchGuard.Core.Property.Models
     public sealed class PropertyDefinition : IEquatable<PropertyDefinition>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        public Project Project { get; init; }
+        public ProjectDefinition Project { get; init; }
 
-        public TypeDefinition Type { get; init; }
+        public TypeDefinition ContainingType { get; init; }
+        public TypeDefinition Type => throw new NotImplementedException();
 
         private readonly IPropertySymbol _property;
 
@@ -31,22 +33,55 @@ namespace ArchGuard.Core.Property.Models
 
         internal bool HasGetMethod => _property.GetMethod is not null;
 
+        internal MethodDefinition? GetMethod =>
+            HasGetMethod
+                ? new MethodDefinition(Project, ContainingType, _property.GetMethod!)
+                : null;
+
         internal bool HasSetMethod => _property.SetMethod is not null;
+
+        internal MethodDefinition? SetMethod =>
+            HasSetMethod
+                ? new MethodDefinition(Project, ContainingType, _property.SetMethod!)
+                : null;
 
         internal bool IsInitOnly => HasSetMethod && _property.SetMethod!.IsInitOnly;
 
         internal bool HasCustomBody => PropertySymbolHelper.HasCustomBody(_property);
 
-        internal PropertyDefinition(TypeDefinition type, IPropertySymbol property)
+        internal bool IsStatic => _property.IsStatic;
+
+        internal bool IsExternallyImmutable(bool ignorePrivateOrProtectedVerification = false)
         {
-            Project = type.Project;
-            Type = type;
-            _property = property;
+            // TODO: ignore properties with backing fields
+
+            if (IsStatic)
+                return true;
+
+            if (!ignorePrivateOrProtectedVerification && IsPrivateOrProtected)
+                return true;
+
+            if (!HasCustomBody)
+                return true;
+
+            if (!IsPrivateOrProtected || GetMethod?.IsExternallyImmutable() == false)
+                return false;
+
+            if (!IsInitOnly || !IsPrivateOrProtected || SetMethod?.IsExternallyImmutable() == false)
+                return false;
+
+            return true;
         }
 
-        internal Compilation? GetCompilation()
+        internal PropertyDefinition(
+            ProjectDefinition project,
+            TypeDefinition containingType,
+            IPropertySymbol property
+        )
         {
-            return Project?.GetCompilationAsync().Result;
+            Project = project;
+            ContainingType = containingType;
+            _property = property;
         }
 
         public override int GetHashCode()

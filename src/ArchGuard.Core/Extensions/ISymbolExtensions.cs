@@ -1,14 +1,15 @@
-namespace ArchGuard.Extensions
+namespace ArchGuard.Core.Extensions
 {
     using System;
     using System.Linq;
+    using ArchGuard.Core;
     using Microsoft.CodeAnalysis;
 
     public static class ISymbolExtensions
     {
         public static (SyntaxNode, SemanticModel) GetSemanticModel(
             this ISymbol symbol,
-            Project project
+            ProjectDefinition project
         )
         {
             ArgumentNullException.ThrowIfNull(symbol);
@@ -26,11 +27,9 @@ namespace ArchGuard.Extensions
                     $"Could not get syntax for {symbol.MetadataName}"
                 );
 
-            var compilation = project.GetCompilationAsync().Result;
-
             var syntaxTree = syntax.SyntaxTree;
             var semanticModel =
-                compilation?.GetSemanticModel(syntaxTree)
+                project.Compilation.GetSemanticModel(syntaxTree)
                 ?? throw new InvalidOperationException(
                     $"Could not get Semantic Model for {symbol.MetadataName}"
                 );

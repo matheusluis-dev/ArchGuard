@@ -164,5 +164,12 @@ namespace ArchGuard.Core.Helpers
 
             return !hasInstanceFields && !hasInstanceProperties && !hasInstanceEvents;
         }
+
+        public static bool IsStaticless(INamedTypeSymbol namedTypeSymbol)
+        {
+            ArgumentNullException.ThrowIfNull(namedTypeSymbol);
+
+            return namedTypeSymbol.GetMembers().All(m => !m.IsStatic);
+        }
     }
 }

@@ -1,4 +1,4 @@
-namespace ArchGuard.Extensions
+namespace ArchGuard.Core.Extensions
 {
     using System;
 

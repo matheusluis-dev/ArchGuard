@@ -4,8 +4,8 @@ namespace ArchGuard.Core.Predicates.Type
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
+    using ArchGuard.Core.Extensions;
     using ArchGuard.Core.Type.Models;
-    using ArchGuard.Extensions;
     using Microsoft.CodeAnalysis;
 
     public static partial class TypePredicate

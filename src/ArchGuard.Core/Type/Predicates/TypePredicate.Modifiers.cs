@@ -1,39 +1,32 @@
 namespace ArchGuard.Core.Predicates.Type
 {
     using System;
-    using System.Linq;
     using ArchGuard.Core.Type.Models;
-    using Microsoft.CodeAnalysis;
-    using Microsoft.CodeAnalysis.CSharp;
-    using Microsoft.CodeAnalysis.CSharp.Syntax;
 
     public static partial class TypePredicate
     {
         public static Func<TypeDefinition, StringComparison, bool> Partial =>
-            (type, _) =>
-                type
-                    .Symbol.DeclaringSyntaxReferences.Select(reference => reference.GetSyntax())
-                    .OfType<TypeDeclarationSyntax>()
-                    .Any(syntax => syntax.Modifiers.Any(SyntaxKind.PartialKeyword));
+            (type, _) => type.IsPartial;
         public static Func<TypeDefinition, StringComparison, bool> NotPartial =>
             (type, _) => !Partial(type, _);
 
         public static Func<TypeDefinition, StringComparison, bool> Sealed =>
-            (type, _) => type.Symbol.IsSealed;
+            (type, _) => type.IsSealed;
         public static Func<TypeDefinition, StringComparison, bool> NotSealed =>
             (type, _) => !Sealed(type, _);
 
         public static Func<TypeDefinition, StringComparison, bool> Nested =>
-            (type, _) => type.Symbol.ContainingType != null;
+            (type, _) => type.IsNested;
         public static Func<TypeDefinition, StringComparison, bool> NotNested =>
             (type, _) => !Nested(type, _);
 
         public static Func<TypeDefinition, StringComparison, bool> Static =>
-            (type, _) => type.Symbol.IsStatic;
+            (type, _) => type.IsStatic;
         public static Func<TypeDefinition, StringComparison, bool> NotStatic =>
             (type, _) => !Static(type, _);
+
         public static Func<TypeDefinition, StringComparison, bool> Abstract =>
-            (type, _) => type.Symbol.IsAbstract;
+            (type, _) => type.IsAbstract;
         public static Func<TypeDefinition, StringComparison, bool> NotAbstract =>
             (type, _) => !Abstract(type, _);
     }

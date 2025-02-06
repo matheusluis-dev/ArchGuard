@@ -8,61 +8,144 @@ namespace ArchGuard.Core.Type.Models
     using ArchGuard.Core.Field.Models;
     using ArchGuard.Core.Helpers;
     using ArchGuard.Core.Method.Models;
+    using ArchGuard.Core.Property.Models;
     using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.CSharp;
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
 
     [DebuggerDisplay("{FullName} | Project: {Project.Name}")]
     public sealed class TypeDefinition : IEquatable<TypeDefinition>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        public Project Project { get; init; }
-
-        private readonly INamedTypeSymbol _symbol;
+        internal ProjectDefinition Project { get; init; }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal string Name => TypeSymbolHelper.GetName(_symbol);
+        internal string Name => TypeSymbolHelper.GetName(_type);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        public string FullName => TypeSymbolHelper.GetFullName(_symbol);
+        public string FullName => TypeSymbolHelper.GetFullName(_type);
 
-        internal string Namespace => _symbol.ContainingNamespace.GetFullName();
+        internal string Namespace => NamespaceSymbolHelper.GetFullName(_type.ContainingNamespace);
 
-        internal bool IsPublic => TypeSymbolHelper.IsPublic(_symbol);
+        internal bool IsPartial =>
+            _type
+                .DeclaringSyntaxReferences.Select(reference => reference.GetSyntax())
+                .OfType<TypeDeclarationSyntax>()
+                .Any(syntax => syntax.Modifiers.Any(SyntaxKind.PartialKeyword));
 
-        internal bool IsInternal => TypeSymbolHelper.IsInternal(_symbol);
+        internal bool IsSealed => _type.IsSealed;
 
-        internal bool IsProtected => SymbolHelper.IsProtected(_symbol);
+        internal bool IsNested => _type.ContainingType is not null;
 
-        internal bool IsPrivate => SymbolHelper.IsPrivate(_symbol);
+        internal bool IsStatic => _type.IsStatic;
 
-        internal bool IsPrivateOrProtected => SymbolHelper.IsPrivateOrProtected(_symbol);
+        internal bool IsAbstract => _type.IsAbstract;
 
-        internal bool IsFileLocal => TypeSymbolHelper.IsFileLocal(_symbol);
+        internal bool IsPublic => TypeSymbolHelper.IsPublic(_type);
 
-        internal bool IsInterface => _symbol.TypeKind is TypeKind.Interface;
+        internal bool IsInternal => TypeSymbolHelper.IsInternal(_type);
 
-        internal bool IsGenericType => _symbol.IsGenericType;
+        internal bool IsProtected => SymbolHelper.IsProtected(_type);
 
-        internal bool IsImmutable => TypeSymbolHelper.IsImmutable(_symbol);
+        internal bool IsPrivate => SymbolHelper.IsPrivate(_type);
 
-        internal bool IsStateless => TypeSymbolHelper.IsStateless(_symbol);
+        internal bool IsPrivateOrProtected => SymbolHelper.IsPrivateOrProtected(_type);
+
+        internal bool IsFileLocal => TypeSymbolHelper.IsFileLocal(_type);
+
+        internal bool IsGenericType => _type.IsGenericType;
+
+        internal bool IsImmutable => TypeSymbolHelper.IsImmutable(_type);
+
+        internal bool IsStateless => TypeSymbolHelper.IsStateless(_type);
+
+        internal bool IsStaticless => TypeSymbolHelper.IsStaticless(_type);
+
+        internal bool IsClass => _type.TypeKind is TypeKind.Class && !IsRecord;
+
+        internal bool IsRecord => _type.IsRecord && _type.TypeKind is not TypeKind.Struct;
+
+        internal bool IsInterface => _type.TypeKind is TypeKind.Interface;
+
+        internal bool IsStruct => _type.TypeKind is TypeKind.Struct && !IsRecordStruct;
+
+        internal bool IsRecordStruct =>
+            _type.TypeKind is TypeKind.Struct or TypeKind.Structure && _type.IsRecord;
+
+        internal bool IsEnum => _type.TypeKind is TypeKind.Enum;
 
         internal IEnumerable<string> SourceFiles =>
-            _symbol.Locations.Select(l => l.SourceTree!.FilePath)!;
+            _type
+                .Locations.Where(l => l.SourceTree is not null)
+                .Select(l => l.SourceTree!.FilePath);
 
-        internal TypeDefinition(Project project, INamedTypeSymbol symbol)
+        internal bool SourceFilePathMatchesNamespace(StringComparison comparison)
         {
+            if (!SourceFiles.Any())
+                return false;
+
+            var separator = Path.DirectorySeparatorChar;
+
+            foreach (var file in SourceFiles)
+            {
+                var directory = Path.GetDirectoryName(file);
+
+                var lastIndexSeparatorAtEnd = directory!.LastIndexOf(
+                    separator + Project.DefaultNamespace + separator,
+                    comparison
+                );
+
+                var lastIndexSeparatorAtStartOnly = directory.LastIndexOf(
+                    separator + Project.DefaultNamespace + separator,
+                    comparison
+                );
+
+                var lastIndex =
+                    lastIndexSeparatorAtEnd > -1
+                        ? lastIndexSeparatorAtEnd
+                        : lastIndexSeparatorAtStartOnly;
+
+                var filePathNormalized = directory[(lastIndex + 1)..].Replace(separator, '.');
+
+                if (Namespace.Equals(filePathNormalized, comparison))
+                    return true;
+            }
+
+            return false;
+        }
+
+        internal bool SourceFileNameMatchesTypeName(StringComparison comparison)
+        {
+            if (!SourceFiles.Any())
+                return false;
+
+            return SourceFiles.Any(file =>
+                Path.GetFileNameWithoutExtension(file).Equals(Name, comparison)
+            );
+        }
+
+        private readonly DependencyFinder _dependencySearch;
+        private readonly INamedTypeSymbol _type;
+
+        internal TypeDefinition(
+            DependencyFinder dependencySearch,
+            ProjectDefinition project,
+            INamedTypeSymbol symbol
+        )
+        {
+            _dependencySearch = dependencySearch;
             Project = project;
-            _symbol = symbol;
+            _type = symbol;
         }
 
         private IEnumerable<TypeDefinition> GetInterfaces()
         {
-            if (!_symbol.AllInterfaces.Any())
+            if (!_type.AllInterfaces.Any())
                 return [];
 
             return GetAllTypesFromProject()
                 .Where(type =>
-                    _symbol.AllInterfaces.Any(@interface =>
+                    _type.AllInterfaces.Any(@interface =>
                         TypeSymbolHelper
                             .GetFullName(@interface)
                             .Equals(type.FullName, StringComparison.Ordinal)
@@ -85,7 +168,7 @@ namespace ArchGuard.Core.Type.Models
             return GetAllTypesFromProject()
                 .Where(type =>
                     TypeSymbolHelper
-                        .Inheritances(_symbol)
+                        .Inheritances(_type)
                         .Any(symbol =>
                             TypeSymbolHelper
                                 .GetFullName(symbol)
@@ -94,22 +177,17 @@ namespace ArchGuard.Core.Type.Models
                 );
         }
 
-        internal Compilation? GetCompilation()
-        {
-            return Project?.GetCompilationAsync().Result;
-        }
-
         internal IEnumerable<TypeDefinition> GetAllTypesFromProject()
         {
-            var compilation = GetCompilation();
+            var compilation = Project.Compilation;
 
-            return TypesSearchCached
+            return TypesLoader
                 .GetAllTypeMembers(compilation!.GlobalNamespace, compilation!.Assembly)
-                .Select(type => new TypeDefinition(Project, type));
+                .Select(type => new TypeDefinition(_dependencySearch, Project, type));
         }
 
         internal IEnumerable<TypeDefinition> GetAllTypesFromProject(
-            IEnumerable<INamedTypeSymbol> filter
+            params IEnumerable<INamedTypeSymbol> filter
         )
         {
             return GetAllTypesFromProject()
@@ -122,41 +200,60 @@ namespace ArchGuard.Core.Type.Models
                 );
         }
 
-        internal IEnumerable<IMethodSymbol> GetConstructors()
+        internal IEnumerable<ConstructorDefinition> GetConstructors()
         {
-            return _symbol
+            return _type
                 .GetMembers()
                 .OfType<IMethodSymbol>()
-                .Where(method => method.MethodKind is MethodKind.Constructor);
+                .Where(constructor => constructor.MethodKind is MethodKind.Constructor)
+                .Select(constructor => new ConstructorDefinition(Project, this, constructor));
         }
 
         internal IEnumerable<MethodDefinition> GetMethods()
         {
-            return _symbol
+            return _type
                 .GetMembers()
                 .OfType<IMethodSymbol>()
                 .Where(method =>
                     method.MethodKind is MethodKind.Ordinary && !method.IsImplicitlyDeclared
                 )
-                .Select(method => new MethodDefinition(this, method));
+                .Select(method => new MethodDefinition(Project, this, method));
         }
 
         internal IEnumerable<FieldDefinition> GetFields()
         {
-            return _symbol
+            return _type
                 .GetMembers()
                 .OfType<IFieldSymbol>()
-                .Select(field => new FieldDefinition(this, field));
+                .Select(field => new FieldDefinition(Project, this, field));
         }
 
         internal IEnumerable<IFieldSymbol> GetConstants()
         {
-            return _symbol.GetMembers().OfType<IFieldSymbol>().Where(field => field.IsConst);
+            return _type.GetMembers().OfType<IFieldSymbol>().Where(field => field.IsConst);
         }
 
-        internal IEnumerable<IPropertySymbol> GetProperties()
+        internal IEnumerable<PropertyDefinition> GetProperties()
         {
-            return _symbol.GetMembers().OfType<IPropertySymbol>();
+            return _type
+                .GetMembers()
+                .OfType<IPropertySymbol>()
+                .Select(property => new PropertyDefinition(Project, this, property));
+        }
+
+        internal IEnumerable<TypeDefinition> GetDependencies()
+        {
+            return _dependencySearch.GetDependencies(this);
+        }
+
+        internal bool IsExternallyImmutable()
+        {
+            if (GetFields().Any(field => !field.IsExternallyImmutable))
+                return false;
+
+            //if (GetProperties().Any(property => property.isExternallyImmutable))
+
+            return true;
         }
 
         public override int GetHashCode()

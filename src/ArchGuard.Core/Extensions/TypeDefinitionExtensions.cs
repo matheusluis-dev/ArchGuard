@@ -1,9 +1,8 @@
-namespace ArchGuard.Extensions
+namespace ArchGuard.Core.Extensions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ArchGuard.Cached;
     using ArchGuard.Core.Helpers;
     using ArchGuard.Core.Type.Models;
     using Microsoft.CodeAnalysis;
@@ -52,7 +51,7 @@ namespace ArchGuard.Extensions
                 .All(@event =>
                     @event.IsStatic
                     || SymbolHelper.IsPrivateOrProtected(@event)
-                    || @event.AddMethod?.IsStatic == true
+                    || @event.AddMethod?.IsStatic
                     || (
                         @event.AddMethod is not null
                         && SymbolHelper.IsPrivateOrProtected(@event.AddMethod)
@@ -70,15 +69,6 @@ namespace ArchGuard.Extensions
                     || SymbolHelper.IsPrivateOrProtected(method)
                     || !method.ExternallyAltersState(project)
                 );
-        }
-
-        public static IEnumerable<TypeDefinition> GetDependencies(
-            this TypeDefinition typeDefinition
-        )
-        {
-            ArgumentNullException.ThrowIfNull(typeDefinition);
-
-            return DependencySearchCached.GetDependencies(typeDefinition);
         }
 
         public static bool IsUsedBy(this TypeDefinition typeDefinition, IEnumerable<string> types)

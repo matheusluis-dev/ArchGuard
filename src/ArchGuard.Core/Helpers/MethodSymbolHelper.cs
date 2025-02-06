@@ -1,12 +1,13 @@
 namespace ArchGuard.Core.Helpers
 {
+    using ArchGuard.Core.Extensions;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
     internal static class MethodSymbolHelper
     {
         private static IEnumerable<IMethodSymbol> GetCalledMethods(
-            Project project,
+            ProjectDefinition project,
             IMethodSymbol methodSymbol
         )
         {
@@ -23,7 +24,7 @@ namespace ArchGuard.Core.Helpers
         }
 
         internal static IEnumerable<INamedTypeSymbol> GetAssignmentsTypes(
-            Project project,
+            ProjectDefinition project,
             IMethodSymbol methodSymbol
         )
         {
@@ -51,7 +52,7 @@ namespace ArchGuard.Core.Helpers
         }
 
         internal static IEnumerable<INamedTypeSymbol> GetPropertiesAccessorsTypes(
-            Project project,
+            ProjectDefinition project,
             IMethodSymbol methodSymbol
         )
         {
@@ -82,7 +83,7 @@ namespace ArchGuard.Core.Helpers
 
         internal static bool ExternallyAltersState(
             IMethodSymbol methodSymbol,
-            Project project,
+            ProjectDefinition project,
             bool ignorePrivateOrProtectedVerification = false
         )
         {
@@ -117,7 +118,7 @@ namespace ArchGuard.Core.Helpers
                             SymbolHelper.IsPrivateOrProtected(symbol)
                             || (
                                 symbol is IPropertySymbol propertySymbol
-                                && propertySymbol.HasSetMethod()
+                                && propertySymbol.SetMethod is not null
                                 && SymbolHelper.IsPrivateOrProtected(propertySymbol.SetMethod!)
                             )
                         )
@@ -155,6 +156,103 @@ namespace ArchGuard.Core.Helpers
                             ignorePrivateOrProtectedVerification: true
                         ) == true
                     );
+            }
+        }
+
+        public static IEnumerable<INamedTypeSymbol> GetDependencies(
+            this IMethodSymbol methodSymbol,
+            INamedTypeSymbol type
+        )
+        {
+            ArgumentNullException.ThrowIfNull(methodSymbol);
+            ArgumentNullException.ThrowIfNull(type);
+
+            var project = type.Project;
+
+            if (!SymbolHelper.HasDeclaringSyntaxReferences(methodSymbol))
+                return [];
+
+            (var syntax, var semanticModel) = methodSymbol.GetSemanticModel(project);
+
+            var dependencies = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
+
+            CheckParameters();
+            CheckReturnType();
+            CheckBodyTypes();
+            CheckCalledMethods();
+
+            return dependencies;
+
+            void CheckParameters()
+            {
+                dependencies.UnionWith(
+                    methodSymbol
+                        .Parameters.Select(parameter => parameter.Type)
+                        .OfType<INamedTypeSymbol>()
+                        .Where(type =>
+                            type.GetAllTypesFromProject()
+                                .Any(typeDefinition =>
+                                    typeDefinition.Symbol.Equals(
+                                        type,
+                                        SymbolEqualityComparer.Default
+                                    )
+                                )
+                        )
+                        .Where(type => !type.Equals(type))
+                        .Select(type => new INamedTypeSymbol(project, type))
+                );
+            }
+
+            void CheckReturnType()
+            {
+                if (
+                    methodSymbol.ReturnType is INamedTypeSymbol methodReturnType
+                    && type.GetAllTypesFromProject()
+                        .Where(type => !type.Equals(type))
+                        .Any(typeDefinition =>
+                            typeDefinition.Symbol.Equals(
+                                methodReturnType,
+                                SymbolEqualityComparer.Default
+                            )
+                        )
+                )
+                {
+                    dependencies.Add(new(project, methodReturnType));
+                }
+            }
+
+            void CheckBodyTypes()
+            {
+                dependencies.UnionWith(
+                    syntax
+                        .DescendantNodes()
+                        .OfType<IdentifierNameSyntax>()
+                        .Select(identifier => semanticModel.GetSymbolInfo(identifier).Symbol)
+                        .OfType<INamedTypeSymbol>()
+                        .Where(type =>
+                            type.GetAllTypesFromProject()
+                                .Any(typeDefinition =>
+                                    typeDefinition.Symbol.Equals(
+                                        type,
+                                        SymbolEqualityComparer.Default
+                                    )
+                                )
+                        )
+                        .Where(type => !type.Equals(type))
+                        .Select(type => new INamedTypeSymbol(project, type))
+                );
+            }
+
+            void CheckCalledMethods()
+            {
+                dependencies.UnionWith(
+                    syntax
+                        .DescendantNodes()
+                        .OfType<InvocationExpressionSyntax>()
+                        .Select(invocation => semanticModel.GetSymbolInfo(invocation).Symbol)
+                        .OfType<IMethodSymbol>()
+                        .SelectMany(calledMethod => calledMethod.GetDependencies(type))
+                );
             }
         }
     }

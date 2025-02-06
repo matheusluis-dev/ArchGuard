@@ -2,11 +2,13 @@ namespace ArchGuard
 {
     public static class Types
     {
-        public static ITypeFilterEntryPoint InSolution(SolutionSearchParameters parameters)
+        public static ITypeFilterEntryPoint InSolution(
+            string solutionPath,
+            string projectName,
+            string preprocessor
+        )
         {
-            var rulesContext = new RulesContext(parameters);
-
-            return rulesContext.StartTypeFilter();
+            return IoC.Create(solutionPath, projectName, preprocessor);
         }
     }
 }

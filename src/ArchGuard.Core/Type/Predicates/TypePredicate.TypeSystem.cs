@@ -2,38 +2,36 @@ namespace ArchGuard.Core.Predicates.Type
 {
     using System;
     using ArchGuard.Core.Type.Models;
-    using Microsoft.CodeAnalysis;
 
     public static partial class TypePredicate
     {
         public static Func<TypeDefinition, StringComparison, bool> Class =>
-            (type, _) => type.Symbol.TypeKind == TypeKind.Class && NotRecord(type, _);
+            (type, _) => type.IsClass;
         public static Func<TypeDefinition, StringComparison, bool> NotClass =>
-            (type, _) => type.Symbol.TypeKind is not TypeKind.Class || type.Symbol.IsRecord;
+            (type, _) => !Class(type, _);
 
         public static Func<TypeDefinition, StringComparison, bool> Interface =>
-            (type, _) => type.Symbol.TypeKind == TypeKind.Interface;
+            (type, _) => type.IsInterface;
         public static Func<TypeDefinition, StringComparison, bool> NotInterface =>
             (type, _) => !Interface(type, _);
 
         public static Func<TypeDefinition, StringComparison, bool> Struct =>
-            (type, _) => type.Symbol.TypeKind == TypeKind.Struct && !type.Symbol.IsRecord;
+            (type, _) => type.IsStruct;
         public static Func<TypeDefinition, StringComparison, bool> NotStruct =>
-            (type, _) => type.Symbol.TypeKind is not TypeKind.Struct || type.Symbol.IsRecord;
+            (type, _) => !Struct(type, _);
 
-        public static Func<TypeDefinition, StringComparison, bool> Enum =>
-            (type, _) => type.Symbol.TypeKind == TypeKind.Enum;
+        public static Func<TypeDefinition, StringComparison, bool> Enum => (type, _) => type.IsEnum;
         public static Func<TypeDefinition, StringComparison, bool> NotEnum =>
             (type, _) => !Enum(type, _);
 
         public static Func<TypeDefinition, StringComparison, bool> Record =>
-            (type, _) => type.Symbol.IsRecord && type.Symbol.TypeKind is not TypeKind.Struct;
+            (type, _) => type.IsRecord;
         public static Func<TypeDefinition, StringComparison, bool> NotRecord =>
-            (type, _) => !type.Symbol.IsRecord || type.Symbol.TypeKind is TypeKind.Struct;
+            (type, _) => !Record(type, _);
 
         public static Func<TypeDefinition, StringComparison, bool> RecordStruct =>
-            (type, _) => type.Symbol.IsRecord && type.Symbol.TypeKind is TypeKind.Struct;
+            (type, _) => type.IsRecordStruct;
         public static Func<TypeDefinition, StringComparison, bool> NotRecordStruct =>
-            (type, _) => !type.Symbol.IsRecord || type.Symbol.TypeKind is not TypeKind.Struct;
+            (type, _) => !RecordStruct(type, _);
     }
 }

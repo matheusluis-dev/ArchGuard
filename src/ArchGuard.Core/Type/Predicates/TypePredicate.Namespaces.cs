@@ -3,8 +3,8 @@ namespace ArchGuard.Core.Predicates.Type
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using ArchGuard.Core.Extensions;
     using ArchGuard.Core.Type.Models;
-    using ArchGuard.Extensions;
     using Microsoft.CodeAnalysis;
 
     public static partial class TypePredicate
@@ -14,8 +14,7 @@ namespace ArchGuard.Core.Predicates.Type
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentNullException(nameof(name));
 
-            return !(type.Symbol.ContainingNamespace is null)
-                && !type.Symbol.ContainingNamespace.IsGlobalNamespace;
+            return !string.IsNullOrWhiteSpace(type.Namespace);
         }
 
         public static Func<TypeDefinition, StringComparison, bool> ResideInNamespace(
@@ -24,10 +23,7 @@ namespace ArchGuard.Core.Predicates.Type
         {
             return (type, comparison) =>
             {
-                var namespaceExists = names.Contains(
-                    type.Symbol.ContainingNamespace.GetFullName(),
-                    comparison.ToComparer()
-                );
+                var namespaceExists = names.Contains(type.Namespace, comparison.ToComparer());
 
                 return names.Any(name =>
                 {
@@ -35,8 +31,7 @@ namespace ArchGuard.Core.Predicates.Type
                         namespaceExists || name[name.Length - 1] == '.' ? name : name + ".";
 
                     return NamespaceDefaultPredicate(type, name)
-                        && type.Symbol.ContainingNamespace.GetFullName()
-                            .StartsWith(@namespace, comparison);
+                        && type.Namespace.StartsWith(@namespace, comparison);
                 });
             };
         }
@@ -55,7 +50,7 @@ namespace ArchGuard.Core.Predicates.Type
             return (type, comparison) =>
                 names.Any(name =>
                     NamespaceDefaultPredicate(type, name)
-                    && type.Symbol.ContainingNamespace.GetFullName().IndexOf(name, comparison) != -1
+                    && type.Namespace.IndexOf(name, comparison) != -1
                 );
         }
 
@@ -73,7 +68,7 @@ namespace ArchGuard.Core.Predicates.Type
             return (type, comparison) =>
                 names.Any(name =>
                     NamespaceDefaultPredicate(type, name)
-                    && type.Symbol.ContainingNamespace.GetFullName().EndsWith(name, comparison)
+                    && type.Namespace.EndsWith(name, comparison)
                 );
         }
 

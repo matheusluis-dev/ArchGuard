@@ -6,13 +6,13 @@ namespace ArchGuard.Core.Method.Models
     using ArchGuard.Core.Type.Models;
     using Microsoft.CodeAnalysis;
 
-    [DebuggerDisplay("{Name} | Type: {Type.SymbolFullName}")]
+    [DebuggerDisplay("{Name} - {ContainingType.FullName}")]
     public sealed class MethodDefinition : IEquatable<MethodDefinition>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        public Project Project { get; init; }
+        public ProjectDefinition Project { get; init; }
 
-        public TypeDefinition Type { get; init; }
+        public TypeDefinition ContainingType { get; init; }
 
         private readonly IMethodSymbol _method;
 
@@ -29,30 +29,52 @@ namespace ArchGuard.Core.Method.Models
 
         internal bool IsPrivateOrProtected => SymbolHelper.IsPrivateOrProtected(_method);
 
-        internal MethodDefinition(TypeDefinition type, IMethodSymbol symbol)
+        internal bool IsAsync => _method.IsAsync;
+
+        internal bool IsStatic => _method.IsStatic;
+
+        internal TypeDefinition ReturnType =>
+            ContainingType
+                .GetAllTypesFromProject(_method.ReturnType as INamedTypeSymbol)
+                .FirstOrDefault();
+
+        internal bool IsExternallyImmutable(bool ignorePrivateOrProtectedVerification = false)
         {
-            Project = type.Project;
-            Type = type;
-            _method = symbol;
+            if (GetTypesAssignedInBody().Any())
+                return false;
+
+            return true;
+        }
+
+        internal MethodDefinition(
+            ProjectDefinition project,
+            TypeDefinition containingType,
+            IMethodSymbol method
+        )
+        {
+            Project = project;
+            ContainingType = containingType;
+            _method = method;
         }
 
         internal IEnumerable<TypeDefinition> GetTypesAssignedInBody()
         {
-            return Type.GetAllTypesFromProject(
+            return ContainingType.GetAllTypesFromProject(
                 MethodSymbolHelper.GetAssignmentsTypes(Project, _method)
             );
         }
 
         internal IEnumerable<TypeDefinition> GetPropertiesAccessorsTypes()
         {
-            return Type.GetAllTypesFromProject(
+            return ContainingType.GetAllTypesFromProject(
                 MethodSymbolHelper.GetPropertiesAccessorsTypes(Project, _method)
             );
         }
 
-        internal Compilation? GetCompilation()
+        internal IEnumerable<TypeDefinition> GetDependencies()
         {
-            return Project?.GetCompilationAsync().Result;
+            // TODO
+            throw new NotImplementedException();
         }
 
         public override int GetHashCode()
