@@ -10,6 +10,8 @@ namespace ArchGuard.Core
     [DebuggerDisplay("{Name} - {ContainingType.FullName}")]
     public sealed class ConstructorDefinition : IEquatable<ConstructorDefinition>
     {
+        public SolutionDefinition Solution { get; init; }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public ProjectDefinition Project { get; init; }
 
@@ -32,12 +34,8 @@ namespace ArchGuard.Core
 
         internal bool HasParameters => _constructor.Parameters.Any();
 
-        internal TypeDefinition ReturnType =>
-            ContainingType
-                .GetAllTypesFromProject(_constructor.ReturnType as INamedTypeSymbol)
-                .FirstOrDefault();
-
         internal ConstructorDefinition(
+            SolutionDefinition solution,
             ProjectDefinition project,
             TypeDefinition containingType,
             IMethodSymbol constructor
@@ -46,6 +44,7 @@ namespace ArchGuard.Core
             if (constructor.MethodKind is not MethodKind.Constructor)
                 throw new ArgumentException("Method is not a Constructor", nameof(constructor));
 
+            Solution = solution;
             Project = project;
             ContainingType = containingType;
             _constructor = constructor;

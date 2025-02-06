@@ -56,6 +56,12 @@ namespace ArchGuard.Cached
 
                 var solution = workspace.OpenSolutionAsync(resultSlnPath.Value.FullName).Result;
 
+                var solutionDefinition = new SolutionDefinition(
+                    _dependencyFinder,
+                    _typesLoader,
+                    solution
+                );
+
                 var projects = solution
                     .Projects.Where(p =>
                         p.Name.Equals(parameters.ProjectName, StringComparison.Ordinal)
@@ -70,6 +76,7 @@ namespace ArchGuard.Cached
                     .Select(project => new ProjectDefinition(
                         _dependencyFinder,
                         _typesLoader,
+                        solutionDefinition,
                         project
                     ));
 
@@ -80,11 +87,7 @@ namespace ArchGuard.Cached
                     );
                 }
 
-                var solutionDefinition = new SolutionDefinition(
-                    _dependencyFinder,
-                    _typesLoader,
-                    solution
-                );
+                solutionDefinition.Projects = projects;
 
                 _cache.TryAdd(parameters, solutionDefinition);
 

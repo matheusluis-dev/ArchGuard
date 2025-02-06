@@ -9,12 +9,20 @@ namespace ArchGuard.Core.Field.Models
     [DebuggerDisplay("{Name} | Type: {Type.SymbolFullName}")]
     public sealed class FieldDefinition : IEquatable<FieldDefinition>
     {
+        internal SolutionDefinition Solution { get; init; }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public ProjectDefinition Project { get; init; }
 
         public TypeDefinition ContainingType { get; init; }
 
-        public TypeDefinition Type => throw new NotImplementedException();
+        public TypeDefinition Type =>
+            Solution.AllTypes.First(type =>
+                type.FullName.Equals(
+                    TypeSymbolHelper.GetFullName(_field.Type),
+                    StringComparison.Ordinal
+                )
+            );
 
         private readonly IFieldSymbol _field;
 
@@ -41,11 +49,13 @@ namespace ArchGuard.Core.Field.Models
             IsStatic || IsPrivateOrProtected || IsReadOnly || IsConst;
 
         internal FieldDefinition(
+            SolutionDefinition solution,
             ProjectDefinition project,
             TypeDefinition containingType,
             IFieldSymbol field
         )
         {
+            Solution = solution;
             Project = project;
             ContainingType = containingType;
             _field = field;

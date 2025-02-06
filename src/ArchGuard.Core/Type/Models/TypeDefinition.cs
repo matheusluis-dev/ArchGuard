@@ -16,6 +16,8 @@ namespace ArchGuard.Core.Type.Models
     [DebuggerDisplay("{FullName} | Project: {Project.Name}")]
     public sealed class TypeDefinition : IEquatable<TypeDefinition>
     {
+        internal SolutionDefinition Solution { get; init; }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal ProjectDefinition Project { get; init; }
 
@@ -129,13 +131,15 @@ namespace ArchGuard.Core.Type.Models
 
         internal TypeDefinition(
             DependencyFinder dependencySearch,
+            SolutionDefinition solution,
             ProjectDefinition project,
-            INamedTypeSymbol symbol
+            INamedTypeSymbol type
         )
         {
             _dependencySearch = dependencySearch;
+            Solution = solution;
             Project = project;
-            _type = symbol;
+            _type = type;
         }
 
         private IEnumerable<TypeDefinition> GetInterfaces()
@@ -143,14 +147,13 @@ namespace ArchGuard.Core.Type.Models
             if (!_type.AllInterfaces.Any())
                 return [];
 
-            return GetAllTypesFromProject()
-                .Where(type =>
-                    _type.AllInterfaces.Any(@interface =>
-                        TypeSymbolHelper
-                            .GetFullName(@interface)
-                            .Equals(type.FullName, StringComparison.Ordinal)
-                    )
-                );
+            return Solution.AllTypes.Where(type =>
+                _type.AllInterfaces.Any(@interface =>
+                    TypeSymbolHelper
+                        .GetFullName(@interface)
+                        .Equals(type.FullName, StringComparison.Ordinal)
+                )
+            );
         }
 
         internal IEnumerable<TypeDefinition> GetImplementedInterfaces()
@@ -165,40 +168,22 @@ namespace ArchGuard.Core.Type.Models
 
         internal IEnumerable<TypeDefinition> GetInheritances()
         {
-            return GetAllTypesFromProject()
-                .Where(type =>
-                    TypeSymbolHelper
-                        .Inheritances(_type)
-                        .Any(symbol =>
-                            TypeSymbolHelper
-                                .GetFullName(symbol)
-                                .Equals(type.FullName, StringComparison.Ordinal)
-                        )
-                );
-        }
+            if (IsInterface)
+                return GetInterfaces();
 
-        internal IEnumerable<TypeDefinition> GetAllTypesFromProject()
-        {
-            var compilation = Project.Compilation;
-
-            return TypesLoader
-                .GetAllTypeMembers(compilation!.GlobalNamespace, compilation!.Assembly)
-                .Select(type => new TypeDefinition(_dependencySearch, Project, type));
-        }
-
-        internal IEnumerable<TypeDefinition> GetAllTypesFromProject(
-            params IEnumerable<INamedTypeSymbol> filter
-        )
-        {
-            return GetAllTypesFromProject()
-                .Where(type =>
-                    filter.Any(a =>
+            return Solution.AllTypes.Where(type =>
+                !type.IsInterface
+                && TypeSymbolHelper
+                    .GetTypeInheritances(_type)
+                    .Any(symbol =>
                         TypeSymbolHelper
-                            .GetFullName(a)
+                            .GetFullName(symbol)
                             .Equals(type.FullName, StringComparison.Ordinal)
                     )
-                );
+            );
         }
+
+
 
         internal IEnumerable<ConstructorDefinition> GetConstructors()
         {
@@ -206,7 +191,12 @@ namespace ArchGuard.Core.Type.Models
                 .GetMembers()
                 .OfType<IMethodSymbol>()
                 .Where(constructor => constructor.MethodKind is MethodKind.Constructor)
-                .Select(constructor => new ConstructorDefinition(Project, this, constructor));
+                .Select(constructor => new ConstructorDefinition(
+                    Solution,
+                    Project,
+                    this,
+                    constructor
+                ));
         }
 
         internal IEnumerable<MethodDefinition> GetMethods()
@@ -215,9 +205,13 @@ namespace ArchGuard.Core.Type.Models
                 .GetMembers()
                 .OfType<IMethodSymbol>()
                 .Where(method =>
-                    method.MethodKind is MethodKind.Ordinary && !method.IsImplicitlyDeclared
+                    method.MethodKind
+                        is MethodKind.Ordinary
+                            or MethodKind.PropertyGet
+                            or MethodKind.PropertySet
+                    && !method.IsImplicitlyDeclared
                 )
-                .Select(method => new MethodDefinition(Project, this, method));
+                .Select(method => new MethodDefinition(Solution, Project, this, method));
         }
 
         internal IEnumerable<FieldDefinition> GetFields()
@@ -225,7 +219,7 @@ namespace ArchGuard.Core.Type.Models
             return _type
                 .GetMembers()
                 .OfType<IFieldSymbol>()
-                .Select(field => new FieldDefinition(Project, this, field));
+                .Select(field => new FieldDefinition(Solution, Project, this, field));
         }
 
         internal IEnumerable<IFieldSymbol> GetConstants()
@@ -238,7 +232,7 @@ namespace ArchGuard.Core.Type.Models
             return _type
                 .GetMembers()
                 .OfType<IPropertySymbol>()
-                .Select(property => new PropertyDefinition(Project, this, property));
+                .Select(property => new PropertyDefinition(Solution, Project, this, property));
         }
 
         internal IEnumerable<TypeDefinition> GetDependencies()
@@ -251,9 +245,41 @@ namespace ArchGuard.Core.Type.Models
             if (GetFields().Any(field => !field.IsExternallyImmutable))
                 return false;
 
-            //if (GetProperties().Any(property => property.isExternallyImmutable))
+            if (GetProperties().Any(property => !property.IsExternallyImmutable()))
+                return false;
+
+            // TODO: check events
+            //var allEventsAreExternallyImmutable = symbol
+            //    .GetMembers()
+            //    .OfType<IEventSymbol>()
+            //    .All(@event =>
+            //        @event.IsStatic
+            //        || SymbolHelper.IsPrivateOrProtected(@event)
+            //        || @event.AddMethod?.IsStatic
+            //        || (
+            //            @event.AddMethod is not null
+            //            && SymbolHelper.IsPrivateOrProtected(@event.AddMethod)
+            //        )
+            //    );
+
+            //if (!allEventsAreExternallyImmutable)
+            //    return false;
+
+            if (GetMethods().Any(method => !method.IsExternallyImmutable()))
+                return false;
 
             return true;
+        }
+
+        internal IEnumerable<TypeDefinition> UsedBy()
+        {
+            foreach (var type in Solution.AllTypes)
+            {
+                var dependencies = type.GetDependencies();
+
+                if (dependencies.Any(dependency => dependency.Equals(this)))
+                    yield return type;
+            }
         }
 
         public override int GetHashCode()

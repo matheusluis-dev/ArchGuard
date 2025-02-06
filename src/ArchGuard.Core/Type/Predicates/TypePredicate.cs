@@ -142,7 +142,8 @@ namespace ArchGuard.Core.Predicates.Type
 
         public static Func<TypeDefinition, StringComparison, bool> UsedBy(string[] types)
         {
-            return (type, _) => type.IsUsedBy(types);
+            return (type, _) =>
+                type.UsedBy().Any(type => types.Contains(type.FullName, StringComparer.Ordinal));
         }
 
         public static Func<TypeDefinition, StringComparison, bool> NotUsedBy(string[] types)

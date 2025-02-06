@@ -15,10 +15,7 @@ namespace ArchGuard.Filters.Tests.Methods
             var filters = Asynchronous.Types.Verify().Methods.That.AreAsynchronous();
 
             // Act
-            var methods = filters
-                .GetMethods()
-                .Select(m => m._method.Name)
-                .Order(StringComparer.Ordinal);
+            var methods = filters.GetMethods().Select(m => m.Name).Order(StringComparer.Ordinal);
 
             // Assert
             Check.That(methods).IsEquivalentTo("AsyncMethod");
@@ -31,10 +28,7 @@ namespace ArchGuard.Filters.Tests.Methods
             var filters = Asynchronous.Types.Verify().Methods.That.AreNotAsynchronous();
 
             // Act
-            var methods = filters
-                .GetMethods()
-                .Select(m => m._method.Name)
-                .Order(StringComparer.Ordinal);
+            var methods = filters.GetMethods().Select(m => m.Name).Order(StringComparer.Ordinal);
 
             // Assert
             Check.That(methods).IsEquivalentTo("SyncMethod");

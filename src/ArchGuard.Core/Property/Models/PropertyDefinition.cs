@@ -10,11 +10,20 @@ namespace ArchGuard.Core.Property.Models
     [DebuggerDisplay("{Name} | Type: {Type.SymbolFullName}")]
     public sealed class PropertyDefinition : IEquatable<PropertyDefinition>
     {
+        internal SolutionDefinition Solution { get; init; }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public ProjectDefinition Project { get; init; }
 
         public TypeDefinition ContainingType { get; init; }
-        public TypeDefinition Type => throw new NotImplementedException();
+
+        public TypeDefinition Type =>
+            Solution.AllTypes.First(type =>
+                type.FullName.Equals(
+                    TypeSymbolHelper.GetFullName(_property.Type),
+                    StringComparison.Ordinal
+                )
+            );
 
         private readonly IPropertySymbol _property;
 
@@ -35,14 +44,14 @@ namespace ArchGuard.Core.Property.Models
 
         internal MethodDefinition? GetMethod =>
             HasGetMethod
-                ? new MethodDefinition(Project, ContainingType, _property.GetMethod!)
+                ? new MethodDefinition(Solution, Project, ContainingType, _property.GetMethod!)
                 : null;
 
         internal bool HasSetMethod => _property.SetMethod is not null;
 
         internal MethodDefinition? SetMethod =>
             HasSetMethod
-                ? new MethodDefinition(Project, ContainingType, _property.SetMethod!)
+                ? new MethodDefinition(Solution, Project, ContainingType, _property.SetMethod!)
                 : null;
 
         internal bool IsInitOnly => HasSetMethod && _property.SetMethod!.IsInitOnly;
@@ -74,11 +83,13 @@ namespace ArchGuard.Core.Property.Models
         }
 
         internal PropertyDefinition(
+            SolutionDefinition solution,
             ProjectDefinition project,
             TypeDefinition containingType,
             IPropertySymbol property
         )
         {
+            Solution = solution;
             Project = project;
             ContainingType = containingType;
             _property = property;

@@ -14,24 +14,35 @@ namespace ArchGuard.Core
 
         public string Path => _solution.FilePath ?? string.Empty;
 
-        public IEnumerable<ProjectDefinition> Projects =>
-            _solution.Projects.Select(project => new ProjectDefinition(
-                _dependencyFinder,
-                _typesLoader,
-                project
-            ));
-
-        private readonly List<TypeDefinition> _types = [];
-        public IReadOnlyList<TypeDefinition> Types
+        private readonly List<ProjectDefinition> _projects = [];
+        public IEnumerable<ProjectDefinition> Projects { get; set; }
+        private readonly List<TypeDefinition> _allTypes = [];
+        public IReadOnlyList<TypeDefinition> AllTypes
         {
             get
             {
-                if (_types.Count > 0)
-                    return _types;
+                if (_allTypes.Count > 0)
+                    return _allTypes;
 
-                _types.AddRange(Projects.SelectMany(project => project.Types));
+                _allTypes.AddRange(Projects.SelectMany(project => project.AllTypes));
 
-                return _types;
+                return _allTypes;
+            }
+        }
+
+        private readonly List<TypeDefinition> _typesFromProjects = [];
+        public IReadOnlyList<TypeDefinition> TypesFromProjects
+        {
+            get
+            {
+                if (_typesFromProjects.Count > 0)
+                    return _typesFromProjects;
+
+                _typesFromProjects.AddRange(
+                    Projects.SelectMany(project => project.TypesFromProject)
+                );
+
+                return _typesFromProjects;
             }
         }
 

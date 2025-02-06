@@ -9,6 +9,8 @@ namespace ArchGuard.Core.Method.Models
     [DebuggerDisplay("{Name} - {ContainingType.FullName}")]
     public sealed class MethodDefinition : IEquatable<MethodDefinition>
     {
+        internal SolutionDefinition Solution { get; init; }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public ProjectDefinition Project { get; init; }
 
@@ -17,7 +19,7 @@ namespace ArchGuard.Core.Method.Models
         private readonly IMethodSymbol _method;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal string Name => _method.Name;
+        public string Name => _method.Name;
 
         internal bool IsPublic => SymbolHelper.IsPublic(_method);
 
@@ -29,17 +31,66 @@ namespace ArchGuard.Core.Method.Models
 
         internal bool IsPrivateOrProtected => SymbolHelper.IsPrivateOrProtected(_method);
 
+        internal bool IsOrdinary => _method.MethodKind is MethodKind.Ordinary;
+
+        internal bool IsPropertyGet => _method.MethodKind is MethodKind.PropertyGet;
+
+        internal bool IsPropertySet => _method.MethodKind is MethodKind.PropertySet;
+
+        internal bool IsImplicitlyDeclared => _method.IsImplicitlyDeclared;
+
         internal bool IsAsync => _method.IsAsync;
 
         internal bool IsStatic => _method.IsStatic;
 
         internal TypeDefinition ReturnType =>
-            ContainingType
-                .GetAllTypesFromProject(_method.ReturnType as INamedTypeSymbol)
-                .FirstOrDefault();
+            Solution.AllTypes.First(type =>
+                type.FullName.Equals(
+                    TypeSymbolHelper.GetFullName(_method.ReturnType),
+                    StringComparison.Ordinal
+                )
+            );
+
+        internal IEnumerable<TypeDefinition> ParametersTypes
+        {
+            get
+            {
+                var parametersTypes = MethodSymbolHelper
+                    .GetParametersTypes(_method)
+                    .Select(TypeSymbolHelper.GetFullName);
+
+                return Solution.AllTypes.Where(type =>
+                    parametersTypes.Any(parameterTypeName =>
+                        type.FullName.Equals(parameterTypeName, StringComparison.Ordinal)
+                    )
+                );
+            }
+        }
+
+        internal IEnumerable<TypeDefinition> TypesInBody
+        {
+            get
+            {
+                var typesInBody = MethodSymbolHelper
+                    .GetTypesInBody(Project, _method)
+                    .Select(TypeSymbolHelper.GetFullName);
+
+                return Solution.AllTypes.Where(type =>
+                    typesInBody.Any(parameterTypeName =>
+                        type.FullName.Equals(parameterTypeName, StringComparison.Ordinal)
+                    )
+                );
+            }
+        }
 
         internal bool IsExternallyImmutable(bool ignorePrivateOrProtectedVerification = false)
         {
+            if (IsImplicitlyDeclared)
+                return false;
+
+            if (!IsOrdinary && !IsPropertyGet && !IsPropertySet)
+                return false;
+
             if (GetTypesAssignedInBody().Any())
                 return false;
 
@@ -47,11 +98,20 @@ namespace ArchGuard.Core.Method.Models
         }
 
         internal MethodDefinition(
+            SolutionDefinition solution,
             ProjectDefinition project,
             TypeDefinition containingType,
             IMethodSymbol method
         )
         {
+            if (method.MethodKind is MethodKind.Constructor)
+            {
+                throw new ArgumentException(
+                    $"Constructors must be created with {nameof(ConstructorDefinition)}"
+                );
+            }
+
+            Solution = solution;
             Project = project;
             ContainingType = containingType;
             _method = method;
@@ -59,22 +119,26 @@ namespace ArchGuard.Core.Method.Models
 
         internal IEnumerable<TypeDefinition> GetTypesAssignedInBody()
         {
-            return ContainingType.GetAllTypesFromProject(
-                MethodSymbolHelper.GetAssignmentsTypes(Project, _method)
-            );
-        }
+            var assignmentTypes = MethodSymbolHelper
+                .GetAssignmentsTypes(Project, _method)
+                .Select(TypeSymbolHelper.GetFullName);
 
-        internal IEnumerable<TypeDefinition> GetPropertiesAccessorsTypes()
-        {
-            return ContainingType.GetAllTypesFromProject(
-                MethodSymbolHelper.GetPropertiesAccessorsTypes(Project, _method)
+            return Solution.AllTypes.Where(type =>
+                assignmentTypes.Contains(type.FullName, StringComparer.Ordinal)
             );
         }
 
         internal IEnumerable<TypeDefinition> GetDependencies()
         {
-            // TODO
-            throw new NotImplementedException();
+            var dependencies = MethodSymbolHelper
+                .GetDependencies(Project, _method)
+                .Select(TypeSymbolHelper.GetFullName);
+
+            return Solution.AllTypes.Where(type =>
+                dependencies.Any(dependencyName =>
+                    type.FullName.Equals(dependencyName, StringComparison.Ordinal)
+                )
+            );
         }
 
         public override int GetHashCode()

@@ -11,13 +11,13 @@ namespace ArchGuard.Cached
         private static readonly Lock _lock = new Lock();
 
         private static readonly ConcurrentDictionary<
-            (INamespaceSymbol, IAssemblySymbol),
+            (INamespaceSymbol, IAssemblySymbol?),
             IEnumerable<INamedTypeSymbol>
         > _cache = new();
 
-        public IEnumerable<INamedTypeSymbol> GetAllTypeMembers(
+        public IEnumerable<INamedTypeSymbol> GetFromProject(
             INamespaceSymbol namespaceSymbol,
-            IAssemblySymbol assemblySymbol
+            IAssemblySymbol? assemblySymbol = null
         )
         {
             lock (_lock)
@@ -25,12 +25,13 @@ namespace ArchGuard.Cached
                 if (_cache.TryGetValue((namespaceSymbol, assemblySymbol), out var result))
                     return result;
 
-                var typeMembers = new List<INamedTypeSymbol>();
+                var typeMembers = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
                 foreach (
                     var typeMember in namespaceSymbol
                         .GetTypeMembers()
                         .Where(typeMember =>
-                            typeMember.ContainingAssembly.Equals(
+                            assemblySymbol is null
+                            || typeMember.ContainingAssembly.Equals(
                                 assemblySymbol,
                                 SymbolEqualityComparer.Default
                             )
@@ -38,12 +39,12 @@ namespace ArchGuard.Cached
                 )
                 {
                     typeMembers.Add(typeMember);
-                    typeMembers.AddRange(GetAllTypeMembers(typeMember, assemblySymbol));
+                    typeMembers.UnionWith(GetAllTypeMembers(typeMember, assemblySymbol!));
                 }
 
                 foreach (var nestedNamespace in namespaceSymbol.GetNamespaceMembers())
                 {
-                    typeMembers.AddRange(GetAllTypeMembers(nestedNamespace, assemblySymbol));
+                    typeMembers.UnionWith(GetFromProject(nestedNamespace, assemblySymbol));
                 }
 
                 _cache.TryAdd((namespaceSymbol, assemblySymbol), typeMembers);
@@ -52,7 +53,7 @@ namespace ArchGuard.Cached
             }
         }
 
-        private IEnumerable<INamedTypeSymbol> GetAllTypeMembers(
+        private static IEnumerable<INamedTypeSymbol> GetAllTypeMembers(
             INamedTypeSymbol typeSymbol,
             IAssemblySymbol assemblySymbol
         )

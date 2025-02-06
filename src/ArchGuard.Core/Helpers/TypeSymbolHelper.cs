@@ -83,6 +83,19 @@ namespace ArchGuard.Core.Helpers
             return name;
         }
 
+        public static string GetFullName(ITypeSymbol typeSymbol)
+        {
+            // TODO: no comments, it's obvious
+            if (typeSymbol is not INamedTypeSymbol namedTypeSymbol)
+            {
+                throw new ArgumentException(
+                    $"{nameof(typeSymbol)} must be {nameof(INamedTypeSymbol)}."
+                );
+            }
+
+            return GetName(namedTypeSymbol);
+        }
+
         public static string GetFullName(INamedTypeSymbol namedTypeSymbol)
         {
             ArgumentNullException.ThrowIfNull(namedTypeSymbol);
@@ -93,20 +106,20 @@ namespace ArchGuard.Core.Helpers
             return $"{namedTypeSymbol.ContainingNamespace}.{GetName(namedTypeSymbol)}";
         }
 
-        public static IEnumerable<INamedTypeSymbol> Inheritances(INamedTypeSymbol namedTypeSymbol)
+        public static IEnumerable<INamedTypeSymbol> GetTypeInheritances(
+            INamedTypeSymbol namedTypeSymbol
+        )
         {
-            if (namedTypeSymbol.TypeKind is TypeKind.Interface)
-                return namedTypeSymbol.AllInterfaces;
+            var types = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
 
-            var baseTypes = new List<INamedTypeSymbol>();
-
-            INamedTypeSymbol? baseType;
-            while ((baseType = namedTypeSymbol.BaseType) is not null)
+            var baseType = namedTypeSymbol.BaseType;
+            while (baseType is not null)
             {
-                baseTypes.Add(baseType);
+                types.Add(baseType);
+                baseType = baseType.BaseType;
             }
 
-            return baseTypes;
+            return types;
         }
 
         public static bool IsImmutable(INamedTypeSymbol namedTypeSymbol)

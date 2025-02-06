@@ -45,7 +45,7 @@ namespace ArchGuard
                 }
             );
 
-            var typeFilterContext = new TypeFilterContext(solutionCompiled.Types);
+            var typeFilterContext = new TypeFilterContext(solutionCompiled.TypesFromProjects);
             var typeAssertionContext = new TypeAssertionContext(typeFilterContext);
 
             var typeAssertion = new TypeAssertion(typeAssertionContext);
@@ -58,28 +58,18 @@ namespace ArchGuard
 
             var methodAssertionContext = new MethodAssertionContext(methodFilterContext);
             var methodAssertion = new MethodAssertion(methodAssertionContext);
-            var methodFilter = new MethodFilter(methodFilterContext, StartMethodAssertion);
+            var methodFilter = new MethodFilter(methodFilterContext, methodAssertion.Start);
 
-            var fieldFilter = new FieldFilter(fieldFilterContext, StartFieldAssertion);
+            var fieldFilter = new FieldFilter(fieldFilterContext, fieldAssertion.Start);
 
             var typeFilter = new TypeFilter(
                 typeFilterContext,
-                StartTypeAssertion,
-                StartMethodFilter,
-                StartFieldFilter
+                typeAssertion.Start,
+                methodFilter.Start,
+                fieldFilter.Start
             );
 
             _startTypeFilter = typeFilter.Start;
-
-            ITypeAssertionRule StartTypeAssertion() => typeAssertion.Start();
-
-            IMethodFilterEntryPoint StartMethodFilter() => methodFilter.Start();
-
-            IMethodAssertionRule StartMethodAssertion() => methodAssertion.Start();
-
-            IFieldFilterEntryPoint StartFieldFilter() => fieldFilter.Start();
-
-            IFieldAssertionRule StartFieldAssertion() => fieldAssertion.Start();
         }
     }
 }

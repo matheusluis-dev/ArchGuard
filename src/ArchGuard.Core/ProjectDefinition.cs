@@ -10,6 +10,8 @@ namespace ArchGuard.Core
     {
         private readonly DependencyFinder _dependencyFinder;
         private readonly TypesLoader _typesLoader;
+
+        private readonly SolutionDefinition _solution;
         private readonly Project _project;
 
         internal string Name => _project.Name;
@@ -18,32 +20,62 @@ namespace ArchGuard.Core
 
         internal Compilation Compilation => _project.GetCompilationAsync().Result!;
 
-        private readonly List<TypeDefinition> _types = [];
-        internal IReadOnlyList<TypeDefinition> Types
+        private readonly List<TypeDefinition> _typesFromProject = [];
+        internal IReadOnlyList<TypeDefinition> TypesFromProject
         {
             get
             {
-                if (_types.Count > 0)
-                    return _types;
+                if (_typesFromProject.Count > 0)
+                    return _typesFromProject;
 
-                _types.AddRange(
+                _typesFromProject.AddRange(
                     _typesLoader
-                        .GetAllTypeMembers(Compilation.GlobalNamespace, Compilation.Assembly)
-                        .Select(symbol => new TypeDefinition(_dependencyFinder, this, symbol))
+                        .GetFromProject(Compilation.GlobalNamespace, Compilation.Assembly)
+                        .Select(symbol => new TypeDefinition(
+                            _dependencyFinder,
+                            _solution,
+                            this,
+                            symbol
+                        ))
                 );
 
-                return _types;
+                return _typesFromProject;
+            }
+        }
+
+        private readonly List<TypeDefinition> _allTypes = [];
+        internal IReadOnlyList<TypeDefinition> AllTypes
+        {
+            get
+            {
+                if (_allTypes.Count > 0)
+                    return _allTypes;
+
+                _allTypes.AddRange(
+                    _typesLoader
+                        .GetFromProject(Compilation.GlobalNamespace, null)
+                        .Select(symbol => new TypeDefinition(
+                            _dependencyFinder,
+                            _solution,
+                            this,
+                            symbol
+                        ))
+                );
+
+                return _allTypes;
             }
         }
 
         internal ProjectDefinition(
             DependencyFinder dependencyFinder,
             TypesLoader typesLoader,
+            SolutionDefinition solution,
             Project project
         )
         {
             _dependencyFinder = dependencyFinder;
             _typesLoader = typesLoader;
+            _solution = solution;
             _project = project;
         }
     }

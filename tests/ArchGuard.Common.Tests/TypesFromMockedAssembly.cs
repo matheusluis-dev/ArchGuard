@@ -4,12 +4,9 @@ namespace ArchGuard.Tests.Common
     {
         public static ITypeFilterEntryPoint All =>
             ArchGuard.Types.InSolution(
-                new SolutionSearchParameters
-                {
-                    SolutionPath = "C:/Users/mathe/source/github/me/ArchGuard/ArchGuard.sln",
-                    Preprocessor = "net9_0",
-                    ProjectName = "ArchGuard.Tests.MockedAssembly",
-                }
+                "C:/Users/mathe/source/github/me/ArchGuard/ArchGuard.sln",
+                "net9_0",
+                "ArchGuard.Tests.MockedAssembly"
             );
     }
 }

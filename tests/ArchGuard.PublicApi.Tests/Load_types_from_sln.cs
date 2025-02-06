@@ -7,16 +7,10 @@ namespace ArchGuard.PublicApi.Tests
         [Fact]
         public void Successfully_load_types_from_given_sln()
         {
-            // Arrange
-            var searchParameters = new SolutionSearchParameters
-            {
-                SolutionPath = "ArchGuard.sln",
-                Preprocessor = "net9_0",
-                ProjectName = "ArchGuard.MockedAssembly.Classes",
-            };
-
             // Act
-            var types = Types.InSolution(searchParameters).GetTypes();
+            var types = Types
+                .InSolution("ArchGuard.sln", "ArchGuard.MockedAssembly.Classes", "net9_0")
+                .GetTypes();
 
             // Assert
             Check.That(types).HasFirstElement();
@@ -25,17 +19,12 @@ namespace ArchGuard.PublicApi.Tests
         [Fact]
         public void Error_when_sln_does_not_exists()
         {
-            // Arrange
-            var slnPath = $"C:/{Guid.NewGuid()}";
-            var searchParameters = new SolutionSearchParameters
-            {
-                SolutionPath = slnPath,
-                Preprocessor = "net9_0",
-                ProjectName = "ArchGuard.MockedAssembly.Classes",
-            };
+            // Arrage
+            var slnPath = Guid.NewGuid().ToString();
 
             // Act
-            Action @action = () => Types.InSolution(searchParameters).GetTypes();
+            Action @action = () =>
+                Types.InSolution(slnPath, "ArchGuard.MockedAssembly.Classes", "net9_0").GetTypes();
 
             // Assert
             Check
@@ -50,15 +39,10 @@ namespace ArchGuard.PublicApi.Tests
         {
             // Arrange
             var projectName = "It.Does.Not.Exists";
-            var searchParameters = new SolutionSearchParameters
-            {
-                SolutionPath = "ArchGuard.sln",
-                Preprocessor = "net9_0",
-                ProjectName = projectName,
-            };
 
             // Act
-            Action @action = () => Types.InSolution(searchParameters).GetTypes();
+            Action @action = () =>
+                Types.InSolution("ArchGuard.sln", projectName, "net9_0").GetTypes();
 
             // Assert
             Check

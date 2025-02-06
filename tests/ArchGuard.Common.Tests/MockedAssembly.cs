@@ -6,12 +6,9 @@ namespace ArchGuard.Tests.Common
         {
             public static ITypeFilterEntryPoint Types =>
                 ArchGuard.Types.InSolution(
-                    new SolutionSearchParameters
-                    {
-                        SolutionPath = "ArchGuard.sln",
-                        Preprocessor = "net9_0",
-                        ProjectName = "ArchGuard.MockedAssembly.HaveDependencyOnNamespace",
-                    }
+                    "ArchGuard.sln",
+                    "ArchGuard.MockedAssembly.HaveDependencyOnNamespace",
+                    "net9_0"
                 );
         }
 
@@ -19,12 +16,9 @@ namespace ArchGuard.Tests.Common
         {
             public static ITypeFilterEntryPoint Types =>
                 ArchGuard.Types.InSolution(
-                    new SolutionSearchParameters
-                    {
-                        SolutionPath = "ArchGuard.sln",
-                        Preprocessor = "net9_0",
-                        ProjectName = "ArchGuard.MockedAssembly.Inherit",
-                    }
+                    "ArchGuard.sln",
+                    "ArchGuard.MockedAssembly.Inherit",
+                    "net9_0"
                 );
         }
 
@@ -34,12 +28,9 @@ namespace ArchGuard.Tests.Common
             {
                 public static ITypeFilterEntryPoint Types =>
                     ArchGuard.Types.InSolution(
-                        new SolutionSearchParameters
-                        {
-                            SolutionPath = "ArchGuard.sln",
-                            Preprocessor = "net9_0",
-                            ProjectName = "ArchGuard.MockedAssembly.AccessModifiers.File",
-                        }
+                        "ArchGuard.sln",
+                        "ArchGuard.MockedAssembly.AccessModifiers.File",
+                        "net9_0"
                     );
             }
 
@@ -47,12 +38,9 @@ namespace ArchGuard.Tests.Common
             {
                 public static ITypeFilterEntryPoint Types =>
                     ArchGuard.Types.InSolution(
-                        new SolutionSearchParameters
-                        {
-                            SolutionPath = "ArchGuard.sln",
-                            Preprocessor = "net9_0",
-                            ProjectName = "ArchGuard.MockedAssembly.AccessModifiers.Internal",
-                        }
+                        "ArchGuard.sln",
+                        "ArchGuard.MockedAssembly.AccessModifiers.Internal",
+                        "net9_0"
                     );
             }
 
@@ -60,12 +48,9 @@ namespace ArchGuard.Tests.Common
             {
                 public static ITypeFilterEntryPoint Types =>
                     ArchGuard.Types.InSolution(
-                        new SolutionSearchParameters
-                        {
-                            SolutionPath = "ArchGuard.sln",
-                            Preprocessor = "net9_0",
-                            ProjectName = "ArchGuard.MockedAssembly.AccessModifiers.Public",
-                        }
+                        "ArchGuard.sln",
+                        "ArchGuard.MockedAssembly.AccessModifiers.Public",
+                        "net9_0"
                     );
             }
         }
@@ -76,12 +61,9 @@ namespace ArchGuard.Tests.Common
             {
                 public static ITypeFilterEntryPoint Types =>
                     ArchGuard.Types.InSolution(
-                        new SolutionSearchParameters
-                        {
-                            SolutionPath = "ArchGuard.sln",
-                            Preprocessor = "net9_0",
-                            ProjectName = "ArchGuard.MockedAssembly.Methods.Asynchronous",
-                        }
+                        "ArchGuard.sln",
+                        "ArchGuard.MockedAssembly.Methods.Asynchronous",
+                        "net9_0"
                     );
             }
 
@@ -89,12 +71,9 @@ namespace ArchGuard.Tests.Common
             {
                 public static ITypeFilterEntryPoint Types =>
                     ArchGuard.Types.InSolution(
-                        new SolutionSearchParameters
-                        {
-                            SolutionPath = "ArchGuard.sln",
-                            Preprocessor = "net9_0",
-                            ProjectName = "ArchGuard.MockedAssembly.Methods.Static",
-                        }
+                        "ArchGuard.sln",
+                        "ArchGuard.MockedAssembly.Methods.Static",
+                        "net9_0"
                     );
             }
         }
@@ -103,12 +82,9 @@ namespace ArchGuard.Tests.Common
         {
             public static ITypeFilterEntryPoint Types =>
                 ArchGuard.Types.InSolution(
-                    new SolutionSearchParameters
-                    {
-                        SolutionPath = "ArchGuard.sln",
-                        Preprocessor = "net9_0",
-                        ProjectName = "ArchGuard.MockedAssembly.Classes",
-                    }
+                    "ArchGuard.sln",
+                    "ArchGuard.MockedAssembly.Classes",
+                    "net9_0"
                 );
         }
 
@@ -116,12 +92,9 @@ namespace ArchGuard.Tests.Common
         {
             public static ITypeFilterEntryPoint Types =>
                 ArchGuard.Types.InSolution(
-                    new SolutionSearchParameters
-                    {
-                        SolutionPath = "ArchGuard.sln",
-                        Preprocessor = "net9_0",
-                        ProjectName = "ArchGuard.MockedAssembly.Enums",
-                    }
+                    "ArchGuard.sln",
+                    "ArchGuard.MockedAssembly.Enums",
+                    "net9_0"
                 );
         }
 
@@ -129,12 +102,9 @@ namespace ArchGuard.Tests.Common
         {
             public static ITypeFilterEntryPoint Types =>
                 ArchGuard.Types.InSolution(
-                    new SolutionSearchParameters
-                    {
-                        SolutionPath = "ArchGuard.sln",
-                        Preprocessor = "net9_0",
-                        ProjectName = "ArchGuard.MockedAssembly.Interfaces",
-                    }
+                    "ArchGuard.sln",
+                    "ArchGuard.MockedAssembly.Interfaces",
+                    "net9_0"
                 );
         }
 
@@ -142,12 +112,9 @@ namespace ArchGuard.Tests.Common
         {
             public static ITypeFilterEntryPoint Types =>
                 ArchGuard.Types.InSolution(
-                    new SolutionSearchParameters
-                    {
-                        SolutionPath = "ArchGuard.sln",
-                        Preprocessor = "net9_0",
-                        ProjectName = "ArchGuard.MockedAssembly.Records",
-                    }
+                    "ArchGuard.sln",
+                    "ArchGuard.MockedAssembly.Records",
+                    "net9_0"
                 );
         }
 
@@ -155,12 +122,9 @@ namespace ArchGuard.Tests.Common
         {
             public static ITypeFilterEntryPoint Types =>
                 ArchGuard.Types.InSolution(
-                    new SolutionSearchParameters
-                    {
-                        SolutionPath = "ArchGuard.sln",
-                        Preprocessor = "net9_0",
-                        ProjectName = "ArchGuard.MockedAssembly.RecordStructs",
-                    }
+                    "ArchGuard.sln",
+                    "ArchGuard.MockedAssembly.RecordStructs",
+                    "net9_0"
                 );
         }
 
@@ -168,12 +132,9 @@ namespace ArchGuard.Tests.Common
         {
             public static ITypeFilterEntryPoint Types =>
                 ArchGuard.Types.InSolution(
-                    new SolutionSearchParameters
-                    {
-                        SolutionPath = "ArchGuard.sln",
-                        Preprocessor = "net9_0",
-                        ProjectName = "ArchGuard.MockedAssembly.Structs",
-                    }
+                    "ArchGuard.sln",
+                    "ArchGuard.MockedAssembly.Structs",
+                    "net9_0"
                 );
         }
     }

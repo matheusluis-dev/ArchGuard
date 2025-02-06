@@ -3,11 +3,9 @@ namespace ArchGuard.Filters.Tests
     using System;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
-    using ArchGuard.Tests.Common.Types;
-    using ArchGuard.Tests.MockedAssembly.Inherit;
-    using FluentAssertions;
     using MockedAssembly.Inherit;
     using NFluent;
+    using Shouldly;
     using Xunit;
 
     // TODO: tests with multiple types as params
@@ -145,16 +143,16 @@ namespace ArchGuard.Filters.Tests
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
-            Check
-                .That(types)
-                .IsEquivalentTo(
+            types.ShouldBe(
+                [
                     "ArchGuard.MockedAssembly.Inherit.Class1",
                     "ArchGuard.MockedAssembly.Inherit.DoNotInheritClass1",
                     "ArchGuard.MockedAssembly.Inherit.IDoNotInheritInterface1",
-                    "ArchGuard.MockedAssembly.Inherit.IInterface1",
                     "ArchGuard.MockedAssembly.Inherit.IInheritInterface1",
-                    "ArchGuard.MockedAssembly.Inherit.ImplementIInterface1"
-                );
+                    "ArchGuard.MockedAssembly.Inherit.IInterface1",
+                    "ArchGuard.MockedAssembly.Inherit.ImplementIInterface1",
+                ]
+            );
         }
 
         [Fact]

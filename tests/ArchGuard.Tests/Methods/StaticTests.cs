@@ -15,10 +15,7 @@ namespace ArchGuard.Filters.Tests.Methods
             var filters = Static.Types.Verify().Methods.That.AreStatic();
 
             // Act
-            var methods = filters
-                .GetMethods()
-                .Select(m => m._method.Name)
-                .Order(StringComparer.Ordinal);
+            var methods = filters.GetMethods().Select(m => m.Name).Order(StringComparer.Ordinal);
 
             // Assert
             Check.That(methods).IsEquivalentTo("Static");
@@ -31,10 +28,7 @@ namespace ArchGuard.Filters.Tests.Methods
             var filters = Static.Types.Verify().Methods.That.AreNotStatic();
 
             // Act
-            var methods = filters
-                .GetMethods()
-                .Select(m => m._method.Name)
-                .Order(StringComparer.Ordinal);
+            var methods = filters.GetMethods().Select(m => m.Name).Order(StringComparer.Ordinal);
 
             // Assert
             Check.That(methods).IsEquivalentTo("NonStatic");
