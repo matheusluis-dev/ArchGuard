@@ -14,13 +14,15 @@ namespace ArchGuard
         private readonly Lazy<StartMethodFilterCallback> _startMethodFilterCallback;
         private readonly Lazy<StartFieldFilterCallback> _startFieldFilterCallback;
         private readonly Lazy<StartPropertyFilterCallback> _startPropertyFilterCallback;
+        private readonly Lazy<StartSliceFilterCallback> _startSliceFilterCallback;
 
         internal TypeFilter(
             TypeFilterContext context,
             Lazy<StartTypeAssertionCallback> startAssertionCallback,
             Lazy<StartMethodFilterCallback> startMethodFilterCallback,
             Lazy<StartFieldFilterCallback> startFieldFilterCallback,
-            Lazy<StartPropertyFilterCallback> startPropertyFilterCallback
+            Lazy<StartPropertyFilterCallback> startPropertyFilterCallback,
+            Lazy<StartSliceFilterCallback> startSliceFilterCallback
         )
         {
             _context = context;
@@ -29,6 +31,7 @@ namespace ArchGuard
             _startMethodFilterCallback = startMethodFilterCallback;
             _startFieldFilterCallback = startFieldFilterCallback;
             _startPropertyFilterCallback = startPropertyFilterCallback;
+            _startSliceFilterCallback = startSliceFilterCallback;
         }
 
         internal ITypeFilterEntryPoint Start()
@@ -40,6 +43,8 @@ namespace ArchGuard
         {
             return this;
         }
+
+        public ISliceFilterRule Slice => _startSliceFilterCallback.Value.Invoke();
 
         public IMethodFilterEntryPoint Methods => _startMethodFilterCallback.Value.Invoke();
 

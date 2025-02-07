@@ -5,6 +5,7 @@ namespace ArchGuard
     using ArchGuard.Core.Method.Contexts;
     using ArchGuard.Core.Models;
     using ArchGuard.Core.Property.Contexts;
+    using ArchGuard.Core.Slice.Contexts;
     using ArchGuard.Core.Type.Contexts;
 
     internal delegate ITypeAssertionRule StartTypeAssertionCallback();
@@ -17,6 +18,9 @@ namespace ArchGuard
 
     internal delegate IPropertyFilterEntryPoint StartPropertyFilterCallback();
     internal delegate IPropertyAssertionRule StartPropertyAssertionCallback();
+
+    internal delegate ISliceFilterRule StartSliceFilterCallback();
+    internal delegate ISliceAssertionRule StartSliceAssertionCallback();
 
     internal sealed class IoC
     {
@@ -105,6 +109,19 @@ namespace ArchGuard
                 () => new(propertyFilterContext.Value, propertyAssertion.Value.Start)
             );
 
+            var sliceFilterContext = new Lazy<SliceFilterContext>(
+                () => new(typeFilterContext.Value)
+            );
+
+            var sliceAssertionContext = new Lazy<SliceAssertionContext>(
+                () => new(sliceFilterContext.Value)
+            );
+
+            var sliceAssertion = new Lazy<SliceAssertion>(() => new(sliceAssertionContext.Value));
+            var sliceFilter = new Lazy<SliceFilter>(
+                () => new(sliceFilterContext.Value, sliceAssertion.Value.Start)
+            );
+
             var typeFilter = new Lazy<TypeFilter>(
                 () =>
                     new(
@@ -112,7 +129,8 @@ namespace ArchGuard
                         new Lazy<StartTypeAssertionCallback>(typeAssertion.Value.Start),
                         new Lazy<StartMethodFilterCallback>(methodFilter.Value.Start),
                         new Lazy<StartFieldFilterCallback>(fieldFilter.Value.Start),
-                        new Lazy<StartPropertyFilterCallback>(propertyFilter.Value.Start)
+                        new Lazy<StartPropertyFilterCallback>(propertyFilter.Value.Start),
+                        new Lazy<StartSliceFilterCallback>(sliceFilter.Value.Start)
                     )
             );
 

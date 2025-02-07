@@ -3,6 +3,7 @@ namespace ArchGuard.Extensions.Shouldly
     using ArchGuard.Core.Field.Models;
     using ArchGuard.Core.Method.Models;
     using ArchGuard.Core.Property.Models;
+    using ArchGuard.Core.Slice.Models;
     using ArchGuard.Core.Type.Models;
 
     public static class ShouldlyExtensions
@@ -29,6 +30,12 @@ namespace ArchGuard.Extensions.Shouldly
         {
             propertyAssertionResult.ShouldNotBeNull();
             propertyAssertionResult.IsSuccessful.ShouldBeTrue();
+        }
+
+        public static void ShouldBeSuccess(this SliceAssertionResult sliceAssertionResult)
+        {
+            sliceAssertionResult.ShouldNotBeNull();
+            sliceAssertionResult.IsSuccessful.ShouldBeTrue();
         }
     }
 }
