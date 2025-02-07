@@ -183,8 +183,6 @@ namespace ArchGuard.Core.Type.Models
             );
         }
 
-
-
         internal IEnumerable<ConstructorDefinition> GetConstructors()
         {
             return _type

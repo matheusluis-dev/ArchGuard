@@ -8,12 +8,18 @@ namespace ArchGuard.Core.Helpers
         {
             ArgumentNullException.ThrowIfNull(symbol);
 
+            if (symbol is INamedTypeSymbol)
+                throw new ArgumentException($"{symbol} must not be {nameof(INamedTypeSymbol)}.");
+
             return symbol.DeclaredAccessibility is Accessibility.Public;
         }
 
         public static bool IsInternal(ISymbol symbol)
         {
             ArgumentNullException.ThrowIfNull(symbol);
+
+            if (symbol is INamedTypeSymbol)
+                throw new ArgumentException($"{symbol} must not be {nameof(INamedTypeSymbol)}.");
 
             return symbol.DeclaredAccessibility
                 is Accessibility.Internal
