@@ -1,6 +1,7 @@
 namespace ArchGuard.Filters.Tests
 {
     using System;
+    using System.Collections.Generic;
     using ArchGuard.Tests.Common;
     using ArchGuard.Tests.Common.Extensions;
     using MockedAssembly.Inherit;
@@ -181,6 +182,21 @@ namespace ArchGuard.Filters.Tests
 
             // Assert
             Check.That(types).Contains("ArchGuard.MockedAssembly.Inherit.ImplementIInterface1");
+        }
+
+        [Fact]
+        public void Inherit_generic_type()
+        {
+            // Arrange
+            var filters = MockedAssembly.Inherit.Types.That.Inherit(typeof(GenericParentClass<>));
+
+            // Act
+            var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
+
+            // Assert
+            types.ShouldBe(
+                new List<string> { "ArchGuard.MockedAssembly.Inherit.InheritGenericParentClass" }
+            );
         }
     }
 }

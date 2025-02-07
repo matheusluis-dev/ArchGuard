@@ -30,12 +30,14 @@ namespace ArchGuard.Core.Predicates.Type
         public static Func<TypeDefinition, StringComparison, bool> Inherit(Type[] types)
         {
             return (type, _) =>
-                type.GetInheritances()
-                    .Any(type =>
-                        types
-                            .Select(type => type.GetFullNameClean())
-                            .Contains(type.FullName, StringComparer.Ordinal)
-                    );
+            {
+                var typesNames = types.Select(type => type.GetFullNameClean());
+                var inheritances = type.GetInheritances();
+
+                return inheritances.Any(inheritance =>
+                    typesNames.Contains(inheritance.FullName, StringComparer.Ordinal)
+                );
+            };
         }
 
         public static Func<TypeDefinition, StringComparison, bool> NotInherit(Type[] types)

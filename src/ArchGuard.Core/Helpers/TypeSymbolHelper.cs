@@ -68,7 +68,7 @@ namespace ArchGuard.Core.Helpers
         {
             ArgumentNullException.ThrowIfNull(namedTypeSymbol);
 
-            var name = namedTypeSymbol.Name;
+            var name = namedTypeSymbol.MetadataName;
 
             var containingType = namedTypeSymbol.ContainingType;
             while (containingType != null)
@@ -99,9 +99,6 @@ namespace ArchGuard.Core.Helpers
         public static string GetFullName(INamedTypeSymbol namedTypeSymbol)
         {
             ArgumentNullException.ThrowIfNull(namedTypeSymbol);
-
-            //if (!containingNamespace.IsGlobalNamespace)
-            //fullName = $"{containingNamespace}.{fullName}";
 
             return $"{namedTypeSymbol.ContainingNamespace}.{GetName(namedTypeSymbol)}";
         }
