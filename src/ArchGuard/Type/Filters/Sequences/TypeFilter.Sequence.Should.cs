@@ -1,4 +1,4 @@
 namespace ArchGuard
 {
-    public sealed partial class TypeFilter { }
+    public sealed partial class TypeFilter;
 }

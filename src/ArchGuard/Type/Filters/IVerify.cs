@@ -4,5 +4,6 @@ namespace ArchGuard
     {
         IMethodFilterEntryPoint Methods { get; }
         IFieldFilterEntryPoint Fields { get; }
+        IPropertyFilterEntryPoint Properties { get; }
     }
 }

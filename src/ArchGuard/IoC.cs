@@ -4,6 +4,7 @@ namespace ArchGuard
     using ArchGuard.Core.Field.Contexts;
     using ArchGuard.Core.Method.Contexts;
     using ArchGuard.Core.Models;
+    using ArchGuard.Core.Property.Contexts;
     using ArchGuard.Core.Type.Contexts;
 
     internal delegate ITypeAssertionRule StartTypeAssertionCallback();
@@ -13,6 +14,9 @@ namespace ArchGuard
 
     internal delegate IFieldFilterEntryPoint StartFieldFilterCallback();
     internal delegate IFieldAssertionRule StartFieldAssertionCallback();
+
+    internal delegate IPropertyFilterEntryPoint StartPropertyFilterCallback();
+    internal delegate IPropertyAssertionRule StartPropertyAssertionCallback();
 
     internal sealed class IoC
     {
@@ -45,31 +49,74 @@ namespace ArchGuard
                 }
             );
 
-            var typeFilterContext = new TypeFilterContext(solutionCompiled.TypesFromProjects);
-            var typeAssertionContext = new TypeAssertionContext(typeFilterContext);
-
-            var typeAssertion = new TypeAssertion(typeAssertionContext);
-
-            var methodFilterContext = new MethodFilterContext(typeFilterContext);
-
-            var fieldFilterContext = new FieldFilterContext(typeFilterContext);
-            var fieldAssertionContext = new FieldAssertionContext(fieldFilterContext);
-            var fieldAssertion = new FieldAssertion(fieldAssertionContext);
-
-            var methodAssertionContext = new MethodAssertionContext(methodFilterContext);
-            var methodAssertion = new MethodAssertion(methodAssertionContext);
-            var methodFilter = new MethodFilter(methodFilterContext, methodAssertion.Start);
-
-            var fieldFilter = new FieldFilter(fieldFilterContext, fieldAssertion.Start);
-
-            var typeFilter = new TypeFilter(
-                typeFilterContext,
-                typeAssertion.Start,
-                methodFilter.Start,
-                fieldFilter.Start
+            var typeFilterContext = new Lazy<TypeFilterContext>(
+                () => new(solutionCompiled.TypesFromProjects)
             );
 
-            _startTypeFilter = typeFilter.Start;
+            var typeAssertionContext = new Lazy<TypeAssertionContext>(
+                () => new(typeFilterContext.Value)
+            );
+
+            var typeAssertion = new Lazy<TypeAssertion>(() => new(typeAssertionContext.Value));
+
+            var methodFilterContext = new Lazy<MethodFilterContext>(
+                () => new(typeFilterContext.Value)
+            );
+
+            var fieldFilterContext = new Lazy<FieldFilterContext>(
+                () => new(typeFilterContext.Value)
+            );
+
+            var fieldAssertionContext = new Lazy<FieldAssertionContext>(
+                () => new(fieldFilterContext.Value)
+            );
+
+            var fieldAssertion = new Lazy<FieldAssertion>(() => new(fieldAssertionContext.Value));
+
+            var propertyFilterContext = new Lazy<PropertyFilterContext>(
+                () => new(typeFilterContext.Value)
+            );
+
+            var propertyAssertionContext = new Lazy<PropertyAssertionContext>(
+                () => new(propertyFilterContext.Value)
+            );
+
+            var propertyAssertion = new Lazy<PropertyAssertion>(
+                () => new(propertyAssertionContext.Value)
+            );
+
+            var methodAssertionContext = new Lazy<MethodAssertionContext>(
+                () => new(methodFilterContext.Value)
+            );
+
+            var methodAssertion = new Lazy<MethodAssertion>(
+                () => new(methodAssertionContext.Value)
+            );
+
+            var methodFilter = new Lazy<MethodFilter>(
+                () => new(methodFilterContext.Value, methodAssertion.Value.Start)
+            );
+
+            var fieldFilter = new Lazy<FieldFilter>(
+                () => new(fieldFilterContext.Value, fieldAssertion.Value.Start)
+            );
+
+            var propertyFilter = new Lazy<PropertyFilter>(
+                () => new(propertyFilterContext.Value, propertyAssertion.Value.Start)
+            );
+
+            var typeFilter = new Lazy<TypeFilter>(
+                () =>
+                    new(
+                        typeFilterContext.Value,
+                        new Lazy<StartTypeAssertionCallback>(typeAssertion.Value.Start),
+                        new Lazy<StartMethodFilterCallback>(methodFilter.Value.Start),
+                        new Lazy<StartFieldFilterCallback>(fieldFilter.Value.Start),
+                        new Lazy<StartPropertyFilterCallback>(propertyFilter.Value.Start)
+                    )
+            );
+
+            _startTypeFilter = typeFilter.Value.Start;
         }
     }
 }

@@ -2,6 +2,7 @@ namespace ArchGuard.Extensions.Shouldly
 {
     using ArchGuard.Core.Field.Models;
     using ArchGuard.Core.Method.Models;
+    using ArchGuard.Core.Property.Models;
     using ArchGuard.Core.Type.Models;
 
     public static class ShouldlyExtensions
@@ -18,10 +19,16 @@ namespace ArchGuard.Extensions.Shouldly
             methodAssertionResult.IsSuccessful.ShouldBeTrue();
         }
 
-        public static void ShouldBeSuccess(this FieldAssertionResult methodAssertionResult)
+        public static void ShouldBeSuccess(this FieldAssertionResult fieldAssertionResult)
         {
-            methodAssertionResult.ShouldNotBeNull();
-            methodAssertionResult.IsSuccessful.ShouldBeTrue();
+            fieldAssertionResult.ShouldNotBeNull();
+            fieldAssertionResult.IsSuccessful.ShouldBeTrue();
+        }
+
+        public static void ShouldBeSuccess(this PropertyAssertionResult propertyAssertionResult)
+        {
+            propertyAssertionResult.ShouldNotBeNull();
+            propertyAssertionResult.IsSuccessful.ShouldBeTrue();
         }
     }
 }
