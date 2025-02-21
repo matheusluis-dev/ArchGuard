@@ -2,8 +2,8 @@ namespace ArchGuard.Core.Slice.Contexts
 {
     using System;
     using System.Collections.Generic;
+    using ArchGuard.Core.Contexts;
     using ArchGuard.Core.Slice.Models;
-    using ArchGuard.Core.Type.Contexts;
 
     public sealed class SliceFilterContext
     {
@@ -33,7 +33,7 @@ namespace ArchGuard.Core.Slice.Contexts
         public IEnumerable<SliceDefinition> GetSlices(StringComparison comparison)
         {
             var types = _typeFilterContext
-                .GetTypes(comparison)
+                .GetElements(comparison)
                 .Where(type => type.Namespace.StartsWith(_namespace, comparison))
                 .ToList();
 

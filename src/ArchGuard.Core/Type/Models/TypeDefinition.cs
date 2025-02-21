@@ -146,6 +146,20 @@ namespace ArchGuard.Core.Type.Models
             );
         }
 
+        internal IEnumerable<TMember> GetMembers<TMember>()
+        {
+            if (typeof(TMember) == typeof(FieldDefinition))
+                return (IEnumerable<TMember>)GetFields();
+
+            if (typeof(TMember) == typeof(PropertyDefinition))
+                return (IEnumerable<TMember>)GetProperties();
+
+            if (typeof(TMember) == typeof(MethodDefinition))
+                return (IEnumerable<TMember>)GetMethods();
+
+            throw new InvalidOperationException("oops");
+        }
+
         internal IEnumerable<TypeDefinition> GetImplementedInterfaces()
         {
             // Interface do not implement another interface

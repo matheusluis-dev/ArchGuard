@@ -1,12 +1,13 @@
 namespace ArchGuard
 {
-    using ArchGuard.Core.Type.Contexts;
+    using ArchGuard.Core.Contexts;
+    using ArchGuard.Core.Type.Models;
 
     public sealed partial class TypeAssertion : ITypeAssertionRule, ITypeAssertionSequence
     {
-        private readonly TypeAssertionContext _context;
+        private readonly AssertionContext<TypeDefinition> _context;
 
-        public TypeAssertion(TypeAssertionContext context)
+        public TypeAssertion(AssertionContext<TypeDefinition> context)
         {
             _context = context;
         }

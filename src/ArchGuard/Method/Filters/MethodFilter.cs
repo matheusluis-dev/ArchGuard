@@ -1,15 +1,18 @@
 namespace ArchGuard
 {
     using System.Collections.Generic;
-    using ArchGuard.Core.Method.Contexts;
+    using ArchGuard.Core.Contexts;
     using ArchGuard.Core.Method.Models;
 
     public sealed partial class MethodFilter : IMethodFilterEntryPoint, IMethodFilterRule, IMethodFilterSequence
     {
-        private readonly MethodFilterContext _context;
+        private readonly MemberFilterContext<MethodDefinition> _context;
         private readonly StartMethodAssertionCallback _startMethodAssertionCallback;
 
-        internal MethodFilter(MethodFilterContext context, StartMethodAssertionCallback startMethodAssertionCallback)
+        internal MethodFilter(
+            MemberFilterContext<MethodDefinition> context,
+            StartMethodAssertionCallback startMethodAssertionCallback
+        )
         {
             _context = context;
             _startMethodAssertionCallback = startMethodAssertionCallback;
@@ -27,7 +30,7 @@ namespace ArchGuard
 
         public IEnumerable<MethodDefinition> GetMethods(StringComparison comparison)
         {
-            return _context.GetMethods(comparison);
+            return _context.GetElements(comparison);
         }
 
         public IMethodAssertionRule Should => _startMethodAssertionCallback.Invoke();

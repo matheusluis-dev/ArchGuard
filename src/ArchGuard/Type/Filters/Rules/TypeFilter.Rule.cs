@@ -12,12 +12,12 @@ namespace ArchGuard
 
         public IEnumerable<TypeDefinition> GetTypes()
         {
-            return _context.GetTypes(Default.StringComparison);
+            return _context.GetElements(Default.StringComparison);
         }
 
         public IEnumerable<TypeDefinition> GetTypes(StringComparison comparison)
         {
-            return _context.GetTypes(comparison);
+            return _context.GetElements(comparison);
         }
 
         public ITypeFilterSequence ImplementInterface(params Type[] types)

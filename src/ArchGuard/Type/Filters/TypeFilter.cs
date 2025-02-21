@@ -1,6 +1,6 @@
 namespace ArchGuard
 {
-    using ArchGuard.Core.Type.Contexts;
+    using ArchGuard.Core.Contexts;
 
     public sealed partial class TypeFilter : ITypeFilterEntryPoint, ITypeFilterRule, ITypeFilterSequence, IVerify
     {

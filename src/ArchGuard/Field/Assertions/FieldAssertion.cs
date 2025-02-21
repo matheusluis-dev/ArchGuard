@@ -1,13 +1,13 @@
 namespace ArchGuard
 {
-    using ArchGuard.Core.Field.Contexts;
+    using ArchGuard.Core.Contexts;
     using ArchGuard.Core.Field.Models;
 
     public sealed partial class FieldAssertion : IFieldAssertionRule, IFieldAssertionSequence
     {
-        private readonly FieldAssertionContext _context;
+        private readonly AssertionContext<FieldDefinition> _context;
 
-        public FieldAssertion(FieldAssertionContext context)
+        public FieldAssertion(AssertionContext<FieldDefinition> context)
         {
             _context = context;
         }
@@ -17,12 +17,12 @@ namespace ArchGuard
             return this;
         }
 
-        public FieldAssertionResult GetResult()
+        public AssertionResult<FieldDefinition> GetResult()
         {
             return GetResult(Default.StringComparison);
         }
 
-        public FieldAssertionResult GetResult(StringComparison comparison)
+        public AssertionResult<FieldDefinition> GetResult(StringComparison comparison)
         {
             return _context.GetResult(comparison);
         }

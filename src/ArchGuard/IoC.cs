@@ -1,12 +1,13 @@
 namespace ArchGuard
 {
     using ArchGuard.Cached;
-    using ArchGuard.Core.Field.Contexts;
-    using ArchGuard.Core.Method.Contexts;
+    using ArchGuard.Core.Contexts;
+    using ArchGuard.Core.Field.Models;
+    using ArchGuard.Core.Method.Models;
     using ArchGuard.Core.Models;
-    using ArchGuard.Core.Property.Contexts;
+    using ArchGuard.Core.Property.Models;
     using ArchGuard.Core.Slice.Contexts;
-    using ArchGuard.Core.Type.Contexts;
+    using ArchGuard.Core.Type.Models;
 
     internal delegate ITypeAssertionRule StartTypeAssertionCallback();
 
@@ -51,25 +52,35 @@ namespace ArchGuard
 
             var typeFilterContext = new Lazy<TypeFilterContext>(() => new(solutionCompiled.TypesFromProjects));
 
-            var typeAssertionContext = new Lazy<TypeAssertionContext>(() => new(typeFilterContext.Value));
+            var typeAssertionContext = new Lazy<AssertionContext<TypeDefinition>>(() => new(typeFilterContext.Value));
 
             var typeAssertion = new Lazy<TypeAssertion>(() => new(typeAssertionContext.Value));
 
-            var methodFilterContext = new Lazy<MethodFilterContext>(() => new(typeFilterContext.Value));
+            var methodFilterContext = new Lazy<MemberFilterContext<MethodDefinition>>(
+                () => new(typeFilterContext.Value)
+            );
 
-            var fieldFilterContext = new Lazy<FieldFilterContext>(() => new(typeFilterContext.Value));
+            var fieldFilterContext = new Lazy<MemberFilterContext<FieldDefinition>>(() => new(typeFilterContext.Value));
 
-            var fieldAssertionContext = new Lazy<FieldAssertionContext>(() => new(fieldFilterContext.Value));
+            var fieldAssertionContext = new Lazy<AssertionContext<FieldDefinition>>(
+                () => new(fieldFilterContext.Value)
+            );
 
             var fieldAssertion = new Lazy<FieldAssertion>(() => new(fieldAssertionContext.Value));
 
-            var propertyFilterContext = new Lazy<PropertyFilterContext>(() => new(typeFilterContext.Value));
+            var propertyFilterContext = new Lazy<MemberFilterContext<PropertyDefinition>>(
+                () => new(typeFilterContext.Value)
+            );
 
-            var propertyAssertionContext = new Lazy<PropertyAssertionContext>(() => new(propertyFilterContext.Value));
+            var propertyAssertionContext = new Lazy<AssertionContext<PropertyDefinition>>(
+                () => new(propertyFilterContext.Value)
+            );
 
             var propertyAssertion = new Lazy<PropertyAssertion>(() => new(propertyAssertionContext.Value));
 
-            var methodAssertionContext = new Lazy<MethodAssertionContext>(() => new(methodFilterContext.Value));
+            var methodAssertionContext = new Lazy<AssertionContext<MethodDefinition>>(
+                () => new(methodFilterContext.Value)
+            );
 
             var methodAssertion = new Lazy<MethodAssertion>(() => new(methodAssertionContext.Value));
 

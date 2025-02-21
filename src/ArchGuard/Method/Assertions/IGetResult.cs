@@ -1,10 +1,11 @@
 namespace ArchGuard
 {
+    using ArchGuard.Core.Contexts;
     using ArchGuard.Core.Method.Models;
 
     public interface IGetMethodResult
     {
-        MethodAssertionResult GetResult();
-        MethodAssertionResult GetResult(StringComparison comparison);
+        AssertionResult<MethodDefinition> GetResult();
+        AssertionResult<MethodDefinition> GetResult(StringComparison comparison);
     }
 }

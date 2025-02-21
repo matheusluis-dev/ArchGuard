@@ -1,12 +1,13 @@
 namespace ArchGuard.Extensions.NFluent
 {
+    using ArchGuard.Core.Contexts;
     using ArchGuard.Core.Field.Models;
     using ArchGuard.Core.Method.Models;
     using ArchGuard.Core.Type.Models;
 
     public static class NFluentExtensions
     {
-        public static void IsSuccess(this ICheck<TypeAssertionResult> result)
+        public static void IsSuccess(this ICheck<AssertionResult<TypeDefinition>> result)
         {
             result.WhichMember(member => member.IsSuccessful);
         }

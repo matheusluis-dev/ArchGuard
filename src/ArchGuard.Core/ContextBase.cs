@@ -76,7 +76,7 @@ namespace ArchGuard.Core
             return GetElements(Default.StringComparison);
         }
 
-        protected IEnumerable<T> GetElements(StringComparison comparison)
+        protected internal IEnumerable<T> GetElements(StringComparison comparison)
         {
             if (_groupedPredicates.Count == 0)
                 return _getElements(comparison);

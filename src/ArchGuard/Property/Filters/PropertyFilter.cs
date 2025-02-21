@@ -1,16 +1,16 @@
 namespace ArchGuard
 {
     using System.Collections.Generic;
-    using ArchGuard.Core.Property.Contexts;
+    using ArchGuard.Core.Contexts;
     using ArchGuard.Core.Property.Models;
 
     public sealed partial class PropertyFilter : IPropertyFilterEntryPoint, IPropertyFilterRule, IPropertyFilterSequence
     {
-        private readonly PropertyFilterContext _context;
+        private readonly MemberFilterContext<PropertyDefinition> _context;
         private readonly StartPropertyAssertionCallback _startPropertyAssertionCallback;
 
         internal PropertyFilter(
-            PropertyFilterContext context,
+            MemberFilterContext<PropertyDefinition> context,
             StartPropertyAssertionCallback startPropertyAssertionCallback
         )
         {
@@ -30,7 +30,7 @@ namespace ArchGuard
 
         public IEnumerable<PropertyDefinition> GetProperties(StringComparison comparison)
         {
-            return _context.GetProperties(comparison);
+            return _context.GetElements(comparison);
         }
 
         public IPropertyAssertionRule Should => _startPropertyAssertionCallback.Invoke();

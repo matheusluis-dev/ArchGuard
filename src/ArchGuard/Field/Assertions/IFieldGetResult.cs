@@ -1,10 +1,11 @@
 namespace ArchGuard
 {
+    using ArchGuard.Core.Contexts;
     using ArchGuard.Core.Field.Models;
 
     public interface IFieldGetResult
     {
-        FieldAssertionResult GetResult();
-        FieldAssertionResult GetResult(StringComparison comparison);
+        AssertionResult<FieldDefinition> GetResult();
+        AssertionResult<FieldDefinition> GetResult(StringComparison comparison);
     }
 }

@@ -1,13 +1,13 @@
 namespace ArchGuard
 {
-    using ArchGuard.Core.Property.Contexts;
+    using ArchGuard.Core.Contexts;
     using ArchGuard.Core.Property.Models;
 
     public sealed partial class PropertyAssertion : IPropertyAssertionRule, IPropertyAssertionSequence
     {
-        private readonly PropertyAssertionContext _context;
+        private readonly AssertionContext<PropertyDefinition> _context;
 
-        public PropertyAssertion(PropertyAssertionContext context)
+        public PropertyAssertion(AssertionContext<PropertyDefinition> context)
         {
             _context = context;
         }
@@ -17,12 +17,12 @@ namespace ArchGuard
             return this;
         }
 
-        public PropertyAssertionResult GetResult()
+        public AssertionResult<PropertyDefinition> GetResult()
         {
             return GetResult(Default.StringComparison);
         }
 
-        public PropertyAssertionResult GetResult(StringComparison comparison)
+        public AssertionResult<PropertyDefinition> GetResult(StringComparison comparison)
         {
             return _context.GetResult(comparison);
         }

@@ -1,16 +1,17 @@
 namespace ArchGuard
 {
     using System;
+    using ArchGuard.Core.Contexts;
     using ArchGuard.Core.Type.Models;
 
     public sealed partial class TypeAssertion
     {
-        public TypeAssertionResult GetResult()
+        public AssertionResult<TypeDefinition> GetResult()
         {
-            return _context.GetResult();
+            return GetResult(Default.StringComparison);
         }
 
-        public TypeAssertionResult GetResult(StringComparison comparison)
+        public AssertionResult<TypeDefinition> GetResult(StringComparison comparison)
         {
             return _context.GetResult(comparison);
         }

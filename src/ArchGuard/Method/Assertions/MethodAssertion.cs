@@ -1,13 +1,13 @@
 namespace ArchGuard
 {
-    using ArchGuard.Core.Method.Contexts;
+    using ArchGuard.Core.Contexts;
     using ArchGuard.Core.Method.Models;
 
     public sealed partial class MethodAssertion : IMethodAssertionRule, IMethodAssertionSequence
     {
-        private readonly MethodAssertionContext _context;
+        private readonly AssertionContext<MethodDefinition> _context;
 
-        public MethodAssertion(MethodAssertionContext context)
+        public MethodAssertion(AssertionContext<MethodDefinition> context)
         {
             _context = context;
         }
@@ -17,12 +17,12 @@ namespace ArchGuard
             return this;
         }
 
-        public MethodAssertionResult GetResult()
+        public AssertionResult<MethodDefinition> GetResult()
         {
             return GetResult(Default.StringComparison);
         }
 
-        public MethodAssertionResult GetResult(StringComparison comparison)
+        public AssertionResult<MethodDefinition> GetResult(StringComparison comparison)
         {
             return _context.GetResult(comparison);
         }
