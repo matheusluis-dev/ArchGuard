@@ -16,10 +16,7 @@ namespace ArchGuard.Cached
     {
         private static readonly Lock _lock = new Lock();
 
-        private static readonly ConcurrentDictionary<
-            SolutionSearchParameters,
-            SolutionDefinition
-        > _cache = new();
+        private static readonly ConcurrentDictionary<SolutionSearchParameters, SolutionDefinition> _cache = new();
 
         private readonly DependencyFinder _dependencyFinder;
         private readonly TypesLoader _typesLoader;
@@ -56,11 +53,7 @@ namespace ArchGuard.Cached
 
                 var solution = workspace.OpenSolutionAsync(resultSlnPath.Value.FullName).Result;
 
-                var solutionDefinition = new SolutionDefinition(
-                    _dependencyFinder,
-                    _typesLoader,
-                    solution
-                );
+                var solutionDefinition = new SolutionDefinition(_dependencyFinder, _typesLoader, solution);
 
                 var projects = solution
                     .Projects.Where(p =>
@@ -82,9 +75,7 @@ namespace ArchGuard.Cached
 
                 if (projects?.Any() != true)
                 {
-                    throw new ProjectNotFoundException(
-                        Error.Prj01ProjectNotFound(parameters.ProjectName)
-                    );
+                    throw new ProjectNotFoundException(Error.Prj01ProjectNotFound(parameters.ProjectName));
                 }
 
                 solutionDefinition.Projects = projects;

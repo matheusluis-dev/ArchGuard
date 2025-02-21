@@ -6,9 +6,7 @@ namespace ArchGuard.Core.Method.Contexts
 
     public sealed class MethodAssertionContext
     {
-        private readonly List<
-            List<Func<MethodDefinition, StringComparison, bool>>
-        > _groupedPredicates = new();
+        private readonly List<List<Func<MethodDefinition, StringComparison, bool>>> _groupedPredicates = new();
 
         private readonly MethodFilterContext _methodFilterContext;
 

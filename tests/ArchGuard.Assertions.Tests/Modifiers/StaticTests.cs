@@ -44,11 +44,7 @@ namespace ArchGuard.Assertions.Tests.Modifiers
             assertion
                 .CompliantTypes.GetFullNames()
                 .Should()
-                .BeEquivalentTo(
-                    TypeNames.FileStaticClass,
-                    TypeNames.InternalStaticClass,
-                    TypeNames.PublicStaticClass
-                );
+                .BeEquivalentTo(TypeNames.FileStaticClass, TypeNames.InternalStaticClass, TypeNames.PublicStaticClass);
             assertion
                 .NonCompliantTypes.GetFullNames()
                 .Should()

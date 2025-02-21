@@ -11,9 +11,7 @@ namespace ArchGuard.Core.Slice.Models
         internal string Namespace { get; init; }
 
         internal IEnumerable<TypeDefinition> Types =>
-            Solution.AllTypes.Where(type =>
-                type.Namespace.StartsWith(Namespace, StringComparison.Ordinal)
-            );
+            Solution.AllTypes.Where(type => type.Namespace.StartsWith(Namespace, StringComparison.Ordinal));
 
         internal IDictionary<TypeDefinition, IEnumerable<TypeDefinition>> DependenciesForEachType
         {
@@ -30,11 +28,7 @@ namespace ArchGuard.Core.Slice.Models
             }
         }
 
-        internal SliceDefinition(
-            SolutionDefinition solution,
-            ProjectDefinition project,
-            string @namespace
-        )
+        internal SliceDefinition(SolutionDefinition solution, ProjectDefinition project, string @namespace)
         {
             Solution = solution;
             Project = project;

@@ -13,9 +13,7 @@ namespace ArchGuard.Assertions.Tests.Modifiers.Access
         public void Internal_types()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(
-                ".Internal."
-            );
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(".Internal.");
 
             var filtersTypes = filters.GetTypes(StringComparison.Ordinal);
 

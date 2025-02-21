@@ -4,10 +4,7 @@ namespace ArchGuard
     using ArchGuard.Core.Property.Contexts;
     using ArchGuard.Core.Property.Models;
 
-    public sealed partial class PropertyFilter
-        : IPropertyFilterEntryPoint,
-            IPropertyFilterRule,
-            IPropertyFilterSequence
+    public sealed partial class PropertyFilter : IPropertyFilterEntryPoint, IPropertyFilterRule, IPropertyFilterSequence
     {
         private readonly PropertyFilterContext _context;
         private readonly StartPropertyAssertionCallback _startPropertyAssertionCallback;

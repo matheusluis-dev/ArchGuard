@@ -27,11 +27,7 @@ namespace ArchGuard.Core.Extensions
             {
                 var allFieldsReadonlyOrPrivate = t.GetMembers()
                     .OfType<IFieldSymbol>()
-                    .All(field =>
-                        field.IsReadOnly
-                        || field.IsConst
-                        || SymbolHelper.IsPrivateOrProtected(field)
-                    );
+                    .All(field => field.IsReadOnly || field.IsConst || SymbolHelper.IsPrivateOrProtected(field));
 
                 var allPropertiesReadonlyOrPrivate = t.GetMembers()
                     .OfType<IPropertySymbol>()

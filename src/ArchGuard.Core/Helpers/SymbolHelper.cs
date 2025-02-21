@@ -61,10 +61,7 @@ namespace ArchGuard.Core.Helpers
             return symbol.DeclaringSyntaxReferences.Any();
         }
 
-        public static (SyntaxNode, SemanticModel) GetSemanticModel(
-            ISymbol symbol,
-            ProjectDefinition project
-        )
+        public static (SyntaxNode, SemanticModel) GetSemanticModel(ISymbol symbol, ProjectDefinition project)
         {
             ArgumentNullException.ThrowIfNull(symbol);
             ArgumentNullException.ThrowIfNull(project);
@@ -77,16 +74,12 @@ namespace ArchGuard.Core.Helpers
 
             var syntax =
                 syntaxReference.GetSyntax()
-                ?? throw new InvalidOperationException(
-                    $"Could not get syntax for {symbol.MetadataName}"
-                );
+                ?? throw new InvalidOperationException($"Could not get syntax for {symbol.MetadataName}");
 
             var syntaxTree = syntax.SyntaxTree;
             var semanticModel =
                 project.Compilation.GetSemanticModel(syntaxTree)
-                ?? throw new InvalidOperationException(
-                    $"Could not get Semantic Model for {symbol.MetadataName}"
-                );
+                ?? throw new InvalidOperationException($"Could not get Semantic Model for {symbol.MetadataName}");
 
             return (syntax, semanticModel);
         }

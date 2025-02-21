@@ -21,12 +21,8 @@ namespace ArchGuard.PublicApi.Tests
 
             var normalizedAssertionMethods = assertionMethods
                 .Where(m => !m.Name.Equals("HaveNamePascalCased", StringComparison.Ordinal))
-                .Where(m =>
-                    !m.Name.Equals("HaveSourceFileNameMatchingTypeName", StringComparison.Ordinal)
-                )
-                .Where(m =>
-                    !m.Name.Equals("HaveSourceFilePathMatchingNamespace", StringComparison.Ordinal)
-                )
+                .Where(m => !m.Name.Equals("HaveSourceFileNameMatchingTypeName", StringComparison.Ordinal))
+                .Where(m => !m.Name.Equals("HaveSourceFilePathMatchingNamespace", StringComparison.Ordinal))
                 .Select(m =>
                     m.Name.Replace("Be", string.Empty, StringComparison.Ordinal)
                         .Replace("NotBe", "Not", StringComparison.Ordinal)

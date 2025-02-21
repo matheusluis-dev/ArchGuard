@@ -8,16 +8,12 @@ namespace ArchGuard.Core.Property.Predicates
         public static Func<PropertyDefinition, StringComparison, bool> HaveNamePascalCased =>
             (type, _) => Regex.IsMatch(type.Name, RegularExpressions.PascalCase);
 
-        public static Func<PropertyDefinition, StringComparison, bool> HaveNameCamelCased(
-            string prefix
-        )
+        public static Func<PropertyDefinition, StringComparison, bool> HaveNameCamelCased(string prefix)
         {
             return (type, _) => Regex.IsMatch(type.Name, RegularExpressions.CamelCase(prefix));
         }
 
-        public static Func<PropertyDefinition, StringComparison, bool> HaveNameCamelCased(
-            char prefix
-        )
+        public static Func<PropertyDefinition, StringComparison, bool> HaveNameCamelCased(char prefix)
         {
             return (type, _) => HaveNameCamelCased(prefix.ToString())(type, _);
         }

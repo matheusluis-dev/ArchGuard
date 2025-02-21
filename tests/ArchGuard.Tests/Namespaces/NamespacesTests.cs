@@ -13,9 +13,7 @@ namespace ArchGuard.Filters.Tests.Namespaces
         public void Not_reside_in_namespace()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.DoNotResideInNamespace(
-                Namespaces.ClassesPublic
-            );
+            var filters = TypesFromMockedAssembly.All.That.DoNotResideInNamespace(Namespaces.ClassesPublic);
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -165,44 +163,33 @@ namespace ArchGuard.Filters.Tests.Namespaces
         public void Reside_in_namespace_containing()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(
-                ".Interfaces."
-            );
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(".Interfaces.");
 
             // Act
             var types = filters.GetTypes().GetFullNames();
 
             // Assert
-            types
-                .Should()
-                .BeEquivalentTo(TypeNames.IInternalInterface, TypeNames.IPublicInterface);
+            types.Should().BeEquivalentTo(TypeNames.IInternalInterface, TypeNames.IPublicInterface);
         }
 
         [Fact]
         public void Reside_in_namespace_containing_with_StringComparison()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(
-                ".InTeRfAcEs."
-            );
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(".InTeRfAcEs.");
 
             // Act
             var types = filters.GetTypes(StringComparison.OrdinalIgnoreCase).GetFullNames();
 
             // Assert
-            types
-                .Should()
-                .BeEquivalentTo(TypeNames.IInternalInterface, TypeNames.IPublicInterface);
+            types.Should().BeEquivalentTo(TypeNames.IInternalInterface, TypeNames.IPublicInterface);
         }
 
         [Fact]
         public void Reside_in_namespace_containing_with_params()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(
-                ".Interfaces.",
-                ".Enums."
-            );
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(".Interfaces.", ".Enums.");
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -222,10 +209,7 @@ namespace ArchGuard.Filters.Tests.Namespaces
         public void Reside_in_namespace_containing_with_params_and_StringComparison()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(
-                ".interfaces.",
-                ".ENUMS."
-            );
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceContaining(".interfaces.", ".ENUMS.");
 
             // Act
             var types = filters.GetTypes(StringComparison.OrdinalIgnoreCase).GetFullNames();
@@ -301,10 +285,7 @@ namespace ArchGuard.Filters.Tests.Namespaces
         public void Reside_in_namespace_ending_with_params()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceEndingWith(
-                ".Internal",
-                ".Public"
-            );
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceEndingWith(".Internal", ".Public");
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -350,10 +331,7 @@ namespace ArchGuard.Filters.Tests.Namespaces
         public void Reside_in_namespace_ending_with_params_and_StringComparison()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceEndingWith(
-                ".internal",
-                ".PUBLIC"
-            );
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespaceEndingWith(".internal", ".PUBLIC");
 
             // Act
             var types = filters.GetTypes(StringComparison.OrdinalIgnoreCase).GetFullNames();

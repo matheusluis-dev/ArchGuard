@@ -4,18 +4,12 @@ namespace ArchGuard
     using ArchGuard.Core.Field.Contexts;
     using ArchGuard.Core.Field.Models;
 
-    public sealed partial class FieldFilter
-        : IFieldFilterEntryPoint,
-            IFieldFilterRule,
-            IFieldFilterSequence
+    public sealed partial class FieldFilter : IFieldFilterEntryPoint, IFieldFilterRule, IFieldFilterSequence
     {
         private readonly FieldFilterContext _context;
         private readonly StartFieldAssertionCallback _startFieldAssertionCallback;
 
-        internal FieldFilter(
-            FieldFilterContext context,
-            StartFieldAssertionCallback startFieldAssertionCallback
-        )
+        internal FieldFilter(FieldFilterContext context, StartFieldAssertionCallback startFieldAssertionCallback)
         {
             _context = context;
             _startFieldAssertionCallback = startFieldAssertionCallback;

@@ -10,20 +10,14 @@ namespace ArchGuard.Core.Predicates.Method
         public static Func<MethodDefinition, StringComparison, bool> HaveNamePascalCased =>
             (method, _) => Regex.IsMatch(method.Name, RegularExpressions.PascalCase);
 
-        public static Func<MethodDefinition, StringComparison, bool> HaveNameEndingWith(
-            IEnumerable<string> names
-        )
+        public static Func<MethodDefinition, StringComparison, bool> HaveNameEndingWith(IEnumerable<string> names)
         {
-            return (method, comparison) =>
-                names.Any(name => method.Name.EndsWith(name, comparison));
+            return (method, comparison) => names.Any(name => method.Name.EndsWith(name, comparison));
         }
 
-        public static Func<MethodDefinition, StringComparison, bool> NotHaveNameEndingWith(
-            IEnumerable<string> names
-        )
+        public static Func<MethodDefinition, StringComparison, bool> NotHaveNameEndingWith(IEnumerable<string> names)
         {
-            return (method, comparison) =>
-                !names.Any(name => method.Name.EndsWith(name, comparison));
+            return (method, comparison) => !names.Any(name => method.Name.EndsWith(name, comparison));
         }
     }
 }

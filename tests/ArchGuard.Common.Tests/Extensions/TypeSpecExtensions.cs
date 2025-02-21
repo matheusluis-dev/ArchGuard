@@ -13,9 +13,7 @@ namespace ArchGuard.Tests.Common.Extensions
             return assembly
                 .GetTypes()
                 .Where(t => t.IsSealed && t.IsAbstract && !t.IsGenericType && !t.IsNested)
-                .SelectMany(t =>
-                    t.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
-                )
+                .SelectMany(t => t.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static))
                 .Where(method => method.IsDefined(typeof(ExtensionAttribute), false))
                 .Where(method => method.GetParameters().FirstOrDefault().ParameterType == type);
         }

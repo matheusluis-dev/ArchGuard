@@ -17,9 +17,7 @@ namespace ArchGuard.Core.Predicates.Type
             return !string.IsNullOrWhiteSpace(type.Namespace);
         }
 
-        public static Func<TypeDefinition, StringComparison, bool> ResideInNamespace(
-            IEnumerable<string> names
-        )
+        public static Func<TypeDefinition, StringComparison, bool> ResideInNamespace(IEnumerable<string> names)
         {
             return (type, comparison) =>
             {
@@ -27,18 +25,14 @@ namespace ArchGuard.Core.Predicates.Type
 
                 return names.Any(name =>
                 {
-                    var @namespace =
-                        namespaceExists || name[name.Length - 1] == '.' ? name : name + ".";
+                    var @namespace = namespaceExists || name[name.Length - 1] == '.' ? name : name + ".";
 
-                    return NamespaceDefaultPredicate(type, name)
-                        && type.Namespace.StartsWith(@namespace, comparison);
+                    return NamespaceDefaultPredicate(type, name) && type.Namespace.StartsWith(@namespace, comparison);
                 });
             };
         }
 
-        public static Func<TypeDefinition, StringComparison, bool> DoNotResideInNamespace(
-            IEnumerable<string> name
-        )
+        public static Func<TypeDefinition, StringComparison, bool> DoNotResideInNamespace(IEnumerable<string> name)
         {
             return (type, comparison) => !ResideInNamespace(name)(type, comparison);
         }
@@ -49,8 +43,7 @@ namespace ArchGuard.Core.Predicates.Type
         {
             return (type, comparison) =>
                 names.Any(name =>
-                    NamespaceDefaultPredicate(type, name)
-                    && type.Namespace.IndexOf(name, comparison) != -1
+                    NamespaceDefaultPredicate(type, name) && type.Namespace.IndexOf(name, comparison) != -1
                 );
         }
 
@@ -66,10 +59,7 @@ namespace ArchGuard.Core.Predicates.Type
         )
         {
             return (type, comparison) =>
-                names.Any(name =>
-                    NamespaceDefaultPredicate(type, name)
-                    && type.Namespace.EndsWith(name, comparison)
-                );
+                names.Any(name => NamespaceDefaultPredicate(type, name) && type.Namespace.EndsWith(name, comparison));
         }
 
         public static Func<TypeDefinition, StringComparison, bool> DoNotResideInNamespaceEndingWith(

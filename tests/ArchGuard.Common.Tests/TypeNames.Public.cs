@@ -14,15 +14,13 @@ namespace ArchGuard.Tests.Common.Types
 
             public const string InternalEnum = Namespaces.Public + "." + nameof(InternalEnum);
 
-            public const string IInternalInterface =
-                Namespaces.Public + "." + nameof(IInternalInterface);
+            public const string IInternalInterface = Namespaces.Public + "." + nameof(IInternalInterface);
 
             public const string PublicClass = Namespaces.Public + "." + nameof(PublicClass);
 
             public const string PublicEnum = Namespaces.Public + "." + nameof(PublicEnum);
 
-            public const string IPublicInterface =
-                Namespaces.Public + "." + nameof(IPublicInterface);
+            public const string IPublicInterface = Namespaces.Public + "." + nameof(IPublicInterface);
         }
     }
 }

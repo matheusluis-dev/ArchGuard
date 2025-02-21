@@ -30,9 +30,7 @@ namespace ArchGuard.Filters.Tests
                     TypeNames.HaveDependencyOn.PublicDependsOnMethodReturnClass,
                     TypeNames.HaveDependencyOn.PublicDependsOnMethodBodyClass,
                     TypeNames.HaveDependencyOn.PublicDependsOnMethodBodyStaticCallClass,
-                    TypeNames
-                        .HaveDependencyOn
-                        .PublicDependsOnMethodBodyCallingStaticConstructorClass,
+                    TypeNames.HaveDependencyOn.PublicDependsOnMethodBodyCallingStaticConstructorClass,
                     TypeNames.HaveDependencyOn.PublicClassExternalStaticConstructor,
                     TypeNames.HaveDependencyOn.PublicDependsOnDirectlyClass,
                     TypeNames.HaveDependencyOn.PublicDependsOnIndirectlyClass

@@ -32,9 +32,7 @@ namespace ArchGuard.Filters.Tests
                     TypeNames.Generics.PublicGenericInheritGenericClass,
                     TypeNames.Generics.PublicParentGenericInheritGenericClass,
                     TypeNames.Generics.PublicGenericOneTypeArgumentInheritTwoTypesArgumentClass,
-                    TypeNames
-                        .Generics
-                        .PublicParentGenericOneTypeArgumentInheritTwoTypesArgumentClass
+                    TypeNames.Generics.PublicParentGenericOneTypeArgumentInheritTwoTypesArgumentClass
                 );
         }
 

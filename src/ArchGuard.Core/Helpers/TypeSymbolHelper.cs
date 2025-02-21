@@ -45,8 +45,7 @@ namespace ArchGuard.Core.Helpers
             if (!typeIsInternal)
                 return false;
 
-            return GetContainingTypes(type)
-                .All(type => !type.IsFileLocal && !SymbolHelper.IsPrivateOrProtected(type));
+            return GetContainingTypes(type).All(type => !type.IsFileLocal && !SymbolHelper.IsPrivateOrProtected(type));
         }
 
         public static bool IsFileLocal(INamedTypeSymbol type)
@@ -88,9 +87,7 @@ namespace ArchGuard.Core.Helpers
             // TODO: no comments, it's obvious
             if (typeSymbol is not INamedTypeSymbol namedTypeSymbol)
             {
-                throw new ArgumentException(
-                    $"{nameof(typeSymbol)} must be {nameof(INamedTypeSymbol)}."
-                );
+                throw new ArgumentException($"{nameof(typeSymbol)} must be {nameof(INamedTypeSymbol)}.");
             }
 
             return GetName(namedTypeSymbol);
@@ -103,9 +100,7 @@ namespace ArchGuard.Core.Helpers
             return $"{namedTypeSymbol.ContainingNamespace}.{GetName(namedTypeSymbol)}";
         }
 
-        public static IEnumerable<INamedTypeSymbol> GetTypeInheritances(
-            INamedTypeSymbol namedTypeSymbol
-        )
+        public static IEnumerable<INamedTypeSymbol> GetTypeInheritances(INamedTypeSymbol namedTypeSymbol)
         {
             var types = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
 
@@ -155,10 +150,7 @@ namespace ArchGuard.Core.Helpers
             ArgumentNullException.ThrowIfNull(namedTypeSymbol);
 
             // Check if there are any instance fields
-            var hasInstanceFields = namedTypeSymbol
-                .GetMembers()
-                .OfType<IFieldSymbol>()
-                .Any(field => !field.IsStatic);
+            var hasInstanceFields = namedTypeSymbol.GetMembers().OfType<IFieldSymbol>().Any(field => !field.IsStatic);
 
             // Check if there are any instance properties
             var hasInstanceProperties = namedTypeSymbol
@@ -167,10 +159,7 @@ namespace ArchGuard.Core.Helpers
                 .Any(property => !property.IsStatic);
 
             // Check if there are any instance events
-            var hasInstanceEvents = namedTypeSymbol
-                .GetMembers()
-                .OfType<IEventSymbol>()
-                .Any(@event => !@event.IsStatic);
+            var hasInstanceEvents = namedTypeSymbol.GetMembers().OfType<IEventSymbol>().Any(@event => !@event.IsStatic);
 
             return !hasInstanceFields && !hasInstanceProperties && !hasInstanceEvents;
         }

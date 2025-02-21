@@ -11,9 +11,7 @@ namespace ArchGuard.Assertions.Tests.Namespaces
         public void Reside_in_namespace()
         {
             // Assert
-            var filters = TypesFromMockedAssembly
-                .All.That.AreNotNested()
-                .And.HaveNameMatching(".*Internal.*");
+            var filters = TypesFromMockedAssembly.All.That.AreNotNested().And.HaveNameMatching(".*Internal.*");
             var filtersTypes = filters.GetTypes();
 
             // Act
@@ -38,9 +36,7 @@ namespace ArchGuard.Assertions.Tests.Namespaces
         public void Reside_in_namespace_with_StringComparison()
         {
             // Assert
-            var filters = TypesFromMockedAssembly
-                .All.That.AreNotNested()
-                .And.HaveNameMatching(".*Internal.*");
+            var filters = TypesFromMockedAssembly.All.That.AreNotNested().And.HaveNameMatching(".*Internal.*");
             var filtersTypes = filters.GetTypes(StringComparison.OrdinalIgnoreCase);
 
             // Act
@@ -65,9 +61,7 @@ namespace ArchGuard.Assertions.Tests.Namespaces
         public void Not_reside_in_namespace()
         {
             // Assert
-            var filters = TypesFromMockedAssembly
-                .All.That.AreNotNested()
-                .And.HaveNameMatching(".*Internal.*");
+            var filters = TypesFromMockedAssembly.All.That.AreNotNested().And.HaveNameMatching(".*Internal.*");
             var filtersTypes = filters.GetTypes();
 
             // Act
@@ -92,9 +86,7 @@ namespace ArchGuard.Assertions.Tests.Namespaces
         public void Not_reside_in_namespace_with_StringComparison()
         {
             // Assert
-            var filters = TypesFromMockedAssembly
-                .All.That.AreNotNested()
-                .And.HaveNameMatching(".*Internal.*");
+            var filters = TypesFromMockedAssembly.All.That.AreNotNested().And.HaveNameMatching(".*Internal.*");
             var filtersTypes = filters.GetTypes(StringComparison.OrdinalIgnoreCase);
 
             // Act
@@ -119,15 +111,11 @@ namespace ArchGuard.Assertions.Tests.Namespaces
         public void Reside_in_namespace_ending_with()
         {
             // Assert
-            var filters = TypesFromMockedAssembly
-                .All.That.AreNotNested()
-                .And.HaveNameMatching(".*Internal.*");
+            var filters = TypesFromMockedAssembly.All.That.AreNotNested().And.HaveNameMatching(".*Internal.*");
             var filtersTypes = filters.GetTypes(StringComparison.Ordinal);
 
             // Act
-            var assertion = filters
-                .Should.ResideInNamespaceEndingWith(".Internal")
-                .GetResult(StringComparison.Ordinal);
+            var assertion = filters.Should.ResideInNamespaceEndingWith(".Internal").GetResult(StringComparison.Ordinal);
 
             // Assert
             assertion.IsSuccessful.Should().BeTrue();
@@ -140,9 +128,7 @@ namespace ArchGuard.Assertions.Tests.Namespaces
         public void Not_reside_in_namespace_ending_with()
         {
             // Assert
-            var filters = TypesFromMockedAssembly
-                .All.That.AreNotNested()
-                .And.HaveNameMatching(".*Internal.*");
+            var filters = TypesFromMockedAssembly.All.That.AreNotNested().And.HaveNameMatching(".*Internal.*");
             var filtersTypes = filters.GetTypes(StringComparison.Ordinal);
 
             // Act

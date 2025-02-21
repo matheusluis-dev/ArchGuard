@@ -15,11 +15,7 @@ namespace ArchGuard.Tests.Common
         public static class Inherit
         {
             public static ITypeFilterEntryPoint Types =>
-                ArchGuard.Types.InSolution(
-                    "ArchGuard.sln",
-                    "ArchGuard.MockedAssembly.Inherit",
-                    "net9_0"
-                );
+                ArchGuard.Types.InSolution("ArchGuard.sln", "ArchGuard.MockedAssembly.Inherit", "net9_0");
         }
 
         public static class AccessModifiers
@@ -70,72 +66,44 @@ namespace ArchGuard.Tests.Common
             public static class Static
             {
                 public static ITypeFilterEntryPoint Types =>
-                    ArchGuard.Types.InSolution(
-                        "ArchGuard.sln",
-                        "ArchGuard.MockedAssembly.Methods.Static",
-                        "net9_0"
-                    );
+                    ArchGuard.Types.InSolution("ArchGuard.sln", "ArchGuard.MockedAssembly.Methods.Static", "net9_0");
             }
         }
 
         public static class Classes
         {
             public static ITypeFilterEntryPoint Types =>
-                ArchGuard.Types.InSolution(
-                    "ArchGuard.sln",
-                    "ArchGuard.MockedAssembly.Classes",
-                    "net9_0"
-                );
+                ArchGuard.Types.InSolution("ArchGuard.sln", "ArchGuard.MockedAssembly.Classes", "net9_0");
         }
 
         public static class Enums
         {
             public static ITypeFilterEntryPoint Types =>
-                ArchGuard.Types.InSolution(
-                    "ArchGuard.sln",
-                    "ArchGuard.MockedAssembly.Enums",
-                    "net9_0"
-                );
+                ArchGuard.Types.InSolution("ArchGuard.sln", "ArchGuard.MockedAssembly.Enums", "net9_0");
         }
 
         public static class Interfaces
         {
             public static ITypeFilterEntryPoint Types =>
-                ArchGuard.Types.InSolution(
-                    "ArchGuard.sln",
-                    "ArchGuard.MockedAssembly.Interfaces",
-                    "net9_0"
-                );
+                ArchGuard.Types.InSolution("ArchGuard.sln", "ArchGuard.MockedAssembly.Interfaces", "net9_0");
         }
 
         public static class Records
         {
             public static ITypeFilterEntryPoint Types =>
-                ArchGuard.Types.InSolution(
-                    "ArchGuard.sln",
-                    "ArchGuard.MockedAssembly.Records",
-                    "net9_0"
-                );
+                ArchGuard.Types.InSolution("ArchGuard.sln", "ArchGuard.MockedAssembly.Records", "net9_0");
         }
 
         public static class RecordStructs
         {
             public static ITypeFilterEntryPoint Types =>
-                ArchGuard.Types.InSolution(
-                    "ArchGuard.sln",
-                    "ArchGuard.MockedAssembly.RecordStructs",
-                    "net9_0"
-                );
+                ArchGuard.Types.InSolution("ArchGuard.sln", "ArchGuard.MockedAssembly.RecordStructs", "net9_0");
         }
 
         public static class Structs
         {
             public static ITypeFilterEntryPoint Types =>
-                ArchGuard.Types.InSolution(
-                    "ArchGuard.sln",
-                    "ArchGuard.MockedAssembly.Structs",
-                    "net9_0"
-                );
+                ArchGuard.Types.InSolution("ArchGuard.sln", "ArchGuard.MockedAssembly.Structs", "net9_0");
         }
     }
 }

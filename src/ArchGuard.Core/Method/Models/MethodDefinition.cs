@@ -45,10 +45,7 @@ namespace ArchGuard.Core.Method.Models
 
         internal TypeDefinition ReturnType =>
             Solution.AllTypes.First(type =>
-                type.FullName.Equals(
-                    TypeSymbolHelper.GetFullName(_method.ReturnType),
-                    StringComparison.Ordinal
-                )
+                type.FullName.Equals(TypeSymbolHelper.GetFullName(_method.ReturnType), StringComparison.Ordinal)
             );
 
         internal IEnumerable<TypeDefinition> ParametersTypes
@@ -106,9 +103,7 @@ namespace ArchGuard.Core.Method.Models
         {
             if (method.MethodKind is MethodKind.Constructor)
             {
-                throw new ArgumentException(
-                    $"Constructors must be created with {nameof(ConstructorDefinition)}"
-                );
+                throw new ArgumentException($"Constructors must be created with {nameof(ConstructorDefinition)}");
             }
 
             Solution = solution;
@@ -123,9 +118,7 @@ namespace ArchGuard.Core.Method.Models
                 .GetAssignmentsTypes(Project, _method)
                 .Select(TypeSymbolHelper.GetFullName);
 
-            return Solution.AllTypes.Where(type =>
-                assignmentTypes.Contains(type.FullName, StringComparer.Ordinal)
-            );
+            return Solution.AllTypes.Where(type => assignmentTypes.Contains(type.FullName, StringComparer.Ordinal));
         }
 
         internal IEnumerable<TypeDefinition> GetDependencies()
@@ -135,9 +128,7 @@ namespace ArchGuard.Core.Method.Models
                 .Select(TypeSymbolHelper.GetFullName);
 
             return Solution.AllTypes.Where(type =>
-                dependencies.Any(dependencyName =>
-                    type.FullName.Equals(dependencyName, StringComparison.Ordinal)
-                )
+                dependencies.Any(dependencyName => type.FullName.Equals(dependencyName, StringComparison.Ordinal))
             );
         }
 

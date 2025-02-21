@@ -7,9 +7,7 @@ namespace ArchGuard.Core.Field.Contexts
 
     public sealed class FieldFilterContext
     {
-        private readonly List<
-            List<Func<FieldDefinition, StringComparison, bool>>
-        > _groupedPredicates = new();
+        private readonly List<List<Func<FieldDefinition, StringComparison, bool>>> _groupedPredicates = new();
 
         private readonly TypeFilterContext _typeFilterContext;
 
@@ -43,9 +41,7 @@ namespace ArchGuard.Core.Field.Contexts
 
         public IEnumerable<FieldDefinition> GetFields(StringComparison comparison)
         {
-            var fields = _typeFilterContext
-                .GetTypes(comparison)
-                .SelectMany(type => type.GetFields());
+            var fields = _typeFilterContext.GetTypes(comparison).SelectMany(type => type.GetFields());
 
             if (_groupedPredicates.Count == 0)
                 return fields;

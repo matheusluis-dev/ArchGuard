@@ -7,9 +7,7 @@ namespace ArchGuard.Core.Property.Contexts
 
     public sealed class PropertyFilterContext
     {
-        private readonly List<
-            List<Func<PropertyDefinition, StringComparison, bool>>
-        > _groupedPredicates = new();
+        private readonly List<List<Func<PropertyDefinition, StringComparison, bool>>> _groupedPredicates = new();
 
         private readonly TypeFilterContext _typeFilterContext;
 
@@ -43,9 +41,7 @@ namespace ArchGuard.Core.Property.Contexts
 
         public IEnumerable<PropertyDefinition> GetProperties(StringComparison comparison)
         {
-            var fields = _typeFilterContext
-                .GetTypes(comparison)
-                .SelectMany(type => type.GetProperties());
+            var fields = _typeFilterContext.GetTypes(comparison).SelectMany(type => type.GetProperties());
 
             if (_groupedPredicates.Count == 0)
                 return fields;

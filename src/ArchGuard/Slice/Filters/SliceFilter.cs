@@ -9,10 +9,7 @@ namespace ArchGuard
         private readonly SliceFilterContext _context;
         private readonly StartSliceAssertionCallback _startSliceAssertionCallback;
 
-        internal SliceFilter(
-            SliceFilterContext context,
-            StartSliceAssertionCallback startSliceAssertionCallback
-        )
+        internal SliceFilter(SliceFilterContext context, StartSliceAssertionCallback startSliceAssertionCallback)
         {
             _context = context;
             _startSliceAssertionCallback = startSliceAssertionCallback;

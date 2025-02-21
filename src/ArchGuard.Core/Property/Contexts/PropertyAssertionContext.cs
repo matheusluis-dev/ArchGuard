@@ -6,9 +6,7 @@ namespace ArchGuard.Core.Property.Contexts
 
     public sealed class PropertyAssertionContext
     {
-        private readonly List<
-            List<Func<PropertyDefinition, StringComparison, bool>>
-        > _groupedPredicates = new();
+        private readonly List<List<Func<PropertyDefinition, StringComparison, bool>>> _groupedPredicates = new();
 
         private readonly PropertyFilterContext _propertyFilterContext;
 

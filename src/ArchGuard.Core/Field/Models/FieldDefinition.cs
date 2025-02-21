@@ -18,10 +18,7 @@ namespace ArchGuard.Core.Field.Models
 
         public TypeDefinition Type =>
             Solution.AllTypes.First(type =>
-                type.FullName.Equals(
-                    TypeSymbolHelper.GetFullName(_field.Type),
-                    StringComparison.Ordinal
-                )
+                type.FullName.Equals(TypeSymbolHelper.GetFullName(_field.Type), StringComparison.Ordinal)
             );
 
         private readonly IFieldSymbol _field;
@@ -45,8 +42,7 @@ namespace ArchGuard.Core.Field.Models
 
         internal bool IsStatic => _field.IsStatic;
 
-        internal bool IsExternallyImmutable =>
-            IsStatic || IsPrivateOrProtected || IsReadOnly || IsConst;
+        internal bool IsExternallyImmutable => IsStatic || IsPrivateOrProtected || IsReadOnly || IsConst;
 
         internal FieldDefinition(
             SolutionDefinition solution,

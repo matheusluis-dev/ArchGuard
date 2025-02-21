@@ -19,10 +19,7 @@ namespace ArchGuard.Core.Property.Models
 
         public TypeDefinition Type =>
             Solution.AllTypes.First(type =>
-                type.FullName.Equals(
-                    TypeSymbolHelper.GetFullName(_property.Type),
-                    StringComparison.Ordinal
-                )
+                type.FullName.Equals(TypeSymbolHelper.GetFullName(_property.Type), StringComparison.Ordinal)
             );
 
         private readonly IPropertySymbol _property;
@@ -43,16 +40,12 @@ namespace ArchGuard.Core.Property.Models
         internal bool HasGetMethod => _property.GetMethod is not null;
 
         internal MethodDefinition? GetMethod =>
-            HasGetMethod
-                ? new MethodDefinition(Solution, Project, ContainingType, _property.GetMethod!)
-                : null;
+            HasGetMethod ? new MethodDefinition(Solution, Project, ContainingType, _property.GetMethod!) : null;
 
         internal bool HasSetMethod => _property.SetMethod is not null;
 
         internal MethodDefinition? SetMethod =>
-            HasSetMethod
-                ? new MethodDefinition(Solution, Project, ContainingType, _property.SetMethod!)
-                : null;
+            HasSetMethod ? new MethodDefinition(Solution, Project, ContainingType, _property.SetMethod!) : null;
 
         internal bool IsInitOnly => HasSetMethod && _property.SetMethod!.IsInitOnly;
 

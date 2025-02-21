@@ -31,12 +31,7 @@ namespace ArchGuard.Core
                 _typesFromProject.AddRange(
                     _typesLoader
                         .GetFromProject(Compilation.GlobalNamespace, Compilation.Assembly)
-                        .Select(symbol => new TypeDefinition(
-                            _dependencyFinder,
-                            _solution,
-                            this,
-                            symbol
-                        ))
+                        .Select(symbol => new TypeDefinition(_dependencyFinder, _solution, this, symbol))
                 );
 
                 return _typesFromProject;
@@ -54,12 +49,7 @@ namespace ArchGuard.Core
                 _allTypes.AddRange(
                     _typesLoader
                         .GetFromProject(Compilation.GlobalNamespace, null)
-                        .Select(symbol => new TypeDefinition(
-                            _dependencyFinder,
-                            _solution,
-                            this,
-                            symbol
-                        ))
+                        .Select(symbol => new TypeDefinition(_dependencyFinder, _solution, this, symbol))
                 );
 
                 return _allTypes;

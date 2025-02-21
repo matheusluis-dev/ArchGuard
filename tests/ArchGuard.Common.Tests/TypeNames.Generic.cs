@@ -19,8 +19,7 @@ namespace ArchGuard.Tests.Common.Types
             public const string IPublicNonGenericInterface =
                 Namespaces.Generics + "." + nameof(IPublicNonGenericInterface);
 
-            public const string PublicNonGenericClass =
-                Namespaces.Generics + "." + nameof(PublicNonGenericClass);
+            public const string PublicNonGenericClass = Namespaces.Generics + "." + nameof(PublicNonGenericClass);
 
             public const string PublicNonGenericInheritGenericClass =
                 Namespaces.Generics + "." + nameof(PublicNonGenericInheritGenericClass);
@@ -35,14 +34,10 @@ namespace ArchGuard.Tests.Common.Types
                 Namespaces.Generics + "." + nameof(PublicParentGenericInheritGenericClass);
 
             public const string PublicGenericOneTypeArgumentInheritTwoTypesArgumentClass =
-                Namespaces.Generics
-                + "."
-                + nameof(PublicGenericOneTypeArgumentInheritTwoTypesArgumentClass);
+                Namespaces.Generics + "." + nameof(PublicGenericOneTypeArgumentInheritTwoTypesArgumentClass);
 
             public const string PublicParentGenericOneTypeArgumentInheritTwoTypesArgumentClass =
-                Namespaces.Generics
-                + "."
-                + nameof(PublicParentGenericOneTypeArgumentInheritTwoTypesArgumentClass);
+                Namespaces.Generics + "." + nameof(PublicParentGenericOneTypeArgumentInheritTwoTypesArgumentClass);
         }
     }
 }

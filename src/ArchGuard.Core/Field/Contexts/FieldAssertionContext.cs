@@ -6,9 +6,7 @@ namespace ArchGuard.Core.Field.Contexts
 
     public sealed class FieldAssertionContext
     {
-        private readonly List<
-            List<Func<FieldDefinition, StringComparison, bool>>
-        > _groupedPredicates = new();
+        private readonly List<List<Func<FieldDefinition, StringComparison, bool>>> _groupedPredicates = new();
 
         private readonly FieldFilterContext _fieldFilterContext;
 

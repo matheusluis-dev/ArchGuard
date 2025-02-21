@@ -3,9 +3,7 @@ namespace ArchGuard
     using ArchGuard.Core.Property.Contexts;
     using ArchGuard.Core.Property.Models;
 
-    public sealed partial class PropertyAssertion
-        : IPropertyAssertionRule,
-            IPropertyAssertionSequence
+    public sealed partial class PropertyAssertion : IPropertyAssertionRule, IPropertyAssertionSequence
     {
         private readonly PropertyAssertionContext _context;
 

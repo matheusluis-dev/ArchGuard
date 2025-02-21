@@ -7,9 +7,7 @@ namespace ArchGuard.Core.Method.Contexts
 
     public sealed class MethodFilterContext
     {
-        private readonly List<
-            List<Func<MethodDefinition, StringComparison, bool>>
-        > _groupedPredicates = new();
+        private readonly List<List<Func<MethodDefinition, StringComparison, bool>>> _groupedPredicates = new();
 
         private readonly TypeFilterContext _typeFilterContext;
 
@@ -43,9 +41,7 @@ namespace ArchGuard.Core.Method.Contexts
 
         public IEnumerable<MethodDefinition> GetMethods(StringComparison comparison)
         {
-            var methods = _typeFilterContext
-                .GetTypes(comparison)
-                .SelectMany(type => type.GetMethods());
+            var methods = _typeFilterContext.GetTypes(comparison).SelectMany(type => type.GetMethods());
 
             if (_groupedPredicates.Count == 0)
                 return methods;

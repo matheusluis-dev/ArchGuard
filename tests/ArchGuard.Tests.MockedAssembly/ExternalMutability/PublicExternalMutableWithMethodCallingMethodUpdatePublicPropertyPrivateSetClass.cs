@@ -4,9 +4,7 @@ namespace ArchGuard.Tests.MockedAssembly.ExternalMutability
     {
         public string String { get; private set; }
 
-        public PublicExternalMutableWithMethodCallingMethodUpdatePublicPropertyPrivateSetClass(
-            string @string
-        )
+        public PublicExternalMutableWithMethodCallingMethodUpdatePublicPropertyPrivateSetClass(string @string)
         {
             SetString(@string);
         }

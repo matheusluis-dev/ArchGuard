@@ -4,18 +4,12 @@ namespace ArchGuard
     using ArchGuard.Core.Method.Contexts;
     using ArchGuard.Core.Method.Models;
 
-    public sealed partial class MethodFilter
-        : IMethodFilterEntryPoint,
-            IMethodFilterRule,
-            IMethodFilterSequence
+    public sealed partial class MethodFilter : IMethodFilterEntryPoint, IMethodFilterRule, IMethodFilterSequence
     {
         private readonly MethodFilterContext _context;
         private readonly StartMethodAssertionCallback _startMethodAssertionCallback;
 
-        internal MethodFilter(
-            MethodFilterContext context,
-            StartMethodAssertionCallback startMethodAssertionCallback
-        )
+        internal MethodFilter(MethodFilterContext context, StartMethodAssertionCallback startMethodAssertionCallback)
         {
             _context = context;
             _startMethodAssertionCallback = startMethodAssertionCallback;

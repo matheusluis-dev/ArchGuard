@@ -20,9 +20,7 @@ namespace ArchGuard.Filters.Tests
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
-            Check
-                .That(types)
-                .Contains("ArchGuard.MockedAssembly.HaveDependencyOnNamespace.NamespaceA.Class");
+            Check.That(types).Contains("ArchGuard.MockedAssembly.HaveDependencyOnNamespace.NamespaceA.Class");
         }
 
         [Fact]
@@ -37,9 +35,7 @@ namespace ArchGuard.Filters.Tests
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
-            Check
-                .That(types)
-                .Contains("ArchGuard.MockedAssembly.HaveDependencyOnNamespace.NamespaceC.Class");
+            Check.That(types).Contains("ArchGuard.MockedAssembly.HaveDependencyOnNamespace.NamespaceC.Class");
         }
 
         [Fact]
@@ -76,9 +72,7 @@ namespace ArchGuard.Filters.Tests
             // Assert
             Check
                 .That(types)
-                .Not.Contains(
-                    "ArchGuard.MockedAssembly.HaveDependencyOnNamespace.NamespaceB.SubNamespace.SubClass"
-                );
+                .Not.Contains("ArchGuard.MockedAssembly.HaveDependencyOnNamespace.NamespaceB.SubNamespace.SubClass");
         }
 
         [Fact]
@@ -115,9 +109,7 @@ namespace ArchGuard.Filters.Tests
             // Assert
             Check
                 .That(types)
-                .Contains(
-                    "ArchGuard.MockedAssembly.HaveDependencyOnNamespace.NamespaceB.SubNamespace.SubClass"
-                );
+                .Contains("ArchGuard.MockedAssembly.HaveDependencyOnNamespace.NamespaceB.SubNamespace.SubClass");
         }
     }
 }

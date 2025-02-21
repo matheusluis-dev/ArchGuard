@@ -55,10 +55,7 @@ namespace ArchGuard.Assertions.Tests.Modifiers
             assertion
                 .NonCompliantTypes.GetFullNames()
                 .Should()
-                .BeEquivalentTo(
-                    TypeNames.Nested.PublicNonNestedClass,
-                    TypeNames.Nested.PublicParentClass
-                );
+                .BeEquivalentTo(TypeNames.Nested.PublicNonNestedClass, TypeNames.Nested.PublicParentClass);
         }
     }
 }

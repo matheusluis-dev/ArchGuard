@@ -41,10 +41,7 @@ namespace ArchGuard.Assertions.Tests.Modifiers.Access
             // Assert
             assertion.IsSuccessful.Should().BeFalse();
             assertion.TypesFiltered.Should().BeEquivalentTo(filtersTypes);
-            assertion
-                .CompliantTypes.GetFullNames()
-                .Should()
-                .BeEquivalentTo(TypeNames.IPublicInterface.ToListString());
+            assertion.CompliantTypes.GetFullNames().Should().BeEquivalentTo(TypeNames.IPublicInterface.ToListString());
             assertion
                 .NonCompliantTypes.GetFullNames()
                 .Should()

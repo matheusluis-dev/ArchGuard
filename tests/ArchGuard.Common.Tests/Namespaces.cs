@@ -12,8 +12,7 @@ namespace ArchGuard.Tests.Common
 
         public const string Interfaces = "ArchGuard.Tests.MockedAssembly.Interfaces";
         public const string InterfacesPublic = "ArchGuard.Tests.MockedAssembly.Interfaces.Public";
-        public const string InterfacesInternal =
-            "ArchGuard.Tests.MockedAssembly.Interfaces.Internal";
+        public const string InterfacesInternal = "ArchGuard.Tests.MockedAssembly.Interfaces.Internal";
 
         public const string RecordsPublic = "ArchGuard.Tests.MockedAssembly.Records.Public";
         public const string RecordsInternal = "ArchGuard.Tests.MockedAssembly.Records.Internal";
@@ -21,14 +20,12 @@ namespace ArchGuard.Tests.Common
         public const string StructsPublic = "ArchGuard.Tests.MockedAssembly.Structs.Public";
         public const string StructsInternal = "ArchGuard.Tests.MockedAssembly.Structs.Internal";
 
-        public const string ExternalMutability =
-            "ArchGuard.Tests.MockedAssembly.ExternalMutability";
+        public const string ExternalMutability = "ArchGuard.Tests.MockedAssembly.ExternalMutability";
         public const string Generics = "ArchGuard.Tests.MockedAssembly.Generics";
         public const string HaveDependencyOn = "ArchGuard.Tests.MockedAssembly.HaveDependencyOn";
         public const string HaveParameterlessConstructor =
             "ArchGuard.Tests.MockedAssembly.HaveParameterlessConstructor";
-        public const string ImplementInterface =
-            "ArchGuard.Tests.MockedAssembly.ImplementInterface";
+        public const string ImplementInterface = "ArchGuard.Tests.MockedAssembly.ImplementInterface";
         public const string Inherit = "ArchGuard.Tests.MockedAssembly.Inherit";
         public const string Internal = "ArchGuard.Tests.MockedAssembly.Internal";
         public const string IsUsedBy = "ArchGuard.Tests.MockedAssembly.IsUsedBy";

@@ -5,37 +5,25 @@ namespace ArchGuard.Tests.Common.Types
         public static class ExternalMutability
         {
             public const string PublicExternalImmutableWithPrivateFieldNonReadonlyClass =
-                Namespaces.ExternalMutability
-                + "."
-                + nameof(PublicExternalImmutableWithPrivateFieldNonReadonlyClass);
+                Namespaces.ExternalMutability + "." + nameof(PublicExternalImmutableWithPrivateFieldNonReadonlyClass);
 
             public const string PublicExternalImmutableEmptyClass =
                 Namespaces.ExternalMutability + "." + nameof(PublicExternalImmutableEmptyClass);
 
             public const string PublicExternalImmutableWithReadonlyFieldClass =
-                Namespaces.ExternalMutability
-                + "."
-                + nameof(PublicExternalImmutableWithReadonlyFieldClass);
+                Namespaces.ExternalMutability + "." + nameof(PublicExternalImmutableWithReadonlyFieldClass);
 
             public const string PublicExternalImmutableWithGetOnlyPropertyClass =
-                Namespaces.ExternalMutability
-                + "."
-                + nameof(PublicExternalImmutableWithGetOnlyPropertyClass);
+                Namespaces.ExternalMutability + "." + nameof(PublicExternalImmutableWithGetOnlyPropertyClass);
 
             public const string PublicExternalImmutableWithInitPropertyClass =
-                Namespaces.ExternalMutability
-                + "."
-                + nameof(PublicExternalImmutableWithInitPropertyClass);
+                Namespaces.ExternalMutability + "." + nameof(PublicExternalImmutableWithInitPropertyClass);
 
             public const string PublicExternalImmutableWithPublicPropertyPrivateSetClass =
-                Namespaces.ExternalMutability
-                + "."
-                + nameof(PublicExternalImmutableWithPublicPropertyPrivateSetClass);
+                Namespaces.ExternalMutability + "." + nameof(PublicExternalImmutableWithPublicPropertyPrivateSetClass);
 
             public const string PublicExternalMutableWithMethodUpdatingPrivateFieldClass =
-                Namespaces.ExternalMutability
-                + "."
-                + nameof(PublicExternalMutableWithMethodUpdatingPrivateFieldClass);
+                Namespaces.ExternalMutability + "." + nameof(PublicExternalMutableWithMethodUpdatingPrivateFieldClass);
 
             public const string PublicExternalMutableWithMethodUpdatingPrivatePropertyClass =
                 Namespaces.ExternalMutability
@@ -60,16 +48,12 @@ namespace ArchGuard.Tests.Common.Types
             public const string PublicExternalMutableWithMethodCallingMethodUpdatePublicPropertyPrivateSetClass =
                 Namespaces.ExternalMutability
                 + "."
-                + nameof(
-                    PublicExternalMutableWithMethodCallingMethodUpdatePublicPropertyPrivateSetClass
-                );
+                + nameof(PublicExternalMutableWithMethodCallingMethodUpdatePublicPropertyPrivateSetClass);
 
             public const string PublicExternalMutableWithMethodCallingGetWithUpdatePublicPropertyPrivateSetClass =
                 Namespaces.ExternalMutability
                 + "."
-                + nameof(
-                    PublicExternalMutableWithMethodCallingGetWithUpdatePublicPropertyPrivateSetClass
-                );
+                + nameof(PublicExternalMutableWithMethodCallingGetWithUpdatePublicPropertyPrivateSetClass);
 
             public const string PublicExternalMutableWithMethodCallingSetWithUpdatePublicPropertyClass =
                 Namespaces.ExternalMutability

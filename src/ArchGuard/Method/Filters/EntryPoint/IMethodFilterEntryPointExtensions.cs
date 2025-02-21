@@ -11,9 +11,7 @@ namespace ArchGuard
         {
             if (!(iTypesFilterStart is MethodFilter typesFilter))
             {
-                throw new ArgumentException(
-                    $"{nameof(iTypesFilterStart)} must be of type {nameof(TypeFilter)}"
-                );
+                throw new ArgumentException($"{nameof(iTypesFilterStart)} must be of type {nameof(TypeFilter)}");
             }
 
             if (filter is null)

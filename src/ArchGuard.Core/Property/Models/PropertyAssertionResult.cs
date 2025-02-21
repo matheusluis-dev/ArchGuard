@@ -7,8 +7,7 @@ namespace ArchGuard.Core.Property.Models
         public bool IsSuccessful => !NonCompliantProperties.Any();
         public IEnumerable<PropertyDefinition> PropertiesFiltered { get; }
         public IEnumerable<PropertyDefinition> CompliantProperties { get; }
-        public IEnumerable<PropertyDefinition> NonCompliantProperties =>
-            PropertiesFiltered.Except(CompliantProperties);
+        public IEnumerable<PropertyDefinition> NonCompliantProperties => PropertiesFiltered.Except(CompliantProperties);
 
         internal PropertyAssertionResult(
             IEnumerable<PropertyDefinition> propertiesFiltered,

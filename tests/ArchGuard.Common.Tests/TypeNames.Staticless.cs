@@ -7,8 +7,7 @@ namespace ArchGuard.Tests.Common.Types
             public const string PublicNonStaticlessClass =
                 Namespaces.Staticless + "." + nameof(PublicNonStaticlessClass);
 
-            public const string PublicStaticlessClass =
-                Namespaces.Staticless + "." + nameof(PublicStaticlessClass);
+            public const string PublicStaticlessClass = Namespaces.Staticless + "." + nameof(PublicStaticlessClass);
         }
     }
 }

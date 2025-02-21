@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solutions-items", "solutions-items", "{D4F2FB78-9C9D-4C9B-A694-2D2BBC8353F5}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.csharpierrc = .csharpierrc
 		.gitignore = .gitignore
 		Directory.Build.props = Directory.Build.props
 		Directory.Packages.props = Directory.Packages.props

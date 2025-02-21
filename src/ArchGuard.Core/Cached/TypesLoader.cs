@@ -31,10 +31,7 @@ namespace ArchGuard.Cached
                         .GetTypeMembers()
                         .Where(typeMember =>
                             assemblySymbol is null
-                            || typeMember.ContainingAssembly.Equals(
-                                assemblySymbol,
-                                SymbolEqualityComparer.Default
-                            )
+                            || typeMember.ContainingAssembly.Equals(assemblySymbol, SymbolEqualityComparer.Default)
                         )
                 )
                 {
@@ -63,10 +60,7 @@ namespace ArchGuard.Cached
                 var nestedType in typeSymbol
                     .GetTypeMembers()
                     .Where(nestedType =>
-                        nestedType.ContainingAssembly.Equals(
-                            assemblySymbol,
-                            SymbolEqualityComparer.Default
-                        )
+                        nestedType.ContainingAssembly.Equals(assemblySymbol, SymbolEqualityComparer.Default)
                     )
             )
             {

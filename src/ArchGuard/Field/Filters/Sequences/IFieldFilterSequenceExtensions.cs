@@ -11,9 +11,7 @@ namespace ArchGuard
         {
             if (!(fieldFilterSequence is FieldFilter fieldFilter))
             {
-                throw new ArgumentException(
-                    $"{nameof(fieldFilterSequence)} must be of type {nameof(FieldFilter)}"
-                );
+                throw new ArgumentException($"{nameof(fieldFilterSequence)} must be of type {nameof(FieldFilter)}");
             }
 
             if (filter is null)
@@ -31,9 +29,7 @@ namespace ArchGuard
         {
             if (!(fieldFilterSequence is FieldFilter typesFilter))
             {
-                throw new ArgumentException(
-                    $"{nameof(fieldFilterSequence)} must be of type {nameof(FieldFilter)}"
-                );
+                throw new ArgumentException($"{nameof(fieldFilterSequence)} must be of type {nameof(FieldFilter)}");
             }
 
             if (filter is null)

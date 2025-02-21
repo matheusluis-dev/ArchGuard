@@ -41,9 +41,7 @@ namespace ArchGuard.Filters.Tests
         {
             // Arrange
             var prefix = "PublicSealed";
-            var filters = TypesFromMockedAssembly.All.That.HaveNameStartingWith(
-                prefix.ToUpperInvariant()
-            );
+            var filters = TypesFromMockedAssembly.All.That.HaveNameStartingWith(prefix.ToUpperInvariant());
 
             // Act
             var types = filters.GetTypes(StringComparison.OrdinalIgnoreCase).GetFullNames();
@@ -111,9 +109,7 @@ namespace ArchGuard.Filters.Tests
         {
             // Arrange
             var suffix = "Class";
-            var filters = TypesFromMockedAssembly.All.That.HaveNameEndingWith(
-                suffix.ToUpperInvariant()
-            );
+            var filters = TypesFromMockedAssembly.All.That.HaveNameEndingWith(suffix.ToUpperInvariant());
 
             // Act
             var types = filters.GetTypes(StringComparison.OrdinalIgnoreCase).GetFullNames();

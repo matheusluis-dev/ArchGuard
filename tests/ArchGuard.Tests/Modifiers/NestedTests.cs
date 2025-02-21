@@ -13,9 +13,7 @@ namespace ArchGuard.Filters.Tests.Modifiers
         public void Nested_types()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly
-                .All.That.ResideInNamespace(Namespaces.Nested)
-                .And.AreNested();
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespace(Namespaces.Nested).And.AreNested();
 
             // Act
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
@@ -35,20 +33,13 @@ namespace ArchGuard.Filters.Tests.Modifiers
         public void Non_nested_types()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly
-                .All.That.ResideInNamespace(Namespaces.Nested)
-                .And.AreNotNested();
+            var filters = TypesFromMockedAssembly.All.That.ResideInNamespace(Namespaces.Nested).And.AreNotNested();
 
             // Act
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
-            types
-                .Should()
-                .BeEquivalentTo(
-                    TypeNames.Nested.PublicParentClass,
-                    TypeNames.Nested.PublicNonNestedClass
-                );
+            types.Should().BeEquivalentTo(TypeNames.Nested.PublicParentClass, TypeNames.Nested.PublicNonNestedClass);
         }
     }
 }

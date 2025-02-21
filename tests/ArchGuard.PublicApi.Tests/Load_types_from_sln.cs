@@ -8,9 +8,7 @@ namespace ArchGuard.PublicApi.Tests
         public void Successfully_load_types_from_given_sln()
         {
             // Act
-            var types = Types
-                .InSolution("ArchGuard.sln", "ArchGuard.MockedAssembly.Classes", "net9_0")
-                .GetTypes();
+            var types = Types.InSolution("ArchGuard.sln", "ArchGuard.MockedAssembly.Classes", "net9_0").GetTypes();
 
             // Assert
             Check.That(types).HasFirstElement();
@@ -23,8 +21,7 @@ namespace ArchGuard.PublicApi.Tests
             var slnPath = Guid.NewGuid().ToString();
 
             // Act
-            Action @action = () =>
-                Types.InSolution(slnPath, "ArchGuard.MockedAssembly.Classes", "net9_0").GetTypes();
+            Action @action = () => Types.InSolution(slnPath, "ArchGuard.MockedAssembly.Classes", "net9_0").GetTypes();
 
             // Assert
             Check
@@ -41,8 +38,7 @@ namespace ArchGuard.PublicApi.Tests
             var projectName = "It.Does.Not.Exists";
 
             // Act
-            Action @action = () =>
-                Types.InSolution("ArchGuard.sln", projectName, "net9_0").GetTypes();
+            Action @action = () => Types.InSolution("ArchGuard.sln", projectName, "net9_0").GetTypes();
 
             // Assert
             Check

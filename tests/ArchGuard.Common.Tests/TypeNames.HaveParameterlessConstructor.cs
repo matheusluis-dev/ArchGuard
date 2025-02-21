@@ -5,19 +5,13 @@ namespace ArchGuard.Tests.Common.Types
         public static class HaveParameterlessConstructor
         {
             public const string PublicOneParameterlessConstructorClass =
-                Namespaces.HaveParameterlessConstructor
-                + "."
-                + nameof(PublicOneParameterlessConstructorClass);
+                Namespaces.HaveParameterlessConstructor + "." + nameof(PublicOneParameterlessConstructorClass);
 
             public const string PublicOnlyParameterlessConstructorClass =
-                Namespaces.HaveParameterlessConstructor
-                + "."
-                + nameof(PublicOnlyParameterlessConstructorClass);
+                Namespaces.HaveParameterlessConstructor + "." + nameof(PublicOnlyParameterlessConstructorClass);
 
             public const string PublicWithoutParameterlessConstructorClass =
-                Namespaces.HaveParameterlessConstructor
-                + "."
-                + nameof(PublicWithoutParameterlessConstructorClass);
+                Namespaces.HaveParameterlessConstructor + "." + nameof(PublicWithoutParameterlessConstructorClass);
         }
     }
 }

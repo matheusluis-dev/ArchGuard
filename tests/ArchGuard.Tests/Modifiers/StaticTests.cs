@@ -13,14 +13,11 @@ namespace ArchGuard.Filters.Tests.Modifiers
         public void Static_types()
         {
             // Arrange
-            var expected = new List<string>
-            {
+            var expected = new List<string> {
 #if NET7_0_OR_GREATER
                 TypeNames.FileStaticClass,
 #endif
-                TypeNames.InternalStaticClass,
-                TypeNames.PublicStaticClass,
-            };
+                TypeNames.InternalStaticClass, TypeNames.PublicStaticClass };
             var filters = TypesFromMockedAssembly.All.That.AreStatic();
 
             // Act

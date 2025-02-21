@@ -4,21 +4,16 @@ namespace ArchGuard.Tests.Common.Types
     {
         public static class Inherit
         {
-            public const string IPublicInterface =
-                Namespaces.Inherit + "." + nameof(IPublicInterface);
+            public const string IPublicInterface = Namespaces.Inherit + "." + nameof(IPublicInterface);
 
             public const string IPublicInheritIPublicInterfaceInterface =
                 Namespaces.Inherit + "." + nameof(IPublicInheritIPublicInterfaceInterface);
 
             public const string IPublicInheritIPublicInterfaceByInheritanceInterface =
-                Namespaces.Inherit
-                + "."
-                + nameof(IPublicInheritIPublicInterfaceByInheritanceInterface);
+                Namespaces.Inherit + "." + nameof(IPublicInheritIPublicInterfaceByInheritanceInterface);
 
             public const string IPublicParentInheritIPublicInterfaceByInheritanceInterface =
-                Namespaces.Inherit
-                + "."
-                + nameof(IPublicParentInheritIPublicInterfaceByInheritanceInterface);
+                Namespaces.Inherit + "." + nameof(IPublicParentInheritIPublicInterfaceByInheritanceInterface);
 
             public const string PublicClass = Namespaces.Inherit + "." + nameof(PublicClass);
 

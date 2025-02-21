@@ -71,15 +71,12 @@ namespace ArchGuard.Core.Type.Models
 
         internal bool IsStruct => _type.TypeKind is TypeKind.Struct && !IsRecordStruct;
 
-        internal bool IsRecordStruct =>
-            _type.TypeKind is TypeKind.Struct or TypeKind.Structure && _type.IsRecord;
+        internal bool IsRecordStruct => _type.TypeKind is TypeKind.Struct or TypeKind.Structure && _type.IsRecord;
 
         internal bool IsEnum => _type.TypeKind is TypeKind.Enum;
 
         internal IEnumerable<string> SourceFiles =>
-            _type
-                .Locations.Where(l => l.SourceTree is not null)
-                .Select(l => l.SourceTree!.FilePath);
+            _type.Locations.Where(l => l.SourceTree is not null).Select(l => l.SourceTree!.FilePath);
 
         internal bool SourceFilePathMatchesNamespace(StringComparison comparison)
         {
@@ -102,10 +99,7 @@ namespace ArchGuard.Core.Type.Models
                     comparison
                 );
 
-                var lastIndex =
-                    lastIndexSeparatorAtEnd > -1
-                        ? lastIndexSeparatorAtEnd
-                        : lastIndexSeparatorAtStartOnly;
+                var lastIndex = lastIndexSeparatorAtEnd > -1 ? lastIndexSeparatorAtEnd : lastIndexSeparatorAtStartOnly;
 
                 var filePathNormalized = directory[(lastIndex + 1)..].Replace(separator, '.');
 
@@ -121,9 +115,7 @@ namespace ArchGuard.Core.Type.Models
             if (!SourceFiles.Any())
                 return false;
 
-            return SourceFiles.Any(file =>
-                Path.GetFileNameWithoutExtension(file).Equals(Name, comparison)
-            );
+            return SourceFiles.Any(file => Path.GetFileNameWithoutExtension(file).Equals(Name, comparison));
         }
 
         private readonly DependencyFinder _dependencySearch;
@@ -149,9 +141,7 @@ namespace ArchGuard.Core.Type.Models
 
             return Solution.AllTypes.Where(type =>
                 _type.AllInterfaces.Any(@interface =>
-                    TypeSymbolHelper
-                        .GetFullName(@interface)
-                        .Equals(type.FullName, StringComparison.Ordinal)
+                    TypeSymbolHelper.GetFullName(@interface).Equals(type.FullName, StringComparison.Ordinal)
                 )
             );
         }
@@ -175,11 +165,7 @@ namespace ArchGuard.Core.Type.Models
                 !type.IsInterface
                 && TypeSymbolHelper
                     .GetTypeInheritances(_type)
-                    .Any(symbol =>
-                        TypeSymbolHelper
-                            .GetFullName(symbol)
-                            .Equals(type.FullName, StringComparison.Ordinal)
-                    )
+                    .Any(symbol => TypeSymbolHelper.GetFullName(symbol).Equals(type.FullName, StringComparison.Ordinal))
             );
         }
 
@@ -189,12 +175,7 @@ namespace ArchGuard.Core.Type.Models
                 .GetMembers()
                 .OfType<IMethodSymbol>()
                 .Where(constructor => constructor.MethodKind is MethodKind.Constructor)
-                .Select(constructor => new ConstructorDefinition(
-                    Solution,
-                    Project,
-                    this,
-                    constructor
-                ));
+                .Select(constructor => new ConstructorDefinition(Solution, Project, this, constructor));
         }
 
         internal IEnumerable<MethodDefinition> GetMethods()
@@ -203,10 +184,7 @@ namespace ArchGuard.Core.Type.Models
                 .GetMembers()
                 .OfType<IMethodSymbol>()
                 .Where(method =>
-                    method.MethodKind
-                        is MethodKind.Ordinary
-                            or MethodKind.PropertyGet
-                            or MethodKind.PropertySet
+                    method.MethodKind is MethodKind.Ordinary or MethodKind.PropertyGet or MethodKind.PropertySet
                     && !method.IsImplicitlyDeclared
                 )
                 .Select(method => new MethodDefinition(Solution, Project, this, method));

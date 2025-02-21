@@ -22,9 +22,7 @@ namespace ArchGuard.Filters.Tests
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
-            Check
-                .That(types)
-                .IsEquivalentTo("ArchGuard.MockedAssembly.Inherit.IInheritInterface1");
+            Check.That(types).IsEquivalentTo("ArchGuard.MockedAssembly.Inherit.IInheritInterface1");
         }
 
         [Fact]
@@ -37,9 +35,7 @@ namespace ArchGuard.Filters.Tests
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
-            Check
-                .That(types)
-                .IsEquivalentTo("ArchGuard.MockedAssembly.Inherit.IInheritInterface1");
+            Check.That(types).IsEquivalentTo("ArchGuard.MockedAssembly.Inherit.IInheritInterface1");
         }
 
         [Fact]
@@ -166,9 +162,7 @@ namespace ArchGuard.Filters.Tests
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
-            Check
-                .That(types)
-                .Not.Contains("ArchGuard.MockedAssembly.Inherit.ImplementIInterface1");
+            Check.That(types).Not.Contains("ArchGuard.MockedAssembly.Inherit.ImplementIInterface1");
         }
 
         [Fact]
@@ -194,9 +188,7 @@ namespace ArchGuard.Filters.Tests
             var types = filters.GetTypes(StringComparison.Ordinal).GetFullNames();
 
             // Assert
-            types.ShouldBe(
-                new List<string> { "ArchGuard.MockedAssembly.Inherit.InheritGenericParentClass" }
-            );
+            types.ShouldBe(new List<string> { "ArchGuard.MockedAssembly.Inherit.InheritGenericParentClass" });
         }
     }
 }

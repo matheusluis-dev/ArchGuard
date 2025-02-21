@@ -27,11 +27,7 @@ namespace ArchGuard
         private delegate ITypeFilterEntryPoint StartTypeFilter();
         private readonly StartTypeFilter _startTypeFilter;
 
-        internal static ITypeFilterEntryPoint Create(
-            string solutionPath,
-            string projectName,
-            string preprocessor
-        )
+        internal static ITypeFilterEntryPoint Create(string solutionPath, string projectName, string preprocessor)
         {
             return new IoC(solutionPath, projectName, preprocessor)._startTypeFilter.Invoke();
         }
@@ -53,74 +49,46 @@ namespace ArchGuard
                 }
             );
 
-            var typeFilterContext = new Lazy<TypeFilterContext>(
-                () => new(solutionCompiled.TypesFromProjects)
-            );
+            var typeFilterContext = new Lazy<TypeFilterContext>(() => new(solutionCompiled.TypesFromProjects));
 
-            var typeAssertionContext = new Lazy<TypeAssertionContext>(
-                () => new(typeFilterContext.Value)
-            );
+            var typeAssertionContext = new Lazy<TypeAssertionContext>(() => new(typeFilterContext.Value));
 
             var typeAssertion = new Lazy<TypeAssertion>(() => new(typeAssertionContext.Value));
 
-            var methodFilterContext = new Lazy<MethodFilterContext>(
-                () => new(typeFilterContext.Value)
-            );
+            var methodFilterContext = new Lazy<MethodFilterContext>(() => new(typeFilterContext.Value));
 
-            var fieldFilterContext = new Lazy<FieldFilterContext>(
-                () => new(typeFilterContext.Value)
-            );
+            var fieldFilterContext = new Lazy<FieldFilterContext>(() => new(typeFilterContext.Value));
 
-            var fieldAssertionContext = new Lazy<FieldAssertionContext>(
-                () => new(fieldFilterContext.Value)
-            );
+            var fieldAssertionContext = new Lazy<FieldAssertionContext>(() => new(fieldFilterContext.Value));
 
             var fieldAssertion = new Lazy<FieldAssertion>(() => new(fieldAssertionContext.Value));
 
-            var propertyFilterContext = new Lazy<PropertyFilterContext>(
-                () => new(typeFilterContext.Value)
-            );
+            var propertyFilterContext = new Lazy<PropertyFilterContext>(() => new(typeFilterContext.Value));
 
-            var propertyAssertionContext = new Lazy<PropertyAssertionContext>(
-                () => new(propertyFilterContext.Value)
-            );
+            var propertyAssertionContext = new Lazy<PropertyAssertionContext>(() => new(propertyFilterContext.Value));
 
-            var propertyAssertion = new Lazy<PropertyAssertion>(
-                () => new(propertyAssertionContext.Value)
-            );
+            var propertyAssertion = new Lazy<PropertyAssertion>(() => new(propertyAssertionContext.Value));
 
-            var methodAssertionContext = new Lazy<MethodAssertionContext>(
-                () => new(methodFilterContext.Value)
-            );
+            var methodAssertionContext = new Lazy<MethodAssertionContext>(() => new(methodFilterContext.Value));
 
-            var methodAssertion = new Lazy<MethodAssertion>(
-                () => new(methodAssertionContext.Value)
-            );
+            var methodAssertion = new Lazy<MethodAssertion>(() => new(methodAssertionContext.Value));
 
             var methodFilter = new Lazy<MethodFilter>(
                 () => new(methodFilterContext.Value, methodAssertion.Value.Start)
             );
 
-            var fieldFilter = new Lazy<FieldFilter>(
-                () => new(fieldFilterContext.Value, fieldAssertion.Value.Start)
-            );
+            var fieldFilter = new Lazy<FieldFilter>(() => new(fieldFilterContext.Value, fieldAssertion.Value.Start));
 
             var propertyFilter = new Lazy<PropertyFilter>(
                 () => new(propertyFilterContext.Value, propertyAssertion.Value.Start)
             );
 
-            var sliceFilterContext = new Lazy<SliceFilterContext>(
-                () => new(typeFilterContext.Value)
-            );
+            var sliceFilterContext = new Lazy<SliceFilterContext>(() => new(typeFilterContext.Value));
 
-            var sliceAssertionContext = new Lazy<SliceAssertionContext>(
-                () => new(sliceFilterContext.Value)
-            );
+            var sliceAssertionContext = new Lazy<SliceAssertionContext>(() => new(sliceFilterContext.Value));
 
             var sliceAssertion = new Lazy<SliceAssertion>(() => new(sliceAssertionContext.Value));
-            var sliceFilter = new Lazy<SliceFilter>(
-                () => new(sliceFilterContext.Value, sliceAssertion.Value.Start)
-            );
+            var sliceFilter = new Lazy<SliceFilter>(() => new(sliceFilterContext.Value, sliceAssertion.Value.Start));
 
             var typeFilter = new Lazy<TypeFilter>(
                 () =>

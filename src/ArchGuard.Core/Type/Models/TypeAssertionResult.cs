@@ -9,8 +9,7 @@ namespace ArchGuard.Core.Type.Models
         public bool IsSuccessful => !NonCompliantTypes.Any();
         public IEnumerable<TypeDefinition> TypesFiltered { get; }
         public IEnumerable<TypeDefinition> CompliantTypes { get; }
-        public IEnumerable<TypeDefinition> NonCompliantTypes =>
-            TypesFiltered.Except(CompliantTypes);
+        public IEnumerable<TypeDefinition> NonCompliantTypes => TypesFiltered.Except(CompliantTypes);
 
         internal TypeAssertionResult(
             IEnumerable<TypeDefinition> typesFiltered,

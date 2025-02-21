@@ -38,19 +38,13 @@ namespace ArchGuard.Core
                 if (_typesFromProjects.Count > 0)
                     return _typesFromProjects;
 
-                _typesFromProjects.AddRange(
-                    Projects.SelectMany(project => project.TypesFromProject)
-                );
+                _typesFromProjects.AddRange(Projects.SelectMany(project => project.TypesFromProject));
 
                 return _typesFromProjects;
             }
         }
 
-        public SolutionDefinition(
-            DependencyFinder dependencyFinder,
-            TypesLoader typesLoader,
-            Solution solution
-        )
+        public SolutionDefinition(DependencyFinder dependencyFinder, TypesLoader typesLoader, Solution solution)
         {
             _dependencyFinder = dependencyFinder;
             _typesLoader = typesLoader;

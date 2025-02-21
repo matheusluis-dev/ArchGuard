@@ -7,8 +7,7 @@ namespace ArchGuard.Core.Slice.Models
         public bool IsSuccessful => !NonCompliantSlices.Any();
         public IEnumerable<SliceDefinition> SlicesFiltered { get; }
         public IEnumerable<SliceDefinition> CompliantSlices { get; }
-        public IEnumerable<SliceDefinition> NonCompliantSlices =>
-            SlicesFiltered.Except(CompliantSlices);
+        public IEnumerable<SliceDefinition> NonCompliantSlices => SlicesFiltered.Except(CompliantSlices);
 
         internal SliceAssertionResult(
             IEnumerable<SliceDefinition> slicesFiltered,

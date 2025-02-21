@@ -11,9 +11,7 @@ namespace ArchGuard
         {
             if (!(methodFilterSequence is MethodFilter methodFilter))
             {
-                throw new ArgumentException(
-                    $"{nameof(methodFilterSequence)} must be of type {nameof(MethodFilter)}"
-                );
+                throw new ArgumentException($"{nameof(methodFilterSequence)} must be of type {nameof(MethodFilter)}");
             }
 
             if (filter is null)
@@ -31,9 +29,7 @@ namespace ArchGuard
         {
             if (!(methodFilterSequence is MethodFilter typesFilter))
             {
-                throw new ArgumentException(
-                    $"{nameof(methodFilterSequence)} must be of type {nameof(MethodFilter)}"
-                );
+                throw new ArgumentException($"{nameof(methodFilterSequence)} must be of type {nameof(MethodFilter)}");
             }
 
             if (filter is null)

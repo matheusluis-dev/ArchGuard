@@ -113,10 +113,7 @@ namespace ArchGuard.Filters.Tests
         public void And_and()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly
-                .All.That.AreClasses()
-                .And.AreNotPublic()
-                .And.AreSealed();
+            var filters = TypesFromMockedAssembly.All.That.AreClasses().And.AreNotPublic().And.AreSealed();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -124,13 +121,11 @@ namespace ArchGuard.Filters.Tests
             // Assert
             types
                 .Should()
-                .BeEquivalentTo(
-                    new List<string> {
+                .BeEquivalentTo(new List<string> {
 #if NET7_0_OR_GREATER
                         TypeNames.FileSealedClass,
 #endif
-                        TypeNames.InternalSealedClass }
-                );
+                        TypeNames.InternalSealedClass });
         }
 
         [Fact]
@@ -160,10 +155,7 @@ namespace ArchGuard.Filters.Tests
         public void And_or()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly
-                .All.That.AreClasses()
-                .And.ArePublic()
-                .Or.AreInterfaces();
+            var filters = TypesFromMockedAssembly.All.That.AreClasses().And.ArePublic().Or.AreInterfaces();
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -256,9 +248,7 @@ namespace ArchGuard.Filters.Tests
         public void And_grouped()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly
-                .All.That.AreClasses()
-                .And(a => a.AreNotPublic().And.AreSealed());
+            var filters = TypesFromMockedAssembly.All.That.AreClasses().And(a => a.AreNotPublic().And.AreSealed());
 
             // Act
             var types = filters.GetTypes().GetFullNames();
@@ -266,13 +256,11 @@ namespace ArchGuard.Filters.Tests
             // Assert
             types
                 .Should()
-                .BeEquivalentTo(
-                    new List<string> {
+                .BeEquivalentTo(new List<string> {
 #if NET7_0_OR_GREATER
                         TypeNames.FileSealedClass,
 #endif
-                        TypeNames.InternalSealedClass }
-                );
+                        TypeNames.InternalSealedClass });
         }
 
         [Fact]
@@ -289,13 +277,11 @@ namespace ArchGuard.Filters.Tests
             // Assert
             types
                 .Should()
-                .BeEquivalentTo(
-                    new List<string> {
+                .BeEquivalentTo(new List<string> {
 #if NET7_0_OR_GREATER
                         TypeNames.FileSealedClass,
 #endif
-                        TypeNames.InternalSealedClass }
-                );
+                        TypeNames.InternalSealedClass });
         }
 
         [Fact]

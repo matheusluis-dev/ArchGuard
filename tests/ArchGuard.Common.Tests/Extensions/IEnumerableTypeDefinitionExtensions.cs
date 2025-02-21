@@ -10,10 +10,7 @@ namespace ArchGuard.Tests.Common.Extensions
     {
         public static IList<string> GetFullNames(this IEnumerable<TypeDefinition> types)
         {
-            return types
-                .Select(type => type.FullName)
-                .OrderBy(fullName => fullName, StringComparer.Ordinal)
-                .ToList();
+            return types.Select(type => type.FullName).OrderBy(fullName => fullName, StringComparer.Ordinal).ToList();
         }
     }
 }

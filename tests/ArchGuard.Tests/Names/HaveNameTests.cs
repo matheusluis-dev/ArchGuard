@@ -79,9 +79,7 @@ namespace ArchGuard.Filters.Tests.Names
         public void Have_full_name_with_StringComparison()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.HaveFullName(
-                TypeNames.PublicClass.ToUpperInvariant()
-            );
+            var filters = TypesFromMockedAssembly.All.That.HaveFullName(TypeNames.PublicClass.ToUpperInvariant());
 
             // Act
             var types = filters.GetTypes(StringComparison.OrdinalIgnoreCase).GetFullNames();
@@ -94,10 +92,7 @@ namespace ArchGuard.Filters.Tests.Names
         public void Have_full_name_with_params()
         {
             // Arrange
-            var filters = TypesFromMockedAssembly.All.That.HaveFullName(
-                TypeNames.PublicClass,
-                TypeNames.InternalClass
-            );
+            var filters = TypesFromMockedAssembly.All.That.HaveFullName(TypeNames.PublicClass, TypeNames.InternalClass);
 
             // Act
             var types = filters.GetTypes().GetFullNames();

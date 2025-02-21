@@ -13,10 +13,7 @@ namespace ArchGuard.Core.Helpers
             ArgumentNullException.ThrowIfNull(project);
             ArgumentNullException.ThrowIfNull(methodSymbol);
 
-            (var methodSyntax, var semanticModel) = SymbolHelper.GetSemanticModel(
-                methodSymbol,
-                project
-            );
+            (var methodSyntax, var semanticModel) = SymbolHelper.GetSemanticModel(methodSymbol, project);
             return methodSyntax
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
@@ -34,10 +31,7 @@ namespace ArchGuard.Core.Helpers
 
             var types = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
 
-            (var methodSyntax, var semanticModel) = SymbolHelper.GetSemanticModel(
-                methodSymbol,
-                project
-            );
+            (var methodSyntax, var semanticModel) = SymbolHelper.GetSemanticModel(methodSymbol, project);
 
             foreach (var calledMethodSymbol in GetCalledMethods(project, methodSymbol))
             {
@@ -65,10 +59,7 @@ namespace ArchGuard.Core.Helpers
 
             var types = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
 
-            (var methodSyntax, var semanticModel) = SymbolHelper.GetSemanticModel(
-                methodSymbol,
-                project
-            );
+            (var methodSyntax, var semanticModel) = SymbolHelper.GetSemanticModel(methodSymbol, project);
 
             foreach (var calledMethodSymbol in GetCalledMethods(project, methodSymbol))
             {
@@ -92,15 +83,10 @@ namespace ArchGuard.Core.Helpers
         {
             ArgumentNullException.ThrowIfNull(methodSymbol);
 
-            return methodSymbol
-                .Parameters.Select(parameter => parameter.Type)
-                .OfType<ITypeSymbol>();
+            return methodSymbol.Parameters.Select(parameter => parameter.Type).OfType<ITypeSymbol>();
         }
 
-        public static IEnumerable<ITypeSymbol> GetTypesInBody(
-            ProjectDefinition project,
-            IMethodSymbol methodSymbol
-        )
+        public static IEnumerable<ITypeSymbol> GetTypesInBody(ProjectDefinition project, IMethodSymbol methodSymbol)
         {
             ArgumentNullException.ThrowIfNull(methodSymbol);
 
@@ -113,10 +99,7 @@ namespace ArchGuard.Core.Helpers
                 .OfType<ITypeSymbol>();
         }
 
-        public static IEnumerable<ITypeSymbol> GetDependencies(
-            ProjectDefinition project,
-            IMethodSymbol method
-        )
+        public static IEnumerable<ITypeSymbol> GetDependencies(ProjectDefinition project, IMethodSymbol method)
         {
             ArgumentNullException.ThrowIfNull(project);
             ArgumentNullException.ThrowIfNull(method);

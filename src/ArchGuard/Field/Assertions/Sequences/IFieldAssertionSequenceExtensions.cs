@@ -9,9 +9,7 @@ namespace ArchGuard
         {
             if (!(fieldAssertionSequence is FieldAssertion fieldAssertion))
             {
-                throw new ArgumentException(
-                    $"{nameof(fieldAssertionSequence)} must be of type {nameof(FieldFilter)}"
-                );
+                throw new ArgumentException($"{nameof(fieldAssertionSequence)} must be of type {nameof(FieldFilter)}");
             }
 
             if (filter is null)
@@ -29,9 +27,7 @@ namespace ArchGuard
         {
             if (!(fieldAssertionSequence is FieldAssertion fieldAssertion))
             {
-                throw new ArgumentException(
-                    $"{nameof(fieldAssertionSequence)} must be of type {nameof(FieldFilter)}"
-                );
+                throw new ArgumentException($"{nameof(fieldAssertionSequence)} must be of type {nameof(FieldFilter)}");
             }
 
             if (filter is null)

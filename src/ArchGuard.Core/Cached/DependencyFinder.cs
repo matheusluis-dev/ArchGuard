@@ -10,10 +10,7 @@ namespace ArchGuard.Cached
 
     public sealed class DependencyFinder
     {
-        private static readonly ConcurrentDictionary<
-            TypeDefinition,
-            IEnumerable<TypeDefinition>
-        > _cache = new();
+        private static readonly ConcurrentDictionary<TypeDefinition, IEnumerable<TypeDefinition>> _cache = new();
 
         private static readonly ConcurrentDictionary<TypeDefinition, SemaphoreSlim> _locks = new();
 
@@ -56,16 +53,12 @@ namespace ArchGuard.Cached
             //)
             IEnumerable<TypeDefinition> GetFieldsDependencies(TypeDefinition type)
             {
-                return type.GetFields()
-                    .Select(field => field.Type)
-                    .Where(type => !type.Equals(type));
+                return type.GetFields().Select(field => field.Type).Where(type => !type.Equals(type));
             }
 
             IEnumerable<TypeDefinition> GetPropertiesDependencies(TypeDefinition type)
             {
-                return type.GetProperties()
-                    .Select(field => field.Type)
-                    .Where(type => !type.Equals(type));
+                return type.GetProperties().Select(field => field.Type).Where(type => !type.Equals(type));
             }
 
             IEnumerable<TypeDefinition> GetMethodsDependencies(TypeDefinition type)

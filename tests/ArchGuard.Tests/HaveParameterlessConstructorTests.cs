@@ -14,9 +14,7 @@ namespace ArchGuard.Filters.Tests
         {
             // Arrange
             var filters = TypesFromMockedAssembly
-                .All.That.ResideInNamespace(
-                    ArchGuard.Tests.Common.Namespaces.HaveParameterlessConstructor
-                )
+                .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.HaveParameterlessConstructor)
                 .And.HaveParameterlessConstructor();
 
             // Act
@@ -36,9 +34,7 @@ namespace ArchGuard.Filters.Tests
         {
             // Arrange
             var filters = TypesFromMockedAssembly
-                .All.That.ResideInNamespace(
-                    ArchGuard.Tests.Common.Namespaces.HaveParameterlessConstructor
-                )
+                .All.That.ResideInNamespace(ArchGuard.Tests.Common.Namespaces.HaveParameterlessConstructor)
                 .And.DoNotHaveParameterlessConstructor();
 
             // Act
