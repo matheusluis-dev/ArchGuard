@@ -1,51 +1,42 @@
-namespace ArchGuard.Generic
+namespace ArchGuard.Generic;
+
+using System.Linq;
+using ArchGuard.Core.Contexts;
+using ArchGuard.Core.Type.Models;
+
+public class Filter<TRule, TContext> : IFilterEntryPoint<TRule>, IFilterSequence<TRule, TContext>
+    where TRule : class, IRule<TContext>
+    where TContext : class
 {
-    using ArchGuard.Core.Contexts;
-    using ArchGuard.Core.Type.Models;
+    private readonly AddRuleCallback<TRule, TContext> _addRule;
+    private readonly AddContextOrCallback _contextOr;
 
-    internal class Filter<TRule, TContext> : IFilterEntryPoint<TRule>, IFilterSequence<TRule>
-        where TRule : class, IRule
-        where TContext : class
+    internal Filter(AddRuleCallback<TRule, TContext> addRule, AddContextOrCallback contextOr)
     {
-        private readonly TRule _rule;
-        private readonly ContextEngine<TContext> _context;
+        _addRule = addRule;
+        _contextOr = contextOr;
+    }
 
-        public Filter(TRule rule, ContextEngine<TContext> context)
+    public TRule That => _addRule.Invoke();
+
+    public TRule And => _addRule.Invoke();
+
+    public TRule Or
+    {
+        get
         {
-            _rule = rule;
-            _context = context;
+            _contextOr.Invoke();
+            return _addRule.Invoke();
         }
+    }
 
-        public TRule That
-        {
-            get
-            {
-                _rule.Callback = () => this;
-                return _rule;
-            }
-        }
+    public void Aaa()
+    {
+        var entry = new FilterEngine<FilterTypeRule, TypeDefinition>(
+            new FilterTypeRule(),
+            new TypeFilterContext(Enumerable.Empty<TypeDefinition>())
+        ).Start();
 
-        public TRule And => _rule;
-
-        public TRule Or
-        {
-            get
-            {
-                _context.Or();
-                return _rule;
-            }
-        }
-
-        public void Aaa()
-        {
-            var entry =
-                (IFilterEntryPoint<FilterTypeRule<TContext>>)
-                    new Filter<FilterTypeRule<TContext>, TypeDefinition>(
-                        new FilterTypeRule<TContext>(),
-                        new TypeFilterContext([])
-                    );
-
-            entry.That.Whatever().Or.Whatever().And.Whatever();
-        }
+        entry.That.AreClasses().And.AreClasses();
     }
 }

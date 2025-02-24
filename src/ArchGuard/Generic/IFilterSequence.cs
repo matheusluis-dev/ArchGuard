@@ -1,9 +1,9 @@
-namespace ArchGuard.Generic
+namespace ArchGuard.Generic;
+
+public interface IFilterSequence<TRule, TContext>
+    where TRule : class, IRule<TContext>
+    where TContext : class
 {
-    internal interface IFilterSequence<TRule>
-        where TRule : class, IRule
-    {
-        public TRule And { get; }
-        public TRule Or { get; }
-    }
+    public TRule And { get; }
+    public TRule Or { get; }
 }

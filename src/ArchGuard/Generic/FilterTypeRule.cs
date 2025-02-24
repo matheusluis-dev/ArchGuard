@@ -1,13 +1,13 @@
-namespace ArchGuard.Generic
-{
-    internal class FilterTypeRule : IRule
-    {
-        public RuleCallback<IRule> Callback { get; set; } = null!;
+namespace ArchGuard.Generic;
 
-        public IFilterSequence<IRule> Whatever()
-        {
-            // do something
-            return Callback.Invoke();
-        }
+using ArchGuard.Core.Type.Models;
+
+public sealed class FilterTypeRule : IRule<TypeDefinition>
+{
+    public AddSequenceCallback<IRule<TypeDefinition>, TypeDefinition> AddSequenceCallback { get; set; } = null!;
+
+    public IFilterSequence<FilterTypeRule, TypeDefinition> AreClasses()
+    {
+        return (IFilterSequence<FilterTypeRule, TypeDefinition>)AddSequenceCallback.Invoke(TypePredicate.Class);
     }
 }
