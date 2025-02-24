@@ -1,4 +1,4 @@
-namespace ArchGuard.Generic;
+namespace ArchGuard.Filters.Base;
 
 public interface IFilterEntryPoint<TRule>
 {

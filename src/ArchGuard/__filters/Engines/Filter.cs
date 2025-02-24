@@ -1,11 +1,10 @@
-namespace ArchGuard.Generic;
+namespace ArchGuard.__filters.Engines;
 
-using System.Linq;
-using ArchGuard.Core.Contexts;
-using ArchGuard.Core.Type.Models;
+using ArchGuard.__filters.Engines.Delegates;
+using ArchGuard.Filters.Base;
 
-public class Filter<TRule, TContext> : IFilterEntryPoint<TRule>, IFilterSequence<TRule, TContext>
-    where TRule : class, IRule<TContext>
+public sealed class Filter<TRule, TContext> : IFilterEntryPoint<TRule>, ISequence<TRule, TContext>
+    where TRule : RuleBase<TContext>
     where TContext : class
 {
     private readonly AddRuleCallback<TRule, TContext> _addRule;
@@ -28,15 +27,5 @@ public class Filter<TRule, TContext> : IFilterEntryPoint<TRule>, IFilterSequence
             _contextOr.Invoke();
             return _addRule.Invoke();
         }
-    }
-
-    public void Aaa()
-    {
-        var entry = new FilterEngine<FilterTypeRule, TypeDefinition>(
-            new FilterTypeRule(),
-            new TypeFilterContext(Enumerable.Empty<TypeDefinition>())
-        ).Start();
-
-        entry.That.AreClasses().And.AreClasses();
     }
 }
