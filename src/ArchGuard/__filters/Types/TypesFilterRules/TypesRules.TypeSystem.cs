@@ -3,65 +3,65 @@
 using ArchGuard.Core.Type.Models;
 using ArchGuard.Filters.Base;
 
-public sealed partial class TypesRules : RuleBase<TypeDefinition>
+public sealed partial class TypesFilterRules : RuleBase<TypeDefinition>
 {
-    public ISequence<TypesRules, TypeDefinition> AreClasses()
+    public ISequence<TypesFilterRules, TypeDefinition> AreClasses()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Class);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Class);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotClasses()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotClasses()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotClass);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotClass);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreInterfaces()
+    public ISequence<TypesFilterRules, TypeDefinition> AreInterfaces()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Interface);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Interface);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotInterfaces()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotInterfaces()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotInterface);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotInterface);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreStructs()
+    public ISequence<TypesFilterRules, TypeDefinition> AreStructs()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Struct);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Struct);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotStructs()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotStructs()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotStruct);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotStruct);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreEnums()
+    public ISequence<TypesFilterRules, TypeDefinition> AreEnums()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Enum);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Enum);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotEnums()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotEnums()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotEnum);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotEnum);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreRecords()
+    public ISequence<TypesFilterRules, TypeDefinition> AreRecords()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Record);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Record);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotRecords()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotRecords()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotRecord);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotRecord);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreRecordStructs()
+    public ISequence<TypesFilterRules, TypeDefinition> AreRecordStructs()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.RecordStruct);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.RecordStruct);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotRecordStructs()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotRecordStructs()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotRecordStruct);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotRecordStruct);
     }
 }

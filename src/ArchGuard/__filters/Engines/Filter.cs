@@ -1,31 +1,23 @@
 namespace ArchGuard.__filters.Engines;
 
-using ArchGuard.__filters.Engines.Delegates;
 using ArchGuard.Filters.Base;
 
-public sealed class Filter<TRule, TContext> : IFilterEntryPoint<TRule>, ISequence<TRule, TContext>
-    where TRule : RuleBase<TContext>
+public sealed class Filter<TRules, TContext> : IFilterEntryPoint<TRules, TContext>, ISequence<TRules, TContext>
+    where TRules : RuleBase<TContext>
     where TContext : class
 {
-    private readonly AddRuleCallback<TRule, TContext> _addRule;
-    private readonly AddContextOrCallback _contextOr;
+    private readonly RuleCallback<TContext> _ruleCallback;
+    private readonly SequenceCallback<TRules, TContext> _sequenceCallback;
 
-    internal Filter(AddRuleCallback<TRule, TContext> addRule, AddContextOrCallback contextOr)
+    public Filter(RuleCallback<TContext> ruleCallback, SequenceCallback<TRules, TContext> sequenceCallback)
     {
-        _addRule = addRule;
-        _contextOr = contextOr;
+        _ruleCallback = ruleCallback;
+        _sequenceCallback = sequenceCallback;
     }
 
-    public TRule That => _addRule.Invoke();
+    public TRules That => (TRules)_ruleCallback.Invoke();
 
-    public TRule And => _addRule.Invoke();
+    public TRules And => (TRules)_ruleCallback.Invoke();
 
-    public TRule Or
-    {
-        get
-        {
-            _contextOr.Invoke();
-            return _addRule.Invoke();
-        }
-    }
+    public TRules Or => _sequenceCallback.Invoke().Or;
 }

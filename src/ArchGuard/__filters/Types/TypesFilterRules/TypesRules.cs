@@ -1,13 +1,13 @@
-﻿namespace ArchGuard.Filters.Types;
+namespace ArchGuard.Filters.Types;
 
 using System;
 using System.Linq;
 using ArchGuard.Core.Type.Models;
 using ArchGuard.Filters.Base;
 
-public sealed partial class TypesRules : RuleBase<TypeDefinition>
+public sealed partial class TypesFilterRules : RuleBase<TypeDefinition>
 {
-    public ISequence<TypesRules, TypeDefinition> ImplementInterface(params Type[] types)
+    public ISequence<TypesFilterRules, TypeDefinition> ImplementInterface(params Type[] types)
     {
         if (types is null)
             throw new ArgumentNullException(nameof(types));
@@ -15,15 +15,16 @@ public sealed partial class TypesRules : RuleBase<TypeDefinition>
         if (types.Any(type => !type.IsInterface))
             throw new ArgumentException("Type must be an interface", nameof(types));
 
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.ImplementInterface(types));
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.ImplementInterface(types));
     }
 
-    public ISequence<TypesRules, TypeDefinition> ImplementInterface<T>()
+    public ISequence<TypesFilterRules, TypeDefinition> ImplementInterface<T>()
     {
         return ImplementInterface(typeof(T));
     }
 
-    public ISequence<TypesRules, TypeDefinition> DoNotImplementInterface(params Type[] types)
+    public ISequence<TypesFilterRules, TypeDefinition> DoNotImplementInterface(params Type[] types)
     {
         if (types is null)
             throw new ArgumentNullException(nameof(types));
@@ -31,140 +32,145 @@ public sealed partial class TypesRules : RuleBase<TypeDefinition>
         if (types.Any(type => !type.IsInterface))
             throw new ArgumentException("Type must be an interface", nameof(types));
 
-        return (ISequence<TypesRules, TypeDefinition>)
-            SequenceCallback.Invoke(TypePredicate.NotImplementInterface(types));
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.NotImplementInterface(types));
     }
 
-    public ISequence<TypesRules, TypeDefinition> DoNotImplementInterface<T>()
+    public ISequence<TypesFilterRules, TypeDefinition> DoNotImplementInterface<T>()
     {
         return DoNotImplementInterface(typeof(T));
     }
 
-    public ISequence<TypesRules, TypeDefinition> Inherit(params Type[] types)
+    public ISequence<TypesFilterRules, TypeDefinition> Inherit(params Type[] types)
     {
         if (types is null)
             throw new ArgumentNullException(nameof(types));
 
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Inherit(types));
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Inherit(types));
     }
 
-    public ISequence<TypesRules, TypeDefinition> Inherit<T>()
+    public ISequence<TypesFilterRules, TypeDefinition> Inherit<T>()
     {
         return Inherit(typeof(T));
     }
 
-    public ISequence<TypesRules, TypeDefinition> DoNotInherit(params Type[] types)
+    public ISequence<TypesFilterRules, TypeDefinition> DoNotInherit(params Type[] types)
     {
         if (types is null)
             throw new ArgumentNullException(nameof(types));
 
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotInherit(types));
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.NotInherit(types));
     }
 
-    public ISequence<TypesRules, TypeDefinition> DoNotInherit<T>()
+    public ISequence<TypesFilterRules, TypeDefinition> DoNotInherit<T>()
     {
         return DoNotInherit(typeof(T));
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreGeneric()
+    public ISequence<TypesFilterRules, TypeDefinition> AreGeneric()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Generic);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Generic);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotGeneric()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotGeneric()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotGeneric);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotGeneric);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreImmutable()
+    public ISequence<TypesFilterRules, TypeDefinition> AreImmutable()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Immutable);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Immutable);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreMutable()
+    public ISequence<TypesFilterRules, TypeDefinition> AreMutable()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Mutable);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Mutable);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreStateless()
+    public ISequence<TypesFilterRules, TypeDefinition> AreStateless()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Stateless);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Stateless);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotStateless()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotStateless()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotStateless);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotStateless);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreStaticless()
+    public ISequence<TypesFilterRules, TypeDefinition> AreStaticless()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Staticless);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Staticless);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotStaticless()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotStaticless()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotStaticless);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotStaticless);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreExternallyImmutable()
+    public ISequence<TypesFilterRules, TypeDefinition> AreExternallyImmutable()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.ExternallyImmutable);
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.ExternallyImmutable);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreExternallyMutable()
+    public ISequence<TypesFilterRules, TypeDefinition> AreExternallyMutable()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.ExternallyMutable);
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.ExternallyMutable);
     }
 
-    public ISequence<TypesRules, TypeDefinition> HaveDependencyOn(params string[] typesNames)
+    public ISequence<TypesFilterRules, TypeDefinition> HaveDependencyOn(params string[] typesNames)
     {
-        return (ISequence<TypesRules, TypeDefinition>)
-            SequenceCallback.Invoke(TypePredicate.HaveDependencyOn(typesNames));
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.HaveDependencyOn(typesNames));
     }
 
-    public ISequence<TypesRules, TypeDefinition> DoNotHaveDependencyOn(params string[] typesNames)
+    public ISequence<TypesFilterRules, TypeDefinition> DoNotHaveDependencyOn(params string[] typesNames)
     {
-        return (ISequence<TypesRules, TypeDefinition>)
-            SequenceCallback.Invoke(TypePredicate.NotHaveDependencyOn(typesNames));
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.NotHaveDependencyOn(typesNames));
     }
 
-    public ISequence<TypesRules, TypeDefinition> HaveDependencyOnNamespace(params string[] namespaces)
+    public ISequence<TypesFilterRules, TypeDefinition> HaveDependencyOnNamespace(params string[] namespaces)
     {
-        return (ISequence<TypesRules, TypeDefinition>)
-            SequenceCallback.Invoke(TypePredicate.HaveDependencyOnNamespace(namespaces));
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.HaveDependencyOnNamespace(namespaces));
     }
 
-    public ISequence<TypesRules, TypeDefinition> DoNotHaveDependencyOnNamespace(params string[] namespaces)
+    public ISequence<TypesFilterRules, TypeDefinition> DoNotHaveDependencyOnNamespace(params string[] namespaces)
     {
-        return (ISequence<TypesRules, TypeDefinition>)
-            SequenceCallback.Invoke(TypePredicate.NotHaveDependencyOnNamespace(namespaces));
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.NotHaveDependencyOnNamespace(namespaces));
     }
 
-    public ISequence<TypesRules, TypeDefinition> HaveDependencyOnlyOnNamespace(params string[] namespaces)
+    public ISequence<TypesFilterRules, TypeDefinition> HaveDependencyOnlyOnNamespace(params string[] namespaces)
     {
-        return (ISequence<TypesRules, TypeDefinition>)
-            SequenceCallback.Invoke(TypePredicate.HaveDependencyOnlyOnNamespace(namespaces));
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.HaveDependencyOnlyOnNamespace(namespaces));
     }
 
-    public ISequence<TypesRules, TypeDefinition> HaveParameterlessConstructor()
+    public ISequence<TypesFilterRules, TypeDefinition> HaveParameterlessConstructor()
     {
-        return (ISequence<TypesRules, TypeDefinition>)
-            SequenceCallback.Invoke(TypePredicate.HaveParameterlessConstructor);
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.HaveParameterlessConstructor);
     }
 
-    public ISequence<TypesRules, TypeDefinition> DoNotHaveParameterlessConstructor()
+    public ISequence<TypesFilterRules, TypeDefinition> DoNotHaveParameterlessConstructor()
     {
-        return (ISequence<TypesRules, TypeDefinition>)
-            SequenceCallback.Invoke(TypePredicate.NotHaveParameterlessConstructor);
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.NotHaveParameterlessConstructor);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreUsedBy(params string[] typesNames)
+    public ISequence<TypesFilterRules, TypeDefinition> AreUsedBy(params string[] typesNames)
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.UsedBy(typesNames));
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.UsedBy(typesNames));
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotUsedBy(params string[] typesNames)
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotUsedBy(params string[] typesNames)
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotUsedBy(typesNames));
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.NotUsedBy(typesNames));
     }
 }

@@ -3,40 +3,41 @@
 using ArchGuard.Core.Type.Models;
 using ArchGuard.Filters.Base;
 
-public sealed partial class TypesRules : RuleBase<TypeDefinition>
+public sealed partial class TypesFilterRules : RuleBase<TypeDefinition>
 {
-    public ISequence<TypesRules, TypeDefinition> ResideInNamespace(params string[] names)
+    public ISequence<TypesFilterRules, TypeDefinition> ResideInNamespace(params string[] names)
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.ResideInNamespace(names));
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.ResideInNamespace(names));
     }
 
-    public ISequence<TypesRules, TypeDefinition> ResideInNamespaceContaining(params string[] names)
+    public ISequence<TypesFilterRules, TypeDefinition> ResideInNamespaceContaining(params string[] names)
     {
-        return (ISequence<TypesRules, TypeDefinition>)
-            SequenceCallback.Invoke(TypePredicate.ResideInNamespaceContaining(names));
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.ResideInNamespaceContaining(names));
     }
 
-    public ISequence<TypesRules, TypeDefinition> ResideInNamespaceEndingWith(params string[] names)
+    public ISequence<TypesFilterRules, TypeDefinition> ResideInNamespaceEndingWith(params string[] names)
     {
-        return (ISequence<TypesRules, TypeDefinition>)
-            SequenceCallback.Invoke(TypePredicate.ResideInNamespaceEndingWith(names));
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.ResideInNamespaceEndingWith(names));
     }
 
-    public ISequence<TypesRules, TypeDefinition> DoNotResideInNamespace(params string[] names)
+    public ISequence<TypesFilterRules, TypeDefinition> DoNotResideInNamespace(params string[] names)
     {
-        return (ISequence<TypesRules, TypeDefinition>)
-            SequenceCallback.Invoke(TypePredicate.DoNotResideInNamespace(names));
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.DoNotResideInNamespace(names));
     }
 
-    public ISequence<TypesRules, TypeDefinition> DoNotResideInNamespaceContaining(params string[] names)
+    public ISequence<TypesFilterRules, TypeDefinition> DoNotResideInNamespaceContaining(params string[] names)
     {
-        return (ISequence<TypesRules, TypeDefinition>)
-            SequenceCallback.Invoke(TypePredicate.DoNotResideInNamespaceContaining(names));
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.DoNotResideInNamespaceContaining(names));
     }
 
-    public ISequence<TypesRules, TypeDefinition> DoNotResideInNamespaceEndingWith(params string[] names)
+    public ISequence<TypesFilterRules, TypeDefinition> DoNotResideInNamespaceEndingWith(params string[] names)
     {
-        return (ISequence<TypesRules, TypeDefinition>)
-            SequenceCallback.Invoke(TypePredicate.DoNotResideInNamespaceEndingWith(names));
+        return (ISequence<TypesFilterRules, TypeDefinition>)
+            AddPredicateCallback.Invoke(TypePredicate.DoNotResideInNamespaceEndingWith(names));
     }
 }

@@ -3,55 +3,55 @@ namespace ArchGuard.Filters.Types;
 using ArchGuard.Core.Type.Models;
 using ArchGuard.Filters.Base;
 
-public sealed partial class TypesRules : RuleBase<TypeDefinition>
+public sealed partial class TypesFilterRules : RuleBase<TypeDefinition>
 {
-    public ISequence<TypesRules, TypeDefinition> ArePublic()
+    public ISequence<TypesFilterRules, TypeDefinition> ArePublic()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Public);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Public);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotPublic()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotPublic()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotPublic);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotPublic);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreInternal()
+    public ISequence<TypesFilterRules, TypeDefinition> AreInternal()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Internal);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Internal);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotInternal()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotInternal()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotInternal);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotInternal);
     }
 
-    public ISequence<TypesRules, TypeDefinition> ArePrivate()
+    public ISequence<TypesFilterRules, TypeDefinition> ArePrivate()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Private);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Private);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotPrivate()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotPrivate()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotPrivate);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotPrivate);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreProtected()
+    public ISequence<TypesFilterRules, TypeDefinition> AreProtected()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Protected);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Protected);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotProtected()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotProtected()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotProtected);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotProtected);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreFileLocal()
+    public ISequence<TypesFilterRules, TypeDefinition> AreFileLocal()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.FileLocal);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.FileLocal);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotFileLocal()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotFileLocal()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotFileLocal);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotFileLocal);
     }
 }

@@ -3,55 +3,55 @@
 using ArchGuard.Core.Type.Models;
 using ArchGuard.Filters.Base;
 
-public sealed partial class TypesRules : RuleBase<TypeDefinition>
+public sealed partial class TypesFilterRules : RuleBase<TypeDefinition>
 {
-    public ISequence<TypesRules, TypeDefinition> ArePartial()
+    public ISequence<TypesFilterRules, TypeDefinition> ArePartial()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Partial);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Partial);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotPartial()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotPartial()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotPartial);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotPartial);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreSealed()
+    public ISequence<TypesFilterRules, TypeDefinition> AreSealed()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Sealed);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Sealed);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotSealed()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotSealed()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotSealed);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotSealed);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNested()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNested()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Nested);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Nested);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotNested()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotNested()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotNested);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotNested);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreStatic()
+    public ISequence<TypesFilterRules, TypeDefinition> AreStatic()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Static);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Static);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotStatic()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotStatic()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotStatic);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotStatic);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreAbstract()
+    public ISequence<TypesFilterRules, TypeDefinition> AreAbstract()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.Abstract);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.Abstract);
     }
 
-    public ISequence<TypesRules, TypeDefinition> AreNotAbstract()
+    public ISequence<TypesFilterRules, TypeDefinition> AreNotAbstract()
     {
-        return (ISequence<TypesRules, TypeDefinition>)SequenceCallback.Invoke(TypePredicate.NotAbstract);
+        return (ISequence<TypesFilterRules, TypeDefinition>)AddPredicateCallback.Invoke(TypePredicate.NotAbstract);
     }
 }

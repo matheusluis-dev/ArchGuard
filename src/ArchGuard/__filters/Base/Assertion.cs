@@ -1,28 +1,25 @@
-﻿namespace ArchGuard.Filters.Base;
+//namespace ArchGuard.Filters.Base;
+//public class Assertion<TRule, TContext> : ISequence<TRule, TContext>
+//    where TRule : RuleBase<TContext>
+//    where TContext : class
+//{
+//    private readonly AddRuleCallback<TRule, TContext> _addRule;
+//    private readonly AddContextOrCallback _contextOr;
 
-using ArchGuard.__filters.Engines.Delegates;
+//    internal Assertion(AddRuleCallback<TRule, TContext> addRule, AddContextOrCallback contextOr)
+//    {
+//        _addRule = addRule;
+//        _contextOr = contextOr;
+//    }
 
-public class Assertion<TRule, TContext> : ISequence<TRule, TContext>
-    where TRule : RuleBase<TContext>
-    where TContext : class
-{
-    private readonly AddRuleCallback<TRule, TContext> _addRule;
-    private readonly AddContextOrCallback _contextOr;
+//    public TRule And => _addRule.Invoke();
 
-    internal Assertion(AddRuleCallback<TRule, TContext> addRule, AddContextOrCallback contextOr)
-    {
-        _addRule = addRule;
-        _contextOr = contextOr;
-    }
-
-    public TRule And => _addRule.Invoke();
-
-    public TRule Or
-    {
-        get
-        {
-            _contextOr.Invoke();
-            return _addRule.Invoke();
-        }
-    }
-}
+//    public TRule Or
+//    {
+//        get
+//        {
+//            _contextOr.Invoke();
+//            return _addRule.Invoke();
+//        }
+//    }
+//}
